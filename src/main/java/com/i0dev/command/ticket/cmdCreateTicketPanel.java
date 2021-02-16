@@ -1,21 +1,17 @@
-package com.i0dev.command.ticket;
+package main.java.com.i0dev.command.ticket;
 
-import com.i0dev.entity.Blacklist;
-import com.i0dev.util.*;
+import main.java.com.i0dev.util.*;
+import main.java.com.i0dev.entity.Blacklist;
+
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.MessageChannel;
-import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.json.simple.JSONObject;
 
 import java.awt.*;
-import java.io.FileReader;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class cmdCreateTicketPanel extends ListenerAdapter {
 
@@ -25,7 +21,6 @@ public class cmdCreateTicketPanel extends ListenerAdapter {
     private final boolean REQUIRE_LITE_PERMISSIONS = getConfig.get().getBoolean("commands.createTicketPanel.permissionLiteMode");
     private final String MESSAGE_FORMAT = getConfig.get().getString("commands.createTicketPanel.format");
     private final boolean COMMAND_ENABLED = getConfig.get().getBoolean("commands.createTicketPanel.enabled");
-
 
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {

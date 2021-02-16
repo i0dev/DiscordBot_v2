@@ -1,11 +1,10 @@
-package com.i0dev.util;
+package main.java.com.i0dev.util;
 
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Movements {

@@ -1,11 +1,11 @@
-package com.i0dev.command.ticket;
+package main.java.com.i0dev.command.ticket;
 
-import com.i0dev.entity.Blacklist;
-import com.i0dev.entity.Ticket;
-import com.i0dev.util.*;
+import main.java.com.i0dev.util.*;
+import main.java.com.i0dev.entity.Blacklist;
+import main.java.com.i0dev.entity.Ticket;
+
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Role;
-import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.json.simple.JSONObject;
@@ -22,8 +22,8 @@ public class cmdTicketAdminOnly extends ListenerAdapter {
     private final String MESSAGE_FORMAT = getConfig.get().getString("commands.ticketAdminOnly.format");
     private final boolean COMMAND_ENABLED = getConfig.get().getBoolean("commands.ticketAdminOnly.enabled");
     private final String MESSAGE_ADMINALREADY = getConfig.get().getString("commands.ticketAdminOnly.alreadyAdminOnly");
-    private final List<String> ROLES_TO_GIVE_ALLOW_FOR_TICKET = getConfig.get().getStringList("commands.event_ticketCreate.RolesToAllowSeeingTickets");
-    private final List<String> ROLES_ALLOWED_TO_SEE_ADMINONLY = getConfig.get().getStringList("commands.event_ticketCreate.RolesToAllowSeeingAdminOnlyTickets");
+    private final List<Long> ROLES_TO_GIVE_ALLOW_FOR_TICKET = getConfig.get().getLongList("events.event_ticketCreate.RolesToAllowSeeingTickets");
+    private final List<Long> ROLES_ALLOWED_TO_SEE_ADMINONLY = getConfig.get().getLongList("events.event_ticketCreate.RolesToAllowSeeingAdminOnlyTickets");
 
 
     @Override
@@ -58,7 +58,7 @@ public class cmdTicketAdminOnly extends ListenerAdapter {
 
             Ticket.get().ticketAdminOnly(e.getChannel(), true);
 
-            for (String roleID : ROLES_TO_GIVE_ALLOW_FOR_TICKET) {
+            for (Long roleID : ROLES_TO_GIVE_ALLOW_FOR_TICKET) {
                 Role role = e.getGuild().getRoleById(roleID);
                 try {
                     e.getChannel().putPermissionOverride(role)
@@ -72,7 +72,7 @@ public class cmdTicketAdminOnly extends ListenerAdapter {
                 } catch (Exception ignored) {
                 }
             }
-            for (String roleID : ROLES_ALLOWED_TO_SEE_ADMINONLY) {
+            for (Long roleID : ROLES_ALLOWED_TO_SEE_ADMINONLY) {
                 Role role = e.getGuild().getRoleById(roleID);
                 try {
                     e.getChannel().putPermissionOverride(role)

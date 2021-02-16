@@ -1,14 +1,13 @@
-package com.i0dev.command.moderation;
+package main.java.com.i0dev.command.moderation;
 
-import com.i0dev.entity.Blacklist;
-import com.i0dev.util.*;
+import main.java.com.i0dev.entity.Blacklist;
+
+import main.java.com.i0dev.util.*;
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class cmdMessageClear extends ListenerAdapter {
 

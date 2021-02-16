@@ -1,5 +1,6 @@
 package main.java.com.i0dev;
 
+import main.java.com.i0dev.command.polls.PollCache;
 import main.java.com.i0dev.entity.*;
 import main.java.com.i0dev.util.inviteutil.InviteTracking;
 import main.java.com.i0dev.jframe.DiscordBotGUI;
@@ -84,6 +85,10 @@ public class DiscordBot {
             } catch (Exception ignored) {
 
             }
+            Timer startPollCreatorTimeout = new Timer();
+            startPollCreatorTimeout.scheduleAtFixedRate(PollCache.get().TaskCheckTimeouts, 50000, 10000);
+
+
             Timer runStartupLaterTimer = new Timer();
             runStartupLaterTimer.schedule(runStartupLater, 1000);
         }
@@ -103,8 +108,8 @@ public class DiscordBot {
 
                 );
             } catch (Exception ignored) {
-
             }
+
             InviteTracking.attemptInviteCaching(conf.GENERAL_MAIN_GUILD);
             System.out.println("Successfully loaded DiscordBot");
         }

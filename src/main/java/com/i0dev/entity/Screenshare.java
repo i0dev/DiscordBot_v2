@@ -1,5 +1,6 @@
-package com.i0dev.entity;
+package main.java.com.i0dev.entity;
 
+import main.java.com.i0dev.util.getConfig;
 import net.dv8tion.jda.api.entities.User;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -36,6 +37,7 @@ public class Screenshare {
         object.put("punisherTag", punisher.getAsTag());
         ScreenshareCache.add(object);
         saveScreenshare();
+
     }
 
     public void addUser(User user, User punisher) {
@@ -95,7 +97,7 @@ public class Screenshare {
         JSONObject all = new JSONObject();
         all.put(KEY, ScreenshareCache);
         try {
-            Files.write(Paths.get(com.i0dev.util.getConfig.get().getFile(FILEPATH).getPath()), all.toJSONString().getBytes());
+            Files.write(Paths.get(getConfig.get().getFile(FILEPATH).getPath()), all.toJSONString().getBytes());
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,11 +1,10 @@
-package main.java.com.i0dev.command.welcome;
+package main.java.com.i0dev.event.welcome;
 
 import main.java.com.i0dev.util.Placeholders;
 import main.java.com.i0dev.util.RoleUtil;
 import main.java.com.i0dev.util.conf;
 import main.java.com.i0dev.util.getConfig;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
@@ -18,13 +17,13 @@ import java.util.concurrent.TimeUnit;
 public class eventWelcome extends ListenerAdapter {
 
     private final String Identifier = "Welcome";
-    private final boolean EVENT_ENABLED = getConfig.get().getBoolean("commands.event_welcome.enabled");
+    private final boolean EVENT_ENABLED = getConfig.get().getBoolean("events.event_welcome.enabled");
     private final String WELCOME_CHANNEL = getConfig.get().getString("channels.welcomeChannelID");
-    private final List<Long> ROLES_TO_GIVE = getConfig.get().getLongList("commands.event_welcome.rolesToGive");
-    private final boolean welcomeMessageThumbnailUseNewMember = getConfig.get().getBoolean("commands.event_welcome.welcomeMessageThumbnailUseNewMember");
-    private final boolean pingUser = getConfig.get().getBoolean("commands.event_welcome.pingUser");
-    private final String MESSAGE_TITLE = getConfig.get().getString("commands.event_welcome.welcomeMessageTitle");
-    private final String MESSAGE_DESC = getConfig.get().getString("commands.event_welcome.welcomeMessageDesc");
+    private final List<Long> ROLES_TO_GIVE = getConfig.get().getLongList("events.event_welcome.rolesToGive");
+    private final boolean welcomeMessageThumbnailUseNewMember = getConfig.get().getBoolean("events.event_welcome.welcomeMessageThumbnailUseNewMember");
+    private final boolean pingUser = getConfig.get().getBoolean("events.event_welcome.pingUser");
+    private final String MESSAGE_TITLE = getConfig.get().getString("events.event_welcome.welcomeMessageTitle");
+    private final String MESSAGE_DESC = getConfig.get().getString("events.event_welcome.welcomeMessageDesc");
 
 
     @Override

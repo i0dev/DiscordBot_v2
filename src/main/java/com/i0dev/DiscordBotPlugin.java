@@ -1,22 +1,25 @@
-package com.i0dev;
+package main.java.com.i0dev;
 
-import com.i0dev.entity.*;
-import com.i0dev.util.conf;
-import com.i0dev.util.getConfig;
-import com.i0dev.util.initJDA;
+import main.java.com.i0dev.entity.*;
+import main.java.com.i0dev.jframe.DiscordBotGUI;
+import main.java.com.i0dev.util.conf;
+import main.java.com.i0dev.util.getConfig;
+import main.java.com.i0dev.util.initJDA;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class DiscordBotPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
+
+        if (!new File("DiscordBot").exists()) {
+            new File("DiscordBot").mkdir();
+        }
         if (!new File("DiscordBot/storage").exists()) {
             new File("DiscordBot/storage").mkdir();
         }
@@ -39,6 +42,8 @@ public class DiscordBotPlugin extends JavaPlugin {
             } catch (IOException ignored) {
             }
         }
+        getConfig.get().reloadConfig();
+        initJDA.get().createJDA();
 
         getConfig.get().getFile(Application.get().getFilePath());
         getConfig.get().getFile(Blacklist.get().getFilePath());
@@ -47,41 +52,21 @@ public class DiscordBotPlugin extends JavaPlugin {
         getConfig.get().getFile(Warning.get().getFilePath());
         getConfig.get().getFile(getConfig.get().getFilePath());
         getConfig.get().getFile(Ticket.get().getFilePath());
+        Application.get().loadApplications();
+        Blacklist.get().loadBlacklist();
+        Warning.get().loadWarnings();
+        Giveaway.get().loadGiveaways();
+        Screenshare.get().loadScreenshare();
+        Ticket.get().loadTickets();
 
-        Timer createJDATimer = new Timer();
-        createJDATimer.schedule(createJDALater, 1000);
-
-        System.out.println("Started loaded DiscordBot. Please wait 4 seconds.");
+        conf.initGlobalConfig();
+        initJDA.get().registerListeners();
+        System.out.println("Successfully loaded DiscordBot");
     }
 
-    public static TimerTask createJDALater = new TimerTask() {
-        public void run() {
-            getConfig.get().reloadConfig();
-            initJDA.get().createJDA();
-
-            Application.get().loadApplications();
-            Blacklist.get().loadBlacklist();
-            Warning.get().loadWarnings();
-            Giveaway.get().loadGiveaways();
-            Screenshare.get().loadScreenshare();
-            Ticket.get().loadTickets();
-
-            Timer runStartupLaterTimer = new Timer();
-            runStartupLaterTimer.schedule(runStartupLater, 3000);
-        }
-    };
-
-    public static TimerTask runStartupLater = new TimerTask() {
-        public void run() {
-            conf.initGlobalConfig();
-            initJDA.get().registerListeners();
-
-            System.out.println("Successfully loaded DiscordBot");
-        }
-    };
 
     @Override
     public void onDisable() {
-        super.onEnable();
+
     }
 }

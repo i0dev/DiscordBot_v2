@@ -1,9 +1,6 @@
-package com.i0dev.util;
+package main.java.com.i0dev.util;
 
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.MessageHistory;
-import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.entities.*;
 import org.json.simple.JSONObject;
 
 import java.io.File;
@@ -45,12 +42,30 @@ public class Logs {
             String Year = message.getTimeCreated().toZonedDateTime().getYear() + "";
             String Hour = message.getTimeCreated().atZoneSameInstant(ZoneId.of("America/New_York")).getHour() + "";
             String Minute = message.getTimeCreated().toZonedDateTime().getMinute() + "";
+            String Second = message.getTimeCreated().toZonedDateTime().getSecond() + "";
 
-            String time = "[" + Month + "/" + Day + "/" + Year + " " + Hour + ":" + Minute + "" + "EST" + "] ";
-            try {
-                toFile.append("     ").append(time).append(" [").append(message.getAuthor().getAsTag()).append("]: ").append(message.getContentDisplay()).append("\n");
-            } catch (Exception ignored) {
-                toFile.append("     ").append(time).append(" [").append("UnknownUser").append("]: ").append(message.getContentDisplay()).append("\n");
+            String time = "[" + Month + "/" + Day + "/" + Year + " " + Hour + ":" + Minute + ":" + Second + "]";
+            if (message.getEmbeds().size() > 0) {
+                MessageEmbed embed = message.getEmbeds().get(0);
+                try {
+                    toFile.append("     ").append(time).append(" [").append(message.getAuthor().getAsTag()).append("]: ").append("[EMBED]"
+                            + "\n          Title: " + embed.getTitle()
+                            + "\n          Desc: " + embed.getDescription()
+                            + "\n          Footer: " + embed.getFooter().getText()
+                    ).append("\n");
+                } catch (Exception ignored) {
+                    toFile.append("     ").append(time).append(" [").append("UnknownUser").append("]: ").append("[EMBED]"
+                            + "\n          Title: " + embed.getTitle()
+                            + "\n          Desc: " + embed.getDescription()
+                            + "\n          Footer: " + embed.getFooter().getText()
+                    ).append("\n");
+                }
+            } else {
+                try {
+                    toFile.append("     ").append(time).append(" [").append(message.getAuthor().getAsTag()).append("]: ").append(message.getContentDisplay()).append("\n");
+                } catch (Exception ignored) {
+                    toFile.append("     ").append(time).append(" [").append("UnknownUser").append("]: ").append(message.getContentDisplay()).append("\n");
+                }
             }
         }
         return toFile.toString();

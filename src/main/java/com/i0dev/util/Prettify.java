@@ -1,4 +1,4 @@
-package com.i0dev.util;
+package main.java.com.i0dev.util;
 
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Role;
@@ -12,6 +12,58 @@ public class Prettify {
     public static String capitalizeFirst(String a) {
         return a.substring(0, 1).toUpperCase() + a.substring(1).toLowerCase();
 
+    }
+
+    public static String formatNumber(int num) {
+        String Formatted = "Extra, Beyond set formatting";
+        switch (num) {
+            case 1:
+                Formatted = "First";
+                break;
+            case 2:
+                Formatted = "Second";
+                break;
+            case 3:
+                Formatted = "Third";
+                break;
+            case 4:
+                Formatted = "Fourth";
+                break;
+            case 5:
+                Formatted = "Fifth";
+                break;
+            case 6:
+                Formatted = "Sixth";
+                break;
+            case 7:
+                Formatted = "Seventh";
+                break;
+            case 8:
+                Formatted = "Eighth";
+                break;
+            case 9:
+                Formatted = "Ninth";
+                break;
+            case 10:
+                Formatted = "Tenth";
+                break;
+            case 11:
+                Formatted = "Eleventh";
+                break;
+            case 12:
+                Formatted = "Twelfth";
+                break;
+            case 13:
+                Formatted = "Thirteenth";
+                break;
+            case 14:
+                Formatted = "Fourteenth";
+                break;
+            case 15:
+                Formatted = "Fifteenth";
+                break;
+        }
+        return Formatted;
     }
 
     public static String FormatList(List<Role> list) {

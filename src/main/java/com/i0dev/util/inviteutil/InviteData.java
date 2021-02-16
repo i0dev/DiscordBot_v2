@@ -1,11 +1,11 @@
-package main.java.com.i0dev.event.inviteTracking;
+package main.java.com.i0dev.util.inviteutil;
 
 import net.dv8tion.jda.api.entities.Invite;
 
-public class InviteData                                   // this object is useful to prevent storing jda entities - check https://github.com/DV8FromTheWorld/JDA#entity-lifetimes
+public class InviteData
 {
-    private final long guildId;                           // store guild's id
-    private int uses;                                     // store invite's usage count
+    private final long guildId;
+    private int uses;
 
     public InviteData(final Invite invite) {
         this.guildId = invite.getGuild().getIdLong();
@@ -20,7 +20,7 @@ public class InviteData                                   // this object is usef
         return uses;
     }
 
-    public void incrementUses()                           // increment stored invite's usage count
+    public void incrementUses()
     {
         this.uses++;
     }

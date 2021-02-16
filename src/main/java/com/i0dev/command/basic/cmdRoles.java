@@ -1,7 +1,7 @@
-package com.i0dev.command.basic;
+package main.java.com.i0dev.command.basic;
 
-import com.i0dev.entity.Blacklist;
-import com.i0dev.util.*;
+import main.java.com.i0dev.util.*;
+import main.java.com.i0dev.entity.Blacklist;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;

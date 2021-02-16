@@ -1,4 +1,4 @@
-package main.java.com.i0dev.command.ticket;
+package main.java.com.i0dev.event.ticket;
 
 import main.java.com.i0dev.entity.Blacklist;
 import main.java.com.i0dev.entity.Ticket;

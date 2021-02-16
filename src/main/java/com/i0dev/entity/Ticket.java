@@ -1,7 +1,6 @@
-package com.i0dev.entity;
+package main.java.com.i0dev.entity;
 
-import com.i0dev.util.conf;
-import net.dv8tion.jda.api.entities.Message;
+import main.java.com.i0dev.util.getConfig;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import org.json.simple.JSONObject;
@@ -121,7 +120,7 @@ public class Ticket {
         JSONObject all = new JSONObject();
         all.put(KEY, OpenTicketCache);
         try {
-            Files.write(Paths.get(com.i0dev.util.getConfig.get().getFile(FILEPATH).getPath()), all.toJSONString().getBytes());
+            Files.write(Paths.get(getConfig.get().getFile(FILEPATH).getPath()), all.toJSONString().getBytes());
         } catch (Exception e) {
             e.printStackTrace();
         }

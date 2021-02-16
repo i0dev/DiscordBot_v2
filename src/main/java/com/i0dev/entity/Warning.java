@@ -1,5 +1,6 @@
-package com.i0dev.entity;
+package main.java.com.i0dev.entity;
 
+import main.java.com.i0dev.util.getConfig;
 import net.dv8tion.jda.api.entities.User;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -95,7 +96,7 @@ public class Warning {
         JSONObject all = new JSONObject();
         all.put(KEY, WarningCache);
         try {
-            Files.write(Paths.get(com.i0dev.util.getConfig.get().getFile(FILEPATH).getPath()), all.toJSONString().getBytes());
+            Files.write(Paths.get(getConfig.get().getFile(FILEPATH).getPath()), all.toJSONString().getBytes());
         } catch (Exception e) {
             e.printStackTrace();
         }

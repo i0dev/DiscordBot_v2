@@ -1,9 +1,8 @@
-package main.java.com.i0dev.gamemodeSpecific;
+package main.java.com.i0dev.command.gamemodeSpecific;
 
 import main.java.com.i0dev.entity.Blacklist;
 import main.java.com.i0dev.util.*;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -19,7 +18,7 @@ public class cmdIslandLeader extends ListenerAdapter {
     private final String MESSAGE_CONTENT = getConfig.get().getString("commands.islandLeader.messageContent");
     private final String MESSAGE_FORMAT = getConfig.get().getString("commands.islandLeader.format");
     private final boolean COMMAND_ENABLED = getConfig.get().getBoolean("commands.islandLeader.enabled");
-    private final String skyblockLeaderRoleID = getConfig.get().getString("roles.islandLeaderRoleID");
+    private final String islandLeaderRoleID = getConfig.get().getString("roles.islandLeaderRoleID");
 
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
@@ -49,7 +48,7 @@ public class cmdIslandLeader extends ListenerAdapter {
             }
             Member MentionedMember = e.getGuild().getMember(MentionedUser);
 
-            e.getGuild().addRoleToMember(MentionedMember, e.getGuild().getRoleById(skyblockLeaderRoleID)).queue();
+            e.getGuild().addRoleToMember(MentionedMember, e.getGuild().getRoleById(islandLeaderRoleID)).queue();
 
             e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_CONTENT.replace("{senderTag}", e.getAuthor().getAsTag()), e.getAuthor())).build()).queue();
         }

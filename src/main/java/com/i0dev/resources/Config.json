@@ -1,66 +1,87 @@
 {
   "general": {
     "prefix": ".",
-    "guildID": 743277096327053316,
-    "token": "Nzk2ODM1NzE5NzMyOTIwMzkz.X_dtGA.6jmPfPDKSoRmeVhvNj7azMDujVI",
-    "deleteCommand": true
+    "guildID": 717818320887349267,
+    "activity": "play.mcrivals.com",
+    "token": "NzIwNDY4NjI1OTk5NTI3OTU4.XuGasg.Ff9fGyS7_g_R9NYhbYXfWIsTTM8",
+    "deleteCommand": true,
+    "creatorTimeouts": 300000
   },
   "channels": {
-    "logsChannelID": 765021985301594122,
-    "ticketCreateChannelID": 766795874961195008,
-    "ticketLogsID": 765021985301594122,
-    "ticketAdminLogsID": 765021985301594122,
-    "staffMovementsChannel": 765021985301594122,
-    "verifyChannelID": 765021985301594122,
-    "welcomeChannelID" : 765021985301594122
+    "logsChannelID": 766330396832432150,
+    "ticketCreateChannelID": 766322425323192330,
+    "ticketLogsID": 766322437309988865,
+    "ticketAdminLogsID": 766322459765899284,
+    "ticketCreateCategoryID": 766177636875239435,
+    "staffMovementsChannel": 806641816924979280,
+    "verifyChannelID": 766324415364857918,
+    "welcomeChannelID": 766324415364857918,
+    "confirmedFactionChannelID": 766328319318556702,
+    "confirmedIslandChannelID": 766328319318556702,
+    "confirmedCellChannelID": 766328319318556702,
+    "inviteTrackingChannelID": 766330396832432150
   },
   "roles": {
-    "LiteAllowedRoles": [],
+    "LiteAllowedRoles": [
+      766183475035373568,
+      766183475761774603,
+      766183474251169814,
+      766183476520943616
+    ],
     "LiteAllowedUsers": [],
-    "StrictAllowedRoles": [],
+    "StrictAllowedRoles": [
+      766183468383338526,
+      766183472749871114,
+      786977069422084116,
+      766183473596989460,
+      786977110266347561
+    ],
     "StrictAllowedUsers": [],
-    "mutedRoleID": 809118723382050826
+    "mutedRoleID": 766668812690391100,
+    "factionLeaderRoleID": 766183477024260107,
+    "islandLeaderRoleID": 766183477024260107,
+    "cellLeaderRoleID": 766183477024260107
   },
   "movementTracks": [
     {
-      "mainRole": 809633423374155827,
+      "mainRole": 766183476520943616,
       "extraRoles": [
-        809633685254963210
+        766186192093839392
       ],
-      "displayName": "Helper"
+      "displayName": "Trial Moderator"
     },
     {
-      "mainRole": 809633422401863691,
+      "mainRole": 766183475761774603,
       "extraRoles": [
-        809633685254963210
+        766186192093839392
       ],
       "displayName": "Moderator"
     },
     {
-      "mainRole": 809633421974306826,
+      "mainRole": 766183475035373568,
       "extraRoles": [
-        809633608537079828
+        766183474251169814
       ],
       "displayName": "Senior Moderator"
     },
     {
-      "mainRole": 809633405229727744,
+      "mainRole": 786977110266347561,
       "extraRoles": [
-        809633608537079828
+        766183474251169814
       ],
-      "displayName": "Admin"
+      "displayName": "Administrator"
     },
     {
-      "mainRole": 809633404580528138,
+      "mainRole": 786977069422084116,
       "extraRoles": [
-        809633606834061313
+        766183473596989460
       ],
       "displayName": "Senior Admin"
     },
     {
-      "mainRole": 809633607886045204,
+      "mainRole": 766183472749871114,
       "extraRoles": [
-        809633606834061313
+        766183473596989460
       ],
       "displayName": "Manager"
     }
@@ -69,13 +90,73 @@
     "embeds": {
       "ColorHexCode": "#BD3423",
       "Thumbnail": "https://cdn.discordapp.com/attachments/737837255267451011/766383520696238140/icon2transparent.png",
-      "Title": "i0dev.com Bot",
-      "Footer": "play.serverip.com"
+      "Title": "MCRivls Bot",
+      "Footer": "play.mcrivals.com"
     },
     "commandNotEnabled": "The command ``{command}`` is not enabled!",
     "commandNoPermission": "You do not have permission to use the command ``{command}``",
     "userNotFound": "the user ``{arg}`` cannot be found. Please try again!",
     "roleNotFound": "the role ``{arg}`` cannot be found. Please try again!"
+  },
+  "events": {
+    "event_welcome": {
+      "enabled": true,
+      "pingUser": true,
+      "welcomeMessageTitle": "Welcome {userTag} to {guildName}",
+      "welcomeMessageDesc": "If you need any support go to #ticket-create\nServer IP: play.serverip.com\nWebsite: www.website.com\nMemberCount: {guildMemberCount}",
+      "welcomeMessageThumbnailUseNewMember": true,
+      "rolesToGive": [
+        795336501709242409,
+        795336444519645234,
+        795336443668594745,
+        795336442985185320,
+        766183896202346516
+      ]
+    },
+    "event_verify": {
+      "enabled": true,
+      "requirePermission": false,
+      "permissionLiteMode": false,
+      "dmToVerifyTitle": "i0dev Verification",
+      "dmToVerifyDesc": "You have sucsessfully verifed yourself in the {guildName} discord!",
+      "rolesToGive": [
+        809855658626646046
+      ],
+      "rolesToRemove": [
+        809855657678209036
+      ]
+    },
+    "event_ticketCreate": {
+      "enabled": true,
+      "requirePermission": false,
+      "permissionLiteMode": false,
+      "adminOnlyEmoji": "\uD83D\uDD14",
+      "closeTicketEmoji": "\uD83D\uDDD1",
+      "ticketCreatedEmbedTitle": "New ticket from {userTag}",
+      "ticketCreatedEmbedFieldHeader": "Please follow the format below:",
+      "dmToTicketCreatorTicket": "New ticket from {userTag}",
+      "dmToTicketCreatorDescription": "You created a new ticket in the **{guildName}** discord!\n Click the channel to go to it! {ticketCreatedMention}",
+      "ticketCreatedEmbedFieldBase": "```{Questions}```",
+      "RolesToPingIfPingEnabled": [
+        766186192093839392,
+        766183474251169814,
+        766183473596989460
+      ],
+      "RolesToAllowSeeingTickets": [
+        795324267969249310
+      ],
+      "RolesToAllowSeeingAdminOnlyTickets": [
+        786977110266347561,
+        786977069422084116,
+        766183472749871114,
+        766183468383338526
+      ]
+    },
+    "event_inviteTracking": {
+      "enabled": true,
+      "logMessageEnabled": true,
+      "trackingMessageContent": "{userTag} has joined the server! Invited by {inviterTag} `Invites: {inviteCount}`"
+    }
   },
   "commands": {
     "avatar": {
@@ -428,28 +509,6 @@
         }
       ]
     },
-    "event_ticketCreate": {
-      "enabled": true,
-      "requirePermission": false,
-      "permissionLiteMode": false,
-      "adminOnlyEmoji": "\uD83D\uDD14",
-      "closeTicketEmoji": "\uD83D\uDDD1",
-      "ticketCreatedEmbedTitle": "New ticket from {userTag}",
-      "ticketCreatedEmbedFieldHeader": "Please follow the format below:",
-      "dmToTicketCreatorTicket": "New ticket from {userTag}",
-      "dmToTicketCreatorDescription": "You created a new ticket in the **{guildName}** discord!\n Click the channel to go to it! {ticketCreatedMention}",
-      "ticketCreatedEmbedFieldBase": "```{Questions}```",
-      "ticketCreateCategory": 766795861769584640,
-      "RolesToPingIfPingEnabled": [
-        "804128351581110292"
-      ],
-      "RolesToAllowSeeingTickets": [
-        "804128351581110292"
-      ],
-      "RolesToAllowSeeingAdminOnlyTickets": [
-        "804128351581110292"
-      ]
-    },
     "ticketRename": {
       "enabled": true,
       "requirePermission": true,
@@ -672,27 +731,137 @@
       "messageTitle": "i0dev Secure Verification",
       "verifyEmoji": "\u2705"
     },
-    "event_verify": {
+    "factionLeader": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "factionLeader",
+        "facLeader"
+      ],
+      "format": "**Format:** ``{command} <user>``",
+      "messageContent": "{senderTag} you have given {userTag} faction leader role"
+    },
+    "islandLeader": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "skyblockLeader",
+        "isLeader"
+      ],
+      "format": "**Format:** ``{command} <user>``",
+      "messageContent": "{senderTag} you have given {userTag} skyblock leader role"
+    },
+    "cellLeader": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "prisonLeader",
+        "cellLeader"
+      ],
+      "format": "**Format:** ``{command} <user>``",
+      "messageContent": "{senderTag} you have given {userTag} cell leader role"
+    },
+    "confirmFaction": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "confirmFaction"
+      ],
+      "format": "**Format:** ``{command} <leader> <faction> <rosterSize>``",
+      "messageContent": "{senderTag} you have confirmed the faction ``{faction}`` with the leader being {userTag}",
+      "confirmMessageDesc": "**Faction:** {faction}\n**Leader:** {userTag}\n",
+      "confirmMessageTitle": "New Confirmed Faction"
+    },
+    "confirmIsland": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "confirmIsland"
+      ],
+      "format": "**Format:** ``{command} <leader> <island> <rosterSize>``",
+      "messageContent": "{senderTag} you have confirmed the island ``{island}`` with the leader being {userTag} and their roster size being `{rosterSize}`",
+      "confirmMessageDesc": "**Island:** {island}\n**Leader:** {userTag}\n**Roster Size:** {rosterSize}\n",
+      "confirmMessageTitle": "New Confirmed Island"
+    },
+    "confirmCell": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "confirmCell"
+      ],
+      "format": "**Format:** ``{command} <leader> <cell> <rosterSize>``",
+      "messageContent": "{senderTag} you have confirmed the cell ``{cell}`` with the leader being {userTag} and their roster size being `{rosterSize}`",
+      "confirmMessageDesc": "**Cell:** {cell}\n**Leader:** {userTag}\n**Roster Size:** {rosterSize}\n",
+      "confirmMessageTitle": "New Confirmed Cell"
+    },
+    "help": {
       "enabled": true,
       "requirePermission": false,
       "permissionLiteMode": false,
-      "dmToVerifyTitle": "i0dev Verification",
-      "dmToVerifyDesc": "You have sucsessfully verifed yourself in the {guildName} discord!",
-      "rolesToGive": [
-        809855658626646046
+      "aliases": [
+        "help",
+        "helpPage"
       ],
-      "rolesToRemove": [
-        809855657678209036
-      ]
+      "format": "**Format:** ``{command} [page]``",
+      "helpPageTitle": "Help & Information [Page {page}]",
+      "disabledEmoji": ":x:",
+      "enabledEmoji": ":white_check_mark:"
     },
-    "event_welcome": {
+    "invites": {
       "enabled": true,
-      "welcomeMessageTitle": "Welcome {userTag} to {guildName}",
-      "welcomeMessageDesc": "If you need any support go to #ticket-create\nServer IP: play.serverip.com\nWebsite: www.website.com\nMemberCount: {guildMemberCount}",
-      "welcomeMessageThumbnailUseNewMember":true,
-      "rolesToGive": [
-        809855657678209036
-      ]
+      "requirePermission": false,
+      "permissionLiteMode": false,
+      "aliases": [
+        "invites",
+        "userInvites"
+      ],
+      "format": "**Format:** ``{command} [user]``",
+      "messageContent": "{userTag} has {inviteCount} invites."
+    },
+    "invite_resetData": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "log": true,
+      "aliases": [
+        "invite_resetData",
+        "resetInvites"
+      ],
+      "format": "**Format:** ``{command} [user]``",
+      "messageContent": "{userTag} you wiped all invite data",
+      "logMessage": "{userTag} has reset all invite data"
+    },
+    "inviteLeaderboard": {
+      "enabled": true,
+      "requirePermission": false,
+      "permissionLiteMode": false,
+      "aliases": [
+        "leaderboard",
+        "inviteLeaderboard"
+      ],
+      "format": "**Format:** ``{command}``",
+      "messageTitle": "Top invites for {guildName}",
+      "leaderboardFormat": "**#{place}.** *{userTag}:* `{invites} invites`\n"
+    },
+    "pollCreator": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "pollCreator",
+        "createPoll"
+      ],
+      "format": "**Format:** ``{command}``",
+      "alreadyCreating": "{userTag} you are already creating a poll, check your dms!",
+      "messageContent": "{userTag} Please check your DMS to complete the Poll Creator",
+      "createdPollTitle": "Incoming poll from {userTag}",
+      "createdPollFormat": "{emoji}** » {content}**\n"
     }
   }
 }

@@ -1,6 +1,5 @@
 package main.java.com.i0dev.util;
 
-import main.java.com.i0dev.command.TestApp;
 import main.java.com.i0dev.command.basic.*;
 import main.java.com.i0dev.command.cmdHelpPage;
 import main.java.com.i0dev.command.cmdVersion;
@@ -19,7 +18,6 @@ import main.java.com.i0dev.command.moderation.mute.cmdGetMuted;
 import main.java.com.i0dev.command.moderation.mute.cmdMute;
 import main.java.com.i0dev.command.moderation.mute.cmdUnmute;
 import main.java.com.i0dev.command.movements.*;
-import main.java.com.i0dev.command.polls.PollCache;
 import main.java.com.i0dev.command.polls.cmdPollCreator;
 import main.java.com.i0dev.command.polls.pollCreatorResponses;
 import main.java.com.i0dev.command.ticket.*;
@@ -156,7 +154,6 @@ public class initJDA {
         jda.addEventListener(new cmdInviteResetData());
         jda.addEventListener(new cmdInviteLeaderboard());
 
-        jda.addEventListener(new TestApp());
         jda.addEventListener(new pollCreatorResponses());
         jda.addEventListener(new cmdPollCreator());
 

@@ -1,6 +1,7 @@
-package com.i0dev.entity;
+package main.java.com.i0dev.entity;
 
-import com.i0dev.util.conf;
+import main.java.com.i0dev.util.conf;
+import main.java.com.i0dev.util.getConfig;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
@@ -81,7 +82,7 @@ public class Giveaway {
         JSONObject all = new JSONObject();
         all.put(KEY, GiveawayCache);
         try {
-            Files.write(Paths.get(com.i0dev.util.getConfig.get().getFile(FILEPATH).getPath()), all.toJSONString().getBytes());
+            Files.write(Paths.get(getConfig.get().getFile(FILEPATH).getPath()), all.toJSONString().getBytes());
         } catch (Exception e) {
             e.printStackTrace();
         }

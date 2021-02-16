@@ -1,11 +1,10 @@
-package com.i0dev.command;
+package main.java.com.i0dev.command;
 
-import com.i0dev.entity.Blacklist;
-import com.i0dev.util.conf;
+import main.java.com.i0dev.entity.Blacklist;
+import main.java.com.i0dev.util.conf;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import org.intellij.lang.annotations.Identifier;
 
 import java.awt.*;
 import java.time.ZonedDateTime;
@@ -19,7 +18,7 @@ public class cmdVersion extends ListenerAdapter {
         versionEmbed = new EmbedBuilder()
                 .setTitle(conf.EMBED_TITLE)
                 .setThumbnail(conf.EMBED_THUMBNAIL)
-                .setDescription("**Prefix:** `" + conf.GENERAL_BOT_PREFIX + "`\n" + "**Version:** " + "`BETA 1.0.1`" + "\n**Author:** `i0#0001`")
+                .setDescription("**Prefix:** `" + conf.GENERAL_BOT_PREFIX + "`\n" + "**Version:** " + "`Public BETA 2.0.0`" + "\n**Author:** `i0#0001`")
                 .setColor(Color.decode(conf.EMBED_COLOR_HEX_CODE))
                 .setTimestamp(ZonedDateTime.now())
                 .setFooter("Bot created by i0dev.com", "https://cdn.discordapp.com/attachments/763790150550683708/780593953824964628/i01.png");

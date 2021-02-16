@@ -1,4 +1,4 @@
-package main.java.com.i0dev.command.ticket;
+package main.java.com.i0dev.event.ticket;
 
 import main.java.com.i0dev.util.*;
 import main.java.com.i0dev.entity.Blacklist;
@@ -142,8 +142,8 @@ public class eventTicketCreate extends ListenerAdapter {
             }
 
             NewTicketCreated.sendMessage(Embed.build()).queue(message -> {
-                message.addReaction(getEmojiWithoutArrow(getConfig.get().getString("commands.event_ticketCreate.closeTicketEmoji"))).queue();
-                message.addReaction(getEmojiWithoutArrow(getConfig.get().getString("commands.event_ticketCreate.adminOnlyEmoji"))).queue();
+                message.addReaction(getEmojiWithoutArrow(getConfig.get().getString("events.event_ticketCreate.closeTicketEmoji"))).queue();
+                message.addReaction(getEmojiWithoutArrow(getConfig.get().getString("events.event_ticketCreate.adminOnlyEmoji"))).queue();
             });
             Ticket.get().createTicket(NewTicketCreated, e.getUser(), AdminOnlyDefault, Integer.parseInt(CurrentTicketNumber));
 
