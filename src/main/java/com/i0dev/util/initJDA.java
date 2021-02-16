@@ -23,6 +23,7 @@ import main.java.com.i0dev.command.polls.pollCreatorResponses;
 import main.java.com.i0dev.command.ticket.*;
 import main.java.com.i0dev.command.verify.cmdVerifyPanel;
 import main.java.com.i0dev.command.verify.eventReactVerify;
+import main.java.com.i0dev.event.automod.eventAutoMod;
 import main.java.com.i0dev.event.inviteTracking.eventInviteTracking;
 import main.java.com.i0dev.event.ticket.eventCloseTicket;
 import main.java.com.i0dev.event.ticket.eventReactAdminOnly;
@@ -147,6 +148,7 @@ public class initJDA {
         jda.addEventListener(new cmdCellLeader());
 
         jda.addEventListener(new cmdHelpPage());
+        jda.addEventListener(new eventAutoMod());
 
         jda.addEventListener(new InviteTracking());
         jda.addEventListener(new eventInviteTracking());

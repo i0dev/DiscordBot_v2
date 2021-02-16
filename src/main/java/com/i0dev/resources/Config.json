@@ -156,6 +156,20 @@
       "enabled": true,
       "logMessageEnabled": true,
       "trackingMessageContent": "{userTag} has joined the server! Invited by {inviterTag} `Invites: {inviteCount}`"
+    },
+    "automod": {
+      "enabled": true,
+      "logs": true,
+      "channelWhitelistMode": true,
+      "automodChannels": [
+        766183468383338526
+      ],
+      "blacklistedWords": [
+        "discord.gg",
+        "n..."
+      ],
+      "logTitle": "[AutoMod] Message Deleted.",
+      "logContent": "{userTag} has said a blacklisted word:\n||{message}||"
     }
   },
   "commands": {

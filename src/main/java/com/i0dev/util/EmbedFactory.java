@@ -35,6 +35,7 @@ public class EmbedFactory {
                 .setTitle(Title)
                 .setFooter(Footer);
     }
+
     public EmbedBuilder createSimpleEmbed(String description) {
 
         return new EmbedBuilder()
@@ -81,6 +82,8 @@ public class EmbedFactory {
                 .setTitle(Title)
                 .setFooter(Footer);
     }
+
+
 
     public EmbedBuilder createSimpleEmbed(String title, String description) {
         if (title == null) {
