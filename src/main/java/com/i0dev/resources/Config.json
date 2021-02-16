@@ -1,0 +1,698 @@
+{
+  "general": {
+    "prefix": ".",
+    "guildID": 743277096327053316,
+    "token": "Nzk2ODM1NzE5NzMyOTIwMzkz.X_dtGA.6jmPfPDKSoRmeVhvNj7azMDujVI",
+    "deleteCommand": true
+  },
+  "channels": {
+    "logsChannelID": 765021985301594122,
+    "ticketCreateChannelID": 766795874961195008,
+    "ticketLogsID": 765021985301594122,
+    "ticketAdminLogsID": 765021985301594122,
+    "staffMovementsChannel": 765021985301594122,
+    "verifyChannelID": 765021985301594122,
+    "welcomeChannelID" : 765021985301594122
+  },
+  "roles": {
+    "LiteAllowedRoles": [],
+    "LiteAllowedUsers": [],
+    "StrictAllowedRoles": [],
+    "StrictAllowedUsers": [],
+    "mutedRoleID": 809118723382050826
+  },
+  "movementTracks": [
+    {
+      "mainRole": 809633423374155827,
+      "extraRoles": [
+        809633685254963210
+      ],
+      "displayName": "Helper"
+    },
+    {
+      "mainRole": 809633422401863691,
+      "extraRoles": [
+        809633685254963210
+      ],
+      "displayName": "Moderator"
+    },
+    {
+      "mainRole": 809633421974306826,
+      "extraRoles": [
+        809633608537079828
+      ],
+      "displayName": "Senior Moderator"
+    },
+    {
+      "mainRole": 809633405229727744,
+      "extraRoles": [
+        809633608537079828
+      ],
+      "displayName": "Admin"
+    },
+    {
+      "mainRole": 809633404580528138,
+      "extraRoles": [
+        809633606834061313
+      ],
+      "displayName": "Senior Admin"
+    },
+    {
+      "mainRole": 809633607886045204,
+      "extraRoles": [
+        809633606834061313
+      ],
+      "displayName": "Manager"
+    }
+  ],
+  "messages": {
+    "embeds": {
+      "ColorHexCode": "#BD3423",
+      "Thumbnail": "https://cdn.discordapp.com/attachments/737837255267451011/766383520696238140/icon2transparent.png",
+      "Title": "i0dev.com Bot",
+      "Footer": "play.serverip.com"
+    },
+    "commandNotEnabled": "The command ``{command}`` is not enabled!",
+    "commandNoPermission": "You do not have permission to use the command ``{command}``",
+    "userNotFound": "the user ``{arg}`` cannot be found. Please try again!",
+    "roleNotFound": "the role ``{arg}`` cannot be found. Please try again!"
+  },
+  "commands": {
+    "avatar": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "avatar",
+        "av"
+      ],
+      "format": "**Format:** ``{command} [user]``",
+      "messageTitle": "{userTag}'s Avatar"
+    },
+    "reloadConfig": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "reloadConfig",
+        "reload"
+      ],
+      "format": "**Format:** ``{command}``",
+      "messageContent": "``{userTag}``, you have sucsessfully reloaded the configuration!"
+    },
+    "roles": {
+      "enabled": true,
+      "requirePermission": false,
+      "permissionLiteMode": false,
+      "aliases": [
+        "roles"
+      ],
+      "format": "**Format:** ``{command}``",
+      "messageTitle": "List of all roles on the server."
+    },
+    "roleInfo": {
+      "enabled": true,
+      "requirePermission": false,
+      "permissionLiteMode": false,
+      "aliases": [
+        "roleInfo"
+      ],
+      "format": "**Format:** ``{command} <role>``",
+      "messageTitle": "Showing role information for {role}",
+      "messageContent": "**ID:** ``{roleID}``\n**Name:** `{roleName}`\n**Color:** `{roleColor}`\n**Mention:** {roleMention}\n**Position:** {rolePos}\n**Mentionable:** `{roleMentionable}`\n**Hoisted:** `{roleHoisted}`"
+    },
+    "serverInfo": {
+      "enabled": true,
+      "requirePermission": false,
+      "permissionLiteMode": false,
+      "aliases": [
+        "serverInfo",
+        "info"
+      ],
+      "format": "**Format:** ``{command}``",
+      "messageTitle": "Showing server information for {guildName}",
+      "messageContent": "**Server Owner:** {serverOwner}\n**Server Region:** `{serverRegion}`\n**Member Count:** `{memberCount}`\n**Categories:** `{categoryCount}`\n**TextChannels:** `{TextChannelCount}`\n**VoiceChannels:** `{VoiceChannelCount}`\n**Roles:** `{roleCount}`\n**Server Creation Date:** `{serverCreationDate}`\n**BotPrefix:** `{BotPrefix}`\n\n**Bots:** `{BotCount}`\n**Humans:** `{HumanCount}`\n**Online:** `{onlineCount}`\n**DND:** `{DNDCount}`\n**Idle:** `{idleCount}`\n**Offline:** `{offlineCount}`\n\n**Server Invite Link:** {inviteLink}"
+    },
+    "userInfo": {
+      "enabled": true,
+      "requirePermission": false,
+      "permissionLiteMode": false,
+      "aliases": [
+        "userInfo",
+        "whoIs"
+      ],
+      "format": "**Format:** ``{command} <user>``",
+      "messageTitle": "Showing user information for {userTag}",
+      "messageContent": "**Created Date:** ``{userCreatedDate}``\n**Join Date:** ``{userJoinDate}``\n**ID:** ``{userID}``\n**Name:** `{userName}`\n**Tag:** `{userTag}`\n**Bot:** `{isBot}`\n**Mention:** {userMention}\n**Online Status:** `{onlineStatus}`\n**Boosting:** `{boosting}`\n**Voice State:** `{voiceState}`\n\n**Roles:** {roleList}\n\n**Permissions:** `{permissionList}`"
+    },
+    "memberCount": {
+      "enabled": true,
+      "requirePermission": false,
+      "permissionLiteMode": false,
+      "aliases": [
+        "memberCount",
+        "members",
+        "users"
+      ],
+      "format": "**Format:** ``{command}``",
+      "messageContent": "**Member Count:** `{memberCount}`\n**Bots:** `{BotCount}`\n**Humans:** `{HumanCount}`\n**Online:** `{onlineCount}`\n**DND:** `{DNDCount}`\n**Idle:** `{idleCount}`\n**Offline:** `{offlineCount}`"
+    },
+    "serverIP": {
+      "enabled": true,
+      "requirePermission": false,
+      "permissionLiteMode": false,
+      "aliases": [
+        "serverIP",
+        "ip"
+      ],
+      "format": "**Format:** ``{command}``",
+      "messageContent": "The current server ip is: ``play.serverip.com``"
+    },
+    "blacklist_add": {
+      "enabled": true,
+      "log": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "blacklist_add"
+      ],
+      "format": "**Format:** ``{command} <user> [reason]``",
+      "messageContent": "You have blacklisted `{userTag}` from using all bot commands.\nWith the reason: `{reason}`",
+      "userAlreadyBlacklisted": "`{userTag}` is already blacklisted!",
+      "logMessage": "{userTag} has been blacklisted by {punisherTag} for reason: {reason}"
+    },
+    "blacklist_remove": {
+      "enabled": true,
+      "log": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "blacklist_remove"
+      ],
+      "format": "**Format:** ``{command} <user>``",
+      "messageContent": "You have unblacklisted `{userTag}` from using all bot commands.",
+      "userNotBlacklisted": "`{userTag}` is not blacklisted!",
+      "logMessage": "{punisherTag} has unblacklisted {userTag}"
+    },
+    "blacklist_clear": {
+      "enabled": true,
+      "log": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "blacklist_clear"
+      ],
+      "format": "**Format:** ``{command}``",
+      "messageContent": "`{userTag}` you have wiped all blacklisted users.",
+      "logMessage": "{userTag} has cleared all blacklisted users."
+    },
+    "blacklist_list": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "blacklist_list"
+      ],
+      "format": "**Format:** ``{command}``",
+      "messageTitle": "List of all blacklisted users",
+      "listFormat": "**{userTag}** - **Blacklisted by:**``{punisherTag}`` - **Reason:** `{reason}`"
+    },
+    "ban": {
+      "enabled": true,
+      "log": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "ban"
+      ],
+      "format": "**Format:** ``{command} <user> [reason]``",
+      "messageContent": "You have banned `{userTag}` from the server\nWith the reason: `{reason}`",
+      "userAlreadyBanned": "`{userTag}` is already banned!",
+      "logMessage": "{userTag} has been banned by {punisherTag} for reason: {reason}"
+    },
+    "kick": {
+      "enabled": true,
+      "log": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "kick"
+      ],
+      "format": "**Format:** ``{command} <user> [reason]``",
+      "messageContent": "You have kicked `{userTag}` from the server\nWith the reason: `{reason}`",
+      "logMessage": "{userTag} has been kicked by {punisherTag} for reason: {reason}"
+    },
+    "unban": {
+      "enabled": true,
+      "log": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "unban",
+        "pardon"
+      ],
+      "format": "**Format:** ``{command} <user>``",
+      "messageContent": "You have unbanned `{userTag}` from the server",
+      "userNotBanned": "`{userTag}` is already not banned!",
+      "logMessage": "{userTag} has been unbanned by {punisherTag}"
+    },
+    "prune": {
+      "enabled": true,
+      "log": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "prune",
+        "purge"
+      ],
+      "format": "**Format:** ``{command} <# of messages> [user]``",
+      "messageContent": "{userTag}, You have pruned `{messages}` messages",
+      "messageContentUser": "{userTag}, You have pruned `{messages}` from the user {prunedTag}",
+      "userAlreadyBanned": "`{userTag}` is already not banned!",
+      "logMessage": "{messages} messages have been pruned by {userTag} in the {channel} channel",
+      "logMessageUser": "{messages} messages have been pruned by {userTag} by the user {prunedUserTag} in the {channel} channel"
+    },
+    "messageClear": {
+      "enabled": true,
+      "log": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "messageClear",
+        "ClearAllMessages"
+      ],
+      "format": "**Format:** ``{command}``",
+      "messageContent": "{userTag}, You have cleared all the messages in this channel.",
+      "logMessage": "{userTag} has cleared all the messages in {channel}"
+    },
+    "screenshare_add": {
+      "enabled": true,
+      "log": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "screenshare_add"
+      ],
+      "format": "**Format:** ``{command} <user> [reason]``",
+      "messageContent": "You have added `{userTag}` to the SS list\nWith the reason: `{reason}`",
+      "userAlreadyOnList": "`{userTag}` is already on the SS list!",
+      "logMessage": "{userTag} has been added to the SS list by {punisherTag} for reason: {reason}"
+    },
+    "screenshare_remove": {
+      "enabled": true,
+      "log": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "screenshare_remove"
+      ],
+      "format": "**Format:** ``{command} <user>``",
+      "messageContent": "You have removed `{userTag}` from the SS list",
+      "userNotOnList": "`{userTag}` is not on the SS list!",
+      "logMessage": "{punisherTag} has rmeoved {userTag} from the SS list"
+    },
+    "screenshare_clear": {
+      "enabled": true,
+      "log": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "screenshare_clear"
+      ],
+      "format": "**Format:** ``{command}``",
+      "messageContent": "`{userTag}` you have wiped all SS list users.",
+      "logMessage": "{userTag} has cleared all SS list users."
+    },
+    "screenshare_list": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "screenshare_list"
+      ],
+      "format": "**Format:** ``{command}``",
+      "messageTitle": "List of all SS list users",
+      "listFormat": "**{userTag}** - **Added by:**``{punisherTag}`` - **Reason:** `{reason}`"
+    },
+    "mute": {
+      "enabled": true,
+      "log": true,
+      "requirePermission": true,
+      "permissionLiteMode": true,
+      "aliases": [
+        "mute"
+      ],
+      "format": "**Format:** ``{command} <user> [reason]``",
+      "messageContent": "You have muted `{userTag}` from the server\nWith the reason: `{reason}`",
+      "logMessage": "{userTag} has been muted by {punisherTag} for reason: {reason}",
+      "userAlreadyMuted": "{userTag} is already muted",
+      "roleNotFoundError": "{userTag}, There was an error getting the muted role. If you do not have a muted role, you can run the comamnd ``.createMutedRole`` and then copy the ID into config."
+    },
+    "unmute": {
+      "enabled": true,
+      "log": true,
+      "requirePermission": true,
+      "permissionLiteMode": true,
+      "aliases": [
+        "unmute",
+        "removeMute"
+      ],
+      "format": "**Format:** ``{command} <user>``",
+      "messageContent": "You have unmuted `{userTag}` from the server",
+      "logMessage": "{userTag} has been unmuted by {punisherTag}",
+      "userNotMuted": "{userTag} is not muted"
+    },
+    "getMuted": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "getMuted",
+        "mutedList"
+      ],
+      "format": "**Format:** ``{command}``",
+      "messageTitle": "List of all muted users",
+      "listFormat": "**{userTag}**"
+    },
+    "createMutedRole": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "createMutedRole"
+      ],
+      "format": "**Format:** ``{command}``",
+      "messageContent": "{userTag} you have created a muted role with the id of ``{ID}``"
+    },
+    "createTicketPanel": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "createTicketPanel",
+        "adminPanel",
+        "admin_panel"
+      ],
+      "format": "**Format:** ``{command}``",
+      "ticketPanelTitle": "i0dev Tickets",
+      "pinTicketPanel": false,
+      "ticketPanelDescription": "Click to one of the emojis to create a corresponding ticket!",
+      "ticketPanelFieldHeaderFormat": "{emoji} - {panelHeader}",
+      "ticketPanelFieldBaseFormat": "{panelDescription}",
+      "ticketOptions": [
+        {
+          "Questions": [
+            "What realm is this for?",
+            "What is your IGN?",
+            "What is your issue?"
+          ],
+          "AdminOnlyDefault": false,
+          "PingStaffRoles": true,
+          "PanelDescription": "General questions, concerns or any support you need",
+          "PanelHeader": "General Ticket",
+          "ChannelName": "support-{ticketNumber}",
+          "Emoji": "\uD83C\uDF9F"
+        },
+        {
+          "Questions": [
+            "What realm is this for?",
+            "What is your IGN?",
+            "What is your issue?"
+          ],
+          "AdminOnlyDefault": true,
+          "PingStaffRoles": false,
+          "PanelDescription": "Tickets that admins and above can see",
+          "PanelHeader": "Admin Ticket",
+          "ChannelName": "support-{ticketNumber}",
+          "Emoji": "\uD83D\uDD14"
+        }
+      ]
+    },
+    "event_ticketCreate": {
+      "enabled": true,
+      "requirePermission": false,
+      "permissionLiteMode": false,
+      "adminOnlyEmoji": "\uD83D\uDD14",
+      "closeTicketEmoji": "\uD83D\uDDD1",
+      "ticketCreatedEmbedTitle": "New ticket from {userTag}",
+      "ticketCreatedEmbedFieldHeader": "Please follow the format below:",
+      "dmToTicketCreatorTicket": "New ticket from {userTag}",
+      "dmToTicketCreatorDescription": "You created a new ticket in the **{guildName}** discord!\n Click the channel to go to it! {ticketCreatedMention}",
+      "ticketCreatedEmbedFieldBase": "```{Questions}```",
+      "ticketCreateCategory": 766795861769584640,
+      "RolesToPingIfPingEnabled": [
+        "804128351581110292"
+      ],
+      "RolesToAllowSeeingTickets": [
+        "804128351581110292"
+      ],
+      "RolesToAllowSeeingAdminOnlyTickets": [
+        "804128351581110292"
+      ]
+    },
+    "ticketRename": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": true,
+      "aliases": [
+        "ticketRename",
+        "trename",
+        "rename"
+      ],
+      "format": "**Format:** ``{command} <name>``",
+      "messageContent": "{userTag} you have renamed the ticket to `{newName}`"
+    },
+    "ticketRemove": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": true,
+      "aliases": [
+        "ticketRemove",
+        "tremove",
+        "remove"
+      ],
+      "format": "**Format:** ``{command} <user>``",
+      "messageContent": "{userTag} you have removed the user {userRemoved} from the ticket."
+    },
+    "ticketAdd": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": true,
+      "aliases": [
+        "ticketAdd",
+        "tadd",
+        "add"
+      ],
+      "format": "**Format:** ``{command} <user>``",
+      "messageContent": "{userTag} you have added the user {addedUser} from the ticket."
+    },
+    "ticketInfo": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": true,
+      "aliases": [
+        "ticketInfo",
+        "tinfo"
+      ],
+      "format": "**Format:** ``{command}``",
+      "messageContent": "**Channel Name:** {channelName}\n**Owners Tag:** {ownersTag}\n**Channel ID:** {channelID}\n**Admin Only:** {adminOnly}"
+    },
+    "ticketAdminOnly": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": true,
+      "aliases": [
+        "ticketAdminOnly",
+        "tadmin",
+        "tup",
+        "adminOnly"
+      ],
+      "format": "**Format:** ``{command}``",
+      "messageContent": "{userTag} you have changed the ticket to admin only!",
+      "alreadyAdminOnly": "{userTag} this ticket is already in Admin Only mode."
+    },
+    "ticketClose": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": true,
+      "aliases": [
+        "ticketClose",
+        "tclose",
+        "close"
+      ],
+      "format": "**Format:** ``{command} <reason>``",
+      "delayToCloseTicketMilis": 5000,
+      "messageContent": "{userTag}, Ticket {channelName} closing in 5 seconds.",
+      "ticketLogsMessage": "\n**Ticket ID:** ``{channelName}``\n\n**Closed By:** ``{userTag}``\n\n**Close Reason:**\n`{reason}`",
+      "ticketLogsTitle": "{userTag}'s ticket was closed."
+    },
+    "fun_slap": {
+      "enabled": true,
+      "requirePermission": false,
+      "permissionLiteMode": false,
+      "aliases": [
+        "slap"
+      ],
+      "format": "**Format:** ``{command} <user>``",
+      "messageContent": "{userTag} slapps you {slapped} (ಠ╭╮ಠ)"
+    },
+    "fun_dice": {
+      "enabled": true,
+      "requirePermission": false,
+      "permissionLiteMode": false,
+      "aliases": [
+        "dice",
+        "roleDie"
+      ],
+      "format": "**Format:** ``{command}``",
+      "messageContent": "{userTag} You rolled a die, and you rolled a {roll}"
+    },
+    "fun_pat": {
+      "enabled": true,
+      "requirePermission": false,
+      "permissionLiteMode": false,
+      "aliases": [
+        "pat",
+        "patUser"
+      ],
+      "format": "**Format:** ``{command} <user>``",
+      "messageContent": "{userTag} pats you {patted}, good boy."
+    },
+    "fun_hey": {
+      "enabled": true,
+      "requirePermission": false,
+      "permissionLiteMode": false,
+      "aliases": [
+        "hey",
+        "hello"
+      ],
+      "format": "**Format:** ``{command}``",
+      "messageContent": "Hello! :wave: {userTag}"
+    },
+    "fun_coinFlip": {
+      "enabled": true,
+      "requirePermission": false,
+      "permissionLiteMode": false,
+      "aliases": [
+        "coinFlip",
+        "cf",
+        "flipACoin"
+      ],
+      "format": "**Format:** ``{command}``",
+      "messageContent": "{userTag} You flipped a coin, and you got a {flip}"
+    },
+    "fun_8ball": {
+      "enabled": true,
+      "requirePermission": false,
+      "permissionLiteMode": false,
+      "aliases": [
+        "8ball",
+        "magic8ball"
+      ],
+      "format": "**Format:** ``{command} <Question>``",
+      "messageContent": "{userTag}, the answer to `{question}` is:\n**{answer}**"
+    },
+    "promote": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "promote",
+        "promoteUser"
+      ],
+      "format": "**Format:** ``{command} <user>``",
+      "nicknameFormat": "{displayName} | {userName}",
+      "messageContent": "{senderTag} you have promoted {userTag} to {position}",
+      "movementMessage": "**{userTag}** has been __promoted__ to **{position}** by {senderTag}",
+      "userMaxPosition": "{userTag} is already the highest role they can possibly be promoted to!"
+    },
+    "demote": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "demote",
+        "demoteUser"
+      ],
+      "format": "**Format:** ``{command} <user>``",
+      "messageContent": "{senderTag} you have demtoed {userTag} to {position}",
+      "movementMessage": "**{userTag}** has been __demoted__ to **{position}** by {senderTag}",
+      "userNotStaff": "{userTag} is not a staff member! cannot demote them.",
+      "userMinPosition": "{userTag} is already the lowest role they can possibly be demoted to!"
+    },
+    "assign": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "assign",
+        "assignUser"
+      ],
+      "format": "**Format:** ``{command} <user> <role>``",
+      "messageContent": "{senderTag} you have assigned {userTag} to {position}",
+      "movementMessage": "**{userTag}** has been __assigned__ to **{position}** by {senderTag}"
+    },
+    "resign": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "resign",
+        "resignUser"
+      ],
+      "format": "**Format:** ``{command} <user>``",
+      "messageContent": "{senderTag} you have resigned {userTag}",
+      "userNotStaff": "{userTag} is not a staff member! cannot resign them.",
+      "movementMessage": "**{userTag}** has resigned."
+    },
+    "staffClear": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "staffClear",
+        "clearStaff"
+      ],
+      "format": "**Format:** ``{command} <user>``",
+      "messageContent": "{senderTag} you have fully demoted {userTag}",
+      "userNotStaff": "{userTag} is not a staff member! cannot demote them.",
+      "movementMessage": "**{userTag}** has been fully demoted by {senderTag}."
+    },
+    "createVerifyPanel": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "createVerifyPanel",
+        "verify_panel"
+      ],
+      "format": "**Format:** ``{command}``",
+      "pinVerifyPanel": true,
+      "messageContent": "To ensure a safe and mutually beneficial experience, all users are required to verify themselves as an actual human. It is your responsibility as a client to read all the rules. Once you agree to them you will be bound by them for as long as you are in this server. When you are done reading them, select the reaction at the bottom to acknowledge and agree to these terms, which will grant you access to the rest of the server.",
+      "messageTitle": "i0dev Secure Verification",
+      "verifyEmoji": "\u2705"
+    },
+    "event_verify": {
+      "enabled": true,
+      "requirePermission": false,
+      "permissionLiteMode": false,
+      "dmToVerifyTitle": "i0dev Verification",
+      "dmToVerifyDesc": "You have sucsessfully verifed yourself in the {guildName} discord!",
+      "rolesToGive": [
+        809855658626646046
+      ],
+      "rolesToRemove": [
+        809855657678209036
+      ]
+    },
+    "event_welcome": {
+      "enabled": true,
+      "welcomeMessageTitle": "Welcome {userTag} to {guildName}",
+      "welcomeMessageDesc": "If you need any support go to #ticket-create\nServer IP: play.serverip.com\nWebsite: www.website.com\nMemberCount: {guildMemberCount}",
+      "welcomeMessageThumbnailUseNewMember":true,
+      "rolesToGive": [
+        809855657678209036
+      ]
+    }
+  }
+}

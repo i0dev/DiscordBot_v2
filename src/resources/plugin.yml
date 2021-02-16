@@ -1,0 +1,12 @@
+name: DiscordLink
+version: ${project.version}
+main: com.i0dev.DiscordLink
+softdepend:  [ LuckPerms ]
+authors: [ i01 ]
+description: Link users in discord to users in game!
+website: i0dev.com
+commands:
+  link:
+    description: Link yourself in game!
+  linkinfo:
+    description: get info on linked players!
