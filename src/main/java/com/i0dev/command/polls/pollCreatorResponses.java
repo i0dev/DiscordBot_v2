@@ -83,14 +83,14 @@ public class pollCreatorResponses extends ListenerAdapter {
         if (CurrentQuestion == 2) {
             previousResponses.put(Questions.get(CurrentQuestion), messageContent);
             PollCache.get().getResponseMap().put(e.getAuthor(), previousResponses);
-            int numberOfPollOptions;
-            try {
-                numberOfPollOptions = Integer.parseInt(messageContent);
-            } catch (Exception ignored) {
+            if (!Prettify.isInt(messageContent)) {
                 e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbedNoThumbnail("Incorrect input. Please enter a number.").build()).queue();
                 return;
+            } else if (Integer.parseInt(messageContent) <= 0) {
+                e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbedNoThumbnail("Incorrect input. Please enter a number greater than 0.").build()).queue();
+                return;
             }
-            for (int i = 0; i < numberOfPollOptions; i++) {
+            for (int i = 0; i < Integer.parseInt(messageContent); i++) {
                 Questions.add("Enter the **Emoji** for the `" + Prettify.formatNumber((i + 1)) + "` option in the poll.");
                 Questions.add("Enter the **Content** for the `" + Prettify.formatNumber((i + 1)) + "` option in the poll.");
             }

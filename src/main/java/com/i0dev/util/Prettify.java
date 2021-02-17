@@ -2,6 +2,7 @@ package main.java.com.i0dev.util;
 
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.entities.User;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -82,6 +83,22 @@ public class Prettify {
         }
         return sb.toString();
     }
+    public static String FormatListUser(List<User> list) {
+
+        StringBuilder sb = new StringBuilder();
+
+        ArrayList<String> Stripped = new ArrayList<>();
+        for (User s : list) {
+            Stripped.add(capitalizeFirst(s.getAsMention()));
+        }
+        for (int i = 0; i < Stripped.size(); i++) {
+            sb.append(Stripped.get(i));
+            if (Stripped.size() - 1 > i) {
+                sb.append(", ");
+            }
+        }
+        return sb.toString();
+    }
 
     public static String FormatListString(List<String> list) {
 
@@ -151,5 +168,46 @@ public class Prettify {
             sb.append("Have a nice day.");
         }
         return sb.toString();
+    }
+
+    public static int getTimeMilis(String input) {
+        input = input.toLowerCase();
+        if (input.isEmpty()) return -1;
+        int time = 0;
+        StringBuilder number = new StringBuilder();
+        for (char c : input.toCharArray()) {
+            if (isInt(String.valueOf(c))) {
+                number.append(c);
+                continue;
+            }
+            if (number.toString().isEmpty()) return -1;
+            int add = Integer.parseInt(number.toString());
+            switch (c) {
+                case 'w':
+                    add *= 7;
+                case 'd':
+                    add *= 24;
+                case 'h':
+                    add *= 60;
+                case 'm':
+                    add *= 60;
+                case 's':
+                    time += add;
+                    number.setLength(0);
+                    break;
+                default:
+                    return -1;
+            }
+        }
+        return time * 1000;
+    }
+
+    public static boolean isInt(String s) {
+        try {
+            Integer.parseInt(s);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }

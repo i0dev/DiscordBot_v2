@@ -1,6 +1,8 @@
 package main.java.com.i0dev;
 
 import main.java.com.i0dev.command.polls.PollCache;
+import main.java.com.i0dev.engine.TaskCheckActiveGiveaways;
+import main.java.com.i0dev.engine.TaskCreatorTimeouts;
 import main.java.com.i0dev.entity.*;
 import main.java.com.i0dev.util.inviteutil.InviteTracking;
 import main.java.com.i0dev.jframe.DiscordBotGUI;
@@ -85,12 +87,13 @@ public class DiscordBot {
             } catch (Exception ignored) {
 
             }
-            Timer startPollCreatorTimeout = new Timer();
-            startPollCreatorTimeout.scheduleAtFixedRate(PollCache.get().TaskCheckTimeouts, 50000, 10000);
+            Timer TaskTimer = new Timer();
+            TaskTimer.scheduleAtFixedRate(TaskCreatorTimeouts.get().TaskPollTimeout, 50000, 10000);
+            TaskTimer.scheduleAtFixedRate(TaskCreatorTimeouts.get().TaskGiveawayTimeout, 50000, 10000);
+            TaskTimer.scheduleAtFixedRate(TaskCheckActiveGiveaways.get().TaskGiveawayTimeout, 5000, 10000);
+            TaskTimer.schedule(runStartupLater, 1000);
 
 
-            Timer runStartupLaterTimer = new Timer();
-            runStartupLaterTimer.schedule(runStartupLater, 1000);
         }
     };
 

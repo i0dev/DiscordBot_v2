@@ -5,6 +5,8 @@ import main.java.com.i0dev.command.cmdHelpPage;
 import main.java.com.i0dev.command.cmdVersion;
 import main.java.com.i0dev.command.fun.*;
 import main.java.com.i0dev.command.gamemodeSpecific.*;
+import main.java.com.i0dev.command.giveaways.cmdGiveawayCreator;
+import main.java.com.i0dev.command.giveaways.giveawayCreatorResponses;
 import main.java.com.i0dev.command.invite.cmdInviteLeaderboard;
 import main.java.com.i0dev.command.invite.cmdInviteResetData;
 import main.java.com.i0dev.command.invite.cmdInvites;
@@ -158,6 +160,9 @@ public class initJDA {
 
         jda.addEventListener(new pollCreatorResponses());
         jda.addEventListener(new cmdPollCreator());
+
+        jda.addEventListener(new giveawayCreatorResponses());
+        jda.addEventListener(new cmdGiveawayCreator());
 
     }
 

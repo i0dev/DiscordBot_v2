@@ -876,6 +876,29 @@
       "messageContent": "{userTag} Please check your DMS to complete the Poll Creator",
       "createdPollTitle": "Incoming poll from {userTag}",
       "createdPollFormat": "{emoji}** » {content}**\n"
+    },
+    "gcreate": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "gcreate",
+        "gstart",
+        "gnew"
+      ],
+      "format": "**Format:** ``{command}``",
+      "alreadyCreating": "{userTag} you are already creating a giveaway, check your dms!",
+      "messageContent": "{userTag} Please check your DMS to complete the Giveaway Creator",
+      "createdGiveawayTitle": "New Giveaway",
+      "createdGiveawayContent": "**React with {emoji} to enter\n\n**Prize:** `{prize}`\n**Length:** {length}\n**Winners:** {winnerCount}\n**Hosted By:** {userMention}\n**",
+      "createdGiveawayFooter": "Ending at",
+      "endedGiveawayTitle": "Giveaway Ended!",
+      "endedGiveawayContent": "**Prize:** `{prize}`\n**Hosted By:** {userMention}\n**Total Entries:** {totalEntries}\n**Winners:** {winners}",
+      "endedGiveawayFooter": "Ended At",
+      "winnersMessageTitle": "Giveaway Ended!",
+      "winnersMessageContent": "[Click to see original giveaway]({messageLink})\n\n**Prize:** `{prize}`\n**Winners:** {winners}",
+      "winnersMessageFooter": "Ended At",
+      "giveawayEmoji": "\uD83C\uDF89"
     }
   }
 }

@@ -19,7 +19,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../Development/Dependencies and Resources/JDA-4.2.0_204-withDependencies.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../IntelleJ Dependencies/JDA-4.2.0_168-withDependencies-min.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -28,7 +28,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../Development/Dependencies and Resources/json-simple-1.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../IntelleJ Dependencies/json-simple-1.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -37,11 +37,22 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../Development/Dependencies and Resources/spigot-1.16.3.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../IntelleJ Dependencies/Hyperoin.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://$MODULE_DIR$/../../Development/Dependencies and Resources/spigot-1.16.3.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../IntelleJ Dependencies/Hyperoin.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../IntelleJ Dependencies/java-json.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/../../IntelleJ Dependencies/java-json.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>

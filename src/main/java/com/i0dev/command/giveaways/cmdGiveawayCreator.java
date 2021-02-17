@@ -49,7 +49,7 @@ public class cmdGiveawayCreator extends ListenerAdapter {
             }
             GiveawayCache.get().getMap().put(e.getAuthor(), 0);
             GiveawayCache.get().getTimeoutMap().put(e.getAuthor(), System.currentTimeMillis() + getConfig.get().getLong("general.creatorTimeouts"));
-            e.getAuthor().openPrivateChannel().complete().sendMessage(EmbedFactory.get().createSimpleEmbedNoThumbnail("Please enter the channel you would like the poll to be posted in.").build()).queue();
+            e.getAuthor().openPrivateChannel().complete().sendMessage(EmbedFactory.get().createSimpleEmbedNoThumbnail("Please enter the channel you would like the giveaway to be posted in.").build()).queue();
             e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_CONTENT, e.getAuthor())).build()).queue();
 
         }

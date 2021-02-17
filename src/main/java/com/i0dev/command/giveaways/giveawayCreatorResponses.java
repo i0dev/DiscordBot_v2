@@ -1,10 +1,8 @@
 package main.java.com.i0dev.command.giveaways;
 
-import main.java.com.i0dev.command.polls.GiveawayCache;
-import main.java.com.i0dev.command.polls.PollCache;
-import main.java.com.i0dev.util.*;
 import main.java.com.i0dev.entity.Blacklist;
-
+import main.java.com.i0dev.entity.Giveaway;
+import main.java.com.i0dev.util.*;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -12,6 +10,8 @@ import net.dv8tion.jda.api.events.message.priv.PrivateMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.awt.*;
+import java.time.Instant;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -25,6 +25,7 @@ public class giveawayCreatorResponses extends ListenerAdapter {
     private final String createdGiveawayTitle = getConfig.get().getString("commands.gcreate.createdGiveawayTitle");
     private final String createdGiveawayContent = getConfig.get().getString("commands.gcreate.createdGiveawayContent");
     private final String createdGiveawayFooter = getConfig.get().getString("commands.gcreate.createdGiveawayFooter");
+    private final String Emoji = getConfig.get().getString("commands.gcreate.giveawayEmoji");
 
 
     @Override
@@ -72,14 +73,28 @@ public class giveawayCreatorResponses extends ListenerAdapter {
                 e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbedNoThumbnail("Cannot find that channel. Please try again").build()).queue();
                 return;
             }
+            previousResponses.put(Questions.get(CurrentQuestion), giveawayChannel.getId());
+            GiveawayCache.get().getResponseMap().put(e.getAuthor(), previousResponses);
+            CurrentQuestion++;
+            GiveawayCache.get().getMap().put(e.getAuthor(), CurrentQuestion);
+            e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbedNoThumbnail(Questions.get(1)).build()).queue();
+            return;
 
         }
-        if (CurrentQuestion > 1 && CurrentQuestion < Questions.size() - 1) {
+        if (CurrentQuestion > 0 && CurrentQuestion < Questions.size() - 1) {
             if (CurrentQuestion == 2) {
-                try {
-                    Integer.parseInt(messageContent);
-                } catch (Exception ignored) {
+                if (!Prettify.isInt(messageContent)) {
                     e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbedNoThumbnail("Incorrect input. Please enter a number.").build()).queue();
+                    return;
+                } else if (Integer.parseInt(messageContent) <= 0) {
+                    e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbedNoThumbnail("Incorrect input. Please enter a number greater than 0.").build()).queue();
+                    return;
+                }
+            }
+
+            if (CurrentQuestion == 3) {
+                if (Prettify.getTimeMilis(messageContent) == -1) {
+                    e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbedNoThumbnail("Incorrect input. Please enter a proper date in the format stated.").build()).queue();
                     return;
                 }
             }
@@ -103,33 +118,32 @@ public class giveawayCreatorResponses extends ListenerAdapter {
             StringBuilder desc = new StringBuilder();
             TextChannel Giveawaychannel = e.getJDA().getTextChannelById(responsesInOrder.get(0));
             String Prize = responsesInOrder.get(1);
-            String WinnerAmmount = responsesInOrder.get(2);
+            String WinnerAmount = responsesInOrder.get(2);
             String GiveawayTime = responsesInOrder.get(3);
+            long endTimeMillis = System.currentTimeMillis() + Prettify.getTimeMilis(responsesInOrder.get(3));
+            ZonedDateTime time = ZonedDateTime.ofInstant(Instant.ofEpochMilli(endTimeMillis), ZoneId.of("America/New_York"));
 
-            String title = "New Giveaway :party:";
-            String format = "**React with {emoji} to enter\n\n**Prize:** `{prize}`\n**Length:** {length}" +
-                    "\n**Winners:** {winnerCount}\n**Hosted By:** {userMention}\n**";
-            String footer = "Ending at{date would be timestamp}";
-            desc.append(messageContent
-                    .replace("{emoji}", "")
-                    .replace("{winnerCount}", WinnerAmmount)
+            desc.append(Placeholders.convert(createdGiveawayContent
+                    .replace("{emoji}", Emoji)
+                    .replace("{winnerCount}", WinnerAmount)
                     .replace("{length}", GiveawayTime)
-                    .replace("{prize}", Prize));
+                    .replace("{prize}", Prize), e.getAuthor()));
 
             EmbedBuilder embed = new EmbedBuilder()
-                    .setTimestamp(null)
+                    .setTimestamp(time)
                     .setColor(Color.decode(conf.EMBED_COLOR_HEX_CODE))
+                    .setThumbnail(conf.EMBED_THUMBNAIL)
                     .setDescription(desc.toString())
-                    .setTitle(createdGiveawayTitle)
-                    .setFooter(footer);
+                    .setTitle(Placeholders.convert(createdGiveawayTitle, e.getAuthor()))
+                    .setFooter(Placeholders.convert(createdGiveawayFooter, e.getAuthor()));
 
+            Message FullChannel = Giveawaychannel.sendMessage(embed.build()).complete();
+            Message DmMessage = e.getChannel().sendMessage(embed.build()).complete();
+            FullChannel.addReaction(Emoji).queue();
+            DmMessage.addReaction(Emoji).queue();
+            Giveaway.get().createGiveaway(e.getAuthor(), Prize, Giveawaychannel, FullChannel, endTimeMillis, Integer.parseInt(WinnerAmount));
 
-            Message FullChannel = Giveawaychannel.sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(createdGiveawayTitle, e.getAuthor()), desc.toString(),).build()).complete();
-            Message DmMessage = e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(createdGiveawayTitle, e.getAuthor()), desc.toString()).build()).complete();
-            FullChannel.addReaction("emoji").queue();
-            DmMessage.addReaction("emoji").queue();
-
-            PollCache.get().removeUser(e.getAuthor());
+            GiveawayCache.get().removeUser(e.getAuthor());
         }
     }
 }

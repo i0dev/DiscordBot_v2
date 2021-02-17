@@ -38,9 +38,9 @@ public class Giveaway {
         JSONObject object = new JSONObject();
         object.put("channelID", channel.getId());
         object.put("messageID", message.getId());
+        object.put("hostID", user.getId());
         object.put("guildID", conf.GENERAL_MAIN_GUILD.getId());
         object.put("prize", prize);
-        object.put("startTime", System.currentTimeMillis());
         object.put("endTime", endTime);
         object.put("winnerAmount", winnerAmount);
         GiveawayCache.add(object);
@@ -74,7 +74,7 @@ public class Giveaway {
         saveGiveaways();
     }
 
-    public ArrayList<JSONObject> getBlacklisted() {
+    public ArrayList<JSONObject> getCache() {
         return GiveawayCache;
     }
 

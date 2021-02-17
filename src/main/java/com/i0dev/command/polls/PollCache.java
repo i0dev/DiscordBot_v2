@@ -43,19 +43,4 @@ public class PollCache {
         PollCache.get().getQuestionMap().remove(user);
         PollCache.get().getTimeoutMap().remove(user);
     }
-
-    public TimerTask TaskCheckTimeouts = new TimerTask() {
-        public void run() {
-            if (TimeoutMap.isEmpty()) return;
-            TimeoutMap.forEach((user, timout) -> {
-                if (System.currentTimeMillis() > timout) {
-                    try {
-                        user.openPrivateChannel().complete().sendMessage(EmbedFactory.get().createSimpleEmbed("Your poll creator has timed out due to inactivity.").build()).queue();
-                    } catch (Exception ignored) {
-                    }
-                    PollCache.get().removeUser(user);
-                }
-            });
-        }
-    };
 }
