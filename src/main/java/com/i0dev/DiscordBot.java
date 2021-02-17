@@ -1,6 +1,7 @@
 package main.java.com.i0dev;
 
 import main.java.com.i0dev.command.polls.PollCache;
+import main.java.com.i0dev.command.reactionroles.ReactionRoleCache;
 import main.java.com.i0dev.engine.TaskCheckActiveGiveaways;
 import main.java.com.i0dev.engine.TaskCreatorTimeouts;
 import main.java.com.i0dev.entity.*;
@@ -52,6 +53,7 @@ public class DiscordBot {
         getConfig.get().getFile(Ticket.get().getFilePath());
         getConfig.get().getFile(Invites.get().getFilePath());
         getConfig.get().getFile(InviteMatcher.get().getFilePath());
+        getConfig.get().getFile(ReactionRoles.get().getFilePath());
 
         Timer createJDATimer = new Timer();
         createJDATimer.schedule(createJDALater, 1000);
@@ -81,6 +83,7 @@ public class DiscordBot {
             Screenshare.get().loadScreenshare();
             Ticket.get().loadTickets();
             Invites.get().loadCacheFromFile();
+            ReactionRoles.get().loadObject();
             InviteMatcher.get().loadCacheFromFile();
             try {
                 DiscordBotGUI.jLabel7.setText("Almost Done");

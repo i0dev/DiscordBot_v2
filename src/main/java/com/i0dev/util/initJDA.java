@@ -22,6 +22,8 @@ import main.java.com.i0dev.command.moderation.mute.cmdUnmute;
 import main.java.com.i0dev.command.movements.*;
 import main.java.com.i0dev.command.polls.cmdPollCreator;
 import main.java.com.i0dev.command.polls.pollCreatorResponses;
+import main.java.com.i0dev.command.reactionroles.cmdReactionRoleCreator;
+import main.java.com.i0dev.command.reactionroles.reactionRoleResponses;
 import main.java.com.i0dev.command.ticket.*;
 import main.java.com.i0dev.command.verify.cmdVerifyPanel;
 import main.java.com.i0dev.command.verify.eventReactVerify;
@@ -95,6 +97,7 @@ public class initJDA {
         jda.addEventListener(new cmdServerInfo());
         jda.addEventListener(new cmdUserInfo());
         jda.addEventListener(new cmdMemberCount());
+        jda.addEventListener(new cmdSuggest());
 
         jda.addEventListener(new cmdBlacklistAdd());
         jda.addEventListener(new cmdBlacklistRemove());
@@ -163,6 +166,9 @@ public class initJDA {
 
         jda.addEventListener(new giveawayCreatorResponses());
         jda.addEventListener(new cmdGiveawayCreator());
+
+        jda.addEventListener(new reactionRoleResponses());
+        jda.addEventListener(new cmdReactionRoleCreator());
 
     }
 

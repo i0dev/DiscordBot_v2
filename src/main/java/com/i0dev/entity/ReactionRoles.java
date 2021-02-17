@@ -1,10 +1,8 @@
 package main.java.com.i0dev.entity;
 
-import main.java.com.i0dev.util.conf;
 import main.java.com.i0dev.util.getConfig;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.entities.User;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -16,40 +14,37 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-public class Giveaway {
+public class ReactionRoles {
 
-    private static String FILEPATH = "DiscordBot/storage/Giveaways.json";
-    private static String KEY = "giveaways";
+    private static String FILEPATH = "DiscordBot/storage/ReactionRoles.json";
+    private static String KEY = "reactionroles";
     private static File FILE = new File(FILEPATH);
 
     public String getFilePath() {
         return FILEPATH;
     }
 
-    private static Giveaway instance = new Giveaway();
+    private static ReactionRoles instance = new ReactionRoles();
 
-    public static Giveaway get() {
+    public static ReactionRoles get() {
         return instance;
     }
 
-    ArrayList<JSONObject> GiveawayCache = new ArrayList<>();
+    ArrayList<JSONObject> ReactionRoleCache = new ArrayList<>();
 
-    public void createGiveaway(User user, String prize, TextChannel channel, Message message, long endTime, int winnerAmount) {
+    public void createReactionRole(TextChannel channel, Message message, ArrayList<JSONObject> options) {
         JSONObject object = new JSONObject();
         object.put("channelID", channel.getId());
         object.put("messageID", message.getId());
-        object.put("hostID", user.getId());
-        object.put("prize", prize);
-        object.put("endTime", endTime);
-        object.put("winnerAmount", winnerAmount);
-        GiveawayCache.add(object);
-        saveGiveaways();
+        object.put("options", options);
+        ReactionRoleCache.add(object);
+        saveObject();
     }
 
-    public JSONObject getGiveaway(String ID) {
-        if (GiveawayCache.isEmpty()) return null;
+    public JSONObject getReactionRole(String ID) {
+        if (ReactionRoleCache.isEmpty()) return null;
 
-        for (JSONObject object : GiveawayCache) {
+        for (JSONObject object : ReactionRoleCache) {
             if (object.get("messageID").equals(ID)) {
                 return object;
             }
@@ -57,11 +52,11 @@ public class Giveaway {
         return null;
     }
 
-    public void deleteGiveaway(String ID) {
-        for (JSONObject object : GiveawayCache) {
+    public void deleteReactionRole(String ID) {
+        for (JSONObject object : ReactionRoleCache) {
             if (object.get("messageID").equals(ID)) {
-                GiveawayCache.remove(object);
-                saveGiveaways();
+                ReactionRoleCache.remove(object);
+                saveObject();
                 break;
 
             }
@@ -69,17 +64,17 @@ public class Giveaway {
     }
 
     public void wipeCache() {
-        GiveawayCache.clear();
-        saveGiveaways();
+        ReactionRoleCache.clear();
+        saveObject();
     }
 
     public ArrayList<JSONObject> getCache() {
-        return GiveawayCache;
+        return ReactionRoleCache;
     }
 
-    public void saveGiveaways() {
+    public void saveObject() {
         JSONObject all = new JSONObject();
-        all.put(KEY, GiveawayCache);
+        all.put(KEY, ReactionRoleCache);
         try {
             Files.write(Paths.get(getConfig.get().getFile(FILEPATH).getPath()), all.toJSONString().getBytes());
         } catch (Exception e) {
@@ -87,11 +82,11 @@ public class Giveaway {
         }
     }
 
-    public void loadGiveaways() {
+    public void loadObject() {
         JSONObject json = null;
         try {
             json = (JSONObject) new JSONParser().parse(new FileReader(FILE));
-            GiveawayCache = (ArrayList<JSONObject>) json.get(KEY);
+            ReactionRoleCache = (ArrayList<JSONObject>) json.get(KEY);
 
         } catch (IOException e) {
             e.printStackTrace();

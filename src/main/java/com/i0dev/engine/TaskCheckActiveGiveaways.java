@@ -1,18 +1,13 @@
 package main.java.com.i0dev.engine;
 
-import main.java.com.i0dev.command.polls.PollCache;
 import main.java.com.i0dev.entity.Giveaway;
-import main.java.com.i0dev.util.Placeholders;
-import main.java.com.i0dev.util.Prettify;
-import main.java.com.i0dev.util.conf;
-import main.java.com.i0dev.util.getConfig;
+import main.java.com.i0dev.util.*;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import org.json.simple.JSONObject;
 
-import javax.annotation.concurrent.ThreadSafe;
 import java.awt.*;
 import java.time.Instant;
 import java.time.ZoneId;
@@ -36,6 +31,7 @@ public class TaskCheckActiveGiveaways {
     private final String winnersMessageTitle = getConfig.get().getString("commands.gcreate.winnersMessageTitle");
     private final String winnersMessageContent = getConfig.get().getString("commands.gcreate.winnersMessageContent");
     private final String winnersMessageFooter = getConfig.get().getString("commands.gcreate.winnersMessageFooter");
+    private final String winnerDmMessage = getConfig.get().getString("commands.gcreate.winnerDmMessage");
 
     public TimerTask TaskGiveawayTimeout = new TimerTask() {
         public void run() {
@@ -90,7 +86,16 @@ public class TaskCheckActiveGiveaways {
 
                     Channel.editMessageById(MessageID, editEmbed.build()).queue();
                     Channel.sendMessage(newEmbed.build()).queue();
-                    //dm giveaway winners
+                    for (User winner : selectedWinners) {
+                        try {
+                            winner.openPrivateChannel().complete().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(winnerDmMessage
+                                            .replace("{prize}", Prize)
+                                            .replace("{messageLink}", ("https://discordapp.com/channels/" + conf.GENERAL_MAIN_GUILD.getId() + "/" + ChannelID + "/" + MessageID))
+                                    , winner)).build()).queue();
+                        } catch (Exception ignored) {
+
+                        }
+                    }
                     Giveaway.get().deleteGiveaway(MessageID);
                     break;
                 }

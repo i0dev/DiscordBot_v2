@@ -19,7 +19,8 @@
     "confirmedFactionChannelID": 766328319318556702,
     "confirmedIslandChannelID": 766328319318556702,
     "confirmedCellChannelID": 766328319318556702,
-    "inviteTrackingChannelID": 766330396832432150
+    "inviteTrackingChannelID": 766330396832432150,
+    "suggestionChannelID": 766330396832432150
   },
   "roles": {
     "LiteAllowedRoles": [
@@ -239,6 +240,20 @@
       "format": "**Format:** ``{command} <user>``",
       "messageTitle": "Showing user information for {userTag}",
       "messageContent": "**Created Date:** ``{userCreatedDate}``\n**Join Date:** ``{userJoinDate}``\n**ID:** ``{userID}``\n**Name:** `{userName}`\n**Tag:** `{userTag}`\n**Bot:** `{isBot}`\n**Mention:** {userMention}\n**Online Status:** `{onlineStatus}`\n**Boosting:** `{boosting}`\n**Voice State:** `{voiceState}`\n\n**Roles:** {roleList}\n\n**Permissions:** `{permissionList}`"
+    },
+    "suggest": {
+      "enabled": true,
+      "requirePermission": false,
+      "permissionLiteMode": false,
+      "aliases": [
+        "suggest",
+        "suggestion"
+      ],
+      "format": "**Format:** ``{command} <gamemode> <suggestion>``",
+      "messageTitle": "Incoming Suggestion",
+      "messageContent": "New suggestion for {gamemode} from {userTag}\n`{suggestion}`",
+      "upVoteEmoji": "\u2705",
+      "downVoteEmoji": "\u274C"
     },
     "memberCount": {
       "enabled": true,
@@ -898,7 +913,21 @@
       "winnersMessageTitle": "Giveaway Ended!",
       "winnersMessageContent": "[Click to see original giveaway]({messageLink})\n\n**Prize:** `{prize}`\n**Winners:** {winners}",
       "winnersMessageFooter": "Ended At",
-      "giveawayEmoji": "\uD83C\uDF89"
+      "giveawayEmoji": "\uD83C\uDF89",
+      "winnerDmMessage": "Congradulations! You won the giveaway for {prize} in the {guildName}\n[Click to see the giveaway]({messageLink})"
+    },
+    "reactionRoles": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "reactionRoles"
+      ],
+      "format": "**Format:** ``{command}``",
+      "alreadyCreating": "{userTag} you are already creating a reaction role panel, check your dms!",
+      "messageContent": "{userTag} Please check your DMS to complete the Reaction Role Creator",
+      "createdReactionRolesTitle": "Reaction Roles (React with an emoji to get that role!)",
+      "createdReactionRolesFormat": "{emoji}** » {role}**\n"
     }
   }
 }
