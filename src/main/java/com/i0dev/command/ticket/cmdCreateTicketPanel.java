@@ -1,8 +1,7 @@
 package main.java.com.i0dev.command.ticket;
 
-import main.java.com.i0dev.util.*;
 import main.java.com.i0dev.entity.Blacklist;
-
+import main.java.com.i0dev.util.*;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;

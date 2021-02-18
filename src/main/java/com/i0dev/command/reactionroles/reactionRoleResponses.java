@@ -8,9 +8,11 @@ import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.priv.PrivateMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 
 public class reactionRoleResponses extends ListenerAdapter {
@@ -119,7 +121,9 @@ public class reactionRoleResponses extends ListenerAdapter {
                 ReactionRoleCache.get().getMap().put(e.getAuthor(), CurrentQuestion);
                 return;
             } else {
-                previousResponses.put(Questions.get(CurrentQuestion), messageContent);
+                previousResponses.put(Questions.get(CurrentQuestion), e.getMessage().getContentRaw());
+                System.out.println(e.getMessage().getContentRaw());
+
                 ReactionRoleCache.get().getResponseMap().put(e.getAuthor(), previousResponses);
                 CurrentQuestion++;
                 e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbedNoThumbnail(Questions.get(CurrentQuestion)).build()).queue();
@@ -127,6 +131,7 @@ public class reactionRoleResponses extends ListenerAdapter {
                 return;
             }
         }
+
         if (CurrentQuestion == Questions.size() - 1) {
             if (!messageContent.equalsIgnoreCase("submit")) {
                 e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbedNoThumbnail("Unknown message, to submit your reaction panel, type `submit`, to cancel type `" + conf.GENERAL_BOT_PREFIX + "cancel`").build()).queue();

@@ -115,7 +115,7 @@ public class initJDA {
         jda.addEventListener(new cmdGetMuted());
         jda.addEventListener(new cmdCreateMutedRole());
 
-        jda.addEventListener(new cmdCreateTicketPanel());
+        jda.addEventListener(new main.java.com.i0dev.command.ticket.cmdCreateTicketPanel());
         jda.addEventListener(new eventTicketCreate());
         jda.addEventListener(new cmdTicketRename());
         jda.addEventListener(new cmdTicketAdd());
@@ -167,8 +167,8 @@ public class initJDA {
         jda.addEventListener(new giveawayCreatorResponses());
         jda.addEventListener(new cmdGiveawayCreator());
 
-        jda.addEventListener(new reactionRoleResponses());
-        jda.addEventListener(new cmdReactionRoleCreator());
+       // jda.addEventListener(new reactionRoleResponses());
+       // jda.addEventListener(new cmdReactionRoleCreator());
 
     }
 

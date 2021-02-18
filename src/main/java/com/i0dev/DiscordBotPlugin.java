@@ -1,20 +1,24 @@
 package main.java.com.i0dev;
 
+import main.java.com.i0dev.engine.TaskCheckActiveGiveaways;
+import main.java.com.i0dev.engine.TaskCreatorTimeouts;
 import main.java.com.i0dev.entity.*;
 import main.java.com.i0dev.jframe.DiscordBotGUI;
 import main.java.com.i0dev.util.conf;
 import main.java.com.i0dev.util.getConfig;
 import main.java.com.i0dev.util.initJDA;
+import main.java.com.i0dev.util.inviteutil.InviteTracking;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class DiscordBotPlugin extends JavaPlugin {
 
-    @Override
     public void onEnable() {
 
         if (!new File("DiscordBot").exists()) {
@@ -42,8 +46,6 @@ public class DiscordBotPlugin extends JavaPlugin {
             } catch (IOException ignored) {
             }
         }
-        getConfig.get().reloadConfig();
-        initJDA.get().createJDA();
 
         getConfig.get().getFile(Application.get().getFilePath());
         getConfig.get().getFile(Blacklist.get().getFilePath());
@@ -52,21 +54,85 @@ public class DiscordBotPlugin extends JavaPlugin {
         getConfig.get().getFile(Warning.get().getFilePath());
         getConfig.get().getFile(getConfig.get().getFilePath());
         getConfig.get().getFile(Ticket.get().getFilePath());
-        Application.get().loadApplications();
-        Blacklist.get().loadBlacklist();
-        Warning.get().loadWarnings();
-        Giveaway.get().loadGiveaways();
-        Screenshare.get().loadScreenshare();
-        Ticket.get().loadTickets();
+        getConfig.get().getFile(Invites.get().getFilePath());
+        getConfig.get().getFile(InviteMatcher.get().getFilePath());
+        getConfig.get().getFile(ReactionRoles.get().getFilePath());
 
-        conf.initGlobalConfig();
-        initJDA.get().registerListeners();
-        System.out.println("Successfully loaded DiscordBot");
+        Timer createJDATimer = new Timer();
+        createJDATimer.schedule(createJDALater, 1000);
+        Timer verify = new Timer();
+        verify.schedule(verifyInitial, 4000);
+        try {
+            DiscordBotGUI.openGUI();
+            DiscordBotGUI.jLabel7.setText("LOADING");
+        } catch (Exception ignored) {
+
+        }
+
     }
 
+    public static TimerTask createJDALater = new TimerTask() {
+        public void run() {
+            getConfig.get().reloadConfig();
+            initJDA.get().createJDA();
+            if (initJDA.get().getJda() == null) {
+                System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nConfiguration generated. Please enter your token in the config file!\n\n\n\n\n\n\n\n\n\n\n");
+                System.exit(0);
+            }
+            Application.get().loadApplications();
+            Blacklist.get().loadBlacklist();
+            Warning.get().loadWarnings();
+            Giveaway.get().loadGiveaways();
+            Screenshare.get().loadScreenshare();
+            Ticket.get().loadTickets();
+            Invites.get().loadCacheFromFile();
+            ReactionRoles.get().loadObject();
+            InviteMatcher.get().loadCacheFromFile();
+            try {
+                DiscordBotGUI.jLabel7.setText("Almost Done");
+            } catch (Exception ignored) {
 
-    @Override
-    public void onDisable() {
+            }
+            Timer TaskTimer = new Timer();
+            TaskTimer.scheduleAtFixedRate(TaskCreatorTimeouts.get().TaskPollTimeout, 50000, 10000);
+            TaskTimer.scheduleAtFixedRate(TaskCreatorTimeouts.get().TaskGiveawayTimeout, 50000, 10000);
+            TaskTimer.scheduleAtFixedRate(TaskCheckActiveGiveaways.get().TaskGiveawayTimeout, 5000, 10000);
+            TaskTimer.schedule(runStartupLater, 1000);
 
-    }
+
+        }
+    };
+
+    public static TimerTask runStartupLater = new TimerTask() {
+        public void run() {
+            conf.initGlobalConfig();
+            initJDA.get().registerListeners();
+            try {
+                DiscordBotGUI.jLabel7.setText("<html>Bot Prefix: \"" + conf.GENERAL_BOT_PREFIX
+                        + "\"<br/>" + "Color Hex: \"" + conf.EMBED_COLOR_HEX_CODE
+                        + "\"<br/>" + "Guild ID: \"" + conf.GENERAL_MAIN_GUILD.getId()
+                        + "\"<br/>" + "Guild Name: \"" + conf.GENERAL_MAIN_GUILD.getName()
+                        + "\"<br/>" + "Bot Activity: \"" + getConfig.get().getString("general.activity")
+                        + "\"</html>"
+
+                );
+            } catch (Exception ignored) {
+            }
+
+            InviteTracking.attemptInviteCaching(conf.GENERAL_MAIN_GUILD);
+            System.out.println("Successfully loaded DiscordBot");
+        }
+    };
+
+    public static TimerTask verifyInitial = new TimerTask() {
+        public void run() {
+            if (initJDA.get().getJda().getGuildById("773035795023790131") == null) {
+                System.out.println("Failed to verify with authentication servers.");
+                System.exit(0);
+            } else {
+                System.out.println("Successfully verified with authentication servers.");
+            }
+        }
+    };
+
 }

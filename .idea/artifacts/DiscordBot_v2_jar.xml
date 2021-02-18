@@ -5,7 +5,6 @@
       <element id="module-output" name="DiscordBot_v2" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../../IntelleJ Dependencies/json-simple-1.1.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../../IntelleJ Dependencies/JDA-4.2.0_168-withDependencies-min.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../IntelleJ Dependencies/java-json.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

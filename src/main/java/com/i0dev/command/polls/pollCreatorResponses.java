@@ -137,7 +137,7 @@ public class pollCreatorResponses extends ListenerAdapter {
             for (int i = 0; i < Emojis.size(); i++) {
                 options.append(createdPollFormat
                         .replace("{content}", ContentList.get(i))
-                        .replace("{emoji}", Emojis.get(i)));
+                        .replace("{emoji}", "" + Emojis.get(i)));
             }
             Message FullChannel = channel.sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(createdPollTitle, e.getAuthor()), desc + "\n\n" + options.toString()).build()).complete();
             Message DmMessage = e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(createdPollTitle, e.getAuthor()), desc + "\n\n" + options.toString()).build()).complete();
