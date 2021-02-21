@@ -1,18 +1,19 @@
 package main.java.com.i0dev.command.reactionroles;
 
+import emoji4j.Emoji;
+import emoji4j.EmojiUtils;
 import main.java.com.i0dev.entity.Blacklist;
 import main.java.com.i0dev.entity.ReactionRoles;
 import main.java.com.i0dev.util.*;
+import net.dv8tion.jda.api.entities.Emote;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.priv.PrivateMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 
 public class reactionRoleResponses extends ListenerAdapter {
@@ -121,15 +122,14 @@ public class reactionRoleResponses extends ListenerAdapter {
                 ReactionRoleCache.get().getMap().put(e.getAuthor(), CurrentQuestion);
                 return;
             } else {
-                previousResponses.put(Questions.get(CurrentQuestion), e.getMessage().getContentRaw());
-                System.out.println(e.getMessage().getContentRaw());
-
+                previousResponses.put(Questions.get(CurrentQuestion), messageContent);
                 ReactionRoleCache.get().getResponseMap().put(e.getAuthor(), previousResponses);
                 CurrentQuestion++;
                 e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbedNoThumbnail(Questions.get(CurrentQuestion)).build()).queue();
                 ReactionRoleCache.get().getMap().put(e.getAuthor(), CurrentQuestion);
                 return;
             }
+
         }
 
         if (CurrentQuestion == Questions.size() - 1) {
@@ -160,13 +160,19 @@ public class reactionRoleResponses extends ListenerAdapter {
             for (int i = 0; i < Emojis.size(); i++) {
                 JSONObject json = new JSONObject();
                 json.put("roleID", ContentList.get(i));
-                json.put("Emoji", Emojis.get(i));
+                if (Emojis.get(i).length() < 19) {
+                    json.put("Emoji", String.format("%x", (int) Emojis.get(i).charAt(0)));
+
+                } else {
+                    json.put("Emoji", Emojis.get(i));
+                }
                 toObject.add(json);
             }
             for (int i = 0; i < Emojis.size(); i++) {
+                String EmojiInit = Emojis.get(i);
                 options.append(createdReactionRolesFormat
                         .replace("{role}", e.getJDA().getRoleById(ContentList.get(i)).getAsMention())
-                        .replace("{emoji}", Emojis.get(i)));
+                        .replace("{emoji}", EmojiInit));
             }
 
             Message FullChannel = channel.sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(createdReactionRolesTitle, e.getAuthor()), desc + "\n\n" + options.toString()).build()).complete();
@@ -174,7 +180,11 @@ public class reactionRoleResponses extends ListenerAdapter {
 
             ReactionRoles.get().createReactionRole(channel, FullChannel, toObject);
 
-            for (String emoji : Emojis) {
+            for (String Iemoji : Emojis) {
+                String emoji = Iemoji;
+                if (emoji.length() > 19) {
+                    emoji = emoji.substring(0, emoji.length() - 1);
+                }
                 FullChannel.addReaction(emoji).queue();
                 DmMessage.addReaction(emoji).queue();
             }

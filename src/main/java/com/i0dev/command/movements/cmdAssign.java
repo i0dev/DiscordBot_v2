@@ -66,10 +66,13 @@ public class cmdAssign extends ListenerAdapter {
             Movements.giveNewRoles(MentionedMember, Long.valueOf(MentionedRole.getId()));
             try {
                 MentionedMember.modifyNickname(nicknameFormat.replace("{userName}", MentionedUser.getName()).replace("{displayName}", assignRoleObject.get("displayName").toString())).queue();
-            }catch (Exception ignored){
+            } catch (Exception ignored) {
 
             }
-            e.getGuild().getTextChannelById(staffMovementsChannelID).sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(movementMessage.replace("{position}", assignRoleObject.get("displayName").toString()).replace("{senderTag}", e.getAuthor().getAsTag()), MentionedUser)).build()).queue();
+            e.getGuild().getTextChannelById(staffMovementsChannelID).sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(movementMessage
+                    .replace("{position}", assignRoleObject.get("displayName").toString())
+                    .replace("{roleMention}", MentionedRole.getAsMention())
+                    .replace("{senderTag}", e.getAuthor().getAsTag()), MentionedUser)).build()).queue();
             e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_CONTENT.replace("{position}", assignRoleObject.get("displayName").toString()).replace("{senderTag}", e.getAuthor().getAsTag()), MentionedUser)).build()).queue();
 
 

@@ -3,8 +3,10 @@
     <output-path>$PROJECT_DIR$/out/artifacts/DiscordBot_v2_jar</output-path>
     <root id="archive" name="DiscordBot_v2.jar">
       <element id="module-output" name="DiscordBot_v2" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../IntelleJ Dependencies/json-simple-1.1.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../IntelleJ Dependencies/JDA-4.2.0_168-withDependencies-min.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../IntelleJ Dependencies/DiscordJDA.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../IntelleJ Dependencies/SimpleJSON.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../IntelleJ Dependencies/JavaJson.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Desktop/emoji4j-6.1-SNAPSHOT.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

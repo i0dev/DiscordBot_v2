@@ -43,13 +43,6 @@ public class eventCloseTicket extends ListenerAdapter {
         if (!e.getReactionEmote().getName().equals(Emoji)) return;
         e.getChannel().removeReactionById(e.getMessageId(), getEmojiWithoutArrow(Emoji), e.getUser()).queue();
 
-        if (Blacklist.get().isBlacklisted(e.getUser())) return;
-        if (!EVENT_ENABLED) return;
-        if (!InternalPermission.get().hasPermission(REQUIRE_PERMISSIONS, REQUIRE_LITE_PERMISSIONS, e.getGuild(), e.getUser())) {
-            e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(conf.MESSAGE_COMMAND_NO_PERMISSION.replace("{command}", Identifier), e.getUser())).build()).queue();
-            return;
-        }
-
         JSONObject ticketObject = Ticket.get().getTicket(e.getChannel());
         String reason = Prettify.ticketRemainingArgFormatter(null, 4);
         File file = Logs.getLogsFile(e.getChannel());

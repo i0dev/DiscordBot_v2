@@ -8,6 +8,8 @@ import main.java.com.i0dev.util.conf;
 import main.java.com.i0dev.util.getConfig;
 import main.java.com.i0dev.util.initJDA;
 import main.java.com.i0dev.util.inviteutil.InviteTracking;
+import net.dv8tion.jda.api.JDA;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -62,12 +64,6 @@ public class DiscordBotPlugin extends JavaPlugin {
         createJDATimer.schedule(createJDALater, 1000);
         Timer verify = new Timer();
         verify.schedule(verifyInitial, 4000);
-        try {
-            DiscordBotGUI.openGUI();
-            DiscordBotGUI.jLabel7.setText("LOADING");
-        } catch (Exception ignored) {
-
-        }
 
     }
 
@@ -88,11 +84,6 @@ public class DiscordBotPlugin extends JavaPlugin {
             Invites.get().loadCacheFromFile();
             ReactionRoles.get().loadObject();
             InviteMatcher.get().loadCacheFromFile();
-            try {
-                DiscordBotGUI.jLabel7.setText("Almost Done");
-            } catch (Exception ignored) {
-
-            }
             Timer TaskTimer = new Timer();
             TaskTimer.scheduleAtFixedRate(TaskCreatorTimeouts.get().TaskPollTimeout, 50000, 10000);
             TaskTimer.scheduleAtFixedRate(TaskCreatorTimeouts.get().TaskGiveawayTimeout, 50000, 10000);
@@ -128,11 +119,15 @@ public class DiscordBotPlugin extends JavaPlugin {
         public void run() {
             if (initJDA.get().getJda().getGuildById("773035795023790131") == null) {
                 System.out.println("Failed to verify with authentication servers.");
-                System.exit(0);
+                Bukkit.getPluginManager().disablePlugin(Bukkit.getPluginManager().getPlugin("DiscordBotPlugin"));
             } else {
                 System.out.println("Successfully verified with authentication servers.");
             }
         }
     };
 
+    @Override
+    public void onDisable() {
+        initJDA.get().getJda().shutdownNow();
+    }
 }

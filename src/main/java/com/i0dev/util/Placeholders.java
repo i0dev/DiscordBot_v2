@@ -3,12 +3,16 @@ package main.java.com.i0dev.util;
 import main.java.com.i0dev.entity.Invites;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.User;
+
+import java.util.List;
 
 public class Placeholders {
 
 
     public static String convert(String initialMessage, User user) {
+        Guild guild = conf.GENERAL_MAIN_GUILD;
 
 
         String AvatarURL;
@@ -23,7 +27,21 @@ public class Placeholders {
         } else {
             BotAvatarURL = initJDA.get().getJda().getSelfUser().getAvatarUrl();
         }
-        Guild guild = conf.GENERAL_MAIN_GUILD;
+
+
+        String OwnerAvatarURL;
+        if (guild.getOwner().getUser().getAvatarUrl() != null) {
+            OwnerAvatarURL = initJDA.get().getJda().getSelfUser().getDefaultAvatarUrl();
+        } else {
+            OwnerAvatarURL = guild.getOwner().getUser().getDefaultAvatarUrl();
+        }
+        String GuildBannerURL;
+        if (guild.getBannerUrl() == null) {
+            GuildBannerURL = "No Banner";
+        } else {
+            GuildBannerURL = guild.getBannerUrl();
+        }
+
 
         return initialMessage
                 .replace("{userAvatarURL}", AvatarURL)
@@ -31,11 +49,11 @@ public class Placeholders {
                 .replace("{guildName}", guild.getName())
                 .replace("{guildMemberCount}", guild.getMemberCount() + "")
                 .replace("{guildBoostTier}", guild.getBoostTier().getKey() + "")
-                .replace("{guildBannerUrl}", guild.getBannerUrl())
+                .replace("{guildBannerUrl}", GuildBannerURL)
                 .replace("{guildOwnerTag}", guild.getOwner().getUser().getAsTag())
                 .replace("{guildOwnerMention}", guild.getOwner().getUser().getAsMention())
                 .replace("{guildOwnerID}", guild.getOwner().getUser().getId())
-                .replace("{guildOwnerAvatarUrl}", guild.getOwner().getUser().getAvatarUrl())
+                .replace("{guildOwnerAvatarUrl}", OwnerAvatarURL)
                 .replace("{guildOwnerName}", guild.getOwner().getUser().getName())
                 .replace("{memberRoleCount}", guild.getMember(user).getRoles().size() + "")
                 .replace("{memberIsAdministrator}", guild.getMember(user).getPermissions().contains(Permission.ADMINISTRATOR) + "")

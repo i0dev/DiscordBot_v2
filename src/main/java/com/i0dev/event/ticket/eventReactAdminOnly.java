@@ -39,14 +39,6 @@ public class eventReactAdminOnly extends ListenerAdapter {
         if (!e.getReactionEmote().getName().equals(Emoji)) return;
         e.getChannel().removeReactionById(e.getMessageId(), getEmojiWithoutArrow(Emoji), e.getUser()).queue();
 
-        if (Blacklist.get().isBlacklisted(e.getUser())) return;
-
-        if (!EVENT_ENABLED) return;
-        if (!InternalPermission.get().hasPermission(REQUIRE_PERMISSIONS, REQUIRE_LITE_PERMISSIONS, e.getGuild(), e.getUser())) {
-            e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(conf.MESSAGE_COMMAND_NO_PERMISSION.replace("{command}", Identifier), e.getUser())).build()).queue();
-            return;
-        }
-
         JSONObject ticketObject = Ticket.get().getTicket(e.getChannel());
         if ((boolean) ticketObject.get("adminOnlyMode")) {
             e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_ADMINALREADY, e.getUser())).build()).queue();

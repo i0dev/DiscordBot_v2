@@ -10,18 +10,18 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../IntelleJ Dependencies/Hyperoin.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../IntelleJ Dependencies/Hyperion.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://$MODULE_DIR$/../../IntelleJ Dependencies/Hyperoin.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../IntelleJ Dependencies/Hyperion.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../IntelleJ Dependencies/json-simple-1.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../IntelleJ Dependencies/SimpleJSON.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -30,7 +30,27 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../IntelleJ Dependencies/JDA-4.2.0_168-withDependencies-min.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../IntelleJ Dependencies/DiscordJDA.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../IntelleJ Dependencies/JavaJson.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/../../IntelleJ Dependencies/JavaJson.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Desktop/emoji4j-6.1-SNAPSHOT.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

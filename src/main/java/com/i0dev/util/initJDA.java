@@ -1,5 +1,7 @@
 package main.java.com.i0dev.util;
 
+import main.java.com.i0dev.command.applications.applyResponses;
+import main.java.com.i0dev.command.applications.cmdApply;
 import main.java.com.i0dev.command.basic.*;
 import main.java.com.i0dev.command.cmdHelpPage;
 import main.java.com.i0dev.command.cmdVersion;
@@ -29,6 +31,7 @@ import main.java.com.i0dev.command.verify.cmdVerifyPanel;
 import main.java.com.i0dev.command.verify.eventReactVerify;
 import main.java.com.i0dev.event.automod.eventAutoMod;
 import main.java.com.i0dev.event.inviteTracking.eventInviteTracking;
+import main.java.com.i0dev.event.reactionroles.onReactionRole;
 import main.java.com.i0dev.event.ticket.eventCloseTicket;
 import main.java.com.i0dev.event.ticket.eventReactAdminOnly;
 import main.java.com.i0dev.event.ticket.eventTicketCreate;
@@ -167,8 +170,12 @@ public class initJDA {
         jda.addEventListener(new giveawayCreatorResponses());
         jda.addEventListener(new cmdGiveawayCreator());
 
-       // jda.addEventListener(new reactionRoleResponses());
-       // jda.addEventListener(new cmdReactionRoleCreator());
+        jda.addEventListener(new reactionRoleResponses());
+        jda.addEventListener(new cmdReactionRoleCreator());
+        jda.addEventListener(new onReactionRole());
+
+        jda.addEventListener(new applyResponses());
+        jda.addEventListener(new cmdApply());
 
     }
 

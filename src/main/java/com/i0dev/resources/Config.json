@@ -3,7 +3,7 @@
     "prefix": ".",
     "guildID": 717818320887349267,
     "activity": "play.mcrivals.com",
-    "token": "Your token here",
+    "token": "your token here",
     "deleteCommand": true,
     "creatorTimeouts": 300000
   },
@@ -20,7 +20,8 @@
     "confirmedIslandChannelID": 766328319318556702,
     "confirmedCellChannelID": 766328319318556702,
     "inviteTrackingChannelID": 766330396832432150,
-    "suggestionChannelID": 766330396832432150
+    "suggestionChannelID": 766330396832432150,
+    "incomingApplicationsChannel": 766330396832432150
   },
   "roles": {
     "LiteAllowedRoles": [
@@ -927,7 +928,29 @@
       "alreadyCreating": "{userTag} you are already creating a reaction role panel, check your dms!",
       "messageContent": "{userTag} Please check your DMS to complete the Reaction Role Creator",
       "createdReactionRolesTitle": "Reaction Roles (React with an emoji to get that role!)",
-      "createdReactionRolesFormat": "{emoji}** » {role}**\n"
+      "createdReactionRolesFormat": "{emoji}**: {role}**\n",
+      "onReactionDMTitle": "Reaction Roles",
+      "onReactionDMDescAdded": ":white_check_mark: You now have the ``{roleName}`` role in the **{guildName}** discord",
+      "onReactionDMDescRemoved": ":x: You no longer have the ``{roleName}`` role in the **{guildName}** discord"
+    },
+    "apply": {
+      "enabled": true,
+      "requirePermission": false,
+      "permissionLiteMode": false,
+      "aliases": [
+        "apply"
+      ],
+      "Questions": [
+        "What is your IGN",
+        "What is your Discord @",
+        "Do you have a working microphone?",
+        "Do you know how to screenshare?"
+      ],
+      "format": "**Format:** ``{command}``",
+      "alreadyCreating": "{userTag} you are already creating an application, check your dms!",
+      "messageContent": "{userTag} Please check your DMS to complete the application",
+      "applicationTitle": "Incoming application from {userTag}",
+      "applicationDesc": "Application from: {userMention}\nUser ID: ``{userID}``\nUser Tag: **{userTag}**\nTime: ``{time}``"
     }
   }
 }

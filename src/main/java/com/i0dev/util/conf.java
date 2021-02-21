@@ -11,6 +11,7 @@ public class conf {
     public static String MESSAGE_COMMAND_NOT_ENABLED;
     public static Guild GENERAL_MAIN_GUILD;
     public static TextChannel GENERAL_MAIN_LOGS_CHANNEL;
+    public static TextChannel APPLICATIONS_CHANNEL;
     public static String EMBED_COLOR_HEX_CODE;
     public static String EMBED_THUMBNAIL;
     public static String EMBED_TITLE;
@@ -22,6 +23,7 @@ public class conf {
     public static void initGlobalConfig() {
         GENERAL_MAIN_GUILD = initJDA.get().getJda().getGuildById(getConfig.get().getLong("general.guildID"));
         GENERAL_MAIN_LOGS_CHANNEL = initJDA.get().getJda().getGuildById(getConfig.get().getLong("general.guildID")).getTextChannelById(getConfig.get().getLong("channels.logsChannelID"));
+        APPLICATIONS_CHANNEL = initJDA.get().getJda().getGuildById(getConfig.get().getLong("general.guildID")).getTextChannelById(getConfig.get().getLong("channels.incomingApplicationsChannel"));
         MESSAGE_COMMAND_NOT_ENABLED = getConfig.get().getString("messages.commandNotEnabled");
         MESSAGE_COMMAND_NO_PERMISSION = getConfig.get().getString("messages.commandNoPermission");
         MESSAGE_USER_NOT_FOUND = getConfig.get().getString("messages.userNotFound");
