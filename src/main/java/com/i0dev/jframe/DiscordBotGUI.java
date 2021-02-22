@@ -7,13 +7,16 @@ public class DiscordBotGUI extends javax.swing.JFrame {
 
     private static DiscordBotGUI instance = new DiscordBotGUI();
 
-
     public static DiscordBotGUI get() {
         return instance;
     }
 
     public DiscordBotGUI() {
-        initComponents();
+        try {
+            initComponents();
+        } catch (Exception ignored) {
+
+        }
     }
 
     public void initComponents() {
@@ -165,11 +168,13 @@ public class DiscordBotGUI extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DiscordBotGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ignored) {
         }
+        try {
+            java.awt.EventQueue.invokeLater(() -> new DiscordBotGUI().setVisible(true));
+        } catch (Exception ignored) {
 
-        java.awt.EventQueue.invokeLater(() -> new DiscordBotGUI().setVisible(true));
+        }
     }
 
     private javax.swing.JLabel jLabel1;

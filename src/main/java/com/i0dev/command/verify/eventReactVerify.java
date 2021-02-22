@@ -1,12 +1,11 @@
 package main.java.com.i0dev.command.verify;
 
+import com.sun.istack.internal.NotNull;
 import main.java.com.i0dev.util.*;
 import main.java.com.i0dev.entity.Blacklist;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.time.ZonedDateTime;

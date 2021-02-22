@@ -1,5 +1,6 @@
 package main.java.com.i0dev.event.welcome;
 
+import com.sun.istack.internal.NotNull;
 import main.java.com.i0dev.util.Placeholders;
 import main.java.com.i0dev.util.RoleUtil;
 import main.java.com.i0dev.util.conf;
@@ -7,7 +8,6 @@ import main.java.com.i0dev.util.getConfig;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.time.ZonedDateTime;

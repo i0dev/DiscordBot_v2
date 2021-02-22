@@ -1,5 +1,6 @@
 package main.java.com.i0dev.event.ticket;
 
+import com.sun.istack.internal.NotNull;
 import main.java.com.i0dev.entity.Blacklist;
 import main.java.com.i0dev.entity.Ticket;
 
@@ -8,7 +9,6 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import org.jetbrains.annotations.NotNull;
 import org.json.simple.JSONObject;
 
 import java.util.List;

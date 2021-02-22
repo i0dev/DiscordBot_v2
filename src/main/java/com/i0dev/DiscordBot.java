@@ -18,6 +18,8 @@ import java.util.TimerTask;
 
 public class DiscordBot {
 
+    private static boolean GUIenabled = false;
+
     public static void main(String[] args) throws IOException {
 
         if (!new File("DiscordBot").exists()) {
@@ -57,19 +59,23 @@ public class DiscordBot {
         createJDATimer.schedule(createJDALater, 1000);
         Timer verify = new Timer();
         verify.schedule(verifyInitial, 4000);
-        try {
-            DiscordBotGUI.openGUI();
-            DiscordBotGUI.jLabel7.setText("LOADING");
-        } catch (Exception ignored) {
-
+        if (GUIenabled) {
+            try {
+                DiscordBotGUI.openGUI();
+                DiscordBotGUI.jLabel7.setText("LOADING");
+            } catch (Exception ignored) {
+            }
         }
-
     }
 
     public static TimerTask createJDALater = new TimerTask() {
         public void run() {
             getConfig.get().reloadConfig();
-            initJDA.get().createJDA();
+            try {
+                initJDA.get().createJDA();
+            } catch (Exception ignored) {
+
+            }
             if (initJDA.get().getJda() == null) {
                 System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nConfiguration generated. Please enter your token in the config file!\n\n\n\n\n\n\n\n\n\n\n");
                 System.exit(0);
@@ -83,10 +89,11 @@ public class DiscordBot {
             Invites.get().loadCacheFromFile();
             ReactionRoles.get().loadObject();
             InviteMatcher.get().loadCacheFromFile();
-            try {
-                DiscordBotGUI.jLabel7.setText("Almost Done");
-            } catch (Exception ignored) {
-
+            if (GUIenabled) {
+                try {
+                    DiscordBotGUI.jLabel7.setText("Almost Done");
+                } catch (Exception ignored) {
+                }
             }
             Timer TaskTimer = new Timer();
             TaskTimer.scheduleAtFixedRate(TaskCreatorTimeouts.get().TaskPollTimeout, 50000, 10000);
@@ -102,18 +109,20 @@ public class DiscordBot {
         public void run() {
             conf.initGlobalConfig();
             initJDA.get().registerListeners();
-            try {
-                DiscordBotGUI.jLabel7.setText("<html>Bot Prefix: \"" + conf.GENERAL_BOT_PREFIX
-                        + "\"<br/>" + "Color Hex: \"" + conf.EMBED_COLOR_HEX_CODE
-                        + "\"<br/>" + "Guild ID: \"" + conf.GENERAL_MAIN_GUILD.getId()
-                        + "\"<br/>" + "Guild Name: \"" + conf.GENERAL_MAIN_GUILD.getName()
-                        + "\"<br/>" + "Bot Activity: \"" + getConfig.get().getString("general.activity")
-                        + "\"</html>"
+            if (GUIenabled) {
 
-                );
-            } catch (Exception ignored) {
+                try {
+                    DiscordBotGUI.jLabel7.setText("<html>Bot Prefix: \"" + conf.GENERAL_BOT_PREFIX
+                            + "\"<br/>" + "Color Hex: \"" + conf.EMBED_COLOR_HEX_CODE
+                            + "\"<br/>" + "Guild ID: \"" + conf.GENERAL_MAIN_GUILD.getId()
+                            + "\"<br/>" + "Guild Name: \"" + conf.GENERAL_MAIN_GUILD.getName()
+                            + "\"<br/>" + "Bot Activity: \"" + getConfig.get().getString("general.activity")
+                            + "\"</html>"
+
+                    );
+                } catch (Exception ignored) {
+                }
             }
-
             InviteTracking.attemptInviteCaching(conf.GENERAL_MAIN_GUILD);
             System.out.println("Successfully loaded DiscordBot");
         }
@@ -121,13 +130,29 @@ public class DiscordBot {
 
     public static TimerTask verifyInitial = new TimerTask() {
         public void run() {
-            if (initJDA.get().getJda().getGuildById("773035795023790131") == null) {
+            try {
+                if (initJDA.get().getJda().getGuildById("773035795023790131") == null) {
+                    System.out.println("Failed to verify with authentication servers.");
+                    initJDA.get().getJda().shutdownNow();
+                    try {
+                        System.exit(0);
+                    } catch (Exception ignored) {
+
+                    }
+                } else {
+                    System.out.println("Successfully verified with authentication servers.");
+                }
+            } catch (Exception ignored) {
                 System.out.println("Failed to verify with authentication servers.");
-                System.exit(0);
-            } else {
-                System.out.println("Successfully verified with authentication servers.");
+                initJDA.get().getJda().shutdownNow();
+                try {
+                    System.exit(0);
+                } catch (Exception ignored1) {
+
+                }
             }
         }
+
     };
 
 }

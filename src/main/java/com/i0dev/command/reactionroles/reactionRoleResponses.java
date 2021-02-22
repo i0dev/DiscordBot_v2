@@ -1,7 +1,5 @@
 package main.java.com.i0dev.command.reactionroles;
 
-import emoji4j.Emoji;
-import emoji4j.EmojiUtils;
 import main.java.com.i0dev.entity.Blacklist;
 import main.java.com.i0dev.entity.ReactionRoles;
 import main.java.com.i0dev.util.*;
