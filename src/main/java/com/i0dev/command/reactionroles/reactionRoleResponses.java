@@ -28,6 +28,8 @@ public class reactionRoleResponses extends ListenerAdapter {
     public void onPrivateMessageReceived(PrivateMessageReceivedEvent e) {
         if (e.getAuthor().isBot()) return;
         if (Blacklist.get().isBlacklisted(e.getAuthor())) return;
+        if (!ReactionRoleCache.get().getMap().containsKey(e.getAuthor())) return;
+
         if (!COMMAND_ENABLED) {
             e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(conf.MESSAGE_COMMAND_NOT_ENABLED.replace("{command}", Identifier), e.getAuthor())).build()).queue();
             return;
@@ -37,7 +39,6 @@ public class reactionRoleResponses extends ListenerAdapter {
             return;
         }
 
-        if (!ReactionRoleCache.get().getMap().containsKey(e.getAuthor())) return;
         if (e.getMessage().getContentRaw().equalsIgnoreCase(conf.GENERAL_BOT_PREFIX + "cancel")) {
             e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbedNoThumbnail("You have canceled your current reaction roles creator.").build()).queue();
             ReactionRoleCache.get().removeUser(e.getAuthor());

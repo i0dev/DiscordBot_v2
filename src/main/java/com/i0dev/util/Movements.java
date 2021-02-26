@@ -11,10 +11,6 @@ public class Movements {
 
     private static final List<JSONObject> Tracks = getConfig.get().getObjectList("movementTracks");
 
-    public Movements() {
-        //Collections.reverse(Tracks);
-    }
-
     public static Role getParentStaff(Member member) {
         for (JSONObject object : Tracks) {
             long mainRoleID = (long) object.get("mainRole");

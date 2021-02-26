@@ -2,7 +2,6 @@ package main.java.com.i0dev;
 
 import main.java.com.i0dev.engine.TaskCheckActiveGiveaways;
 import main.java.com.i0dev.engine.TaskCreatorTimeouts;
-import main.java.com.i0dev.entity.*;
 import main.java.com.i0dev.jframe.DiscordBotGUI;
 import main.java.com.i0dev.util.conf;
 import main.java.com.i0dev.util.getConfig;
@@ -44,27 +43,23 @@ public class DiscordBot {
             }
         }
 
-        getConfig.get().getFile(Application.get().getFilePath());
-        getConfig.get().getFile(Blacklist.get().getFilePath());
-        getConfig.get().getFile(Giveaway.get().getFilePath());
-        getConfig.get().getFile(Screenshare.get().getFilePath());
-        getConfig.get().getFile(Warning.get().getFilePath());
+        getConfig.get().getFile(main.java.com.i0dev.entity.Application.get().getFilePath());
+        getConfig.get().getFile(main.java.com.i0dev.entity.Blacklist.get().getFilePath());
+        getConfig.get().getFile(main.java.com.i0dev.entity.Giveaway.get().getFilePath());
+        getConfig.get().getFile(main.java.com.i0dev.entity.Screenshare.get().getFilePath());
+        getConfig.get().getFile(main.java.com.i0dev.entity.Warning.get().getFilePath());
         getConfig.get().getFile(getConfig.get().getFilePath());
-        getConfig.get().getFile(Ticket.get().getFilePath());
-        getConfig.get().getFile(Invites.get().getFilePath());
-        getConfig.get().getFile(InviteMatcher.get().getFilePath());
-        getConfig.get().getFile(ReactionRoles.get().getFilePath());
+        getConfig.get().getFile(main.java.com.i0dev.entity.Ticket.get().getFilePath());
+        getConfig.get().getFile(main.java.com.i0dev.entity.Invites.get().getFilePath());
+        getConfig.get().getFile(main.java.com.i0dev.entity.InviteMatcher.get().getFilePath());
+        getConfig.get().getFile(main.java.com.i0dev.entity.ReactionRoles.get().getFilePath());
 
         Timer createJDATimer = new Timer();
         createJDATimer.schedule(createJDALater, 1000);
         Timer verify = new Timer();
         verify.schedule(verifyInitial, 4000);
         if (GUIenabled) {
-            try {
-                DiscordBotGUI.openGUI();
-                DiscordBotGUI.jLabel7.setText("LOADING");
-            } catch (Exception ignored) {
-            }
+            DiscordBotGUI.openGUI();
         }
     }
 
@@ -80,21 +75,15 @@ public class DiscordBot {
                 System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nConfiguration generated. Please enter your token in the config file!\n\n\n\n\n\n\n\n\n\n\n");
                 System.exit(0);
             }
-            Application.get().loadApplications();
-            Blacklist.get().loadBlacklist();
-            Warning.get().loadWarnings();
-            Giveaway.get().loadGiveaways();
-            Screenshare.get().loadScreenshare();
-            Ticket.get().loadTickets();
-            Invites.get().loadCacheFromFile();
-            ReactionRoles.get().loadObject();
-            InviteMatcher.get().loadCacheFromFile();
-            if (GUIenabled) {
-                try {
-                    DiscordBotGUI.jLabel7.setText("Almost Done");
-                } catch (Exception ignored) {
-                }
-            }
+            main.java.com.i0dev.entity.Application.get().loadApplications();
+            main.java.com.i0dev.entity.Blacklist.get().loadBlacklist();
+            main.java.com.i0dev.entity.Warning.get().loadWarnings();
+            main.java.com.i0dev.entity.Giveaway.get().loadGiveaways();
+            main.java.com.i0dev.entity.Screenshare.get().loadScreenshare();
+            main.java.com.i0dev.entity.Ticket.get().loadTickets();
+            main.java.com.i0dev.entity.Invites.get().loadCacheFromFile();
+            main.java.com.i0dev.entity.ReactionRoles.get().loadObject();
+            main.java.com.i0dev.entity.InviteMatcher.get().loadCacheFromFile();
             Timer TaskTimer = new Timer();
             TaskTimer.scheduleAtFixedRate(TaskCreatorTimeouts.get().TaskPollTimeout, 50000, 10000);
             TaskTimer.scheduleAtFixedRate(TaskCreatorTimeouts.get().TaskGiveawayTimeout, 50000, 10000);
@@ -110,18 +99,14 @@ public class DiscordBot {
             conf.initGlobalConfig();
             initJDA.get().registerListeners();
             if (GUIenabled) {
+                DiscordBotGUI.jLabel7.setText("<html>Bot Prefix: \"" + conf.GENERAL_BOT_PREFIX
+                        + "\"<br/>" + "Color Hex: \"" + conf.EMBED_COLOR_HEX_CODE
+                        + "\"<br/>" + "Guild ID: \"" + conf.GENERAL_MAIN_GUILD.getId()
+                        + "\"<br/>" + "Guild Name: \"" + conf.GENERAL_MAIN_GUILD.getName()
+                        + "\"<br/>" + "Bot Activity: \"" + getConfig.get().getString("general.activity")
+                        + "\"</html>"
 
-                try {
-                    DiscordBotGUI.jLabel7.setText("<html>Bot Prefix: \"" + conf.GENERAL_BOT_PREFIX
-                            + "\"<br/>" + "Color Hex: \"" + conf.EMBED_COLOR_HEX_CODE
-                            + "\"<br/>" + "Guild ID: \"" + conf.GENERAL_MAIN_GUILD.getId()
-                            + "\"<br/>" + "Guild Name: \"" + conf.GENERAL_MAIN_GUILD.getName()
-                            + "\"<br/>" + "Bot Activity: \"" + getConfig.get().getString("general.activity")
-                            + "\"</html>"
-
-                    );
-                } catch (Exception ignored) {
-                }
+                );
             }
             InviteTracking.attemptInviteCaching(conf.GENERAL_MAIN_GUILD);
             System.out.println("Successfully loaded DiscordBot");
@@ -152,7 +137,5 @@ public class DiscordBot {
                 }
             }
         }
-
     };
-
 }

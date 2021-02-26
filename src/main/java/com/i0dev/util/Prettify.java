@@ -4,6 +4,8 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.User;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
@@ -83,6 +85,7 @@ public class Prettify {
         }
         return sb.toString();
     }
+
     public static String FormatListUser(List<User> list) {
 
         StringBuilder sb = new StringBuilder();
@@ -210,4 +213,16 @@ public class Prettify {
             return false;
         }
     }
+
+    public static String formatDate(ZonedDateTime time) {
+        String Month = time.getMonth().getValue() + "";
+        String Day = time.getDayOfMonth() + "";
+        String Year = time.getYear() + "";
+        String Hour = time.getHour() + "";
+        String Minute = time.getMinute() + "";
+        String Second = time.getSecond() + "";
+
+        return "[" + Month + "/" + Day + "/" + Year + " " + Hour + ":" + Minute + ":" + Second + "]";
+    }
+
 }

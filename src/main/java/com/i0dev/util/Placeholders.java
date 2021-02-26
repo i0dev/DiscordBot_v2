@@ -1,6 +1,7 @@
 package main.java.com.i0dev.util;
 
 import main.java.com.i0dev.entity.Invites;
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Role;
@@ -12,6 +13,8 @@ public class Placeholders {
 
 
     public static String convert(String initialMessage, User user) {
+        JDA jda = initJDA.get().getJda();
+        Invites inviteManager = Invites.get();
         Guild guild = conf.GENERAL_MAIN_GUILD;
 
 
@@ -22,16 +25,16 @@ public class Placeholders {
             AvatarURL = user.getAvatarUrl();
         }
         String BotAvatarURL;
-        if (initJDA.get().getJda().getSelfUser().getAvatarUrl() == null) {
-            BotAvatarURL = initJDA.get().getJda().getSelfUser().getDefaultAvatarUrl();
+        if (jda.getSelfUser().getAvatarUrl() == null) {
+            BotAvatarURL = jda.getSelfUser().getDefaultAvatarUrl();
         } else {
-            BotAvatarURL = initJDA.get().getJda().getSelfUser().getAvatarUrl();
+            BotAvatarURL = jda.getSelfUser().getAvatarUrl();
         }
 
 
         String OwnerAvatarURL;
         if (guild.getOwner().getUser().getAvatarUrl() != null) {
-            OwnerAvatarURL = initJDA.get().getJda().getSelfUser().getDefaultAvatarUrl();
+            OwnerAvatarURL = jda.getSelfUser().getDefaultAvatarUrl();
         } else {
             OwnerAvatarURL = guild.getOwner().getUser().getDefaultAvatarUrl();
         }
@@ -58,15 +61,15 @@ public class Placeholders {
                 .replace("{memberRoleCount}", guild.getMember(user).getRoles().size() + "")
                 .replace("{memberIsAdministrator}", guild.getMember(user).getPermissions().contains(Permission.ADMINISTRATOR) + "")
                 .replace("{memberEffectiveName}", guild.getMember(user).getEffectiveName())
-                .replace("{BotUserTag}", initJDA.get().getJda().getSelfUser().getAsTag())
-                .replace("{BotUserMention}", initJDA.get().getJda().getSelfUser().getAsMention())
-                .replace("{BotUserID}", initJDA.get().getJda().getSelfUser().getId())
+                .replace("{BotUserTag}", jda.getSelfUser().getAsTag())
+                .replace("{BotUserMention}", jda.getSelfUser().getAsMention())
+                .replace("{BotUserID}", jda.getSelfUser().getId())
                 .replace("{userTag}", user.getAsTag())
                 .replace("{userMention}", user.getAsMention())
                 .replace("{userID}", user.getId())
                 .replace("{BotUserAvatarUL}", BotAvatarURL)
                 .replace("{UserAvatarUrl}", AvatarURL)
-                .replace("{inviteCount}", Invites.get().getUserInviteCount(user) + "")
-                .replace("{BotUserName}", initJDA.get().getJda().getSelfUser().getName());
+                .replace("{inviteCount}", inviteManager.getUserInviteCount(user) + "")
+                .replace("{BotUserName}", jda.getSelfUser().getName());
     }
 }

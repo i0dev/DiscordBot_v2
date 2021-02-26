@@ -10,7 +10,7 @@ public class MessageAliases {
     public static boolean isMessageACommand(Message message, List<String> aliases) {
         String[] splitMessage = message.getContentRaw().split(" ");
         for (String command : aliases) {
-            if (splitMessage[0].equalsIgnoreCase(getConfig.get().getString("general.prefix") + command)) {
+            if (splitMessage[0].equalsIgnoreCase(conf.GENERAL_BOT_PREFIX + command)) {
                 return true;
             }
         }

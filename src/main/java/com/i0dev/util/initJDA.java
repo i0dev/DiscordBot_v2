@@ -1,8 +1,11 @@
 package main.java.com.i0dev.util;
 
 import main.java.com.i0dev.command.applications.applyResponses;
+import main.java.com.i0dev.command.applications.cmdAccept;
 import main.java.com.i0dev.command.applications.cmdApply;
+import main.java.com.i0dev.command.applications.cmdReject;
 import main.java.com.i0dev.command.basic.*;
+import main.java.com.i0dev.command.cmdExportDiscordUsers;
 import main.java.com.i0dev.command.cmdHelpPage;
 import main.java.com.i0dev.command.cmdVersion;
 import main.java.com.i0dev.command.fun.*;
@@ -107,6 +110,7 @@ public class initJDA {
         jda.addEventListener(new cmdBlacklistClear());
         jda.addEventListener(new cmdBlacklistList());
 
+        jda.addEventListener(new cmdAnnounce());
         jda.addEventListener(new cmdBan());
         jda.addEventListener(new cmdUnban());
         jda.addEventListener(new cmdKick());
@@ -176,6 +180,10 @@ public class initJDA {
 
         jda.addEventListener(new applyResponses());
         jda.addEventListener(new cmdApply());
+        jda.addEventListener(new cmdAccept());
+        jda.addEventListener(new cmdReject());
+
+        jda.addEventListener(new cmdExportDiscordUsers());
 
     }
 

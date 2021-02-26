@@ -3,7 +3,7 @@
     "prefix": ".",
     "guildID": 717818320887349267,
     "activity": "play.mcrivals.com",
-    "token": "your token here",
+    "token": "NzIwNDY4NjI1OTk5NTI3OTU4.XuGasg.Ff9fGyS7_g_R9NYhbYXfWIsTTM8",
     "deleteCommand": true,
     "creatorTimeouts": 300000
   },
@@ -98,7 +98,8 @@
     "commandNotEnabled": "The command ``{command}`` is not enabled!",
     "commandNoPermission": "You do not have permission to use the command ``{command}``",
     "userNotFound": "the user ``{arg}`` cannot be found. Please try again!",
-    "roleNotFound": "the role ``{arg}`` cannot be found. Please try again!"
+    "roleNotFound": "the role ``{arg}`` cannot be found. Please try again!",
+    "channelNotFound": "the channel ``{arg}`` cannot be found. Please try again!"
   },
   "events": {
     "event_welcome": {
@@ -943,14 +944,57 @@
       "Questions": [
         "What is your IGN",
         "What is your Discord @",
-        "Do you have a working microphone?",
-        "Do you know how to screenshare?"
+        "Do you have a working microphone?"
       ],
       "format": "**Format:** ``{command}``",
       "alreadyCreating": "{userTag} you are already creating an application, check your dms!",
       "messageContent": "{userTag} Please check your DMS to complete the application",
       "applicationTitle": "Incoming application from {userTag}",
       "applicationDesc": "Application from: {userMention}\nUser ID: ``{userID}``\nUser Tag: **{userTag}**\nTime: ``{time}``"
+    },
+    "announce": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "announce",
+        "say"
+      ],
+      "format": "**Format:** ``{command} <channel> <content>``",
+      "messageContent": "{userTag} You have made an announcement in {channel}!",
+      "announcementTitle": "Announcement from: {userName}"
+    },
+    "accept": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "deleteApplicationAfterAccepted": true,
+      "requireAppToBeSubmittedToAccept": true,
+      "aliases": [
+        "accept",
+        "acceptApplication"
+      ],
+      "format": "**Format:** ``{command} <user> <role> [content]``",
+      "defaultResponse": "Your application was accepted. Please contact me on discord to finish setup: `{userTag}`",
+      "messageContent": ":white_check_mark: You have accepted {userTag} with the response: {response}",
+      "userNoApplicationSubmitted": "The user {userTag} doesnt have an application submitted.",
+      "dmToAcceptedDesc": ":white_check_mark: Your application was accepted by {userTag}!\n`{response}`\n You we're given the role {roleMention}"
+    },
+    "reject": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "deleteApplicationAfterRejected": true,
+      "requireAppToBeSubmittedToReject": true,
+      "aliases": [
+        "reject",
+        "rejectApplication"
+      ],
+      "format": "**Format:** ``{command} <user> [content]``",
+      "defaultResponse": "Your application was accepted. Please contact me on discord to finish setup: `{userTag}`",
+      "messageContent": ":x: You have rejected {userTag} with the response: {response}",
+      "userNoApplicationSubmitted": "The user {userTag} doesnt have an application submitted.",
+      "dmToRejectedDesc": ":x: Your application was rejected by {userTag}!\n`{response}`"
     }
   }
 }

@@ -1,6 +1,7 @@
 package main.java.com.i0dev.command.applications;
 
 import main.java.com.i0dev.command.reactionroles.ReactionRoleCache;
+import main.java.com.i0dev.entity.Application;
 import main.java.com.i0dev.entity.Blacklist;
 import main.java.com.i0dev.util.*;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -30,6 +31,8 @@ public class applyResponses extends ListenerAdapter {
     public void onPrivateMessageReceived(PrivateMessageReceivedEvent e) {
         if (e.getAuthor().isBot()) return;
         if (Blacklist.get().isBlacklisted(e.getAuthor())) return;
+        if (!ApplicationCache.get().getMap().containsKey(e.getAuthor())) return;
+
         if (!COMMAND_ENABLED) {
             e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(conf.MESSAGE_COMMAND_NOT_ENABLED.replace("{command}", Identifier), e.getAuthor())).build()).queue();
             return;
@@ -39,7 +42,6 @@ public class applyResponses extends ListenerAdapter {
             return;
         }
 
-        if (!ApplicationCache.get().getMap().containsKey(e.getAuthor())) return;
         if (e.getMessage().getContentRaw().equalsIgnoreCase(conf.GENERAL_BOT_PREFIX + "cancel")) {
             e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbedNoThumbnail("You have canceled your current application.").build()).queue();
             ApplicationCache.get().removeUser(e.getAuthor());
@@ -133,6 +135,7 @@ public class applyResponses extends ListenerAdapter {
                 Message DmMessagePage3 = e.getChannel().sendMessage(thirdPage.build()).complete();
             }
             ApplicationCache.get().removeUser(e.getAuthor());
+            Application.get().addUser(e.getAuthor(), Questions, responsesInOrder);
         }
     }
 }

@@ -7,6 +7,7 @@ public class conf {
 
     public static String MESSAGE_USER_NOT_FOUND;
     public static String MESSAGE_ROLE_NOT_FOUND;
+    public static String MESSAGE_CHANNEL_NOT_FOUND;
     public static String MESSAGE_COMMAND_NO_PERMISSION;
     public static String MESSAGE_COMMAND_NOT_ENABLED;
     public static Guild GENERAL_MAIN_GUILD;
@@ -27,6 +28,7 @@ public class conf {
         MESSAGE_COMMAND_NOT_ENABLED = getConfig.get().getString("messages.commandNotEnabled");
         MESSAGE_COMMAND_NO_PERMISSION = getConfig.get().getString("messages.commandNoPermission");
         MESSAGE_USER_NOT_FOUND = getConfig.get().getString("messages.userNotFound");
+        MESSAGE_CHANNEL_NOT_FOUND= getConfig.get().getString("messages.channelNotFound");
         EMBED_COLOR_HEX_CODE = getConfig.get().getString("messages.embeds.ColorHexCode");
         EMBED_THUMBNAIL = getConfig.get().getString("messages.embeds.Thumbnail");
         EMBED_TITLE = getConfig.get().getString("messages.embeds.Title");
