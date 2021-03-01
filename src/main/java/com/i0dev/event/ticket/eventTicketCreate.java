@@ -71,11 +71,11 @@ public class eventTicketCreate extends ListenerAdapter {
             saveFile();
             EmbedBuilder Embed = new EmbedBuilder()
                     .setColor(Color.decode(conf.EMBED_COLOR_HEX_CODE))
-                    .setThumbnail(e.getMember().getUser().getAvatarUrl())
+                    .setThumbnail(e.getMember().getUser().getEffectiveAvatarUrl())
                     .setTitle(Placeholders.convert(TICKET_CREATED_EMBED_TITLE, e.getMember().getUser()))
                     .addField(TICKET_CREATED_EMBED_FIELD_HEADER, Placeholders.convert(TICKET_CREATED_EMBED_FIELD_BASE, e.getMember().getUser()).replace("{Questions}", Prettify.FormatListString(Questions)), false)
                     .setTimestamp(ZonedDateTime.now())
-                    .setFooter(conf.EMBED_FOOTER, e.getMember().getUser().getAvatarUrl());
+                    .setFooter(conf.EMBED_FOOTER, e.getMember().getUser().getEffectiveAvatarUrl());
 
 
             try {
@@ -149,7 +149,7 @@ public class eventTicketCreate extends ListenerAdapter {
 
             EmbedBuilder EmbedPM = new EmbedBuilder()
                     .setTitle(Placeholders.convert(MESSAGE_DM_TICKETCREATOR_TITLE, e.getUser()))
-                    .setThumbnail(e.getUser().getAvatarUrl())
+                    .setThumbnail(e.getUser().getEffectiveAvatarUrl())
                     .setColor(Color.decode(conf.EMBED_COLOR_HEX_CODE))
                     .setDescription(Placeholders.convert(MESSAGE_DM_TICKETCREATOR_DESCRIPTION.replace("{ticketCreatedMention}", NewTicketCreated.getAsMention()), e.getUser()))
                     .setTimestamp(ZonedDateTime.now());

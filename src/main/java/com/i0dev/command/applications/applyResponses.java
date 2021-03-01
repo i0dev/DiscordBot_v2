@@ -94,7 +94,7 @@ public class applyResponses extends ListenerAdapter {
             EmbedBuilder embed = new EmbedBuilder()
                     .setTimestamp(ZonedDateTime.now())
                     .setColor(Color.decode(conf.EMBED_COLOR_HEX_CODE))
-                    .setThumbnail(e.getAuthor().getAvatarUrl())
+                    .setThumbnail(e.getAuthor().getEffectiveAvatarUrl())
                     .setDescription(Placeholders.convert(applicationDesc.replace("{time}", time), e.getAuthor()))
                     .setTitle(Placeholders.convert(applicationTitle, e.getAuthor()))
                     .setFooter(conf.EMBED_FOOTER);

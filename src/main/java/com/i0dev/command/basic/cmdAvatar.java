@@ -51,7 +51,7 @@ public class cmdAvatar extends ListenerAdapter {
             //checks if the message only contains 1 argument
             if (message.length == 1) {
                 //runs the avatar for the sender
-                e.getChannel().sendMessage(EmbedFactory.get().imageEmbed(Placeholders.convert(MESSAGE_TITLE.replace("{user}", e.getAuthor().getAsTag()), e.getAuthor()), e.getAuthor().getAvatarUrl()).build()).queue();
+                e.getChannel().sendMessage(EmbedFactory.get().imageEmbed(Placeholders.convert(MESSAGE_TITLE.replace("{user}", e.getAuthor().getAsTag()), e.getAuthor()), e.getAuthor().getEffectiveAvatarUrl()).build()).queue();
                 return;
             }
             //checks if the message contains 2 arguments
@@ -63,7 +63,7 @@ public class cmdAvatar extends ListenerAdapter {
                 }
                 //runs the avatar for other players
                 else {
-                    e.getChannel().sendMessage(EmbedFactory.get().imageEmbed(Placeholders.convert(MESSAGE_TITLE, MentionedUser), MentionedUser.getAvatarUrl()).build()).queue();
+                    e.getChannel().sendMessage(EmbedFactory.get().imageEmbed(Placeholders.convert(MESSAGE_TITLE, MentionedUser), MentionedUser.getEffectiveAvatarUrl()).build()).queue();
                 }
                 return;
             }

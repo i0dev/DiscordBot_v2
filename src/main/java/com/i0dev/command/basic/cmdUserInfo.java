@@ -74,7 +74,7 @@ public class cmdUserInfo extends ListenerAdapter {
                     .replace("{voiceState}", VoiceState)
                     .replace("{roleList}", Prettify.FormatList(MentionedMember.getRoles()))
                     .replace("{permissionList}", Prettify.FormatList(MentionedMember.getPermissions()));
-            e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_TITLE, e.getAuthor()), Placeholders.convert(description, e.getAuthor()), MentionedUser.getAvatarUrl()).build()).queue();
+            e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_TITLE, e.getAuthor()), Placeholders.convert(description, e.getAuthor()), MentionedUser.getEffectiveAvatarUrl()).build()).queue();
 
         }
     }

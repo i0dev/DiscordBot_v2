@@ -65,13 +65,17 @@ public class Invites {
     }
 
     public long getUserInviteCountAdd1(User user) {
-        for (JSONObject object : InvitesCache) {
-            if (object.get("userID").toString().equals(user.getId())) {
-                String Invites = (String) object.get("invites");
-                long InvitesLong = Long.parseLong(Invites);
-                InvitesLong++;
-                return InvitesLong;
+        try {
+            for (JSONObject object : InvitesCache) {
+                if (object.get("userID").toString().equals(user.getId())) {
+                    String Invites = (String) object.get("invites");
+                    long InvitesLong = Long.parseLong(Invites);
+                    InvitesLong++;
+                    return InvitesLong;
+                }
             }
+        } catch (Exception ignored) {
+
         }
         return 1;
     }

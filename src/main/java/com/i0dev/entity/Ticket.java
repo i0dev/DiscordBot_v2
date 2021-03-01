@@ -36,7 +36,7 @@ public class Ticket {
         JSONObject object = new JSONObject();
         object.put("channelID", channel.getId());
         object.put("ticketOwnerID", ticketOwner.getId());
-        object.put("ticketOwnerAvatarURL", ticketOwner.getAvatarUrl());
+        object.put("ticketOwnerAvatarURL", ticketOwner.getEffectiveAvatarUrl());
         object.put("ticketOwnerTag", ticketOwner.getAsTag());
         object.put("adminOnlyMode", adminOnlyMode);
         object.put("ticketNumber", ticketNumber);

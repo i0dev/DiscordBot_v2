@@ -36,11 +36,10 @@ public class eventWelcome extends ListenerAdapter {
                 .setTitle(Placeholders.convert(MESSAGE_TITLE, e.getUser()))
                 .setColor(Color.decode(conf.EMBED_COLOR_HEX_CODE))
                 .setFooter(conf.EMBED_FOOTER)
-
                 .setDescription(Placeholders.convert(MESSAGE_DESC, e.getUser()))
                 .setTimestamp(ZonedDateTime.now());
         if (welcomeMessageThumbnailUseNewMember) {
-            Embed.setThumbnail(e.getUser().getAvatarUrl());
+            Embed.setThumbnail(e.getUser().getEffectiveAvatarUrl());
         } else {
             Embed.setThumbnail(conf.EMBED_THUMBNAIL);
         }

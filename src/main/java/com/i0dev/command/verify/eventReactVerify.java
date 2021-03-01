@@ -43,7 +43,7 @@ public class eventReactVerify extends ListenerAdapter {
 
         EmbedBuilder EmbedPM = new EmbedBuilder()
                 .setTitle(Placeholders.convert(MESSAGE_DM_TITLE, e.getUser()))
-                .setThumbnail(e.getUser().getAvatarUrl())
+                .setThumbnail(e.getUser().getEffectiveAvatarUrl())
                 .setFooter(conf.EMBED_FOOTER)
                 .setColor(Color.decode(conf.EMBED_COLOR_HEX_CODE))
                 .setDescription(Placeholders.convert(MESSAGE_DM_DESCRIPTION, e.getUser()))
