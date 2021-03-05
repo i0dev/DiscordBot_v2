@@ -102,6 +102,11 @@
     "channelNotFound": "the channel ``{arg}`` cannot be found. Please try again!"
   },
   "events": {
+    "memberCounter": {
+      "memberCountEnabled": true,
+      "memberCountChannelID": 766450480850272287,
+      "channelNameFormat": "Members: {guildMemberCount}"
+    },
     "event_welcome": {
       "enabled": true,
       "pingUser": true,
@@ -133,8 +138,8 @@
       "enabled": true,
       "requirePermission": false,
       "permissionLiteMode": false,
-      "adminOnlyEmoji": "\uD83D\uDD14",
-      "closeTicketEmoji": "\uD83D\uDDD1",
+      "adminOnlyEmoji": "U+1F514",
+      "closeTicketEmoji": "U+1F5D1",
       "ticketCreatedEmbedTitle": "New ticket from {userTag}",
       "ticketCreatedEmbedFieldHeader": "Please follow the format below:",
       "dmToTicketCreatorTicket": "New ticket from {userTag}",
@@ -196,7 +201,7 @@
         "reload"
       ],
       "format": "**Format:** ``{command}``",
-      "messageContent": "``{userTag}``, you have sucsessfully reloaded the configuration!"
+      "messageContent": "``{userTag}``, you have successfully reloaded the configuration! It may take 5 seconds for the bot to be back up and running!"
     },
     "roles": {
       "enabled": true,
@@ -254,8 +259,9 @@
       "format": "**Format:** ``{command} <gamemode> <suggestion>``",
       "messageTitle": "Incoming Suggestion",
       "messageContent": "New suggestion for {gamemode} from {userTag}\n`{suggestion}`",
-      "upVoteEmoji": "\u2705",
-      "downVoteEmoji": "\u274C"
+      "SuccessMessage": "{userTag} You have successfully submitted a suggestion: `{suggestion}` for the gamemode `{gamemode}`",
+      "upVoteEmoji": "U+1F44D",
+      "downVoteEmoji": "U+1F44E"
     },
     "memberCount": {
       "enabled": true,
@@ -523,7 +529,7 @@
           "PanelDescription": "General questions, concerns or any support you need",
           "PanelHeader": "General Ticket",
           "ChannelName": "support-{ticketNumber}",
-          "Emoji": "\uD83C\uDF9F"
+          "Emoji": "U+1F39F"
         },
         {
           "Questions": [
@@ -536,7 +542,7 @@
           "PanelDescription": "Tickets that admins and above can see",
           "PanelHeader": "Admin Ticket",
           "ChannelName": "support-{ticketNumber}",
-          "Emoji": "\uD83D\uDD14"
+          "Emoji": "U+1F514"
         }
       ]
     },
@@ -760,7 +766,7 @@
       "pinVerifyPanel": true,
       "messageContent": "To ensure a safe and mutually beneficial experience, all users are required to verify themselves as an actual human. It is your responsibility as a client to read all the rules. Once you agree to them you will be bound by them for as long as you are in this server. When you are done reading them, select the reaction at the bottom to acknowledge and agree to these terms, which will grant you access to the rest of the server.",
       "messageTitle": "i0dev Secure Verification",
-      "verifyEmoji": "\u2705"
+      "verifyEmoji": "U+2705"
     },
     "factionLeader": {
       "enabled": true,
@@ -915,7 +921,7 @@
       "winnersMessageTitle": "Giveaway Ended!",
       "winnersMessageContent": "[Click to see original giveaway]({messageLink})\n\n**Prize:** `{prize}`\n**Winners:** {winners}",
       "winnersMessageFooter": "Ended At",
-      "giveawayEmoji": "\uD83C\uDF89",
+      "giveawayEmoji": "U+1F389",
       "winnerDmMessage": "Congradulations! You won the giveaway for {prize} in the {guildName}\n[Click to see the giveaway]({messageLink})"
     },
     "reactionRoles": {

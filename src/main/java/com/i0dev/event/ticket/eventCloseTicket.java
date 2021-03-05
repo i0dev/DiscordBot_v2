@@ -3,7 +3,6 @@ package main.java.com.i0dev.event.ticket;
 import com.sun.istack.internal.NotNull;
 import main.java.com.i0dev.entity.Blacklist;
 import main.java.com.i0dev.entity.Ticket;
-
 import main.java.com.i0dev.util.*;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
@@ -30,6 +29,7 @@ public class eventCloseTicket extends ListenerAdapter {
     private final String ADMIN_LOGS_ID = getConfig.get().getString("channels.ticketAdminLogsID");
     private final long delayToCloseTicketMilis = getConfig.get().getLong("commands.ticketClose.delayToCloseTicketMilis");
 
+
     @Override
     public void onGuildMessageReactionAdd(@NotNull GuildMessageReactionAddEvent e) {
         if (e.getUser().isBot()) return;
@@ -39,9 +39,15 @@ public class eventCloseTicket extends ListenerAdapter {
         if (!InternalPermission.get().hasPermission(REQUIRE_PERMISSIONS, REQUIRE_LITE_PERMISSIONS, e.getGuild(), e.getUser()))
             return;
         if (!Ticket.get().isTicket(e.getChannel())) return;
-        String Emoji = getSimpleEmoji(closeTicketEmoji);
-        if (!e.getReactionEmote().getName().equals(Emoji)) return;
-        e.getChannel().removeReactionById(e.getMessageId(), getEmojiWithoutArrow(Emoji), e.getUser()).queue();
+        String Emoji = EmojiUtil.getSimpleEmoji(closeTicketEmoji);
+        if (e.getReactionEmote().isEmoji()) {
+            if (!EmojiUtil.getUnicodeFromCodepoints(e.getReactionEmote().getAsCodepoints()).equalsIgnoreCase(Emoji))
+                return;
+
+        } else {
+            if (!e.getReactionEmote().getName().equalsIgnoreCase(closeTicketEmoji)) return;
+        }
+        e.getChannel().removeReactionById(e.getMessageId(), EmojiUtil.getEmojiWithoutArrow(Emoji), e.getUser()).queue();
 
         JSONObject ticketObject = Ticket.get().getTicket(e.getChannel());
         String reason = Prettify.ticketRemainingArgFormatter(null, 4);
@@ -78,21 +84,5 @@ public class eventCloseTicket extends ListenerAdapter {
 
     }
 
-
-    private String getSimpleEmoji(String Emoji) {
-        if (Emoji.length() < 3) {
-            return Emoji;
-        } else {
-            return Emoji.substring(2, Emoji.length() - 20);
-        }
-    }
-
-    private String getEmojiWithoutArrow(String Emoji) {
-        if (Emoji.length() < 3) {
-            return Emoji;
-        } else {
-            return Emoji.substring(0, Emoji.length() - 1);
-        }
-    }
 
 }

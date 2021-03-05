@@ -6,8 +6,7 @@ import main.java.com.i0dev.jframe.DiscordBotGUI;
 import main.java.com.i0dev.util.conf;
 import main.java.com.i0dev.util.getConfig;
 import main.java.com.i0dev.util.initJDA;
-import main.java.com.i0dev.util.inviteutil.InviteTracking;
-import org.bukkit.plugin.Plugin;
+import main.java.com.i0dev.util.InviteTracking;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;

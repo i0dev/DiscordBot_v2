@@ -48,7 +48,7 @@ public class cmdBlacklistClear extends ListenerAdapter {
 
             e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_CONTENT, e.getAuthor())).build()).queue();
             if (LOGS_ENABLED) {
-                conf.GENERAL_MAIN_LOGS_CHANNEL.sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(LOGS_MESSAGE, e.getAuthor())).build()).queue();
+                MessageUtil.sendMessage(conf.GENERAL_MAIN_LOGS_CHANNEL,EmbedFactory.get().createSimpleEmbed(Placeholders.convert(LOGS_MESSAGE, e.getAuthor())).build());
             }
         }
     }

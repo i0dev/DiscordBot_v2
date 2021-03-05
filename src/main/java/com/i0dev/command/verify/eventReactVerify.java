@@ -1,9 +1,10 @@
 package main.java.com.i0dev.command.verify;
 
 import com.sun.istack.internal.NotNull;
-import main.java.com.i0dev.util.*;
 import main.java.com.i0dev.entity.Blacklist;
+import main.java.com.i0dev.util.*;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.MessageReaction;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -24,7 +25,6 @@ public class eventReactVerify extends ListenerAdapter {
     private final List<Long> ROLES_TO_REMOVE = getConfig.get().getLongList("events.event_verify.rolesToRemove");
     private final String VERIFY_EMOJI = getConfig.get().getString("commands.createVerifyPanel.verifyEmoji");
 
-
     @Override
     public void onGuildMessageReactionAdd(@NotNull GuildMessageReactionAddEvent e) {
         if (e.getUser().isBot()) return;
@@ -34,12 +34,21 @@ public class eventReactVerify extends ListenerAdapter {
         if (Blacklist.get().isBlacklisted(e.getUser())) return;
         if (!InternalPermission.get().hasPermission(REQUIRE_PERMISSIONS, REQUIRE_LITE_PERMISSIONS, e.getGuild(), e.getUser()))
             return;
-        String Emoji = getSimpleEmoji(VERIFY_EMOJI);
-        if (!e.getReactionEmote().getName().equals(Emoji)) return;
-        e.getChannel().removeReactionById(e.getMessageId(), getEmojiWithoutArrow(Emoji), e.getUser()).queue();
+        String Emoji = EmojiUtil.getSimpleEmoji(VERIFY_EMOJI);
 
-        RoleUtil.giveRolesLongs(ROLES_TO_GIVE,e.getMember());
-        RoleUtil.removeRolesLongs(ROLES_TO_REMOVE,e.getMember());
+
+        if (e.getReactionEmote().isEmoji()) {
+            if (!EmojiUtil.getUnicodeFromCodepoints(e.getReactionEmote().getAsCodepoints()).equalsIgnoreCase(Emoji)) return;
+
+        } else {
+            if (!e.getReactionEmote().getName().equalsIgnoreCase(VERIFY_EMOJI)) return;
+        }
+
+
+        e.getChannel().removeReactionById(e.getMessageId(), EmojiUtil.getEmojiWithoutArrow(Emoji), e.getUser()).queue();
+
+        RoleUtil.giveRolesLongs(ROLES_TO_GIVE, e.getMember());
+        RoleUtil.removeRolesLongs(ROLES_TO_REMOVE, e.getMember());
 
         EmbedBuilder EmbedPM = new EmbedBuilder()
                 .setTitle(Placeholders.convert(MESSAGE_DM_TITLE, e.getUser()))
@@ -55,20 +64,4 @@ public class eventReactVerify extends ListenerAdapter {
         }
     }
 
-
-    private String getSimpleEmoji(String Emoji) {
-        if (Emoji.length() < 3) {
-            return Emoji;
-        } else {
-            return Emoji.substring(2, Emoji.length() - 20);
-        }
-    }
-
-    private String getEmojiWithoutArrow(String Emoji) {
-        if (Emoji.length() < 3) {
-            return Emoji;
-        } else {
-            return Emoji.substring(0, Emoji.length() - 1);
-        }
-    }
 }

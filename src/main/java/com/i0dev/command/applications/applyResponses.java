@@ -124,14 +124,14 @@ public class applyResponses extends ListenerAdapter {
             }
 
 
-            Message FullChannel = conf.APPLICATIONS_CHANNEL.sendMessage(embed.build()).complete();
+            Message FullChannel = MessageUtil.sendMessageComplete(conf.APPLICATIONS_CHANNEL, embed.build());
             Message DmMessage = e.getChannel().sendMessage(embed.build()).complete();
             if (secondPage.getFields().size() > 0) {
-                Message FullChannelPage2 = conf.APPLICATIONS_CHANNEL.sendMessage(secondPage.build()).complete();
+                Message FullChannelPage2 = MessageUtil.sendMessageComplete(conf.APPLICATIONS_CHANNEL, secondPage.build());
                 Message DmMessagePage2 = e.getChannel().sendMessage(secondPage.build()).complete();
             }
             if (thirdPage.getFields().size() > 0) {
-                Message FullChannelPage3 = conf.APPLICATIONS_CHANNEL.sendMessage(thirdPage.build()).complete();
+                Message FullChannelPage3 = MessageUtil.sendMessageComplete(conf.APPLICATIONS_CHANNEL, thirdPage.build());
                 Message DmMessagePage3 = e.getChannel().sendMessage(thirdPage.build()).complete();
             }
             ApplicationCache.get().removeUser(e.getAuthor());

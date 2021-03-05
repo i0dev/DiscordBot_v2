@@ -1,13 +1,14 @@
 package main.java.com.i0dev.event.ticket;
 
 import com.sun.istack.internal.NotNull;
-import main.java.com.i0dev.util.*;
 import main.java.com.i0dev.entity.Blacklist;
 import main.java.com.i0dev.entity.Ticket;
-
+import main.java.com.i0dev.util.*;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.entities.Category;
+import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.json.simple.JSONObject;
@@ -19,8 +20,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.ZonedDateTime;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class eventTicketCreate extends ListenerAdapter {
 
@@ -39,7 +41,6 @@ public class eventTicketCreate extends ListenerAdapter {
     private final List<Long> ROLES_TO_GIVE_ALLOW_FOR_TICKET = getConfig.get().getLongList("events.event_ticketCreate.RolesToAllowSeeingTickets");
     private final List<Long> ROLES_ALLOWED_TO_SEE_ADMINONLY = getConfig.get().getLongList("events.event_ticketCreate.RolesToAllowSeeingAdminOnlyTickets");
 
-
     @Override
     public void onGuildMessageReactionAdd(@NotNull GuildMessageReactionAddEvent e) {
         if (e.getUser().isBot()) return;
@@ -52,13 +53,20 @@ public class eventTicketCreate extends ListenerAdapter {
 
         List<JSONObject> TicketOptions = getConfig.get().getObjectList("commands.createTicketPanel.ticketOptions");
         for (JSONObject object : TicketOptions) {
-            String Emoji = getSimpleEmoji(object.get("Emoji").toString());
-            if (!e.getReactionEmote().getName().equals(Emoji)) continue;
+            String Emoji = EmojiUtil.getSimpleEmoji(object.get("Emoji").toString());
+
+            if (e.getReactionEmote().isEmoji()) {
+                if (!EmojiUtil.getUnicodeFromCodepoints(e.getReactionEmote().getAsCodepoints()).equalsIgnoreCase(Emoji))
+                    continue;
+            } else {
+                if (!e.getReactionEmote().getName().equalsIgnoreCase(Emoji)) continue;
+            }
+
             ArrayList<String> Questions = (ArrayList<String>) object.get("Questions");
             boolean AdminOnlyDefault = (boolean) object.get("AdminOnlyDefault");
             boolean PingStaffRoles = (boolean) object.get("PingStaffRoles");
             String ChannelName = object.get("ChannelName").toString();
-            e.getChannel().removeReactionById(e.getMessageId(), getEmojiWithoutArrow(Emoji), e.getUser()).queue();
+            e.getChannel().removeReactionById(e.getMessageId(), EmojiUtil.getEmojiWithoutArrow(Emoji), e.getUser()).queue();
 
             Category NewTicketCreatedCategory = e.getGuild().getCategoryById(TICKET_CREATE_CATEGORY_ID);
             TextChannel NewTicketCreated;
@@ -142,8 +150,8 @@ public class eventTicketCreate extends ListenerAdapter {
             }
 
             NewTicketCreated.sendMessage(Embed.build()).queue(message -> {
-                message.addReaction(getEmojiWithoutArrow(getConfig.get().getString("events.event_ticketCreate.closeTicketEmoji"))).queue();
-                message.addReaction(getEmojiWithoutArrow(getConfig.get().getString("events.event_ticketCreate.adminOnlyEmoji"))).queue();
+                message.addReaction(EmojiUtil.getEmojiWithoutArrow(getConfig.get().getString("events.event_ticketCreate.closeTicketEmoji"))).queue();
+                message.addReaction(EmojiUtil.getEmojiWithoutArrow(getConfig.get().getString("events.event_ticketCreate.adminOnlyEmoji"))).queue();
             });
             Ticket.get().createTicket(NewTicketCreated, e.getUser(), AdminOnlyDefault, Integer.parseInt(CurrentTicketNumber));
 
@@ -159,22 +167,6 @@ public class eventTicketCreate extends ListenerAdapter {
 
             }
 
-        }
-    }
-
-    private String getSimpleEmoji(String Emoji) {
-        if (Emoji.length() < 3) {
-            return Emoji;
-        } else {
-            return Emoji.substring(2, Emoji.length() - 20);
-        }
-    }
-
-    private String getEmojiWithoutArrow(String Emoji) {
-        if (Emoji.length() < 3) {
-            return Emoji;
-        } else {
-            return Emoji.substring(0, Emoji.length() - 1);
         }
     }
 

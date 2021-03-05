@@ -67,10 +67,10 @@ public class cmdUnmute extends ListenerAdapter {
             e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_CONTENT, MentionedUser)).build()).queue();
 
             if (LOGS_ENABLED) {
-                conf.GENERAL_MAIN_LOGS_CHANNEL.sendMessage(EmbedFactory.get().createSimpleEmbed(LOGS_MESSAGE
+                MessageUtil.sendMessage(conf.GENERAL_MAIN_LOGS_CHANNEL, EmbedFactory.get().createSimpleEmbed(LOGS_MESSAGE
                         .replace("{userTag}", MentionedUser.getAsTag())
                         .replace("{punisherTag}", e.getAuthor().getAsTag()))
-                        .build()).queue();
+                        .build());
             }
         }
     }

@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class cmd8Ball extends ListenerAdapter {
 
@@ -42,40 +43,71 @@ public class cmd8Ball extends ListenerAdapter {
                 return;
             }
 
-            String Question = "";
-            for (int i = 1; i < message.length; i++) {
-                Question = Question + " " + message[i] + " ";
-            }
-            int Response = (int) (Math.random() * 5);
-
-
-            if (Response < 0) {
-                Response = Response * -1;
-            }
+            int choice = Math.abs(ThreadLocalRandom.current().nextInt(20)) + 1;
             String Ans = "N/A";
-            switch (Response) {
-                case 0:
-                    Ans = "Most Likely";
-                    break;
+            switch (choice) {
                 case 1:
-                    Ans = "Yes";
+                    Ans = "Ask again later.";
                     break;
                 case 2:
-                    Ans = "Possibly";
+                    Ans = "Better not tell you now.";
                     break;
                 case 3:
-                    Ans = "No";
+                    Ans = "Cannot predict now.";
                     break;
                 case 4:
-                    Ans = "Defiantly Not";
+                    Ans = " Concentrate and ask again";
                     break;
                 case 5:
-                    Ans = "NEVER";
+                    Ans = "Don't count on it.";
+                    break;
+                case 6:
+                    Ans = "It is certain.";
+                    break;
+                case 7:
+                    Ans = "It is decidedly so.";
+                    break;
+                case 8:
+                    Ans = "Most likely.";
+                    break;
+                case 9:
+                    Ans = "My reply is no.";
+                    break;
+                case 10:
+                    Ans = "My sources say no.";
+                    break;
+                case 11:
+                    Ans = "Outlook not so good.";
+                    break;
+                case 12:
+                    Ans = "Outlook good.";
+                    break;
+                case 13:
+                    Ans = "Reply hazy, try again.";
+                    break;
+                case 14:
+                    Ans = "Signs point to yes.";
+                    break;
+                case 15:
+                    Ans = "Very doubtful.";
+                    break;
+                case 16:
+                    Ans = "Without a doubt.";
+                    break;
+                case 17:
+                    Ans = "Yes.";
+                    break;
+                case 18:
+                    Ans = "Yes - definitely.";
+                    break;
+                case 19:
+                    Ans = "You may rely on it.";
+                    break;
+                case 20:
+                    Ans = "As I see it, yes.";
                     break;
             }
-
-            e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_CONTENT.replace("{question}", Question).replace("{answer}", Ans + ""), e.getAuthor())).build()).queue();
-
+            e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_CONTENT.replace("{question}", Prettify.remainingArgFormatter(message, 1)).replace("{answer}", Ans + ""), e.getAuthor())).build()).queue();
         }
     }
 }

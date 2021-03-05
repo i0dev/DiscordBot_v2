@@ -2,8 +2,6 @@ package main.java.com.i0dev.command.basic;
 
 import main.java.com.i0dev.entity.Blacklist;
 import main.java.com.i0dev.util.*;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -22,7 +20,7 @@ public class cmdSuggest extends ListenerAdapter {
     private final String upVoteEmoji = getConfig.get().getString("commands.suggest.upVoteEmoji");
     private final String downVoteEmoji = getConfig.get().getString("commands.suggest.downVoteEmoji");
     private final String suggestionChannelID = getConfig.get().getString("channels.suggestionChannelID");
-
+    private final String sucsessMessage = getConfig.get().getString("commands.suggest.SuccessMessage");
 
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
@@ -44,12 +42,17 @@ public class cmdSuggest extends ListenerAdapter {
                 e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_FORMAT.replace("{command}", conf.GENERAL_BOT_PREFIX + COMMAND_ALIASES.get(0)), e.getAuthor())).build()).queue();
                 return;
             }
+            e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(sucsessMessage
+                            .replace("{gamemode}", message[1])
+                            .replace("{suggestion}", Prettify.remainingArgFormatter(message, 2))
+                    , e.getAuthor())).build()).queue();
             e.getGuild().getTextChannelById(suggestionChannelID).sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_TITLE, e.getAuthor()), Placeholders.convert(MESSAGE_CONTENT
                     .replace("{gamemode}", message[1])
-                    .replace("{userName}", Prettify.remainingArgFormatter(message, 2)), e.getAuthor())).build()).queue(message1 -> {
-                message1.addReaction(upVoteEmoji).queue();
-                message1.addReaction(downVoteEmoji).queue();
+                    .replace("{suggestion}", Prettify.remainingArgFormatter(message, 2)), e.getAuthor())).build()).queue(message1 -> {
+                message1.addReaction(EmojiUtil.getEmojiWithoutArrow(upVoteEmoji)).queue();
+                message1.addReaction(EmojiUtil.getEmojiWithoutArrow(downVoteEmoji)).queue();
             });
         }
     }
+
 }

@@ -1,5 +1,9 @@
 package main.java.com.i0dev.entity;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import main.java.com.i0dev.util.getConfig;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
@@ -119,8 +123,12 @@ public class Ticket {
     public void saveTickets() {
         JSONObject all = new JSONObject();
         all.put(KEY, OpenTicketCache);
+        Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
+        JsonParser parser = new JsonParser();
+        JsonElement el = parser.parse(all.toJSONString());
+        String jsonString = gson.toJson(el);
         try {
-            Files.write(Paths.get(getConfig.get().getFile(FILEPATH).getPath()), all.toJSONString().getBytes());
+            Files.write(Paths.get(getConfig.get().getFile(FILEPATH).getPath()), jsonString.getBytes());
         } catch (Exception e) {
             e.printStackTrace();
         }

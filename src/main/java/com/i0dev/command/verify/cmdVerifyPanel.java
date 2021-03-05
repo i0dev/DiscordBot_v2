@@ -5,6 +5,7 @@ import main.java.com.i0dev.entity.Blacklist;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.MessageReaction;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -24,7 +25,6 @@ public class cmdVerifyPanel extends ListenerAdapter {
     private final boolean COMMAND_ENABLED = getConfig.get().getBoolean("commands.createVerifyPanel.enabled");
     private final boolean PIN_MESSAGE = getConfig.get().getBoolean("commands.createVerifyPanel.pinVerifyPanel");
     private final String VERIFY_EMOJI = getConfig.get().getString("commands.createVerifyPanel.verifyEmoji");
-
 
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
@@ -63,19 +63,9 @@ public class cmdVerifyPanel extends ListenerAdapter {
 
             Message PanelMessage = e.getChannel().sendMessage(Embed.build()).complete();
             if (PIN_MESSAGE) PanelMessage.pin().queue();
-            String Emoji = getEmojiWithoutArrow(VERIFY_EMOJI);
+            String Emoji = EmojiUtil.getEmojiWithoutArrow(VERIFY_EMOJI);
             PanelMessage.addReaction(Emoji).queue();
 
         }
-    }
-
-    private String getEmojiWithoutArrow(String emoji) {
-        String EmojiWithoutArrow;
-        if (emoji.length() < 3) {
-            EmojiWithoutArrow = emoji;
-        } else {
-            EmojiWithoutArrow = emoji.substring(0, emoji.length() - 1);
-        }
-        return EmojiWithoutArrow;
     }
 }

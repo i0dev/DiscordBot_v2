@@ -31,10 +31,10 @@ public class eventAutoMod extends ListenerAdapter {
             if (messageContent.contains(word)) {
                 e.getMessage().delete().queue();
                 if (logEnabled) {
-                    conf.GENERAL_MAIN_LOGS_CHANNEL.sendMessage(EmbedFactory.get()
+                    MessageUtil.sendMessage(conf.GENERAL_MAIN_LOGS_CHANNEL, EmbedFactory.get()
                             .createSimpleEmbed(Placeholders.convert(logTitle,
                                     e.getAuthor()), Placeholders.convert(logContent.replace("{message}", messageContent),
-                                    e.getAuthor())).build()).queue();
+                                    e.getAuthor())).build());
                 }
                 break;
             }

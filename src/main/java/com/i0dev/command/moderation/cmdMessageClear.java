@@ -57,10 +57,10 @@ public class cmdMessageClear extends ListenerAdapter {
             e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_CONTENT.replace("{messages}", message[1]), e.getAuthor())).build()).queue();
 
             if (LOGS_ENABLED) {
-                conf.GENERAL_MAIN_LOGS_CHANNEL.sendMessage(EmbedFactory.get().createSimpleEmbed(LOGS_MESSAGE
+                MessageUtil.sendMessage(conf.GENERAL_MAIN_LOGS_CHANNEL, EmbedFactory.get().createSimpleEmbed(LOGS_MESSAGE
                         .replace("{userTag}", e.getAuthor().getAsTag())
                         .replace("{channel}", e.getChannel().getAsMention()))
-                        .build()).queue();
+                        .build());
             }
         }
     }

@@ -50,7 +50,7 @@ public class cmdInviteResetData extends ListenerAdapter {
             InviteMatcher.get().wipeCache();
             e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(messageContent, e.getAuthor())).build()).queue();
             if (LOGS_ENABLED) {
-                conf.GENERAL_MAIN_LOGS_CHANNEL.sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(LOGS_MESSAGE, e.getAuthor())).build()).queue();
+                MessageUtil.sendMessage(conf.GENERAL_MAIN_LOGS_CHANNEL, EmbedFactory.get().createSimpleEmbed(Placeholders.convert(LOGS_MESSAGE, e.getAuthor())).build());
             }
         }
     }

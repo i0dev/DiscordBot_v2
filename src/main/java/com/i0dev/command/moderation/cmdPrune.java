@@ -79,11 +79,11 @@ public class cmdPrune extends ListenerAdapter {
 
 
                 if (LOGS_ENABLED) {
-                    conf.GENERAL_MAIN_LOGS_CHANNEL.sendMessage(EmbedFactory.get().createSimpleEmbed(LOGS_MESSAGE
+                    MessageUtil.sendMessage(conf.GENERAL_MAIN_LOGS_CHANNEL, (EmbedFactory.get().createSimpleEmbed(LOGS_MESSAGE
                             .replace("{messages}", message[1])
                             .replace("{userTag}", e.getAuthor().getAsTag())
                             .replace("{channel}", e.getChannel().getAsMention()))
-                            .build()).queue();
+                            .build()));
                 }
 
             } else {
@@ -119,12 +119,12 @@ public class cmdPrune extends ListenerAdapter {
                     }
                 });
                 if (LOGS_ENABLED) {
-                    conf.GENERAL_MAIN_LOGS_CHANNEL.sendMessage(EmbedFactory.get().createSimpleEmbed(LOGS_MESSAGE
+                    MessageUtil.sendMessage(conf.GENERAL_MAIN_LOGS_CHANNEL, EmbedFactory.get().createSimpleEmbed(LOGS_MESSAGE
                             .replace("{messages}", message[1])
                             .replace("{userTag}", e.getAuthor().getAsTag())
                             .replace("{prunedUserTag}", MentionedUser.getAsTag())
                             .replace("{channel}", e.getChannel().getAsMention()))
-                            .build()).queue();
+                            .build());
                 }
 
 

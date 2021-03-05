@@ -1,7 +1,7 @@
 package main.java.com.i0dev.command.basic;
 
-import main.java.com.i0dev.util.*;
 import main.java.com.i0dev.entity.Blacklist;
+import main.java.com.i0dev.util.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -36,12 +36,12 @@ public class cmdReloadConfig extends ListenerAdapter {
             }
             String[] message = e.getMessage().getContentRaw().split(" ");
             if (message.length != 1) {
-                e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_FORMAT.replace("{command}",conf.GENERAL_BOT_PREFIX+COMMAND_ALIASES.get(0)), e.getAuthor())).build()).queue();
+                e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_FORMAT.replace("{command}", conf.GENERAL_BOT_PREFIX + COMMAND_ALIASES.get(0)), e.getAuthor())).build()).queue();
                 return;
             }
-            conf.initGlobalConfig();
-            getConfig.get().reloadConfig();
             e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_DESCRIPTION.replace("{tag}", e.getAuthor().getAsTag()), e.getAuthor())).build()).queue();
+            getConfig.reload();
+
         }
     }
 }

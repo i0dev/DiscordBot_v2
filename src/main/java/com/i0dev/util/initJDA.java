@@ -39,7 +39,6 @@ import main.java.com.i0dev.event.ticket.eventCloseTicket;
 import main.java.com.i0dev.event.ticket.eventReactAdminOnly;
 import main.java.com.i0dev.event.ticket.eventTicketCreate;
 import main.java.com.i0dev.event.welcome.eventWelcome;
-import main.java.com.i0dev.util.inviteutil.InviteTracking;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;

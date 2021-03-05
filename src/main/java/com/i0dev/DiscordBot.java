@@ -2,11 +2,13 @@ package main.java.com.i0dev;
 
 import main.java.com.i0dev.engine.TaskCheckActiveGiveaways;
 import main.java.com.i0dev.engine.TaskCreatorTimeouts;
+import main.java.com.i0dev.engine.TaskMemberCount;
 import main.java.com.i0dev.jframe.DiscordBotGUI;
 import main.java.com.i0dev.util.conf;
 import main.java.com.i0dev.util.getConfig;
 import main.java.com.i0dev.util.initJDA;
-import main.java.com.i0dev.util.inviteutil.InviteTracking;
+import main.java.com.i0dev.util.InviteTracking;
+import org.json.simple.parser.ParseException;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,6 +20,7 @@ import java.util.TimerTask;
 public class DiscordBot {
 
     private static boolean GUIenabled = false;
+    private static boolean firstTimeConfig = false;
 
     public static void main(String[] args) throws IOException {
 
@@ -41,6 +44,9 @@ public class DiscordBot {
                         CurrentTicketNumber.getBytes());
             } catch (IOException ignored) {
             }
+        }
+        if (!new File("DiscordBot/Config.json").exists()) {
+            firstTimeConfig = true;
         }
 
         getConfig.get().getFile(main.java.com.i0dev.entity.Application.get().getFilePath());
@@ -66,6 +72,12 @@ public class DiscordBot {
     public static TimerTask createJDALater = new TimerTask() {
         public void run() {
             getConfig.get().reloadConfig();
+            if (!firstTimeConfig) {
+                try {
+                    getConfig.get().putDefaultsIfAbsent();
+                } catch (ParseException | IOException ignored) {
+                }
+            }
             try {
                 initJDA.get().createJDA();
             } catch (Exception ignored) {
@@ -88,6 +100,7 @@ public class DiscordBot {
             TaskTimer.scheduleAtFixedRate(TaskCreatorTimeouts.get().TaskPollTimeout, 50000, 10000);
             TaskTimer.scheduleAtFixedRate(TaskCreatorTimeouts.get().TaskGiveawayTimeout, 50000, 10000);
             TaskTimer.scheduleAtFixedRate(TaskCheckActiveGiveaways.get().TaskGiveawayTimeout, 5000, 10000);
+            TaskTimer.scheduleAtFixedRate(TaskMemberCount.MemberCountTimer, 5000, 30000);
             TaskTimer.schedule(runStartupLater, 1000);
 
 

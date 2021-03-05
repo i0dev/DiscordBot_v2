@@ -1,5 +1,9 @@
 package main.java.com.i0dev.entity;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import main.java.com.i0dev.util.conf;
 import main.java.com.i0dev.util.getConfig;
 import net.dv8tion.jda.api.entities.Message;
@@ -80,8 +84,14 @@ public class Giveaway {
     public void saveGiveaways() {
         JSONObject all = new JSONObject();
         all.put(KEY, GiveawayCache);
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
+        JsonParser parser = new JsonParser();
+        JsonElement el = parser.parse(all.toJSONString());
+        String jsonString = gson.toJson(el);
+
         try {
-            Files.write(Paths.get(getConfig.get().getFile(FILEPATH).getPath()), all.toJSONString().getBytes());
+            Files.write(Paths.get(getConfig.get().getFile(FILEPATH).getPath()), jsonString.getBytes());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -89,6 +99,7 @@ public class Giveaway {
 
     public void loadGiveaways() {
         JSONObject json = null;
+
         try {
             json = (JSONObject) new JSONParser().parse(new FileReader(FILE));
             GiveawayCache = (ArrayList<JSONObject>) json.get(KEY);

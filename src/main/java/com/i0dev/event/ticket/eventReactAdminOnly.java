@@ -6,6 +6,7 @@ import main.java.com.i0dev.entity.Ticket;
 
 import main.java.com.i0dev.util.*;
 import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.MessageReaction;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -25,7 +26,6 @@ public class eventReactAdminOnly extends ListenerAdapter {
     private final List<Long> ROLES_TO_GIVE_ALLOW_FOR_TICKET = getConfig.get().getLongList("events.event_ticketCreate.RolesToAllowSeeingTickets");
     private final List<Long> ROLES_ALLOWED_TO_SEE_ADMINONLY = getConfig.get().getLongList("events.event_ticketCreate.RolesToAllowSeeingAdminOnlyTickets");
 
-
     @Override
     public void onGuildMessageReactionAdd(@NotNull GuildMessageReactionAddEvent e) {
         if (e.getUser().isBot()) return;
@@ -35,9 +35,17 @@ public class eventReactAdminOnly extends ListenerAdapter {
         if (!InternalPermission.get().hasPermission(REQUIRE_PERMISSIONS, REQUIRE_LITE_PERMISSIONS, e.getGuild(), e.getUser()))
             return;
         if (!Ticket.get().isTicket(e.getChannel())) return;
-        String Emoji = getSimpleEmoji(AdminOnlyEmoji);
-        if (!e.getReactionEmote().getName().equals(Emoji)) return;
-        e.getChannel().removeReactionById(e.getMessageId(), getEmojiWithoutArrow(Emoji), e.getUser()).queue();
+        String Emoji = EmojiUtil.getSimpleEmoji(AdminOnlyEmoji);
+
+        if (e.getReactionEmote().isEmoji()) {
+            if (!EmojiUtil.getUnicodeFromCodepoints(e.getReactionEmote().getAsCodepoints()).equalsIgnoreCase(Emoji)) return;
+        } else {
+            if (!e.getReactionEmote().getName().equalsIgnoreCase(AdminOnlyEmoji)) return;
+        }
+
+
+
+        e.getChannel().removeReactionById(e.getMessageId(), EmojiUtil.getEmojiWithoutArrow(Emoji), e.getUser()).queue();
 
         JSONObject ticketObject = Ticket.get().getTicket(e.getChannel());
         if ((boolean) ticketObject.get("adminOnlyMode")) {
@@ -79,20 +87,4 @@ public class eventReactAdminOnly extends ListenerAdapter {
 
 
     }
-
-
-    private String getSimpleEmoji(String Emoji) {
-        if (Emoji.length() < 3) {
-            return Emoji;
-        } else {
-            return Emoji.substring(2, Emoji.length() - 20);
-        }
-    }private String getEmojiWithoutArrow(String Emoji) {
-        if (Emoji.length() < 3) {
-            return Emoji;
-        } else {
-            return Emoji.substring(0, Emoji.length() - 1);
-        }
-    }
-
 }
