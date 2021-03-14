@@ -95,7 +95,7 @@ public class DiscordBotPlugin extends JavaPlugin {
             }
             main.java.com.i0dev.entity.Application.get().loadApplications();
             main.java.com.i0dev.entity.Blacklist.get().loadBlacklist();
-            main.java.com.i0dev.entity.Warning.get().loadWarnings();
+            main.java.com.i0dev.entity.Warning.get().loadCacheFromFile();
             main.java.com.i0dev.entity.Giveaway.get().loadGiveaways();
             main.java.com.i0dev.entity.Screenshare.get().loadScreenshare();
             main.java.com.i0dev.entity.Ticket.get().loadTickets();

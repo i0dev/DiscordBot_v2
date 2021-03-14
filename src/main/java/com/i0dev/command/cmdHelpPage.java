@@ -45,8 +45,8 @@ public class cmdHelpPage extends ListenerAdapter {
         desc.append("{enabled}``{cmd} <leader> <cell> <rosterSize>``\n - *Confirm that Cell as playing.*".replace("{enabled}", (getConfig.get().getBoolean("commands.confirmCell.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.confirmCell.aliases").get(0)));
         desc.append("\n**End of page ").append(page).append(":**\n*Use ``").append(conf.GENERAL_BOT_PREFIX).append("help [page]`` to go to other pages!*");
         desc.append("\n\n**Page 1 contents:** ``Basic, Fun, GameMode Specific``");
-        desc.append("\n**Page 2 contents:** ``Moderation, Movements``");
-        desc.append("\n**Page 3 contents:** ``Ticket, Invite, Other``");
+        desc.append("\n**Page 2 contents:** ``Moderation``");
+        desc.append("\n**Page 3 contents:** ``Movements, Ticket, Invite, Other``");
         return desc.toString();
     }
 
@@ -78,16 +78,15 @@ public class cmdHelpPage extends ListenerAdapter {
         desc.append("{enabled}``{cmd} <user>`` - *Remove a user to the screenshare list.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.screenshare_remove.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.screenshare_remove.aliases").get(0)));
         desc.append("{enabled}``{cmd}`` - *Clear list.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.screenshare_clear.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.screenshare_clear.aliases").get(0)));
         desc.append("{enabled}``{cmd}`` - *Send list.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.screenshare_list.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.screenshare_list.aliases").get(0)));
-        desc.append("\n**Movement Commands:**\n");
-        desc.append("{enabled}``{cmd} <user> <role>`` - *Assign a user to that role track.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.assign.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.assign.aliases").get(0)));
-        desc.append("{enabled}``{cmd} <user>`` - *Demotes the user by 1 role track.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.demote.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.demote.aliases").get(0)));
-        desc.append("{enabled}``{cmd} <user> `` - *Promotes the user by 1 role track.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.promote.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.promote.aliases").get(0)));
-        desc.append("{enabled}``{cmd} <user>`` - *Resign that user, & remove their roles.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.resign.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.resign.aliases").get(0)));
-        desc.append("{enabled}``{cmd} <user>`` - *Fully demote that user, & remove their roles.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.staffClear.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.staffClear.aliases").get(0)));
+        desc.append("\n");
+        desc.append("{enabled}``{cmd} <user> [reason]`` - *Warn User*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.warn.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.warn.aliases").get(0)));
+        desc.append("{enabled}``{cmd} <user>`` - *Remove a warn from a user*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.removeWarn.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.removeWarn.aliases").get(0)));
+        desc.append("{enabled}``{cmd}`` - *Clear list.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.warns_clear.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.warns_clear.aliases").get(0)));
+        desc.append("{enabled}``{cmd}`` - *Send list.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.warns_list.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.warns_list.aliases").get(0)));
         desc.append("\n**End of page ").append(page).append(":**\n*Use ``").append(conf.GENERAL_BOT_PREFIX).append("help [page]`` to go to other pages!*");
         desc.append("\n\n**Page 1 contents:** ``Basic, Fun, GameMode Specific``");
-        desc.append("\n**Page 2 contents:** ``Moderation, Movements``");
-        desc.append("\n**Page 3 contents:** ``Ticket, Invite, Other``");
+        desc.append("\n**Page 2 contents:** ``Moderation``");
+        desc.append("\n**Page 3 contents:** ``Movements, Ticket, Invite, Other``");
         return desc.toString();
     }
 
@@ -98,32 +97,37 @@ public class cmdHelpPage extends ListenerAdapter {
         desc.append("`[]`: arg optional.\n");
         desc.append(enabledEmoji).append(": command enabled.\n");
         desc.append(disabledEmoji).append(": command disabled.\n\n");
-        desc.append("**Ticket Commands:**\n");
+        desc.append("**Movement Commands:**\n");
+        desc.append("{enabled}``{cmd} <user> <role>`` - *Assign a user to that role.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.assign.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.assign.aliases").get(0)));
+        desc.append("{enabled}``{cmd} <user>`` - *Demotes the user once.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.demote.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.demote.aliases").get(0)));
+        desc.append("{enabled}``{cmd} <user> `` - *Promotes the user once.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.promote.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.promote.aliases").get(0)));
+        desc.append("{enabled}``{cmd} <user>`` - *Resign that user.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.resign.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.resign.aliases").get(0)));
+        desc.append("{enabled}``{cmd} <user>`` - *Fully demote that user.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.staffClear.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.staffClear.aliases").get(0)));
+        desc.append("\n**Ticket Commands:**\n");
         desc.append("{enabled}``{cmd}`` - *Create the ticket panel.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.createTicketPanel.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.createTicketPanel.aliases").get(0)));
         desc.append("{enabled}``{cmd} <user>`` - *Adds a user to the ticket.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.ticketAdd.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.ticketAdd.aliases").get(0)));
         desc.append("{enabled}``{cmd} <user>`` - *Removes a user to the ticket.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.ticketRemove.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.ticketRemove.aliases").get(0)));
         desc.append("{enabled}``{cmd}`` - *Switch the ticket to admin only mode.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.ticketAdminOnly.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.ticketAdminOnly.aliases").get(0)));
-        desc.append("{enabled}``{cmd}`` - *Give information about the ticket.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.ticketInfo.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.ticketInfo.aliases").get(0)));
+        desc.append("{enabled}``{cmd}`` - *Give ticket info.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.ticketInfo.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.ticketInfo.aliases").get(0)));
         desc.append("{enabled}``{cmd} <name>`` - *Renames the ticket.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.ticketRename.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.ticketRename.aliases").get(0)));
-        desc.append("{enabled}``{cmd} [reason]`` - *Closes the ticket and generates logs.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.ticketClose.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.ticketClose.aliases").get(0)));
+        desc.append("{enabled}``{cmd} [reason]`` - *Closes the ticket.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.ticketClose.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.ticketClose.aliases").get(0)));
         desc.append("\n**Invite Commands:**\n");
         desc.append("{enabled}``{cmd} [user]`` - *Gets the invites of a user.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.invites.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.invites.aliases").get(0)));
         desc.append("{enabled}``{cmd}`` - *Sends the invites leaderboard.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.inviteLeaderboard.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.inviteLeaderboard.aliases").get(0)));
         desc.append("{enabled}``{cmd}`` - *Resets all invite data.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.invite_resetData.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.invite_resetData.aliases").get(0)));
         desc.append("\n**Other Commands:**\n");
         desc.append("{enabled}``{cmd}`` - *Create the verify panel.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.createVerifyPanel.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.createVerifyPanel.aliases").get(0)));
-        desc.append("{enabled}``{cmd}`` - *Sends the help page.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.help.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.help.aliases").get(0)));
-        desc.append("{enabled}``{cmd}`` - *Starts a poll creator in your DMS.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.pollCreator.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.pollCreator.aliases").get(0)));
-        desc.append("{enabled}``{cmd}`` - *Starts a giveaway creator in your DMS.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.gcreate.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.gcreate.aliases").get(0)));
-        desc.append("{enabled}``{cmd}`` - *Starts a reaction roles creator in your DMS.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.reactionRoles.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.reactionRoles.aliases").get(0)));
-        desc.append("{enabled}``{cmd}`` - *Start an application in your DMS.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.apply.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.apply.aliases").get(0)));
-        desc.append("{enabled}``{cmd} <user> <role> [response]`` - *Accept a users application.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.accept.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.accept.aliases").get(0)));
-        desc.append("{enabled}``{cmd} <user> [response]`` - *Rejects a users application.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.reject.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.reject.aliases").get(0)));
+        desc.append("{enabled}``{cmd}`` - *Starts a poll creator.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.pollCreator.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.pollCreator.aliases").get(0)));
+        desc.append("{enabled}``{cmd}`` - *Starts a giveaway creator.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.gcreate.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.gcreate.aliases").get(0)));
+        desc.append("{enabled}``{cmd}`` - *Starts a reaction role creato.r*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.reactionRoles.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.reactionRoles.aliases").get(0)));
+        desc.append("{enabled}``{cmd}`` - *Create an Application.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.apply.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.apply.aliases").get(0)));
+        desc.append("{enabled}``{cmd} <user> <role> [response]`` - *Accept a users app.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.accept.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.accept.aliases").get(0)));
+        desc.append("{enabled}``{cmd} <user> [response]`` - *Rejects a users app.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.reject.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.reject.aliases").get(0)));
         desc.append(enabledEmoji).append("``").append(conf.GENERAL_BOT_PREFIX).append("version`` - *Sends the version of the bot.*\n");
         desc.append("\n**End of page ").append(page).append(":**\n*Use ``").append(conf.GENERAL_BOT_PREFIX).append("help [page]`` to go to other pages!*");
         desc.append("\n\n**Page 1 contents:** ``Basic, Fun, GameMode Specific``");
-        desc.append("\n**Page 2 contents:** ``Moderation, Movements``");
-        desc.append("\n**Page 3 contents:** ``Ticket, Invite, Other``");
+        desc.append("\n**Page 2 contents:** ``Moderation``");
+        desc.append("\n**Page 3 contents:** ``Movements, Ticket, Invite, Other``");
         return desc.toString();
     }
 
@@ -162,6 +166,7 @@ public class cmdHelpPage extends ListenerAdapter {
         if (message.getReactions().size() > 1) {
             message.clearReactions().queue();
             if (e.getReactionEmote().getEmoji().equals("\u2B05")) {
+                message.clearReactions().queue();
                 message.editMessage(EmbedFactory.get().createSimpleEmbed(MESSAGE_TITLE.replace("{page}", "1"), page1()).build()).queue(message1 -> {
                             message1.addReaction("\u27A1").queue();
                         }
@@ -187,6 +192,7 @@ public class cmdHelpPage extends ListenerAdapter {
                 );
             }
             if (message.getReactions().get(0).getReactionEmote().getEmoji().equals("\u2B05")) {
+                message.clearReactions().queue();
                 message.editMessage(EmbedFactory.get().createSimpleEmbed(MESSAGE_TITLE.replace("{page}", "2"), page2()).build()).queue(message1 -> {
                             message1.addReaction("\u2B05").queue();
                             message1.addReaction("\u27A1").queue();
@@ -229,6 +235,7 @@ public class cmdHelpPage extends ListenerAdapter {
                 );
 
             } else if (message[1].equalsIgnoreCase("2")) {
+
                 e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(MESSAGE_TITLE.replace("{page}", "2"), page2()).build()).queue(message1 -> {
                             message1.addReaction("\u2B05").queue();
                             message1.addReaction("\u27A1").queue();
@@ -238,6 +245,7 @@ public class cmdHelpPage extends ListenerAdapter {
                 );
 
             } else if (message[1].equalsIgnoreCase("3")) {
+
                 e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(MESSAGE_TITLE.replace("{page}", "3"), page3()).build()).queue(message1 -> {
                             message1.addReaction("\u2B05").queue();
                             HelpPageCache.get().getList().add(message1);

@@ -24,6 +24,14 @@ import main.java.com.i0dev.command.moderation.mute.cmdCreateMutedRole;
 import main.java.com.i0dev.command.moderation.mute.cmdGetMuted;
 import main.java.com.i0dev.command.moderation.mute.cmdMute;
 import main.java.com.i0dev.command.moderation.mute.cmdUnmute;
+import main.java.com.i0dev.command.moderation.screenshare.cmdScreenshareAdd;
+import main.java.com.i0dev.command.moderation.screenshare.cmdScreenshareClear;
+import main.java.com.i0dev.command.moderation.screenshare.cmdScreenshareList;
+import main.java.com.i0dev.command.moderation.screenshare.cmdScreenshareRemove;
+import main.java.com.i0dev.command.moderation.warn.cmdWarn;
+import main.java.com.i0dev.command.moderation.warn.cmdWarnClear;
+import main.java.com.i0dev.command.moderation.warn.cmdWarnList;
+import main.java.com.i0dev.command.moderation.warn.cmdWarnRemove;
 import main.java.com.i0dev.command.movements.*;
 import main.java.com.i0dev.command.polls.cmdPollCreator;
 import main.java.com.i0dev.command.polls.pollCreatorResponses;
@@ -108,6 +116,16 @@ public class initJDA {
         jda.addEventListener(new cmdBlacklistRemove());
         jda.addEventListener(new cmdBlacklistClear());
         jda.addEventListener(new cmdBlacklistList());
+
+        jda.addEventListener(new cmdScreenshareAdd());
+        jda.addEventListener(new cmdScreenshareRemove());
+        jda.addEventListener(new cmdScreenshareClear());
+        jda.addEventListener(new cmdScreenshareList());
+
+        jda.addEventListener(new cmdWarn());
+        jda.addEventListener(new cmdWarnRemove());
+        jda.addEventListener(new cmdWarnClear());
+        jda.addEventListener(new cmdWarnList());
 
         jda.addEventListener(new cmdAnnounce());
         jda.addEventListener(new cmdBan());

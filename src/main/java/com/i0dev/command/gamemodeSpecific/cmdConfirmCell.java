@@ -53,13 +53,13 @@ public class cmdConfirmCell extends ListenerAdapter {
             e.getGuild().getTextChannelById(confirmedCellChannelID).sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_MESSAGE_TITLE, MentionedUser), Placeholders.convert(MESSAGE_MESSAGE_DESC
                     .replace("{cell}", island)
                     .replace("{rosterSize}", rosterSize
-                    ), e.getAuthor())).build()).queue();
+                    ), MentionedUser)).build()).queue();
 
             e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_CONTENT
                     .replace("{cell}", island)
                     .replace("{senderTag}", e.getAuthor().getAsTag())
                     .replace("{rosterSize}", rosterSize
-                    ), e.getAuthor())).build()).queue();
+                    ), MentionedUser)).build()).queue();
         }
     }
 }

@@ -53,13 +53,13 @@ public class cmdConfirmIsland extends ListenerAdapter {
             e.getGuild().getTextChannelById(confirmedIslandChannel).sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_MESSAGE_TITLE, MentionedUser), Placeholders.convert(MESSAGE_MESSAGE_DESC
                     .replace("{island}", island)
                     .replace("{rosterSize}", rosterSize
-                    ), e.getAuthor())).build()).queue();
+                    ), MentionedUser)).build()).queue();
 
             e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_CONTENT
                     .replace("{island}", island)
                     .replace("{senderTag}", e.getAuthor().getAsTag())
                     .replace("{rosterSize}", rosterSize
-                    ), e.getAuthor())).build()).queue();
+                    ), MentionedUser)).build()).queue();
         }
     }
 }

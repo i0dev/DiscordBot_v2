@@ -53,13 +53,13 @@ public class cmdConfirmFaction extends ListenerAdapter {
             e.getGuild().getTextChannelById(confirmedFactionChannel).sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_MESSAGE_TITLE, MentionedUser), Placeholders.convert(MESSAGE_MESSAGE_DESC
                     .replace("{faction}", faction)
                     .replace("{rosterSize}", rosterSize
-                    ), e.getAuthor())).build()).queue();
+                    ), MentionedUser)).build()).queue();
 
             e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_CONTENT
                     .replace("{faction}", faction)
                     .replace("{senderTag}", e.getAuthor().getAsTag())
                     .replace("{rosterSize}", rosterSize
-                    ), e.getAuthor())).build()).queue();
+                    ), MentionedUser)).build()).queue();
         }
     }
 }

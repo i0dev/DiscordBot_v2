@@ -66,14 +66,18 @@ public class cmdTicketClose extends ListenerAdapter {
             if (TicketUser != null) {
                 try {
                     TicketUser.openPrivateChannel().complete().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_TICKET_LOG_TITLE, TicketUser), Placeholders.convert(MESSAGE_TICKET_LOG.replace("{channelName}", e.getChannel().getName()).replace("{reason}", reason), TicketUser), TicketUser.getEffectiveAvatarUrl()).build()).queueAfter(delayToCloseTicketMilis, TimeUnit.MILLISECONDS);
-                    TicketUser.openPrivateChannel().complete().sendFile(file).queueAfter(delayToCloseTicketMilis, TimeUnit.MILLISECONDS);
+                    TicketUser.openPrivateChannel().complete().sendFile(file).queueAfter(delayToCloseTicketMilis + 1000, TimeUnit.MILLISECONDS);
                 } catch (Exception ignored) {
                 }
             }
             if (!(boolean) ticketObject.get("adminOnlyMode")) {
-                e.getGuild().getTextChannelById(TICKET_LOGS_ID).sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_TICKET_LOG_TITLE, e.getAuthor()), Placeholders.convert(MESSAGE_TICKET_LOG.replace("{channelName}", e.getChannel().getName()).replace("{reason}", reason), TicketUser), TicketUser.getEffectiveAvatarUrl()).build()).queueAfter(delayToCloseTicketMilis, TimeUnit.MILLISECONDS);
+                e.getGuild().getTextChannelById(TICKET_LOGS_ID).sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_TICKET_LOG_TITLE, TicketUser), Placeholders.convert(MESSAGE_TICKET_LOG.replace("{channelName}", e.getChannel().getName()).replace("{reason}", reason), e.getAuthor()), TicketUser.getEffectiveAvatarUrl()).build()).queueAfter(delayToCloseTicketMilis, TimeUnit.MILLISECONDS);
+                e.getGuild().getTextChannelById(ADMIN_LOGS_ID).sendFile(file).queueAfter(delayToCloseTicketMilis + 1000, TimeUnit.MILLISECONDS);
+
             } else {
-                e.getGuild().getTextChannelById(ADMIN_LOGS_ID).sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_TICKET_LOG_TITLE, e.getAuthor()), Placeholders.convert(MESSAGE_TICKET_LOG.replace("{channelName}", e.getChannel().getName()).replace("{reason}", reason), TicketUser), TicketUser.getEffectiveAvatarUrl()).build()).queueAfter(delayToCloseTicketMilis, TimeUnit.MILLISECONDS);
+                e.getGuild().getTextChannelById(ADMIN_LOGS_ID).sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_TICKET_LOG_TITLE, TicketUser), Placeholders.convert(MESSAGE_TICKET_LOG.replace("{channelName}", e.getChannel().getName()).replace("{reason}", reason), e.getAuthor()), TicketUser.getEffectiveAvatarUrl()).build()).queueAfter(delayToCloseTicketMilis, TimeUnit.MILLISECONDS);
+                e.getGuild().getTextChannelById(ADMIN_LOGS_ID).sendFile(file).queueAfter(delayToCloseTicketMilis + 1000, TimeUnit.MILLISECONDS);
+
             }
             e.getChannel().delete().queueAfter(delayToCloseTicketMilis, TimeUnit.MILLISECONDS);
         }

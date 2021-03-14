@@ -16,71 +16,132 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Warning {
 
     private static String FILEPATH = "DiscordBot/storage/Warnings.json";
-    private static File FILE = new File(FILEPATH);
     private static String KEY = "warnings";
+    private static File FILE = new File(FILEPATH);
 
     private static Warning instance = new Warning();
 
     public static Warning get() {
         return instance;
     }
-    public String getFilePath(){
+
+    public String getFilePath() {
         return FILEPATH;
     }
 
-    ArrayList<JSONObject> WarningCache = new ArrayList<>();
+    ArrayList<JSONObject> WarningsCache = new ArrayList<>();
 
-    public void addUser(User user, String reason, User punisher) {
-        JSONObject object = new JSONObject();
-        object.put("userID", user.getId());
-        object.put("reason", reason);
-        object.put("punisherID", punisher.getId());
-        object.put("punisherTag", punisher.getAsTag());
-        WarningCache.add(object);
-        saveWarnings();
+    public void increaseUser(User user) {
+        if (isAlreadyOn(user)) {
+            JSONObject object = getUserObject(user);
+            String Warnings = (String) object.get("warnings");
+            long WarnLong = Long.parseLong(Warnings);
+            WarnLong++;
+            removeUserObject(user);
+            addNewUser(user, WarnLong);
+
+        } else {
+            addNewUser(user);
+        }
     }
 
-    public void addUser(User user, User punisher) {
-        JSONObject object = new JSONObject();
-        object.put("userID", user.getId());
-        object.put("reason", "No Reason");
-        object.put("punisherID", punisher.getId());
-        object.put("punisherTag", punisher.getAsTag());
-
-        WarningCache.add(object);
-        saveWarnings();
-    }
-
-    public JSONObject getWarningObject(User user) {
-        if (WarningCache.isEmpty()) return null;
-
-        for (JSONObject object : WarningCache) {
-            if (object.get("userID").equals(user.getId())) {
+    public JSONObject getUserObject(User user) {
+        for (JSONObject object : WarningsCache) {
+            if (object.get("userID").toString().equals(user.getId())) {
                 return object;
             }
         }
         return null;
     }
 
-    public void removeUser(User user) {
-        for (JSONObject object : WarningCache) {
-            if (object.get("userID").equals(user.getId())) {
-                WarningCache.remove(object);
-                saveWarnings();
+    public void removeUserObject(User user) {
+        for (JSONObject object : WarningsCache) {
+            if (object.get("userID").toString().equals(user.getId())) {
+                WarningsCache.remove(object);
                 break;
             }
         }
     }
 
-    public boolean isOnWarnList(User user) {
-        if (WarningCache.isEmpty()) return false;
+    public long getUserWarnCountAddOne(User user) {
+        try {
+            for (JSONObject object : WarningsCache) {
+                if (object.get("userID").toString().equals(user.getId())) {
+                    String Warnings = (String) object.get("warnings");
+                    long WarnLong = Long.parseLong(Warnings);
+                    WarnLong++;
+                    return WarnLong;
+                }
+            }
+        } catch (Exception ignored) {
 
-        for (JSONObject object : WarningCache) {
-            if (object.get("userID").equals(user.getId())) {
+        }
+        return 1;
+    }
+    public long getUserWarnCountRemoveOne(User user) {
+        try {
+            for (JSONObject object : WarningsCache) {
+                if (object.get("userID").toString().equals(user.getId())) {
+                    String Warnings = (String) object.get("warnings");
+                    long WarnLong = Long.parseLong(Warnings);
+                    WarnLong--;
+                    return WarnLong;
+                }
+            }
+        } catch (Exception ignored) {
+
+        }
+        return 0;
+    }
+
+    public long getUserWarnCount(User user) {
+        for (JSONObject object : WarningsCache) {
+            if (object.get("userID").toString().equals(user.getId())) {
+                String Warnings = (String) object.get("warnings");
+                long WarnLong = Long.parseLong(Warnings);
+                return WarnLong;
+            }
+        }
+        return 0;
+    }
+
+    public void decreaseUser(User user) {
+        if (isAlreadyOn(user)) {
+            JSONObject object = getUserObject(user);
+            String Warnings = (String) object.get("warnings");
+            long WarnLong = Long.parseLong(Warnings);
+            WarnLong--;
+            removeUserObject(user);
+            addNewUser(user, WarnLong);
+
+        }
+    }
+
+    public void addNewUser(User user) {
+        JSONObject newObject = new JSONObject();
+        newObject.put("userID", user.getId());
+        newObject.put("warnings", 1 + "");
+        WarningsCache.add(newObject);
+        saveCacheToFile();
+    }
+
+    public void addNewUser(User user, long Invites) {
+        JSONObject newObject = new JSONObject();
+        newObject.put("userID", user.getId());
+        newObject.put("warnings", Invites + "");
+        WarningsCache.add(newObject);
+        saveCacheToFile();
+    }
+
+
+    public boolean isAlreadyOn(User user) {
+        for (JSONObject object : WarningsCache) {
+            if (object.get("userID").toString().equals(user.getId())) {
                 return true;
             }
         }
@@ -88,17 +149,18 @@ public class Warning {
     }
 
     public void wipeCache() {
-        WarningCache.clear();
-        saveWarnings();
+        WarningsCache.clear();
+        saveCacheToFile();
     }
 
-    public ArrayList<JSONObject> getBlacklisted() {
-        return WarningCache;
+    public ArrayList<JSONObject> getCache() {
+        return WarningsCache;
     }
 
-    public void saveWarnings() {
+
+    public void saveCacheToFile() {
         JSONObject all = new JSONObject();
-        all.put(KEY, WarningCache);
+        all.put(KEY, WarningsCache);
         Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
         JsonParser parser = new JsonParser();
         JsonElement el = parser.parse(all.toJSONString());
@@ -110,11 +172,21 @@ public class Warning {
         }
     }
 
-    public void loadWarnings() {
+    public JSONObject getRaw() {
+        try {
+            return (JSONObject) new JSONParser().parse(new FileReader(FILE));
+
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void loadCacheFromFile() {
         JSONObject json = null;
         try {
             json = (JSONObject) new JSONParser().parse(new FileReader(FILE));
-            WarningCache = (ArrayList<JSONObject>) json.get(KEY);
+            WarningsCache = (ArrayList<JSONObject>) json.get(KEY);
 
         } catch (IOException e) {
             e.printStackTrace();

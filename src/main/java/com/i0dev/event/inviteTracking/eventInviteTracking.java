@@ -31,7 +31,6 @@ public class eventInviteTracking extends ListenerAdapter {
         User inviter = e.getJDA().getUserById(object.get("invitedBy").toString());
         if (inviter == null) return;
         Invites.get().decreaseUser(inviter);
-        System.out.println(1);
         InviteMatcher.get().removeNewJoin(e.getUser());
 
     }

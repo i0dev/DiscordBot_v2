@@ -51,7 +51,7 @@ public class cmdFactionLeader extends ListenerAdapter {
 
             e.getGuild().addRoleToMember(MentionedMember, e.getGuild().getRoleById(factionLeaderRole)).queue();
 
-            e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_CONTENT.replace("{senderTag}", e.getAuthor().getAsTag()), e.getAuthor())).build()).queue();
+            e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_CONTENT.replace("{senderTag}", e.getAuthor().getAsTag()), MentionedUser)).build()).queue();
         }
     }
 }

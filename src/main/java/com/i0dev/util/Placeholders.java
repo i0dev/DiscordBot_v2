@@ -45,6 +45,7 @@ public class Placeholders {
                 .replace("{BotUserAvatarUL}", jda.getSelfUser().getEffectiveAvatarUrl())
                 .replace("{UserAvatarUrl}", user.getEffectiveAvatarUrl())
                 .replace("{inviteCount}", inviteManager.getUserInviteCount(user) + "")
+                .replace("{userWarns}",  main.java.com.i0dev.entity.Warning.get().getUserWarnCount(user) + "")
                 .replace("{BotUserName}", jda.getSelfUser().getName());
     }
 }

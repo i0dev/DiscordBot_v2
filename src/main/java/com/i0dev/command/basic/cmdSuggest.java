@@ -38,7 +38,7 @@ public class cmdSuggest extends ListenerAdapter {
                 return;
             }
             String[] message = e.getMessage().getContentRaw().split(" ");
-            if (message.length != 3) {
+            if (message.length <= 2) {
                 e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_FORMAT.replace("{command}", conf.GENERAL_BOT_PREFIX + COMMAND_ALIASES.get(0)), e.getAuthor())).build()).queue();
                 return;
             }

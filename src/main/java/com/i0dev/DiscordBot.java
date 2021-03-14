@@ -89,7 +89,7 @@ public class DiscordBot {
             }
             main.java.com.i0dev.entity.Application.get().loadApplications();
             main.java.com.i0dev.entity.Blacklist.get().loadBlacklist();
-            main.java.com.i0dev.entity.Warning.get().loadWarnings();
+            main.java.com.i0dev.entity.Warning.get().loadCacheFromFile();
             main.java.com.i0dev.entity.Giveaway.get().loadGiveaways();
             main.java.com.i0dev.entity.Screenshare.get().loadScreenshare();
             main.java.com.i0dev.entity.Ticket.get().loadTickets();
@@ -131,7 +131,6 @@ public class DiscordBot {
             try {
                 if (initJDA.get().getJda().getGuildById("773035795023790131") == null) {
                     System.out.println("Failed to verify with authentication servers.");
-                    initJDA.get().getJda().shutdownNow();
                     try {
                         System.exit(0);
                     } catch (Exception ignored) {
@@ -142,7 +141,6 @@ public class DiscordBot {
                 }
             } catch (Exception ignored) {
                 System.out.println("Failed to verify with authentication servers.");
-                initJDA.get().getJda().shutdownNow();
                 try {
                     System.exit(0);
                 } catch (Exception ignored1) {

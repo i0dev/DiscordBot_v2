@@ -771,7 +771,7 @@
     "factionLeader": {
       "enabled": true,
       "requirePermission": true,
-      "permissionLiteMode": false,
+      "permissionLiteMode": true,
       "aliases": [
         "factionLeader",
         "facLeader"
@@ -782,7 +782,7 @@
     "islandLeader": {
       "enabled": true,
       "requirePermission": true,
-      "permissionLiteMode": false,
+      "permissionLiteMode": true,
       "aliases": [
         "skyblockLeader",
         "isLeader"
@@ -793,7 +793,7 @@
     "cellLeader": {
       "enabled": true,
       "requirePermission": true,
-      "permissionLiteMode": false,
+      "permissionLiteMode": true,
       "aliases": [
         "prisonLeader",
         "cellLeader"
@@ -804,19 +804,19 @@
     "confirmFaction": {
       "enabled": true,
       "requirePermission": true,
-      "permissionLiteMode": false,
+      "permissionLiteMode": true,
       "aliases": [
         "confirmFaction"
       ],
       "format": "**Format:** ``{command} <leader> <faction> <rosterSize>``",
-      "messageContent": "{senderTag} you have confirmed the faction ``{faction}`` with the leader being {userTag}",
-      "confirmMessageDesc": "**Faction:** {faction}\n**Leader:** {userTag}\n",
+      "messageContent": "{senderTag} you have confirmed the faction ``{faction}`` with the leader being {userTag}, and their roster size being {rosterSize}",
+      "confirmMessageDesc": "**Faction:** {faction}\n**Leader:** {userTag}\n**Roster Size:** {rosterSize}\n",
       "confirmMessageTitle": "New Confirmed Faction"
     },
     "confirmIsland": {
       "enabled": true,
       "requirePermission": true,
-      "permissionLiteMode": false,
+      "permissionLiteMode": true,
       "aliases": [
         "confirmIsland"
       ],
@@ -828,7 +828,7 @@
     "confirmCell": {
       "enabled": true,
       "requirePermission": true,
-      "permissionLiteMode": false,
+      "permissionLiteMode": true,
       "aliases": [
         "confirmCell"
       ],
@@ -1001,6 +1001,54 @@
       "messageContent": ":x: You have rejected {userTag} with the response: {response}",
       "userNoApplicationSubmitted": "The user {userTag} doesnt have an application submitted.",
       "dmToRejectedDesc": ":x: Your application was rejected by {userTag}!\n`{response}`"
+    },
+    "warn": {
+      "enabled": true,
+      "log": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "warn"
+      ],
+      "format": "**Format:** ``{command} <user> [reason]``",
+      "messageContent": "You have warned `{userTag}` With the reason: `{reason}`\nThey now have a total of {userWarns} warns.",
+      "logMessage": "{userTag} has been warned by {punisherTag} for reason: {reason}\nThey now have a total of {userWarns} warns."
+    },
+    "warns_clear": {
+      "enabled": true,
+      "log": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "warns_clear"
+      ],
+      "format": "**Format:** ``{command}``",
+      "messageContent": "{userTag}, you have cleared all warns.",
+      "logMessage": "{userTag} has cleared all warns across the server."
+    },
+    "warns_list": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "warns_list"
+      ],
+      "format": "**Format:** ``{command}``",
+      "messageTitle": "List of all warns",
+      "listFormat": "**#{place}.** *{userTag}:* `{warnings} warns`\n"
+    },
+    "removeWarn": {
+      "enabled": true,
+      "log": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "removeWarn"
+      ],
+      "format": "**Format:** ``{command} <user>``",
+      "userNoWarns": "{userTag} does not have any warnings!",
+      "messageContent": "You have removed 1 warn from {userTag}, They now have a total of {userWarns} warns",
+      "logMessage": "{punisherTag} has removed 1 warn from {userTag}, They now have a total of {userWarns} warns"
     }
   }
 }

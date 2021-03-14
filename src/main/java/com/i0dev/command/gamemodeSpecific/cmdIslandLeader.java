@@ -50,7 +50,7 @@ public class cmdIslandLeader extends ListenerAdapter {
 
             e.getGuild().addRoleToMember(MentionedMember, e.getGuild().getRoleById(islandLeaderRoleID)).queue();
 
-            e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_CONTENT.replace("{senderTag}", e.getAuthor().getAsTag()), e.getAuthor())).build()).queue();
+            e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_CONTENT.replace("{senderTag}", e.getAuthor().getAsTag()), MentionedUser)).build()).queue();
         }
     }
 }
