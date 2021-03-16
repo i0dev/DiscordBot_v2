@@ -5,7 +5,8 @@
     "activity": "play.mcrivals.com",
     "token": "NzIwNDY4NjI1OTk5NTI3OTU4.XuGasg.Ff9fGyS7_g_R9NYhbYXfWIsTTM8",
     "deleteCommand": true,
-    "creatorTimeouts": 300000
+    "creatorTimeouts": 300000,
+    "tebexSecret": "f17aa08894081f8a750492c2dc81c13568fb2d02"
   },
   "channels": {
     "logsChannelID": 766330396832432150,
@@ -1049,6 +1050,39 @@
       "userNoWarns": "{userTag} does not have any warnings!",
       "messageContent": "You have removed 1 warn from {userTag}, They now have a total of {userWarns} warns",
       "logMessage": "{punisherTag} has removed 1 warn from {userTag}, They now have a total of {userWarns} warns"
+    },
+    "tebexLookup": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "tebexLookup"
+      ],
+      "format": "**Format:** ``{command} <ign>``",
+      "ignError": "Cannot find that minecraft user!",
+      "messageTitle": "Player lookup for: {ign}"
+    },
+    "tebexTransactionLookup": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "tebexTrans"
+      ],
+      "format": "**Format:** ``{command} <Transaction ID>``",
+      "transError": "Cannot find that transaction! Please try again.",
+      "messageTitle": "Transaction lookup for ID: {transID}"
+    },
+    "tebexPackageLookup": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "tebexPackage"
+      ],
+      "format": "**Format:** ``{command} <Package ID>``",
+      "pkgError": "Cannot find that package! Please try again.",
+      "messageTitle": "Package lookup for ID: {pkgID}"
     }
   }
 }

@@ -23,6 +23,7 @@ public class conf {
     public static String EMBED_THUMBNAIL;
     public static String EMBED_TITLE;
     public static String EMBED_FOOTER;
+    public static String TEBEX_SECRET;
     public static String GENERAL_BOT_PREFIX;
     public static boolean GENERAL_DELETE_COMMAND;
 
@@ -46,8 +47,7 @@ public class conf {
         MESSAGE_ROLE_NOT_FOUND = getConfig.get().getString("messages.roleNotFound");
         GENERAL_BOT_PREFIX = getConfig.get().getString("general.prefix");
         GENERAL_DELETE_COMMAND = getConfig.get().getBoolean("general.deleteCommand");
-
-
+        TEBEX_SECRET = getConfig.get().getString("general.tebexSecret");
         GENERAL_MAIN_LOGS_CHANNEL = getConfig.get().getLong("channels.logsChannelID").toString();
         APPLICATIONS_CHANNEL = getConfig.get().getLong("channels.incomingApplicationsChannel").toString();
     }

@@ -155,6 +155,11 @@ public class Prettify {
         return sb.toString();
     }
 
+    public static ZonedDateTime getZonedDateTimeFromString(String s) {
+        return ZonedDateTime.parse(s);
+    }
+
+
     public static String ticketRemainingArgFormatter(String[] message, int startPos) {
         StringBuilder sb = new StringBuilder();
         if (message == null) {
