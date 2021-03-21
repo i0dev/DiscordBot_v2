@@ -1,5 +1,6 @@
 package main.java.com.i0dev.command.polls;
 
+import main.java.com.i0dev.cache.PollCache;
 import main.java.com.i0dev.entity.Blacklist;
 
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -41,12 +42,12 @@ public class cmdPollCreator extends ListenerAdapter {
                 e.getChannel().sendMessage(main.java.com.i0dev.util.EmbedFactory.get().createSimpleEmbed(main.java.com.i0dev.util.Placeholders.convert(MESSAGE_FORMAT.replace("{command}", main.java.com.i0dev.util.conf.GENERAL_BOT_PREFIX + COMMAND_ALIASES.get(0)), e.getAuthor())).build()).queue();
                 return;
             }
-            if (main.java.com.i0dev.command.polls.PollCache.get().getMap().containsKey(e.getAuthor()) || main.java.com.i0dev.command.polls.PollCache.get().getResponseMap().containsKey(e.getAuthor())) {
+            if (PollCache.get().getMap().containsKey(e.getAuthor()) || PollCache.get().getResponseMap().containsKey(e.getAuthor())) {
                 e.getChannel().sendMessage(main.java.com.i0dev.util.EmbedFactory.get().createSimpleEmbed(main.java.com.i0dev.util.Placeholders.convert(alreadyCreating, e.getAuthor())).build()).queue();
                 return;
             }
-            main.java.com.i0dev.command.polls.PollCache.get().getMap().put(e.getAuthor(), 0);
-            main.java.com.i0dev.command.polls.PollCache.get().getTimeoutMap().put(e.getAuthor(), System.currentTimeMillis() + main.java.com.i0dev.util.getConfig.get().getLong("general.creatorTimeouts"));
+            PollCache.get().getMap().put(e.getAuthor(), 0);
+            PollCache.get().getTimeoutMap().put(e.getAuthor(), System.currentTimeMillis() + main.java.com.i0dev.util.getConfig.get().getLong("general.creatorTimeouts"));
             e.getAuthor().openPrivateChannel().complete().sendMessage(main.java.com.i0dev.util.EmbedFactory.get().createSimpleEmbedNoThumbnail("Please enter the channel you would like the poll to be posted in.").build()).queue();
             e.getChannel().sendMessage(main.java.com.i0dev.util.EmbedFactory.get().createSimpleEmbed(main.java.com.i0dev.util.Placeholders.convert(MESSAGE_CONTENT, e.getAuthor())).build()).queue();
 

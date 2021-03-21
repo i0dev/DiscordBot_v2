@@ -1,9 +1,9 @@
 package main.java.com.i0dev.command.reactionroles;
 
+import main.java.com.i0dev.cache.ReactionRoleCache;
 import main.java.com.i0dev.entity.Blacklist;
 import main.java.com.i0dev.entity.ReactionRoles;
 import main.java.com.i0dev.util.*;
-import net.dv8tion.jda.api.entities.Emote;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.TextChannel;

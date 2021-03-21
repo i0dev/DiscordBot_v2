@@ -1,5 +1,6 @@
 package main.java.com.i0dev.command.giveaways;
 
+import main.java.com.i0dev.cache.GiveawayCache;
 import main.java.com.i0dev.entity.Blacklist;
 import main.java.com.i0dev.entity.Giveaway;
 import main.java.com.i0dev.util.*;

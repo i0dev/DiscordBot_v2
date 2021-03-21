@@ -1,6 +1,6 @@
 package main.java.com.i0dev.command.applications;
 
-import main.java.com.i0dev.command.reactionroles.ReactionRoleCache;
+import main.java.com.i0dev.cache.ApplicationCache;
 import main.java.com.i0dev.entity.Application;
 import main.java.com.i0dev.entity.Blacklist;
 import main.java.com.i0dev.util.*;

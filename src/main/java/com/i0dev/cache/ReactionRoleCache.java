@@ -1,18 +1,16 @@
-package main.java.com.i0dev.command.polls;
+package main.java.com.i0dev.cache;
 
-import main.java.com.i0dev.util.EmbedFactory;
 import net.dv8tion.jda.api.entities.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.TimerTask;
 
-public class PollCache {
+public class ReactionRoleCache {
 
-    private static PollCache instance = new PollCache();
+    private static ReactionRoleCache instance = new ReactionRoleCache();
 
-    public static PollCache get() {
+    public static ReactionRoleCache get() {
         return instance;
     }
 
@@ -38,9 +36,9 @@ public class PollCache {
     }
 
     public void removeUser(User user) {
-        PollCache.get().getResponseMap().remove(user);
-        PollCache.get().getMap().remove(user);
-        PollCache.get().getQuestionMap().remove(user);
-        PollCache.get().getTimeoutMap().remove(user);
+        ReactionRoleCache.get().getResponseMap().remove(user);
+        ReactionRoleCache.get().getMap().remove(user);
+        ReactionRoleCache.get().getQuestionMap().remove(user);
+        ReactionRoleCache.get().getTimeoutMap().remove(user);
     }
 }

@@ -1,4 +1,4 @@
-package main.java.com.i0dev.command.reactionroles;
+package main.java.com.i0dev.cache;
 
 import net.dv8tion.jda.api.entities.User;
 
@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-public class ReactionRoleCache {
+public class PollCache {
 
-    private static ReactionRoleCache instance = new ReactionRoleCache();
+    private static PollCache instance = new PollCache();
 
-    public static ReactionRoleCache get() {
+    public static PollCache get() {
         return instance;
     }
 
@@ -36,9 +36,9 @@ public class ReactionRoleCache {
     }
 
     public void removeUser(User user) {
-        ReactionRoleCache.get().getResponseMap().remove(user);
-        ReactionRoleCache.get().getMap().remove(user);
-        ReactionRoleCache.get().getQuestionMap().remove(user);
-        ReactionRoleCache.get().getTimeoutMap().remove(user);
+        PollCache.get().getResponseMap().remove(user);
+        PollCache.get().getMap().remove(user);
+        PollCache.get().getQuestionMap().remove(user);
+        PollCache.get().getTimeoutMap().remove(user);
     }
 }

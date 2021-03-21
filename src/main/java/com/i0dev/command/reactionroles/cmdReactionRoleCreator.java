@@ -1,5 +1,6 @@
 package main.java.com.i0dev.command.reactionroles;
 
+import main.java.com.i0dev.cache.ReactionRoleCache;
 import main.java.com.i0dev.entity.Blacklist;
 import main.java.com.i0dev.util.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;

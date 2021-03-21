@@ -1,8 +1,7 @@
 package main.java.com.i0dev.engine;
 
-import main.java.com.i0dev.command.giveaways.GiveawayCache;
-import main.java.com.i0dev.command.polls.PollCache;
-import main.java.com.i0dev.entity.Giveaway;
+import main.java.com.i0dev.cache.GiveawayCache;
+import main.java.com.i0dev.cache.PollCache;
 import main.java.com.i0dev.util.EmbedFactory;
 import net.dv8tion.jda.api.entities.User;
 

@@ -1,6 +1,5 @@
-package main.java.com.i0dev.command.applications;
+package main.java.com.i0dev.cache;
 
-import main.java.com.i0dev.command.reactionroles.ReactionRoleCache;
 import net.dv8tion.jda.api.entities.User;
 
 import java.util.ArrayList;
