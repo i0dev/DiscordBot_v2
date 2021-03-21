@@ -25,7 +25,8 @@ public class onReactionRole extends ListenerAdapter {
     private final String onReactionDMDescRemoved = getConfig.get().getString("commands.reactionRoles.onReactionDMDescRemoved");
 
     @Override
-    public void onGuildMessageReactionRemove(@NotNull GuildMessageReactionRemoveEvent e) {
+    public void onGuildMessageReactionRemove(GuildMessageReactionRemoveEvent e) {
+        if (e.getUser() == null) return;
         if (e.getUser().isBot()) return;
         if (!EVENT_ENABLED) return;
         if (!e.getGuild().equals(conf.GENERAL_MAIN_GUILD)) return;

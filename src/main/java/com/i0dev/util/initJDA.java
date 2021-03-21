@@ -37,6 +37,7 @@ import main.java.com.i0dev.command.polls.cmdPollCreator;
 import main.java.com.i0dev.command.polls.pollCreatorResponses;
 import main.java.com.i0dev.command.reactionroles.cmdReactionRoleCreator;
 import main.java.com.i0dev.command.reactionroles.reactionRoleResponses;
+import main.java.com.i0dev.command.tebex.tebexInfo;
 import main.java.com.i0dev.command.tebex.tebexPackageLookup;
 import main.java.com.i0dev.command.tebex.tebexPlayerLookup;
 import main.java.com.i0dev.command.tebex.tebexTransactionLookup;
@@ -208,6 +209,7 @@ public class initJDA {
         jda.addEventListener(new tebexPlayerLookup());
         jda.addEventListener(new tebexTransactionLookup());
         jda.addEventListener(new tebexPackageLookup());
+        jda.addEventListener(new tebexInfo());
 
     }
 

@@ -412,10 +412,10 @@
       "aliases": [
         "screenshare_add"
       ],
-      "format": "**Format:** ``{command} <user> [reason]``",
-      "messageContent": "You have added `{userTag}` to the SS list\nWith the reason: `{reason}`",
-      "userAlreadyOnList": "`{userTag}` is already on the SS list!",
-      "logMessage": "{userTag} has been added to the SS list by {punisherTag} for reason: {reason}"
+      "format": "**Format:** ``{command} <IGN> [reason]``",
+      "messageContent": "You have added `{IGN}` to the SS list\nWith the reason: `{reason}`",
+      "userAlreadyOnList": "`{IGN}` is already on the SS list!",
+      "logMessage": "{IGN} has been added to the SS list by {punisherTag} for reason: {reason}"
     },
     "screenshare_remove": {
       "enabled": true,
@@ -425,10 +425,10 @@
       "aliases": [
         "screenshare_remove"
       ],
-      "format": "**Format:** ``{command} <user>``",
-      "messageContent": "You have removed `{userTag}` from the SS list",
-      "userNotOnList": "`{userTag}` is not on the SS list!",
-      "logMessage": "{punisherTag} has rmeoved {userTag} from the SS list"
+      "format": "**Format:** ``{command} <IGN>``",
+      "messageContent": "You have removed `{IGN}` from the SS list",
+      "userNotOnList": "`{IGN}` is not on the SS list!",
+      "logMessage": "{punisherTag} has rmeoved {IGN} from the SS list"
     },
     "screenshare_clear": {
       "enabled": true,
@@ -451,7 +451,7 @@
       ],
       "format": "**Format:** ``{command}``",
       "messageTitle": "List of all SS list users",
-      "listFormat": "**{userTag}** - **Added by:**``{punisherTag}`` - **Reason:** `{reason}`"
+      "listFormat": "**{IGN}** - **Added by:**``{punisherTag}`` - **Reason:** `{reason}`"
     },
     "mute": {
       "enabled": true,
@@ -516,34 +516,33 @@
       "ticketPanelTitle": "i0dev Tickets",
       "pinTicketPanel": false,
       "ticketPanelDescription": "Click to one of the emojis to create a corresponding ticket!",
-      "ticketPanelFieldHeaderFormat": "{emoji} - {panelHeader}",
       "ticketPanelFieldBaseFormat": "{panelDescription}",
       "ticketOptions": [
         {
+          "ChannelName": "support-{ticketNumber}",
+          "PingStaffRoles": true,
+          "PanelHeader": ":tickets: - General Ticket",
+          "Emoji": "U+1F39F",
           "Questions": [
             "What realm is this for?",
             "What is your IGN?",
             "What is your issue?"
           ],
           "AdminOnlyDefault": false,
-          "PingStaffRoles": true,
-          "PanelDescription": "General questions, concerns or any support you need",
-          "PanelHeader": "General Ticket",
-          "ChannelName": "support-{ticketNumber}",
-          "Emoji": "U+1F39F"
+          "PanelDescription": "General questions, concerns or any support you need"
         },
         {
+          "ChannelName": "support-{ticketNumber}",
+          "PingStaffRoles": false,
+          "PanelHeader": ":bell: - Admin Ticket",
+          "Emoji": "U+1F514",
           "Questions": [
             "What realm is this for?",
             "What is your IGN?",
             "What is your issue?"
           ],
           "AdminOnlyDefault": true,
-          "PingStaffRoles": false,
-          "PanelDescription": "Tickets that admins and above can see",
-          "PanelHeader": "Admin Ticket",
-          "ChannelName": "support-{ticketNumber}",
-          "Emoji": "U+1F514"
+          "PanelDescription": "Tickets that admins and above can see"
         }
       ]
     },
@@ -1061,6 +1060,15 @@
       "format": "**Format:** ``{command} <ign>``",
       "ignError": "Cannot find that minecraft user!",
       "messageTitle": "Player lookup for: {ign}"
+    },
+    "tebexInfo": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "aliases": [
+        "tebexInfo"
+      ],
+      "format": "**Format:** ``{command}``"
     },
     "tebexTransactionLookup": {
       "enabled": true,

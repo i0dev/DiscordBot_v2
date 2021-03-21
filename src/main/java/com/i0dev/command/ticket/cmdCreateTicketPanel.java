@@ -43,7 +43,6 @@ public class cmdCreateTicketPanel extends ListenerAdapter {
             }
             String[] message = e.getMessage().getContentRaw().split(" ");
             if (message.length != 1) {
-
                 e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_FORMAT.replace("{command}", conf.GENERAL_BOT_PREFIX + COMMAND_ALIASES.get(0)), e.getAuthor())).build()).queue();
                 return;
             }
@@ -51,7 +50,6 @@ public class cmdCreateTicketPanel extends ListenerAdapter {
             List<JSONObject> TicketOptions = getConfig.get().getObjectList("commands.createTicketPanel.ticketOptions");
             String ticketPanelTitle = getConfig.get().getString("commands.createTicketPanel.ticketPanelTitle");
             String ticketPanelDescription = getConfig.get().getString("commands.createTicketPanel.ticketPanelDescription");
-            String ticketPanelFieldHeaderFormat = getConfig.get().getString("commands.createTicketPanel.ticketPanelFieldHeaderFormat");
             String ticketPanelFieldBaseFormat = getConfig.get().getString("commands.createTicketPanel.ticketPanelFieldBaseFormat");
             boolean pinTicketPanel = getConfig.get().getBoolean("commands.createTicketPanel.pinTicketPanel");
 
@@ -66,26 +64,15 @@ public class cmdCreateTicketPanel extends ListenerAdapter {
             for (JSONObject object : TicketOptions) {
                 String PanelHeader = object.get("PanelHeader").toString();
                 String PanelDescription = object.get("PanelDescription").toString();
-                String Emoji = object.get("Emoji").toString();
-                Embed.addField(ticketPanelFieldHeaderFormat.replace("{emoji}", Emoji).replace("{panelHeader}", PanelHeader),
+                Embed.addField(PanelHeader,
                         ticketPanelFieldBaseFormat.replace("{panelDescription}", PanelDescription), false);
             }
             Message PanelMessage = e.getChannel().sendMessage(Embed.build()).complete();
             if (pinTicketPanel) PanelMessage.pin().queue();
             for (JSONObject object : TicketOptions) {
-                String Emoji = getEmojiWithoutArrow(object.get("Emoji").toString());
+                String Emoji = EmojiUtil.getEmojiWithoutArrow(object.get("Emoji").toString());
                 PanelMessage.addReaction(Emoji).queue();
             }
         }
-    }
-
-    private String getEmojiWithoutArrow(String emoji) {
-        String EmojiWithoutArrow;
-        if (emoji.length() < 3) {
-            EmojiWithoutArrow = emoji;
-        } else {
-            EmojiWithoutArrow = emoji.substring(0, emoji.length() - 1);
-        }
-        return EmojiWithoutArrow;
     }
 }

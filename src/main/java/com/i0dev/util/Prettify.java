@@ -163,7 +163,7 @@ public class Prettify {
     public static String ticketRemainingArgFormatter(String[] message, int startPos) {
         StringBuilder sb = new StringBuilder();
         if (message == null) {
-            sb.append("Have a nice day.");
+            sb.append(getConfig.get().getString("commands.ticketClose.defaultCloseReason"));
             return sb.toString();
         }
         for (int i = startPos; i < message.length; i++) {
@@ -173,7 +173,7 @@ public class Prettify {
             }
         }
         if (message.length == startPos) {
-            sb.append("Have a nice day.");
+            sb.append(getConfig.get().getString("commands.ticketClose.defaultCloseReason"));
         }
         return sb.toString();
     }

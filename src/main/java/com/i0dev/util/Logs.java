@@ -57,8 +57,15 @@ public class Logs {
                     toFile.append("     ").append(time).append(" [").append("UnknownUser").append("]: ").append("[EMBED]"
                             + "\n          Title: " + embed.getTitle()
                             + "\n          Desc: " + embed.getDescription()
-                            + "\n          Footer: " + embed.getFooter().getText()
-                    ).append("\n");
+                    );
+                    try {
+                        toFile.append("\n          Footer: " + embed.getFooter().getText()
+                        );
+                    } catch (Exception ignored1) {
+
+                    }
+
+                    toFile.append("\n");
                 }
             } else {
                 try {

@@ -1,8 +1,10 @@
 package main.java.com.i0dev.command;
 
+import main.java.com.i0dev.cache.HelpCmdCache;
 import main.java.com.i0dev.entity.Blacklist;
 import main.java.com.i0dev.util.*;
 import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.MessageReaction;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -47,6 +49,8 @@ public class cmdHelpPage extends ListenerAdapter {
         desc.append("\n\n**Page 1 contents:** ``Basic, Fun, GameMode Specific``");
         desc.append("\n**Page 2 contents:** ``Moderation``");
         desc.append("\n**Page 3 contents:** ``Movements, Ticket, Invite, Other``");
+        desc.append("\n**Page 4 contents:** ``Tebex Commands``");
+
         return desc.toString();
     }
 
@@ -74,7 +78,7 @@ public class cmdHelpPage extends ListenerAdapter {
         desc.append("{enabled}``{cmd}`` - *List all the muted users.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.getMuted.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.getMuted.aliases").get(0)));
         desc.append("{enabled}``{cmd}`` - *Create a muted role.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.createMutedRole.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.createMutedRole.aliases").get(0)));
         desc.append("\n");
-        desc.append("{enabled}``{cmd} <user>`` - *Add a user to the screenshare list.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.screenshare_add.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.screenshare_add.aliases").get(0)));
+        desc.append("{enabled}``{cmd} <user> [reason]`` - *Add a user to the screenshare list.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.screenshare_add.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.screenshare_add.aliases").get(0)));
         desc.append("{enabled}``{cmd} <user>`` - *Remove a user to the screenshare list.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.screenshare_remove.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.screenshare_remove.aliases").get(0)));
         desc.append("{enabled}``{cmd}`` - *Clear list.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.screenshare_clear.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.screenshare_clear.aliases").get(0)));
         desc.append("{enabled}``{cmd}`` - *Send list.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.screenshare_list.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.screenshare_list.aliases").get(0)));
@@ -87,6 +91,8 @@ public class cmdHelpPage extends ListenerAdapter {
         desc.append("\n\n**Page 1 contents:** ``Basic, Fun, GameMode Specific``");
         desc.append("\n**Page 2 contents:** ``Moderation``");
         desc.append("\n**Page 3 contents:** ``Movements, Ticket, Invite, Other``");
+        desc.append("\n**Page 4 contents:** ``Tebex Commands``");
+
         return desc.toString();
     }
 
@@ -119,7 +125,7 @@ public class cmdHelpPage extends ListenerAdapter {
         desc.append("{enabled}``{cmd}`` - *Create the verify panel.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.createVerifyPanel.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.createVerifyPanel.aliases").get(0)));
         desc.append("{enabled}``{cmd}`` - *Starts a poll creator.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.pollCreator.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.pollCreator.aliases").get(0)));
         desc.append("{enabled}``{cmd}`` - *Starts a giveaway creator.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.gcreate.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.gcreate.aliases").get(0)));
-        desc.append("{enabled}``{cmd}`` - *Starts a reaction role creato.r*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.reactionRoles.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.reactionRoles.aliases").get(0)));
+        desc.append("{enabled}``{cmd}`` - *Starts a reaction role creator.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.reactionRoles.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.reactionRoles.aliases").get(0)));
         desc.append("{enabled}``{cmd}`` - *Create an Application.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.apply.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.apply.aliases").get(0)));
         desc.append("{enabled}``{cmd} <user> <role> [response]`` - *Accept a users app.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.accept.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.accept.aliases").get(0)));
         desc.append("{enabled}``{cmd} <user> [response]`` - *Rejects a users app.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.reject.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.reject.aliases").get(0)));
@@ -128,6 +134,28 @@ public class cmdHelpPage extends ListenerAdapter {
         desc.append("\n\n**Page 1 contents:** ``Basic, Fun, GameMode Specific``");
         desc.append("\n**Page 2 contents:** ``Moderation``");
         desc.append("\n**Page 3 contents:** ``Movements, Ticket, Invite, Other``");
+        desc.append("\n**Page 4 contents:** ``Tebex Commands``");
+
+        return desc.toString();
+    }
+
+    private String page4() {
+        StringBuilder desc = new StringBuilder();
+        String page = "4";
+        desc.append("`<>`: arg required.\n");
+        desc.append("`[]`: arg optional.\n");
+        desc.append(enabledEmoji).append(": command enabled.\n");
+        desc.append(disabledEmoji).append(": command disabled.\n\n");
+        desc.append("**Tebex Commands:**\n");
+        desc.append("{enabled}``{cmd} <ign>`` - *Get that users Tebex logs*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.tebexLookup.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.tebexLookup.aliases").get(0)));
+        desc.append("{enabled}``{cmd} <Transaction ID>`` - *Get information about that transaction.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.tebexTransactionLookup.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.tebexTransactionLookup.aliases").get(0)));
+        desc.append("{enabled}``{cmd} <Package ID>`` - *Get information about that package.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.tebexPackageLookup.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.tebexPackageLookup.aliases").get(0)));
+        desc.append("{enabled}``{cmd}`` - *Get general information about the tebex server.*\n".replace("{enabled}", (getConfig.get().getBoolean("commands.tebexInfo.enabled") + "").replace("true", enabledEmoji).replace("false", disabledEmoji)).replace("{cmd}", conf.GENERAL_BOT_PREFIX + getConfig.get().getStringList("commands.tebexInfo.aliases").get(0)));
+        desc.append("\n**End of page ").append(page).append(":**\n*Use ``").append(conf.GENERAL_BOT_PREFIX).append("help [page]`` to go to other pages!*");
+        desc.append("\n\n**Page 1 contents:** ``Basic, Fun, GameMode Specific``");
+        desc.append("\n**Page 2 contents:** ``Moderation``");
+        desc.append("\n**Page 3 contents:** ``Movements, Ticket, Invite, Other``");
+        desc.append("\n**Page 4 contents:** ``Tebex Commands``");
         return desc.toString();
     }
 
@@ -141,66 +169,18 @@ public class cmdHelpPage extends ListenerAdapter {
     private final String enabledEmoji = getConfig.get().getString("commands.help.enabledEmoji");
     private final String disabledEmoji = getConfig.get().getString("commands.help.disabledEmoji");
 
-    public boolean isHelpMessage(Message reactionMessage) {
-        for (Message message : HelpPageCache.get().getList()) {
-            try {
-                if (reactionMessage.equals(message)) {
-                    return true;
-                }
-            } catch (Exception ignored) {
-            }
-        }
-        return false;
-    }
 
-    @Override
-    public void onMessageReactionAdd(MessageReactionAddEvent e) {
-        if (e.getUser().isBot()) return;
-        if (!e.getGuild().equals(conf.GENERAL_MAIN_GUILD)) return;
-        if (Blacklist.get().isBlacklisted(e.getUser())) return;
-        if (!COMMAND_ENABLED) return;
-        if (!InternalPermission.get().hasPermission(REQUIRE_PERMISSIONS, REQUIRE_LITE_PERMISSIONS, e.getGuild(), e.getUser()))
-            return;
-        Message message = e.getChannel().retrieveMessageById(e.getMessageId()).complete();
-        if (!isHelpMessage(message)) return;
-        if (message.getReactions().size() > 1) {
-            message.clearReactions().queue();
-            if (e.getReactionEmote().getEmoji().equals("\u2B05")) {
-                message.clearReactions().queue();
-                message.editMessage(EmbedFactory.get().createSimpleEmbed(MESSAGE_TITLE.replace("{page}", "1"), page1()).build()).queue(message1 -> {
-                            message1.addReaction("\u27A1").queue();
-                        }
-                );
-            } else if (e.getReactionEmote().getEmoji().equals("\u27A1")) {
-                message.editMessage(EmbedFactory.get().createSimpleEmbed(MESSAGE_TITLE.replace("{page}", "3"), page3()).build()).queue(message1 -> {
-                            message1.addReaction("\u2B05").queue();
-                        }
-                );
-            }
-            return;
-        }
+    private void addReactions(Message msg) {
+        msg.addReaction("1️⃣").queue();
+        msg.addReaction("2️⃣").queue();
+        msg.addReaction("3️⃣").queue();
+        msg.addReaction("4️⃣").queue();
 
-        if (message.getReactions().size() == 1) {
-            if (message.getReactions().get(0).getReactionEmote().getEmoji().equals("\u27A1")) {
-                message.clearReactions().queue();
-                message.editMessage(EmbedFactory.get().createSimpleEmbed(MESSAGE_TITLE.replace("{page}", "2"), page2()).build()).queue(message1 -> {
-                            message1.addReaction("\u2B05").queue();
-                            message1.addReaction("\u27A1").queue();
-
-                        }
-
-                );
-            }
-            if (message.getReactions().get(0).getReactionEmote().getEmoji().equals("\u2B05")) {
-                message.clearReactions().queue();
-                message.editMessage(EmbedFactory.get().createSimpleEmbed(MESSAGE_TITLE.replace("{page}", "2"), page2()).build()).queue(message1 -> {
-                            message1.addReaction("\u2B05").queue();
-                            message1.addReaction("\u27A1").queue();
-
-                        }
-                );
-            }
-        }
+        //   msg.addReaction("5️⃣").queue();
+        //   msg.addReaction("6️⃣").queue();
+        //   msg.addReaction("7️⃣").queue();
+        //   msg.addReaction("8️⃣").queue();
+        //   msg.addReaction("9️⃣").queue();
 
     }
 
@@ -226,33 +206,63 @@ public class cmdHelpPage extends ListenerAdapter {
                 e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_FORMAT.replace("{command}", conf.GENERAL_BOT_PREFIX + COMMAND_ALIASES.get(0)), e.getAuthor())).build()).queue();
                 return;
             }
-
             if (message.length == 1 || message[1].equalsIgnoreCase("1")) {
                 e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(MESSAGE_TITLE.replace("{page}", "1"), page1()).build()).queue(message1 -> {
-                            message1.addReaction("\u27A1").queue();
-                            HelpPageCache.get().getList().add(message1);
-                        }
-                );
-
+                    addReactions(message1);
+                    HelpCmdCache.get().getList().add(message1);
+                });
             } else if (message[1].equalsIgnoreCase("2")) {
-
                 e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(MESSAGE_TITLE.replace("{page}", "2"), page2()).build()).queue(message1 -> {
-                            message1.addReaction("\u2B05").queue();
-                            message1.addReaction("\u27A1").queue();
-                            HelpPageCache.get().getList().add(message1);
-
-                        }
-                );
-
+                    addReactions(message1);
+                    HelpCmdCache.get().getList().add(message1);
+                });
             } else if (message[1].equalsIgnoreCase("3")) {
-
                 e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(MESSAGE_TITLE.replace("{page}", "3"), page3()).build()).queue(message1 -> {
-                            message1.addReaction("\u2B05").queue();
-                            HelpPageCache.get().getList().add(message1);
-
-                        }
-                );
+                    addReactions(message1);
+                    HelpCmdCache.get().getList().add(message1);
+                });
+            } else if (message[1].equalsIgnoreCase("4")) {
+                e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(MESSAGE_TITLE.replace("{page}", "4"), page4()).build()).queue(message1 -> {
+                    addReactions(message1);
+                    HelpCmdCache.get().getList().add(message1);
+                });
             }
         }
+    }
+
+    @Override
+    public void onMessageReactionAdd(MessageReactionAddEvent e) {
+        if (e.getUser().isBot()) return;
+        if (!e.getGuild().equals(conf.GENERAL_MAIN_GUILD)) return;
+        if (Blacklist.get().isBlacklisted(e.getUser())) return;
+        if (!COMMAND_ENABLED) return;
+        if (!InternalPermission.get().hasPermission(REQUIRE_PERMISSIONS, REQUIRE_LITE_PERMISSIONS, e.getGuild(), e.getUser()))
+            return;
+        Message message = e.getChannel().retrieveMessageById(e.getMessageId()).complete();
+        if (!isHelpMessage(message)) return;
+
+        if (e.getReaction().getReactionEmote().getEmoji().equals("1️⃣")) {
+            message.editMessage(EmbedFactory.get().createSimpleEmbed(MESSAGE_TITLE.replace("{page}", "1"), page1()).build()).queue(message1 -> message1.removeReaction("1️⃣", e.getUser()).queue());
+        } else if (e.getReaction().getReactionEmote().getEmoji().equals("2️⃣")) {
+            message.editMessage(EmbedFactory.get().createSimpleEmbed(MESSAGE_TITLE.replace("{page}", "2"), page2()).build()).queue(message1 -> message1.removeReaction("2️⃣", e.getUser()).queue());
+        } else if (e.getReaction().getReactionEmote().getEmoji().equals("3️⃣")) {
+            message.editMessage(EmbedFactory.get().createSimpleEmbed(MESSAGE_TITLE.replace("{page}", "3"), page3()).build()).queue(message1 -> message1.removeReaction("3️⃣", e.getUser()).queue());
+        } else if (e.getReaction().getReactionEmote().getEmoji().equals("4️⃣")) {
+            message.editMessage(EmbedFactory.get().createSimpleEmbed(MESSAGE_TITLE.replace("{page}", "4"), page4()).build()).queue(message1 -> message1.removeReaction("4️⃣", e.getUser()).queue());
+        }
+
+
+    }
+
+    public boolean isHelpMessage(Message reactionMessage) {
+        for (Message message : HelpCmdCache.get().getList()) {
+            try {
+                if (reactionMessage.equals(message)) {
+                    return true;
+                }
+            } catch (Exception ignored) {
+            }
+        }
+        return false;
     }
 }

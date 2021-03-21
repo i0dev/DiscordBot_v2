@@ -1,17 +1,16 @@
-package main.java.com.i0dev.command;
-
+package main.java.com.i0dev.cache;
 
 import net.dv8tion.jda.api.entities.Message;
 
 import java.util.ArrayList;
 
-public class HelpPageCache {
+public class HelpCmdCache {
 
     public ArrayList<Message> helpMessages = new ArrayList<>();
 
-    private static HelpPageCache instance = new HelpPageCache();
+    private static HelpCmdCache instance = new HelpCmdCache();
 
-    public static HelpPageCache get() {
+    public static HelpCmdCache get() {
         return instance;
     }
 

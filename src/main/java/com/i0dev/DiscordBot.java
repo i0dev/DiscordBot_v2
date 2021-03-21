@@ -4,10 +4,7 @@ import main.java.com.i0dev.engine.TaskCheckActiveGiveaways;
 import main.java.com.i0dev.engine.TaskCreatorTimeouts;
 import main.java.com.i0dev.engine.TaskMemberCount;
 import main.java.com.i0dev.jframe.DiscordBotGUI;
-import main.java.com.i0dev.util.conf;
-import main.java.com.i0dev.util.getConfig;
-import main.java.com.i0dev.util.initJDA;
-import main.java.com.i0dev.util.InviteTracking;
+import main.java.com.i0dev.util.*;
 import org.json.simple.parser.ParseException;
 
 import java.io.File;
@@ -63,7 +60,7 @@ public class DiscordBot {
         Timer createJDATimer = new Timer();
         createJDATimer.schedule(createJDALater, 1000);
         Timer verify = new Timer();
-        verify.schedule(verifyInitial, 4000);
+        verify.schedule(verifyInitial, 9000);
         if (GUIenabled) {
             DiscordBotGUI.openGUI();
         }
@@ -130,21 +127,18 @@ public class DiscordBot {
         public void run() {
             try {
                 if (initJDA.get().getJda().getGuildById("773035795023790131") == null) {
-                    System.out.println("Failed to verify with authentication servers.");
-                    try {
-                        System.exit(0);
-                    } catch (Exception ignored) {
+                    System.exit(0);
+                    throw new i0devException("Failed to verify with authentication servers. Please make sure your token is correct, and you have the bot verified.");
 
-                    }
                 } else {
                     System.out.println("Successfully verified with authentication servers.");
                 }
             } catch (Exception ignored) {
-                System.out.println("Failed to verify with authentication servers.");
                 try {
                     System.exit(0);
-                } catch (Exception ignored1) {
-
+                    throw new i0devException("Failed to verify with authentication servers. Please make sure your token is correct, and you have the bot verified.");
+                } catch (i0devException e) {
+                    e.printStackTrace();
                 }
             }
         }

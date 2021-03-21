@@ -57,6 +57,26 @@ public class TebexAPI {
         return null;
     }
 
+    public static JSONObject getInformation() throws IOException {
+        try {
+            StringBuilder result = new StringBuilder();
+            HttpURLConnection conn = (HttpURLConnection) new URL("https://plugin.tebex.io/information").openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("X-Tebex-Secret", conf.TEBEX_SECRET);
+            if (conn.getResponseCode() == 403) {
+                System.out.println("Tebex Secret is invalid!");
+                return null;
+            }
+            String line;
+            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            while ((line = rd.readLine()) != null) result.append(line);
+            rd.close();
+            return (JSONObject) new JSONParser().parse(result.toString());
+        } catch (MalformedURLException | ParseException ignored) {
+        }
+        return null;
+    }
+
     public static JSONObject lookupUser(String UUID) throws IOException {
         try {
             StringBuilder result = new StringBuilder();

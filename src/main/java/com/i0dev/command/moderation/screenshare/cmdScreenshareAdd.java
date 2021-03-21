@@ -46,14 +46,10 @@ public class cmdScreenshareAdd extends ListenerAdapter {
                 e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_FORMAT.replace("{command}", conf.GENERAL_BOT_PREFIX + COMMAND_ALIASES.get(0)), e.getAuthor())).build()).queue();
                 return;
             }
-            User MentionedUser = FindFromString.get().getUser(message[1], e.getMessage());
-            if (MentionedUser == null) {
-                e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(conf.MESSAGE_USER_NOT_FOUND.replace("{arg}", message[1]), e.getAuthor())).build()).queue();
-                return;
-            }
+            String MentionedUser = message[1];
 
             if (Screenshare.get().isOnSSList(MentionedUser)) {
-                e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(USER_ALREADY_ON_LIST, e.getAuthor())).build()).queue();
+                e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(USER_ALREADY_ON_LIST.replace("{IGN}",MentionedUser), e.getAuthor())).build()).queue();
                 return;
             }
 
@@ -61,11 +57,11 @@ public class cmdScreenshareAdd extends ListenerAdapter {
 
             Screenshare.get().addUser(MentionedUser, reason, e.getAuthor());
 
-            e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_CONTENT.replace("{reason}", reason), MentionedUser)).build()).queue();
+            e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(MESSAGE_CONTENT.replace("{IGN}",MentionedUser).replace("{reason}", reason), e.getAuthor())).build()).queue();
 
             if (LOGS_ENABLED) {
-                MessageUtil.sendMessage(conf.GENERAL_MAIN_LOGS_CHANNEL,EmbedFactory.get().createSimpleEmbed(LOGS_MESSAGE
-                        .replace("{userTag}", MentionedUser.getAsTag())
+                MessageUtil.sendMessage(conf.GENERAL_MAIN_LOGS_CHANNEL, EmbedFactory.get().createSimpleEmbed(LOGS_MESSAGE
+                        .replace("{IGN}", MentionedUser)
                         .replace("{punisherTag}", e.getAuthor().getAsTag())
                         .replace("{reason}", reason))
                         .build());

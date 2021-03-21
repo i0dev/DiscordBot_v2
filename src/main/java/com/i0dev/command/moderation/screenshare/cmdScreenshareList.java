@@ -49,7 +49,7 @@ public class cmdScreenshareList extends ListenerAdapter {
 
             for (JSONObject screenshare : Screenshare.get().getScreenshareList()) {
                 description.append(LIST_FORMAT
-                        .replace("{userTag}", screenshare.get("userTag").toString())
+                        .replace("{IGN}", screenshare.get("userID").toString())
                         .replace("{punisherTag}", screenshare.get("punisherTag").toString())
                         .replace("{reason}", screenshare.get("reason").toString()));
                 description.append("\n");

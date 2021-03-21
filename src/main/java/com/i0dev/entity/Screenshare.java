@@ -28,14 +28,16 @@ public class Screenshare {
     public static Screenshare get() {
         return instance;
     }
-    public String getFilePath(){
+
+    public String getFilePath() {
         return FILEPATH;
     }
+
     ArrayList<JSONObject> ScreenshareCache = new ArrayList<>();
 
-    public void addUser(User user, String reason, User punisher) {
+    public void addUser(String user, String reason, User punisher) {
         JSONObject object = new JSONObject();
-        object.put("userID", user.getId());
+        object.put("userID", user);
         object.put("reason", reason);
         object.put("punisherID", punisher.getId());
         object.put("punisherTag", punisher.getAsTag());
@@ -44,9 +46,9 @@ public class Screenshare {
 
     }
 
-    public void addUser(User user, User punisher) {
+    public void addUser(String user, User punisher) {
         JSONObject object = new JSONObject();
-        object.put("userID", user.getId());
+        object.put("userID", user);
         object.put("reason", "No Reason");
         object.put("punisherID", punisher.getId());
         object.put("punisherTag", punisher.getAsTag());
@@ -55,20 +57,20 @@ public class Screenshare {
         saveScreenshare();
     }
 
-    public JSONObject getScreenshareObject(User user) {
+    public JSONObject getScreenshareObject(String user) {
         if (ScreenshareCache.isEmpty()) return null;
 
         for (JSONObject object : ScreenshareCache) {
-            if (object.get("userID").equals(user.getId())) {
+            if (object.get("userID").equals(user)) {
                 return object;
             }
         }
         return null;
     }
 
-    public void removeUser(User user) {
+    public void removeUser(String user) {
         for (JSONObject object : ScreenshareCache) {
-            if (object.get("userID").equals(user.getId())) {
+            if (object.get("userID").equals(user)) {
                 ScreenshareCache.remove(object);
                 saveScreenshare();
                 break;
@@ -77,11 +79,11 @@ public class Screenshare {
         }
     }
 
-    public boolean isOnSSList(User user) {
+    public boolean isOnSSList(String IGN) {
         if (ScreenshareCache.isEmpty()) return false;
 
         for (JSONObject object : ScreenshareCache) {
-            if (object.get("userID").equals(user.getId())) {
+            if (object.get("userID").equals(IGN)) {
                 return true;
             }
         }
