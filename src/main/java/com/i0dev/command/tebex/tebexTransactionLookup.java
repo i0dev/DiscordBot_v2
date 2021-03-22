@@ -3,15 +3,12 @@ package main.java.com.i0dev.command.tebex;
 import main.java.com.i0dev.entity.Blacklist;
 import main.java.com.i0dev.util.*;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.json.simple.JSONObject;
 
 import java.awt.*;
 import java.io.IOException;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +50,7 @@ public class tebexTransactionLookup extends ListenerAdapter {
 
             JSONObject json = null;
             try {
-                json = TebexAPI.lookupTransaction(transID);
+                json = ApiUtils.lookupTransaction(transID);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
@@ -69,11 +66,11 @@ public class tebexTransactionLookup extends ListenerAdapter {
                                     ((JSONObject) json.get("currency")).get("symbol") + "" + json.get("amount").toString() + " " +
                                     ((JSONObject) json.get("currency")).get("iso_4217") +
                                     "`\nStatus: `" + json.get("status").toString() + "`\nPlayer IGN: `" + ((JSONObject) json.get("player")).get("name") + "`"
-                                    + "\nPlayer UUID: `" + TebexAPI.convertUUID(((JSONObject) json.get("player")).get("uuid").toString()) + "`",
+                                    + "\nPlayer UUID: `" + ApiUtils.convertUUID(((JSONObject) json.get("player")).get("uuid").toString()) + "`",
                             true)
                     .setColor(Color.decode(conf.EMBED_COLOR_HEX_CODE))
                     .setTimestamp(Prettify.getZonedDateTimeFromString(json.get("date").toString()))
-                    .setThumbnail("https://crafatar.com/avatars/" + TebexAPI.getUUIDFromIGN(((JSONObject) json.get("player")).get("name").toString()))
+                    .setThumbnail("https://crafatar.com/avatars/" + ApiUtils.getUUIDFromIGN(((JSONObject) json.get("player")).get("name").toString()))
                     .setFooter("Transaction Date ");
 
             StringBuilder packagesFormat = new StringBuilder();

@@ -3,8 +3,6 @@ package main.java.com.i0dev.command.tebex;
 import main.java.com.i0dev.entity.Blacklist;
 import main.java.com.i0dev.util.*;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.json.simple.JSONObject;
@@ -12,7 +10,6 @@ import org.json.simple.JSONObject;
 import java.awt.*;
 import java.io.IOException;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class tebexPackageLookup extends ListenerAdapter {
@@ -53,7 +50,7 @@ public class tebexPackageLookup extends ListenerAdapter {
 
             JSONObject json = null;
             try {
-                json = TebexAPI.lookupPackage(pkgID);
+                json = ApiUtils.lookupPackage(pkgID);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }

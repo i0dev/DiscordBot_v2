@@ -15,6 +15,7 @@ import main.java.com.i0dev.command.giveaways.giveawayCreatorResponses;
 import main.java.com.i0dev.command.invite.cmdInviteLeaderboard;
 import main.java.com.i0dev.command.invite.cmdInviteResetData;
 import main.java.com.i0dev.command.invite.cmdInvites;
+import main.java.com.i0dev.command.minecraftAPI.cmdMCServerInfo;
 import main.java.com.i0dev.command.moderation.blacklist.cmdBlacklistAdd;
 import main.java.com.i0dev.command.moderation.blacklist.cmdBlacklistClear;
 import main.java.com.i0dev.command.moderation.blacklist.cmdBlacklistList;
@@ -210,6 +211,8 @@ public class initJDA {
         jda.addEventListener(new tebexTransactionLookup());
         jda.addEventListener(new tebexPackageLookup());
         jda.addEventListener(new tebexInfo());
+
+        jda.addEventListener(new cmdMCServerInfo());
 
     }
 

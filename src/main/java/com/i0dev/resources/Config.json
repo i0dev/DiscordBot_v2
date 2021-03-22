@@ -1061,6 +1061,17 @@
       "ignError": "Cannot find that minecraft user!",
       "messageTitle": "Player lookup for: {ign}"
     },
+    "MCServerInfo": {
+      "aliases": [
+        "MCServerInfo"
+      ],
+      "cantFindServerError": "Cannot find the server: {ip}",
+      "permissionLiteMode": false,
+      "requirePermission": true,
+      "format": "**Format:** ``{command} <Server IP>``",
+      "messageTitle": "Server lookup for: {ip}",
+      "enabled": true
+    },
     "tebexInfo": {
       "enabled": true,
       "requirePermission": true,

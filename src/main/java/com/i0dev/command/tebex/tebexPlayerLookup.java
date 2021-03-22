@@ -3,8 +3,6 @@ package main.java.com.i0dev.command.tebex;
 import main.java.com.i0dev.entity.Blacklist;
 import main.java.com.i0dev.util.*;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.json.simple.JSONObject;
@@ -50,14 +48,14 @@ public class tebexPlayerLookup extends ListenerAdapter {
                 return;
             }
             String playerIGN = message[1];
-            if (TebexAPI.getUUIDFromIGN(playerIGN).equals("")) {
+            if (ApiUtils.getUUIDFromIGN(playerIGN).equals("")) {
                 e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(ignError).build()).queue();
                 return;
             }
 
             JSONObject json = null;
             try {
-                json = TebexAPI.lookupUser(TebexAPI.getUUIDFromIGN(playerIGN));
+                json = ApiUtils.lookupUser(ApiUtils.getUUIDFromIGN(playerIGN));
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
@@ -75,12 +73,12 @@ public class tebexPlayerLookup extends ListenerAdapter {
             }
             EmbedBuilder embed = new EmbedBuilder()
                     .setTitle(MESSAGE_TITLE.replace("{ign}", playerIGN))
-                    .addField("Minecraft Information", "IGN: ``" + ((JSONObject) json.get("player")).get("username") + "``\nUUID: ``" + TebexAPI.getUUIDFromIGN(playerIGN) + "`` ", true)
+                    .addField("Minecraft Information", "IGN: ``" + ((JSONObject) json.get("player")).get("username") + "``\nUUID: ``" + ApiUtils.getUUIDFromIGN(playerIGN) + "`` ", true)
                     .addField("Store Information", "Bans: `" + json.get("banCount") + "`\nChargeback Rate: ``" + json.get("chargebackRate") + "%``\nTotal Spent: `$" + total + " USD`", true)
                     .addField("Payment History", paymentSection.toString(), false)
                     .setColor(Color.decode(conf.EMBED_COLOR_HEX_CODE))
                     .setTimestamp(ZonedDateTime.now())
-                    .setThumbnail("https://crafatar.com/avatars/" + TebexAPI.getUUIDFromIGN(playerIGN))
+                    .setThumbnail("https://crafatar.com/avatars/" + ApiUtils.getUUIDFromIGN(playerIGN))
                     .setFooter(conf.EMBED_FOOTER);
             e.getChannel().sendMessage(embed.build()).queue();
         }

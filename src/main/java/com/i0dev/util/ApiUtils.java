@@ -11,7 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class TebexAPI {
+public class ApiUtils {
 
     public static JSONObject lookupTransaction(String transID) throws IOException {
         try {
@@ -83,6 +83,21 @@ public class TebexAPI {
                 System.out.println("Tebex Secret is invalid!");
                 return null;
             }
+            String line;
+            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            while ((line = rd.readLine()) != null) result.append(line);
+            rd.close();
+            return (JSONObject) new JSONParser().parse(result.toString());
+        } catch (MalformedURLException | ParseException e) {
+        }
+        return null;
+    }
+
+    public static JSONObject MinecraftServerLookup(String ipAddress) throws IOException {
+        try {
+            StringBuilder result = new StringBuilder();
+            HttpURLConnection conn = (HttpURLConnection) new URL("https://api.mcsrvstat.us/2/" + ipAddress).openConnection();
+            conn.setRequestMethod("GET");
             String line;
             BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             while ((line = rd.readLine()) != null) result.append(line);
