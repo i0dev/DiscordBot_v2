@@ -1061,6 +1061,19 @@
       "ignError": "Cannot find that minecraft user!",
       "messageTitle": "Player lookup for: {ign}"
     },
+    "tebexGiftcardCreate": {
+      "enabled": true,
+      "requirePermission": true,
+      "permissionLiteMode": false,
+      "log": false,
+      "aliases": [
+        "tebexCreateGiftcard"
+      ],
+      "format": "**Format:** ``{command} <Amount> [note]``",
+      "error": "There was an error creating that giftcard. Please make sure your Tebex account has permission to create giftcards!",
+      "messageContent": "{userTag}, You have created a buycraft giftcard!\n**Value:** ``{value}``\n**Code:** ||{code}||\n**Note: ``{note}``**",
+      "logMessage": "{userTag}, has created a buycraft giftcard!\n**Value:** ``{value}``\n**Code:** ||{code}||\n**Note: ``{note}``**"
+    },
     "MCServerInfo": {
       "aliases": [
         "MCServerInfo"
