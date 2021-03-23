@@ -52,11 +52,7 @@ public class tebexInfo extends ListenerAdapter {
             }
 
             JSONObject json = null;
-            try {
-                json = ApiUtils.getInformation();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+            json = ApiUtils.getInformation();
             json = (JSONObject) json.get("account");
             EmbedBuilder embed = new EmbedBuilder()
                     .setTitle(conf.EMBED_TITLE)

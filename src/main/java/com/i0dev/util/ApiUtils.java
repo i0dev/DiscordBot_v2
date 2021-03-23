@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 
 public class ApiUtils {
@@ -45,10 +46,6 @@ public class ApiUtils {
         return getGeneralRequest(method, "https://plugin.tebex.io/", param, "X-Tebex-Secret", conf.TEBEX_SECRET);
     }
 
-    private static JSONObject postTebexRequest(String method, String param, String BodyParam1, String BodyParam2) {
-        return getGeneralRequest(method, "https://plugin.tebex.io/", param, "X-Tebex-Secret", conf.TEBEX_SECRET);
-    }
-
     public static JSONObject lookupTransaction(String transID) {
         return getTebexRequest("GET", "payments/" + transID);
     }
@@ -57,29 +54,43 @@ public class ApiUtils {
         return getTebexRequest("GET", "package/" + packageID);
     }
 
+    public static JSONObject MinecraftServerLookup(String ipAddress) throws IOException {
+        return getGeneralRequest("GET", "https://api.mcsrvstat.us/2/", ipAddress);
+    }
+
     public static JSONObject getInformation() {
         return getTebexRequest("GET", "information");
     }
 
-    public static JSONObject createGiftcard(String amt, String note) {
+    private static JSONObject convertToJSON(HttpURLConnection connection) {
         try {
             StringBuilder result = new StringBuilder();
+            String line;
+            BufferedReader rd = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            while ((line = rd.readLine()) != null) result.append(line);
+            rd.close();
+            return (JSONObject) new JSONParser().parse(result.toString());
+        } catch (ParseException | IOException e) {
+            e.printStackTrace();
+        }
+        return new JSONObject();
+    }
+
+    public static JSONObject createGiftcard(String amt, String note) {
+        try {
             HttpURLConnection conn = (HttpURLConnection) new URL("https://plugin.tebex.io/gift-cards").openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("X-Tebex-Secret", conf.TEBEX_SECRET);
-            conn.addRequestProperty("amount", amt);
+            conn.setRequestProperty("amount", amt);
             if (!note.equals("")) {
-                conn.addRequestProperty("note", note);
+                conn.setRequestProperty("note", note);
             }
             if (conn.getResponseCode() == 403) {
                 return new JSONObject();
             }
-            String line;
-            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            while ((line = rd.readLine()) != null) result.append(line);
-            rd.close();
-            return (JSONObject) new JSONParser().parse(result.toString());
-        } catch (MalformedURLException | ParseException ignored) {
+            return convertToJSON(conn);
+
+        } catch (MalformedURLException | ProtocolException ignored) {
             return new JSONObject();
         } catch (IOException e) {
             e.printStackTrace();

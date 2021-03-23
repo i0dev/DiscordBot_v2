@@ -49,11 +49,7 @@ public class tebexTransactionLookup extends ListenerAdapter {
             String transID = message[1];
 
             JSONObject json = null;
-            try {
-                json = ApiUtils.lookupTransaction(transID);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+            json = ApiUtils.lookupTransaction(transID);
             if (json == null) {
                 e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(ignError).build()).queue();
                 return;

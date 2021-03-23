@@ -67,12 +67,17 @@ public class tebexGiftcardCreate extends ListenerAdapter {
                 note = "No note provided";
             }
 
-            String desc = messageContent;
-            e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(desc
-                            .replace("{code}", code)
-                            .replace("{value}", value + " " + currency)
-                            .replace("{note}", note)
-                    , e.getAuthor())).build()).queue();
+            String desc = messageContent
+                    .replace("{code}", code)
+                    .replace("{value}", value + " " + currency)
+                    .replace("{note}", note);
+
+
+            e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(desc, e    .getAuthor())).build()).queue();
+
+            if (LOGS_ENABLED) {
+                MessageUtil.sendMessage(conf.GENERAL_MAIN_LOGS_CHANNEL, EmbedFactory.get().createSimpleEmbed(Placeholders.convert(desc, e.getAuthor())).build());
+            }
         }
     }
 }

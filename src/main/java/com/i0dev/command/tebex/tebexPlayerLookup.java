@@ -54,11 +54,7 @@ public class tebexPlayerLookup extends ListenerAdapter {
             }
 
             JSONObject json = null;
-            try {
-                json = ApiUtils.lookupUser(ApiUtils.getUUIDFromIGN(playerIGN));
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+            json = ApiUtils.lookupUser(ApiUtils.getUUIDFromIGN(playerIGN));
 
             ArrayList<JSONObject> payments = (ArrayList<JSONObject>) json.get("payments");
             StringBuilder paymentSection = new StringBuilder();

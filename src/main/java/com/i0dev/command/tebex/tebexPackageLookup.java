@@ -49,11 +49,7 @@ public class tebexPackageLookup extends ListenerAdapter {
             String pkgID = message[1];
 
             JSONObject json = null;
-            try {
-                json = ApiUtils.lookupPackage(pkgID);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+            json = ApiUtils.lookupPackage(pkgID);
             if (json == null) {
                 e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(ignError).build()).queue();
                 return;
