@@ -1,9 +1,6 @@
 package main.java.com.i0dev.engine;
 
-import main.java.com.i0dev.util.Placeholders;
-import main.java.com.i0dev.util.conf;
-import main.java.com.i0dev.util.getConfig;
-import main.java.com.i0dev.util.initJDA;
+import main.java.com.i0dev.util.*;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 
@@ -18,8 +15,10 @@ public class TaskMemberCount {
             if (!configuration.getBoolean("events.memberCounter.memberCountEnabled")) return;
             VoiceChannel channel = conf.GENERAL_MAIN_GUILD.getVoiceChannelById(configuration.getLong("events.memberCounter.memberCountChannelID"));
             if (channel == null) {
-                System.out.println("The member counter channel is null!");
-                return;
+                try {
+                    throw new i0devException("Thee member counting channel is invalid!");
+                } catch (i0devException e) {
+                }
             }
             channel.getManager().setName(Placeholders.convert(configuration.getString("events.memberCounter.channelNameFormat"), jda.getSelfUser())).queue();
         }

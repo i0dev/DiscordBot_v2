@@ -51,5 +51,4 @@ public class conf {
         GENERAL_MAIN_LOGS_CHANNEL = getConfig.get().getLong("channels.logsChannelID").toString();
         APPLICATIONS_CHANNEL = getConfig.get().getLong("channels.incomingApplicationsChannel").toString();
     }
-
 }

@@ -13,7 +13,6 @@ public class InternalPermission {
         return instance;
     }
 
-
     public boolean hasStrictPermission(User user, Guild guild) {
         if (Objects.requireNonNull(guild.getMember(user)).getPermissions().contains(Permission.ADMINISTRATOR))
             return true;

@@ -13,15 +13,16 @@ import java.net.URL;
 
 public class ApiUtils {
 
-    public static JSONObject lookupTransaction(String transID) throws IOException {
+    private static JSONObject getGeneralRequest(String method, String url, String param, String HeaderKey, String HeaderValue) {
         try {
             StringBuilder result = new StringBuilder();
-            HttpURLConnection conn = (HttpURLConnection) new URL("https://plugin.tebex.io/payments/" + transID).openConnection();
-            conn.setRequestMethod("GET");
-            conn.setRequestProperty("X-Tebex-Secret", conf.TEBEX_SECRET);
+            HttpURLConnection conn = (HttpURLConnection) new URL(url + param).openConnection();
+            conn.setRequestMethod(method);
+            if (!HeaderKey.equals("") && !HeaderValue.equals("")) {
+                conn.setRequestProperty(HeaderKey, HeaderValue);
+            }
             if (conn.getResponseCode() == 403) {
-                System.out.println("Tebex Secret is invalid!");
-                return null;
+                return new JSONObject();
             }
             String line;
             BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -29,102 +30,39 @@ public class ApiUtils {
             rd.close();
             return (JSONObject) new JSONParser().parse(result.toString());
         } catch (MalformedURLException | ParseException ignored) {
+            return new JSONObject();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return null;
+        return new JSONObject();
     }
 
-    public static JSONObject lookupPackage(String packageID) throws IOException {
-        try {
-            StringBuilder result = new StringBuilder();
-            HttpURLConnection conn = (HttpURLConnection) new URL("https://plugin.tebex.io/package/" + packageID).openConnection();
-            conn.setRequestMethod("GET");
-            conn.setRequestProperty("X-Tebex-Secret", conf.TEBEX_SECRET);
-            if (conn.getResponseCode() == 403) {
-                System.out.println("Tebex Secret is invalid!");
-                return null;
-            }
-            String line;
-            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            while ((line = rd.readLine()) != null) result.append(line);
-            rd.close();
-            return (JSONObject) new JSONParser().parse(result.toString());
-        } catch (MalformedURLException | ParseException ignored) {
-        }
-        return null;
+    private static JSONObject getGeneralRequest(String method, String url, String param) {
+        return getGeneralRequest(method, url, param, "", "");
     }
 
-    public static JSONObject getInformation() throws IOException {
-        try {
-            StringBuilder result = new StringBuilder();
-            HttpURLConnection conn = (HttpURLConnection) new URL("https://plugin.tebex.io/information").openConnection();
-            conn.setRequestMethod("GET");
-            conn.setRequestProperty("X-Tebex-Secret", conf.TEBEX_SECRET);
-            if (conn.getResponseCode() == 403) {
-                System.out.println("Tebex Secret is invalid!");
-                return null;
-            }
-            String line;
-            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            while ((line = rd.readLine()) != null) result.append(line);
-            rd.close();
-            return (JSONObject) new JSONParser().parse(result.toString());
-        } catch (MalformedURLException | ParseException ignored) {
-        }
-        return null;
+    private static JSONObject getTebexRequest(String method, String param) {
+        return getGeneralRequest(method, "https://plugin.tebex.io/", param, "X-Tebex-Secret", conf.TEBEX_SECRET);
     }
 
-    public static JSONObject lookupUser(String UUID) throws IOException {
-        try {
-            StringBuilder result = new StringBuilder();
-            HttpURLConnection conn = (HttpURLConnection) new URL("https://plugin.tebex.io/user/" + UUID).openConnection();
-            conn.setRequestMethod("GET");
-            conn.setRequestProperty("X-Tebex-Secret", conf.TEBEX_SECRET);
-            if (conn.getResponseCode() == 403) {
-                System.out.println("Tebex Secret is invalid!");
-                return null;
-            }
-            String line;
-            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            while ((line = rd.readLine()) != null) result.append(line);
-            rd.close();
-            return (JSONObject) new JSONParser().parse(result.toString());
-        } catch (MalformedURLException | ParseException e) {
-        }
-        return null;
+    public static JSONObject lookupTransaction(String transID) {
+        return getTebexRequest("GET", "payments/" + transID);
     }
 
-    public static JSONObject MinecraftServerLookup(String ipAddress) throws IOException {
-        try {
-            StringBuilder result = new StringBuilder();
-            HttpURLConnection conn = (HttpURLConnection) new URL("https://api.mcsrvstat.us/2/" + ipAddress).openConnection();
-            conn.setRequestMethod("GET");
-            String line;
-            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            while ((line = rd.readLine()) != null) result.append(line);
-            rd.close();
-            return (JSONObject) new JSONParser().parse(result.toString());
-        } catch (MalformedURLException | ParseException e) {
-        }
-        return null;
+    public static JSONObject lookupPackage(String packageID) {
+        return getTebexRequest("GET", "package/" + packageID);
+    }
+
+    public static JSONObject getInformation() {
+        return getTebexRequest("GET", "information");
+    }
+
+    public static JSONObject lookupUser(String UUID) {
+        return getTebexRequest("GET", "user/" + UUID);
     }
 
     public static String getUUIDFromIGN(String ign) {
-        try {
-            StringBuilder result = new StringBuilder();
-            HttpURLConnection conn = (HttpURLConnection) new URL("https://api.mojang.com/users/profiles/minecraft/" + ign).openConnection();
-            conn.setRequestMethod("GET");
-            String line;
-            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            while ((line = rd.readLine()) != null) result.append(line);
-            rd.close();
-            JSONObject json = (JSONObject) new JSONParser().parse(result.toString());
-            String UUID = json.get("id").toString();
-            return convertUUID(UUID);
-
-
-        } catch (ParseException | IOException e) {
-        }
-        return "";
+        return convertUUID(getGeneralRequest("GET", "https://api.mojang.com/users/profiles/minecraft/", ign).get("id").toString());
     }
 
     public static String convertUUID(String s) {

@@ -23,7 +23,6 @@ public class EmbedFactory {
         Thumbnail = getConfig.get().getString("messages.embeds.Thumbnail");
         Title = getConfig.get().getString("messages.embeds.Title");
         Footer = getConfig.get().getString("messages.embeds.Footer");
-
     }
 
     public EmbedBuilder createSimpleEmbedNoThumbnail(String description) {

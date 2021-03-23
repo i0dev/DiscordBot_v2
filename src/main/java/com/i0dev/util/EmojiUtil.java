@@ -4,12 +4,6 @@ import net.dv8tion.jda.api.entities.MessageReaction;
 
 public class EmojiUtil {
 
-    public static char getTextEmoji(String Emoji) {
-        String newString = "\\u"+Emoji.substring(2);
-        System.out.println(newString);
-        return newString.toCharArray()[0];
-    }
-
     public static String getSimpleEmoji(String Emoji) {
         if (Emoji.length() < 20) {
             return MessageReaction.ReactionEmote.fromUnicode(Emoji, initJDA.get().getJda()).getEmoji();

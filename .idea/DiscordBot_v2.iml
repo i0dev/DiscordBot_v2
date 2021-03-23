@@ -10,7 +10,18 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../IntelleJ Dependencies/DiscordJDA.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../Development/Dependencies and Resources/java-json.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/../../Development/Dependencies and Resources/java-json.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../Development/Dependencies and Resources/JDA-4.2.0_204-withDependencies.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -19,29 +30,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../IntelleJ Dependencies/Hyperion.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$MODULE_DIR$/../../IntelleJ Dependencies/Hyperion.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../IntelleJ Dependencies/JavaJson.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$MODULE_DIR$/../../IntelleJ Dependencies/JavaJson.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../IntelleJ Dependencies/SimpleJSON.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../Development/Dependencies and Resources/jda-utilities-2.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -50,7 +39,16 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../IntelleJ Dependencies/gson-2.8.6.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../Development/Dependencies and Resources/json-simple-1.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../Development/Dependencies and Resources/gson-2.8.6.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
