@@ -21,6 +21,7 @@ public class tebexGiftcardCreate extends ListenerAdapter {
     private final String messageContent = getConfig.get().getString("commands.tebexGiftcardCreate.messageContent");
     private final String MESSAGE_FORMAT = getConfig.get().getString("commands.tebexGiftcardCreate.format");
     private final boolean COMMAND_ENABLED = getConfig.get().getBoolean("commands.tebexGiftcardCreate.enabled");
+    private final boolean dmCodeInsteadOfSameChannel = getConfig.get().getBoolean("commands.tebexGiftcardCreate.dmCodeInsteadOfSameChannel");
 
     private final String error = getConfig.get().getString("commands.tebexGiftcardCreate.error");
 
@@ -58,6 +59,11 @@ public class tebexGiftcardCreate extends ListenerAdapter {
                 e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(error).build()).queue();
                 return;
             }
+            System.out.println(json.toJSONString());
+            if ((json.containsKey("error") && json.get("error").equals("2")) || json.isEmpty()) {
+                e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(error).build()).queue();
+                return;
+            }
             json = ((JSONObject) json.get("data"));
             String code = json.get("code").toString();
             json = ((JSONObject) json.get("balance"));
@@ -71,12 +77,18 @@ public class tebexGiftcardCreate extends ListenerAdapter {
                     .replace("{code}", code)
                     .replace("{value}", value + " " + currency)
                     .replace("{note}", note);
-
-
-            e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(desc, e    .getAuthor())).build()).queue();
-
+            String LOGS_MESSAGE2 = LOGS_MESSAGE
+                    .replace("{code}", code)
+                    .replace("{value}", value + " " + currency)
+                    .replace("{note}", note);
             if (LOGS_ENABLED) {
-                MessageUtil.sendMessage(conf.GENERAL_MAIN_LOGS_CHANNEL, EmbedFactory.get().createSimpleEmbed(Placeholders.convert(desc, e.getAuthor())).build());
+                MessageUtil.sendMessage(conf.GENERAL_MAIN_LOGS_CHANNEL, EmbedFactory.get().createSimpleEmbed(Placeholders.convert(LOGS_MESSAGE2, e.getAuthor())).build());
+            }
+            if (dmCodeInsteadOfSameChannel) {
+                e.getAuthor().openPrivateChannel().complete().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(desc, e.getAuthor())).build()).queue();
+
+            } else {
+                e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(desc, e.getAuthor())).build()).queue();
             }
         }
     }

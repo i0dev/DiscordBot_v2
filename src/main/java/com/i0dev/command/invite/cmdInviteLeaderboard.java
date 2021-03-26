@@ -56,12 +56,15 @@ public class cmdInviteLeaderboard extends ListenerAdapter {
             list.sort(Comparator.comparing(o -> Integer.parseInt(o.get("invites").toString())));
             Collections.reverse(list);
             StringBuilder desc = new StringBuilder();
+            int maxEntries = 0;
             for (JSONObject obj : list) {
+                if (maxEntries >= 25) { break; }
                 User user = e.getJDA().getUserById(obj.get("userID").toString());
                 if (user == null) continue;
                 desc.append(main.java.com.i0dev.util.Placeholders.convert(leaderboardFormat
                         .replace("{invites}", NumberFormat.getNumberInstance().format(Integer.parseInt(obj.get("invites").toString())))
                         .replace("{place}", (list.indexOf(obj) + 1) + ""), user));
+                maxEntries++;
             }
             e.getChannel().sendMessage(main.java.com.i0dev.util.EmbedFactory.get().createSimpleEmbed(main.java.com.i0dev.util.Placeholders.convert(messageTitle, e.getAuthor()), main.java.com.i0dev.util.Placeholders.convert(desc.toString(), e.getAuthor())).build()).queue();
         }

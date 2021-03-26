@@ -4,9 +4,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
@@ -76,21 +74,44 @@ public class ApiUtils {
         return new JSONObject();
     }
 
+    private static JSONObject convertToJSON(InputStream stream) {
+        try {
+            StringBuilder result = new StringBuilder();
+            String line;
+            BufferedReader rd = new BufferedReader(new InputStreamReader(stream));
+            while ((line = rd.readLine()) != null) result.append(line);
+            rd.close();
+            return (JSONObject) new JSONParser().parse(result.toString());
+        } catch (ParseException | IOException e) {
+            e.printStackTrace();
+        }
+        return new JSONObject();
+    }
+
     public static JSONObject createGiftcard(String amt, String note) {
         try {
             HttpURLConnection conn = (HttpURLConnection) new URL("https://plugin.tebex.io/gift-cards").openConnection();
-            conn.setRequestMethod("POST");
+            conn.setDoOutput(true);
             conn.setRequestProperty("X-Tebex-Secret", conf.TEBEX_SECRET);
-            conn.setRequestProperty("amount", amt);
-            if (!note.equals("")) {
-                conn.setRequestProperty("note", note);
+            conn.setRequestProperty("Content-Type", "application/json; utf-8");
+            conn.setRequestProperty("Accept", "application/json");
+            String o;
+            if (note.equals("")) {
+                o = "{\"amount\": \"" + amt + "\"}";
+            } else {
+                o = "{\"amount\": " + amt + ",\"note\":\"" + note + "\"}";
             }
-            if (conn.getResponseCode() == 403) {
-                return new JSONObject();
+            conn.getOutputStream().write(o.getBytes());
+            if (conn.getResponseCode() == 400) {
+                JSONObject ob = new JSONObject();
+                ob.put("error", "2");
+                return ob;
             }
+            System.out.println(convertToJSON(conn).toJSONString());
             return convertToJSON(conn);
 
         } catch (MalformedURLException | ProtocolException ignored) {
+            ignored.printStackTrace();
             return new JSONObject();
         } catch (IOException e) {
             e.printStackTrace();

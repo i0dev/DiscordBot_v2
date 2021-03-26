@@ -25,6 +25,7 @@ public class applyResponses extends ListenerAdapter {
     private final String applicationTitle = getConfig.get().getString("commands.apply.applicationTitle");
     private final String applicationDesc = getConfig.get().getString("commands.apply.applicationDesc");
     private final List<String> initialQuestions = getConfig.get().getStringList("commands.apply.Questions");
+    private final String submitMessage = getConfig.get().getString("commands.apply.submitMessage");
 
 
     @Override
@@ -78,7 +79,7 @@ public class applyResponses extends ListenerAdapter {
         if (CurrentQuestion == Questions.size() - 1) {
 
             if (!messageContent.equalsIgnoreCase("submit")) {
-                e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbedNoThumbnail("Type `submit`, to cancel type `" + conf.GENERAL_BOT_PREFIX + "cancel`").build()).queue();
+                e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbedNoThumbnail(submitMessage.replace("{prefix}", conf.GENERAL_BOT_PREFIX)).build()).queue();
                 previousResponses.put(Questions.get(CurrentQuestion), messageContent);
                 ApplicationCache.get().getResponseMap().put(e.getAuthor(), previousResponses);
                 return;

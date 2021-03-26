@@ -27,6 +27,7 @@ public class giveawayCreatorResponses extends ListenerAdapter {
     private final String createdGiveawayContent = getConfig.get().getString("commands.gcreate.createdGiveawayContent");
     private final String createdGiveawayFooter = getConfig.get().getString("commands.gcreate.createdGiveawayFooter");
     private final String Emoji = getConfig.get().getString("commands.gcreate.giveawayEmoji");
+    private final String giveawayEmojiText = getConfig.get().getString("commands.gcreate.giveawayEmojiText");
 
 
     @Override
@@ -126,7 +127,7 @@ public class giveawayCreatorResponses extends ListenerAdapter {
             ZonedDateTime time = ZonedDateTime.ofInstant(Instant.ofEpochMilli(endTimeMillis), ZoneId.of("America/New_York"));
 
             desc.append(Placeholders.convert(createdGiveawayContent
-                    .replace("{emoji}", Emoji)
+                    .replace("{emoji}", giveawayEmojiText)
                     .replace("{winnerCount}", WinnerAmount)
                     .replace("{length}", GiveawayTime)
                     .replace("{prize}", Prize), e.getAuthor()));

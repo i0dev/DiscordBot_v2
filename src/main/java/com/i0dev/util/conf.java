@@ -1,13 +1,6 @@
 package main.java.com.i0dev.util;
 
-import com.google.gson.JsonObject;
 import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.TextChannel;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.List;
-import java.util.Set;
 
 public class conf {
 
