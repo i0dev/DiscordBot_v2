@@ -403,6 +403,7 @@
       "createdGiveawayContent": "**React with **{emoji}** to enter\n\n**Prize:** `{prize}`\n**Length:** {length}\n**Winners:** {winnerCount}\n**Hosted By:** {userMention}\n**",
       "endedGiveawayTitle": "Giveaway Ended!",
       "enabled": true,
+      "giveawayEmojiText": ":tada:",
       "endedGiveawayContent": "**Prize:** `{prize}`\n**Hosted By:** {userMention}\n**Total Entries:** {totalEntries}\n**Winners:** {winners}",
       "giveawayEmoji": "U+1F389",
       "permissionLiteMode": false,
@@ -412,6 +413,20 @@
       "winnersMessageContent": "[Click to see original giveaway]({messageLink})\n\n**Prize:** `{prize}`\n**Winners:** {winners}",
       "alreadyCreating": "**{userTag}**, you are already creating a giveaway, check your direct messages to continue filling it out! To cancel your current creator, message `.cancel` to me!",
       "messageContent": "**{userTag}**, Please check your Direct Messages to complete the Giveaway Creator!"
+    }, 
+    "giveawayReroll": {
+      "aliases": [
+        "greroll",
+        "giveawayReroll"
+      ],
+      "permissionLiteMode": false,
+      "requirePermission": true,
+      "format": "**Format:** ``{command} <Message ID>``\n\n*Use this command to re-roll the winners of a giveaway!*",
+      "error": "Cannot find that giveaway! Please try again!",
+      "errorRunning": "That giveaway is currently active! Can only reroll finished giveaways.",
+      "messageContent": "**{userTag}**, you have sucsessfully re-rolled that giveaway!",
+      "newWinnersTitle":"Giveaway was re-rolled by {userTag}",
+      "enabled": true
     },
     "pollCreator": {
       "createdPollTitle": "Incoming poll from {userTag}",

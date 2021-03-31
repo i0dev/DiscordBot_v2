@@ -103,6 +103,23 @@ public class Prettify {
         return sb.toString();
     }
 
+    public static String FormatDoubleListUser(List<User> list) {
+
+        StringBuilder sb = new StringBuilder();
+
+        ArrayList<String> Stripped = new ArrayList<>();
+        for (User s : list) {
+            Stripped.add(capitalizeFirst(s.getAsMention()) + "`(" + s.getAsTag() + ")`");
+        }
+        for (int i = 0; i < Stripped.size(); i++) {
+            sb.append(Stripped.get(i));
+            if (Stripped.size() - 1 > i) {
+                sb.append(", ");
+            }
+        }
+        return sb.toString();
+    }
+
     public static String FormatListString(List<String> list) {
 
         StringBuilder sb = new StringBuilder();

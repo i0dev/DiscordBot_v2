@@ -19,7 +19,7 @@ public class cmdVersion extends ListenerAdapter {
         versionEmbed = new EmbedBuilder()
                 .setTitle(conf.EMBED_TITLE)
                 .setThumbnail(conf.EMBED_THUMBNAIL)
-                .setDescription("**Prefix:** `" + conf.GENERAL_BOT_PREFIX + "`\n" + "**Version:** " + "`2.0.17`" + "\n**Author:** `i0#0001`")
+                .setDescription("**Prefix:** `" + conf.GENERAL_BOT_PREFIX + "`\n" + "**Version:** " + "`2.0.18`" + "\n**Author:** `i0#0001`")
                 .setColor(Color.decode(conf.EMBED_COLOR_HEX_CODE))
                 .setTimestamp(ZonedDateTime.now())
                 .setFooter("Bot created by i0dev.com", "https://cdn.discordapp.com/attachments/763790150550683708/780593953824964628/i01.png");

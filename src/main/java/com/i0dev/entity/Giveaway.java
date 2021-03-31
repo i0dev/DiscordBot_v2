@@ -46,7 +46,14 @@ public class Giveaway {
         object.put("prize", prize);
         object.put("endTime", endTime);
         object.put("winnerAmount", winnerAmount);
+        object.put("ended", false);
         GiveawayCache.add(object);
+        saveGiveaways();
+    }
+
+    public void createGiveaway(JSONObject giveaway, boolean ended) {
+        giveaway.put("ended", ended);
+        GiveawayCache.add(giveaway);
         saveGiveaways();
     }
 
@@ -59,6 +66,14 @@ public class Giveaway {
             }
         }
         return null;
+    }
+
+    public void endGiveaway(String ID) {
+        if (GiveawayCache.isEmpty()) return;
+        JSONObject giveaway = getGiveaway(ID);
+        deleteGiveaway(ID);
+        createGiveaway(giveaway, true);
+
     }
 
     public void deleteGiveaway(String ID) {
