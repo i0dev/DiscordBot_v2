@@ -77,18 +77,23 @@ public class applyResponses extends ListenerAdapter {
         }
 
         if (CurrentQuestion == Questions.size() - 1) {
+            previousResponses.put(Questions.get(CurrentQuestion), messageContent);
+            ApplicationCache.get().getResponseMap().put(e.getAuthor(), previousResponses);
+            CurrentQuestion++;
+            ApplicationCache.get().getMap().put(e.getAuthor(), CurrentQuestion);
+            e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbedNoThumbnail(submitMessage.replace("{prefix}", conf.GENERAL_BOT_PREFIX)).build()).queue();
+            return;
+        }
+        if (CurrentQuestion == Questions.size() && !messageContent.equalsIgnoreCase("submit")) {
+            e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbedNoThumbnail(submitMessage.replace("{prefix}", conf.GENERAL_BOT_PREFIX)).build()).queue();
+            return;
+        }
 
-            if (!messageContent.equalsIgnoreCase("submit")) {
-                e.getChannel().sendMessage(EmbedFactory.get().createSimpleEmbedNoThumbnail(submitMessage.replace("{prefix}", conf.GENERAL_BOT_PREFIX)).build()).queue();
-                previousResponses.put(Questions.get(CurrentQuestion), messageContent);
-                ApplicationCache.get().getResponseMap().put(e.getAuthor(), previousResponses);
-                return;
-            }
+        if (CurrentQuestion == Questions.size() && messageContent.equalsIgnoreCase("submit")) {
             ArrayList<String> responsesInOrder = new ArrayList<>();
             ((LinkedHashMap<String, String>) ApplicationCache.get().getResponseMap().get(e.getAuthor())).forEach((key, value) -> {
                 responsesInOrder.add(value);
             });
-
 
             String time = "[" + ZonedDateTime.now().getMonth().getValue() + "/" + ZonedDateTime.now().getDayOfMonth() + "/" + ZonedDateTime.now().getYear() + " " + ZonedDateTime.now().getHour() + ":" + ZonedDateTime.now().getMinute() + ":" + ZonedDateTime.now().getMinute() + "]";
 

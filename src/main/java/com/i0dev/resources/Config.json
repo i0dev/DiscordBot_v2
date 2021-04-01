@@ -897,7 +897,7 @@
         "If the Council is full, would you like to be considered for openings in the future?"
       ],
       "enabled": true,
-      "submitMessage": "You have completed the application. Type `{prefix}submit` to submit it to the staff team!\n\nThanks so much and we’ll be in touch via discord in a few days.",
+      "submitMessage": "You have completed the application. Type `submit` to submit it to the staff team!\n\nThanks so much and we’ll be in touch via discord in a few days.",
       "alreadyCreating": "**{userTag}**, you are already creating an application, check your Direct Messages to continue filling it out!",
       "messageContent": "**{userTag}**, Please check your Direct Messages To complete the application."
     },
