@@ -1,6 +1,6 @@
 package main.java.com.i0dev.cache;
 
-import main.java.com.i0dev.util.EmbedFactory;
+import main.java.com.i0dev.utility.EmbedFactory;
 import net.dv8tion.jda.api.entities.User;
 
 import java.util.ArrayList;

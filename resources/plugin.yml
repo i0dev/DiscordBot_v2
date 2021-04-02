@@ -1,0 +1,9 @@
+name: DiscordBot
+version: 1.0.1
+main: main.java.com.i0dev.DiscordBot
+authors: [ i01 ]
+description: i0dev Discord Bot
+website: https://i0dev.com/
+commands:
+  DiscordBot:
+    description: Main command
