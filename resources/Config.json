@@ -22,7 +22,8 @@
     "confirmedCellChannelID": 766328319318556702,
     "ticketAdminLogsID": 766322459765899284,
     "confirmedIslandChannelID": 766328319318556702,
-    "ticketCreateChannelID": 766322425323192330
+    "ticketCreateChannelID": 766322425323192330,
+    "changelogChannelID": 766324291565781042
   },
   "roles": {
     "islandLeaderRoleID": 766183477024260107,
@@ -95,6 +96,7 @@
     "commandNoPermission": "You do not have permission to use the command ``{command}``\n If you believe this is an error, please contact an administrator to get it changed!",
     "channelNotFound": "The channel ``{arg}`` cannot be found. Please try again!\n\n**Quick Tip!**\n*You can use multiple inputs for entering channel information.*\n*You can use the ID, Mention, or name!*\n\n**Example:**\n`823925370126073876`, `#general`, `general`",
     "userNotFound": "The user ``{arg}`` cannot be found. Please try again!\n\n**Quick Tip!**\n*You can use multiple inputs for entering user information.*\n*You can use the ID, Mention, or tag!*\n\n**Example:**\n`823925370126073876`, `@i0`, `i0#0001`",
+    "botNotInPluginMode": "This command will only work if the bot is ran as a plugin on a Spigot Minecraft Server!",
     "embeds": {
       "Footer": "Play.MCRivals.com",
       "Title": "MCRivals Discord Bot",
@@ -185,7 +187,17 @@
       "channelWhitelistMode": true
     }
   },
+  "minecraftModules": {},
   "commands": {
+    "heapDumpToDiscord": {
+      "aliases": [
+        "heapDump"
+      ],
+      "permissionLiteMode": false,
+      "requirePermission": true,
+      "format": "**Format:** ``{command}``\n\n*Use this command to get memory and process information. If the bot is running as a plugin, it will display basic server TPS and information too.*",
+      "enabled": true
+    },
     "userInfo": {
       "aliases": [
         "whois",
@@ -197,6 +209,16 @@
       "messageTitle": "Showing user information for {userTag}.",
       "enabled": true,
       "messageContent": "**Created Date:** ``{userCreatedDate}``\n**Join Date:** ``{userJoinDate}``\n**ID:** ``{userID}``\n**Name:** `{userName}`\n**Tag:** `{userTag}`\n**Bot:** `{isBot}`\n**Mention:** {userMention}\n**Online Status:** `{onlineStatus}`\n**Boosting:** `{boosting}`\n**Voice State:** `{voiceState}`\n\n**Roles:** {roleList}\n\n**Permissions:** `{permissionList}`"
+    },
+    "profile": {
+      "aliases": [
+        "profile"
+      ],
+      "permissionLiteMode": false,
+      "requirePermission": false,
+      "format": "**Format:** ``{command} [user]``\n\n*Use this command to send the profile page of the specified user, or yourself.*",
+      "messageTitle": "{userTag}'s Profile",
+      "enabled": true
     },
     "blacklist_add": {
       "userAlreadyBlacklisted": "`{userTag}` is already blacklisted from using all discord commands!",
@@ -413,7 +435,7 @@
       "winnersMessageContent": "[Click to see original giveaway]({messageLink})\n\n**Prize:** `{prize}`\n**Winners:** {winners}",
       "alreadyCreating": "**{userTag}**, you are already creating a giveaway, check your direct messages to continue filling it out! To cancel your current creator, message `.cancel` to me!",
       "messageContent": "**{userTag}**, Please check your Direct Messages to complete the Giveaway Creator!"
-    }, 
+    },
     "giveawayReroll": {
       "aliases": [
         "greroll",
@@ -425,7 +447,7 @@
       "error": "Cannot find that giveaway! Please try again!",
       "errorRunning": "That giveaway is currently active! Can only reroll finished giveaways.",
       "messageContent": "**{userTag}**, you have sucsessfully re-rolled that giveaway!",
-      "newWinnersTitle":"Giveaway was re-rolled by {userTag}",
+      "newWinnersTitle": "Giveaway was re-rolled by {userTag}",
       "enabled": true
     },
     "pollCreator": {
@@ -491,7 +513,19 @@
       "format": "**Format:** ``{command} <channel> <content>``\n\n*Use this command to make an announcement in a certain channel!*",
       "announcementTitle": "Announcement from: {userName}",
       "enabled": true,
-      "messageContent": "**{userTag}** You have successfully made an announcement in ``{channel}``!"
+      "messageContent": "**{userTag}** You have successfully made an announcement in {channel}!"
+    },
+    "changelog": {
+      "aliases": [
+        "changelog"
+      ],
+      "permissionLiteMode": false,
+      "showThumbnail": false,
+      "requirePermission": true,
+      "format": "**Format:** ``{command} <content>``\n\n*Use this command to post a changelog in the changelog channel.*",
+      "changelogTitle": "Changelog Post from: {userTag}",
+      "enabled": true,
+      "messageContent": "**{userTag}** You have successfully posted a changelog in {channel}!"
     },
     "accept": {
       "deleteApplicationAfterAccepted": true,
@@ -742,6 +776,17 @@
       "enabled": true,
       "messageContent": "**ID:** ``{roleID}``\n**Name:** `{roleName}`\n**Color:** `{roleColor}`\n**Mention:** {roleMention}\n**Position:** {rolePos}\n**Mentionable:** `{roleMentionable}`\n**Hoisted:** `{roleHoisted}`"
     },
+    "role_all": {
+      "aliases": [
+        "role_all"
+      ],
+      "permissionLiteMode": false,
+      "requirePermission": true,
+      "format": "**Format:** ``{command} <role>``\n\n*Use this command to give everyone on the server that role*",
+      "noUsersToGive" : "**{userTag}**, could not apply roles. Everyone already has the role `{roleName}`!",
+      "enabled": true,
+      "messageContent": "**{userTag}**, You have queued giving the role `{roleName}` to **{userCount}** users. This will take around `{time}` to complete."
+    },
     "reject": {
       "aliases": [
         "reject",
@@ -967,6 +1012,7 @@
         "admin_panel"
       ],
       "permissionLiteMode": false,
+      "messageSentBeforePanel": "https://cdn.discordapp.com/attachments/766323223960616990/828300815667167312/McRivals2.png",
       "ticketPanelDescription": "Click to one of the emojis to create a corresponding ticket!",
       "ticketPanelFieldBaseFormat": "{panelDescription}",
       "ticketOptions": [

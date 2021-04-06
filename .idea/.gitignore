@@ -6,7 +6,3 @@
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
-/out/
-/.idea
-DiscordBot.iml
-DiscordBot_v2.iml
