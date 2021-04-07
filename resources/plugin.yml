@@ -4,6 +4,7 @@ main: com.i0dev.DiscordBot
 authors: [ i01 ]
 description: i0dev Discord Bot
 website: https://i0dev.com/
+softdepend: [ LiteBans ]
 commands:
   DiscordBot:
     description: Main command

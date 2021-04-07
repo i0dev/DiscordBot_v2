@@ -23,7 +23,8 @@
     "ticketAdminLogsID": 766322459765899284,
     "confirmedIslandChannelID": 766328319318556702,
     "ticketCreateChannelID": 766322425323192330,
-    "changelogChannelID": 766324291565781042
+    "changelogChannelID": 766324291565781042,
+    "acceptedSuggestionChannelID": 766330396832432150
   },
   "roles": {
     "islandLeaderRoleID": 766183477024260107,
@@ -187,7 +188,12 @@
       "channelWhitelistMode": true
     }
   },
-  "minecraftModules": {},
+  "minecraftModules": {
+    "litebansLogs": {
+      "enabled": true,
+      "logMessage": "**Type:** `{type}`\n**Staff Member:** `{punisherName}`\n**Punished:** `{punishedName}`\n**Reason:** `{reason}`\n**Duration:** `{duration}`\n**UUID:** `{uuid}`"
+    }
+  },
   "commands": {
     "heapDumpToDiscord": {
       "aliases": [
@@ -196,6 +202,19 @@
       "permissionLiteMode": false,
       "requirePermission": true,
       "format": "**Format:** ``{command}``\n\n*Use this command to get memory and process information. If the bot is running as a plugin, it will display basic server TPS and information too.*",
+      "enabled": true
+    },
+    "acceptSuggestion": {
+      "aliases": [
+        "accept_suggestion"
+      ],
+      "permissionLiteMode": false,
+      "cantFindSuggestion": "**{userTag}**, cannot find the suggestion with the message ID of: `{arg}`, please try again.",
+      "requirePermission": true,
+      "format": "**Format:** ``{command} <Message ID> [note]``\n\n*Use this command to accept a suggestion.*",
+      "messageTitle": "Suggestion accepted by {userTag}",
+      "acceptedSuggestionEmbedColor": "#00cd00",
+      "acceptSuggestionEmoji": "U+2705",
       "enabled": true
     },
     "userInfo": {
@@ -218,6 +237,18 @@
       "requirePermission": false,
       "format": "**Format:** ``{command} [user]``\n\n*Use this command to send the profile page of the specified user, or yourself.*",
       "messageTitle": "{userTag}'s Profile",
+      "enabled": true
+    },
+    "runIngameCommand": {
+      "aliases": [
+        "runCmd"
+      ],
+      "permissionLiteMode": false,
+      "requirePermission": true,
+      "log": true,
+      "logMessage": "**{userTag}** has run the command `{command}` through console!",
+      "format": "**Format:** ``{command} <command>``\n\n*Use this command to run a command through console to ingame!*",
+      "messageContent": "**{userTag}**, you have run the command `{command}` through console!",
       "enabled": true
     },
     "blacklist_add": {
@@ -354,6 +385,17 @@
       "messageTitle": "Top invites for {guildName}",
       "enabled": true
     },
+  "ticketTopLeaderboard": {
+    "leaderboardFormat": "**#{place}.** *{userTag}:* `{ticketsClosed} closed tickets`\n",
+    "aliases": [
+      "ticketTopLB"
+    ],
+    "permissionLiteMode": true,
+    "requirePermission": true,
+    "format": "**Format:** ``{command}``\n\n*You can use this command to check the leaderboard for most closed tickets in the discord server! This leaderboard will only display a maximum of 25 users.*",
+    "messageTitle": "MCRivals Staff TicketTop Leaderboard",
+    "enabled": true
+  },
     "serverIP": {
       "aliases": [
         "serverIP",
@@ -783,7 +825,7 @@
       "permissionLiteMode": false,
       "requirePermission": true,
       "format": "**Format:** ``{command} <role>``\n\n*Use this command to give everyone on the server that role*",
-      "noUsersToGive" : "**{userTag}**, could not apply roles. Everyone already has the role `{roleName}`!",
+      "noUsersToGive": "**{userTag}**, could not apply roles. Everyone already has the role `{roleName}`!",
       "enabled": true,
       "messageContent": "**{userTag}**, You have queued giving the role `{roleName}` to **{userCount}** users. This will take around `{time}` to complete."
     },
