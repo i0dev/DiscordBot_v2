@@ -42,6 +42,9 @@ public class Shop {
         //Hi
 
         int size = 5;
+
+        //bye
+
         int maxPages = (int) Math.ceil(OPTIONS.size() / size);
         int startingIndex = (page - 1) * size;
         int endingIndex = Math.min(page * size, OPTIONS.size());
