@@ -39,6 +39,7 @@ public class Shop {
             page = Integer.parseInt(message[2]);
         }
 
+        //Hi
 
         int size = 5;
         int maxPages = (int) Math.ceil(OPTIONS.size() / size);
