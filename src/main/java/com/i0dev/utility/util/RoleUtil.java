@@ -1,6 +1,7 @@
 package com.i0dev.utility.util;
 
 import com.i0dev.engine.discord.RoleQueue;
+import com.i0dev.engine.discord.Type;
 import com.i0dev.utility.GlobalConfig;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
@@ -31,14 +32,14 @@ public class RoleUtil {
         for (long roleID : roleIDS) {
             Role role = member.getGuild().getRoleById(roleID);
             if (member.getRoles().contains(role)) continue;
-            RoleQueue.addToQueue(member.getUser(), role);
+            RoleQueue.addToQueue(member.getUser(), role, Type.ADD_ROLE);
         }
     }
 
     public static void giveRolesMemberLongs(Role role, List<Member> members) {
         for (Member member : members) {
             if (member.getRoles().contains(role)) continue;
-            RoleQueue.addToQueue(member.getUser(), role);
+            RoleQueue.addToQueue(member.getUser(), role, Type.ADD_ROLE);
         }
     }
 
@@ -46,7 +47,7 @@ public class RoleUtil {
 
         for (User member : members) {
             if (GlobalConfig.GENERAL_MAIN_GUILD.getMember(member).getRoles().contains(role)) continue;
-            RoleQueue.addToQueue(member, role);
+            RoleQueue.addToQueue(member, role, Type.ADD_ROLE);
         }
     }
 
@@ -55,7 +56,7 @@ public class RoleUtil {
             Role role = member.getGuild().getRoleById(roleID);
             if (role == null) continue;
             if (member.getRoles().contains(role)) continue;
-            RoleQueue.addToQueue(member.getUser(), role);
+            RoleQueue.addToQueue(member.getUser(), role, Type.ADD_ROLE);
         }
     }
 
@@ -63,7 +64,7 @@ public class RoleUtil {
         for (Role role : roles) {
             if (role == null) continue;
             if (member.getRoles().contains(role)) continue;
-            RoleQueue.addToQueue(member.getUser(), role);
+            RoleQueue.addToQueue(member.getUser(), role, Type.ADD_ROLE);
         }
     }
 

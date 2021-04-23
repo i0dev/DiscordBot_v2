@@ -5,6 +5,15 @@ import net.dv8tion.jda.api.entities.MessageReaction;
 
 public class EmojiUtil {
 
+
+    public static boolean isEmojiValid(MessageReaction.ReactionEmote reactionEmote, String emote) {
+        if (reactionEmote.isEmoji()) {
+            return EmojiUtil.getUnicodeFromCodepoints(reactionEmote.getAsCodepoints()).equalsIgnoreCase(emote);
+        }
+        return reactionEmote.getEmote().getAsMention().equalsIgnoreCase(emote);
+    }
+
+
     public static String getSimpleEmoji(String Emoji) {
         if (Emoji.length() < 20) {
             return MessageReaction.ReactionEmote.fromUnicode(Emoji, InternalJDA.get().getJda()).getEmoji();
@@ -18,7 +27,7 @@ public class EmojiUtil {
     }
 
     public static String getEmojiWithoutArrow(String Emoji) {
-        if (Emoji.length() < 20) {
+        if (Emoji.length() < 15) {
             return MessageReaction.ReactionEmote.fromUnicode(Emoji, InternalJDA.get().getJda()).getEmoji();
         } else {
             return Emoji.substring(0, Emoji.length() - 1);

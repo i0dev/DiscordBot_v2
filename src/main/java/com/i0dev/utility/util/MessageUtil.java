@@ -1,65 +1,67 @@
 package com.i0dev.utility.util;
 
-import com.i0dev.utility.GlobalConfig;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.entities.TextChannel;
+import com.i0dev.utility.EmbedFactory;
+import com.i0dev.utility.InternalJDA;
+import com.i0dev.utility.Placeholders;
+import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.exceptions.ErrorHandler;
+import net.dv8tion.jda.api.requests.ErrorResponse;
+
+import java.util.List;
 
 public class MessageUtil {
 
-    public static void sendMessage(TextChannel channel, MessageEmbed message) {
-        if (channel == null) {
-            System.out.println("ERROR: There was no channel set in config to send this message. Please make sure the ID is correct!");
-            return;
-
-        }
-        channel.sendMessage(message).queue();
+    public static void sendMessage(Long channelID, String message) {
+        sendMessage(channelID, message, null, null, null);
     }
 
-    public static void sendMessage(Long ID, MessageEmbed message) {
-        if (GlobalConfig.GENERAL_MAIN_GUILD.getTextChannelById(ID) == null) {
-            System.out.println("ERROR: There was no channel set in config to send this message. Please make sure the ID is correct!");
-
-            return;
-        }
-        GlobalConfig.GENERAL_MAIN_GUILD.getTextChannelById(ID).sendMessage(message).queue();
+    public static void sendMessage(Long channelID, String message, User author) {
+        sendMessage(channelID, message, null, author, null);
     }
 
-    public static void sendMessage(String ID, MessageEmbed message) {
-        if (GlobalConfig.GENERAL_MAIN_GUILD.getTextChannelById(ID) == null) {
-            System.out.println("ERROR: There was no channel set in config to send this message. Please make sure the ID is correct!");
+    public static void sendMessage(Long channelID, String message, User author, User mentioned) {
+        sendMessage(channelID, message, null, author, mentioned);
+    }
 
-            return;
-        }
-        GlobalConfig.GENERAL_MAIN_GUILD.getTextChannelById(ID).sendMessage(message).queue();
+    public static Message sendMessage(Long channelID, String message, String title, User author, User mentioned) {
+        MessageChannel messageChannel = InternalJDA.get().getJda().getTextChannelById(channelID);
+        return messageChannel.sendMessage(
+                EmbedFactory.createEmbed(
+                        Placeholders.convert(title, mentioned, author),
+                        Placeholders.convert(message, mentioned, author)).build())
+                .complete();
+
+    }
+
+    public static Message sendMessage(Long channelID, MessageEmbed messageEmbed) {
+        MessageChannel messageChannel = InternalJDA.get().getJda().getTextChannelById(channelID);
+        return messageChannel.sendMessage(messageEmbed).complete();
+    }
+
+    public static void sendMessagePrivateChannel(Long userID, String message, String title, User author, User mentioned) {
+        PrivateChannel messageChannel = InternalJDA.get().getJda().getPrivateChannelById(userID);
+        messageChannel.sendMessage(
+                EmbedFactory.createEmbed(Placeholders.convert(title, mentioned, author), Placeholders.convert(message, mentioned, author)).build())
+                .queue(null, new ErrorHandler().ignore(ErrorResponse.UNKNOWN_CHANNEL));
     }
 
 
-    public static Message sendMessageComplete(TextChannel channel, MessageEmbed message) {
-        if (channel == null) {
-            System.out.println("ERROR: There was no channel set in config to send this message. Please make sure the ID is correct!");
-
-            return null;
-        }
-        return channel.sendMessage(message).complete();
-    }
-
-    public static Message sendMessageComplete(Long ID, MessageEmbed message) {
-        if (GlobalConfig.GENERAL_MAIN_GUILD.getTextChannelById(ID) == null) {
-            System.out.println("ERROR: There was no channel set in config to send this message. Please make sure the ID is correct!");
-
-            return null;
+    public static void sendMessageIngame(org.bukkit.entity.Player player, String message) {
+        try {
+            player.sendMessage(FormatUtil.c(message));
+        } catch (Exception ignored) {
 
         }
-        return GlobalConfig.GENERAL_MAIN_GUILD.getTextChannelById(ID).sendMessage(message).complete();
     }
 
-    public static Message sendMessageComplete(String ID, MessageEmbed message) {
-        if (GlobalConfig.GENERAL_MAIN_GUILD.getTextChannelById(ID) == null) {
-            System.out.println("ERROR: There was no channel set in config to send this message. Please make sure the ID is correct!");
+    public static void sendMessageIngame(org.bukkit.entity.Player player, List<String> messages) {
+        try {
+            for (String message : messages) {
+                player.sendMessage(FormatUtil.c(message));
+            }
+        } catch (Exception ignored) {
 
-            return null;
         }
-        return GlobalConfig.GENERAL_MAIN_GUILD.getTextChannelById(ID).sendMessage(message).complete();
     }
+
 }

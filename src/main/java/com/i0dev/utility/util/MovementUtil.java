@@ -1,8 +1,9 @@
 package com.i0dev.utility.util;
 
 import com.i0dev.engine.discord.RoleQueue;
+import com.i0dev.engine.discord.Type;
 import com.i0dev.utility.GlobalConfig;
-import com.i0dev.utility.getConfig;
+import com.i0dev.utility.Configuration;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import org.json.simple.JSONObject;
@@ -12,7 +13,7 @@ import java.util.List;
 
 public class MovementUtil {
 
-    private static final List<JSONObject> Tracks = getConfig.get().getObjectList("movementTracks");
+    private static final List<JSONObject> Tracks = Configuration.getObjectList("movementTracks");
 
     public static Role getParentStaff(Member member) {
         for (JSONObject object : Tracks) {
@@ -34,7 +35,7 @@ public class MovementUtil {
             for (long roleToGiveID : RoleIDS) {
                 Role roleToGive = GlobalConfig.GENERAL_MAIN_GUILD.getRoleById(roleToGiveID);
                 if (roleToGive == null) continue;
-                RoleQueue.addToQueue(member.getUser(), roleToGive);
+                RoleQueue.addToQueue(member.getUser(), roleToGive, Type.ADD_ROLE);
             }
         }
     }

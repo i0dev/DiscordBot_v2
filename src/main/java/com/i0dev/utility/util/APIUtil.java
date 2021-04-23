@@ -5,7 +5,10 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
@@ -30,11 +33,10 @@ public class APIUtil {
             rd.close();
             return (JSONObject) new JSONParser().parse(result.toString());
         } catch (MalformedURLException | ParseException ignored) {
-            return new JSONObject();
-        } catch (IOException e) {
-            e.printStackTrace();
+            return null;
+        } catch (IOException ignored) {
         }
-        return new JSONObject();
+        return null;
     }
 
     private static JSONObject getGeneralRequest(String method, String url, String param) {
@@ -108,7 +110,6 @@ public class APIUtil {
                 ob.put("error", "2");
                 return ob;
             }
-            System.out.println(convertToJSON(conn).toJSONString());
             return convertToJSON(conn);
 
         } catch (MalformedURLException | ProtocolException ignored) {
@@ -129,7 +130,11 @@ public class APIUtil {
     }
 
     public static String getIGNFromUUID(String uuid) {
-        return getGeneralRequest("GET", "https://sessionserver.mojang.com/session/minecraft/profile/", uuid).get("name").toString();
+        try {
+            return getGeneralRequest("GET", "https://sessionserver.mojang.com/session/minecraft/profile/", uuid).get("name").toString();
+        } catch (Exception ignored) {
+            return null;
+        }
     }
 
     public static void refreshAPICache(String uuid) {

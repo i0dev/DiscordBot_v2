@@ -15,7 +15,7 @@ public class TaskCreatorTimeouts {
             PollCache.get().getTimeoutMap().forEach((user, timout) -> {
                 if (System.currentTimeMillis() > (long) timout) {
                     try {
-                        ((User) user).openPrivateChannel().complete().sendMessage(EmbedFactory.get().createSimpleEmbed("Your poll creator has timed out due to inactivity.").build()).queue();
+                        ((User) user).openPrivateChannel().complete().sendMessage(EmbedFactory.createEmbed("Your poll creator has timed out due to inactivity.").build()).queue();
                     } catch (Exception ignored) {
                     }
                     PollCache.get().removeUser((User) user);
@@ -30,7 +30,7 @@ public class TaskCreatorTimeouts {
             GiveawayCache.get().getTimeoutMap().forEach((user, timout) -> {
                 if (System.currentTimeMillis() > (long) timout) {
                     try {
-                        ((User) user).openPrivateChannel().complete().sendMessage(EmbedFactory.get().createSimpleEmbed("Your giveaway creator has timed out due to inactivity.").build()).queue();
+                        ((User) user).openPrivateChannel().complete().sendMessage(EmbedFactory.createEmbed("Your giveaway creator has timed out due to inactivity.").build()).queue();
                     } catch (Exception ignored) {
                     }
                     GiveawayCache.get().removeUser((User) user);

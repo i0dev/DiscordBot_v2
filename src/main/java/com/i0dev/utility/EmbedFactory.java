@@ -1,113 +1,68 @@
 package com.i0dev.utility;
 
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 
 import java.awt.*;
 import java.time.ZonedDateTime;
 
 public class EmbedFactory {
 
-    private static final EmbedFactory embedFactory = new EmbedFactory();
+    public static final String colorHex = Configuration.getString("messages.embeds.ColorHexCode");
+    public static final String defaultThumnail = Configuration.getString("messages.embeds.Thumbnail");
+    public static final String defaultTitle = Configuration.getString("messages.embeds.Title");
+    public static final String defaultFooter = Configuration.getString("messages.embeds.Footer");
 
-    public static EmbedFactory get() {
-        return embedFactory;
+    public static EmbedBuilder createEmbed(String description) {
+        return createEmbed(null, description, null, null);
     }
 
-    private final String colorHex;
-    private final String Thumbnail;
-    private final String Title;
-    private final String Footer;
-
-    public EmbedFactory() {
-        colorHex = getConfig.get().getString("messages.embeds.ColorHexCode");
-        Thumbnail = getConfig.get().getString("messages.embeds.Thumbnail");
-        Title = getConfig.get().getString("messages.embeds.Title");
-        Footer = getConfig.get().getString("messages.embeds.Footer");
+    public static EmbedBuilder createEmbed(String title, String description) {
+        return createEmbed(title, description, null, null);
     }
 
-    public EmbedBuilder createSimpleEmbedNoThumbnail(String description) {
-
-        return new EmbedBuilder()
-                .setTimestamp(ZonedDateTime.now())
-                .setColor(Color.decode(colorHex))
-                .setDescription(description)
-                .setTitle(Title)
-                .setFooter(Footer);
+    public static EmbedBuilder createEmbed(String title, String description, String footer) {
+        return createEmbed(title, description, footer, null);
     }
 
-    public EmbedBuilder createSimpleEmbed(String description) {
-
-        return new EmbedBuilder()
-                .setTimestamp(ZonedDateTime.now())
-                .setColor(Color.decode(colorHex))
-                .setThumbnail(Thumbnail)
-                .setDescription(description)
-                .setTitle(Title)
-                .setFooter(Footer);
+    public static EmbedBuilder createEmbed(String title, String description, String footer, String thumbnail) {
+        return createEmbed(title, description, footer, thumbnail, null);
     }
 
-    public EmbedBuilder createSimpleEmbed(String Title, String description, String AvatarURL) {
 
-        if (Title == null && AvatarURL != null) {
-            return new EmbedBuilder()
-                    .setTimestamp(ZonedDateTime.now())
-                    .setColor(Color.decode(colorHex))
-                    .setThumbnail(AvatarURL)
-                    .setDescription(description)
-                    .setTitle(this.Title)
-                    .setFooter(Footer);
+    public static EmbedBuilder createEmbed(String title, String description, String footer, String thumbnail, String image, MessageEmbed.Field... fields) {
+
+        EmbedBuilder embedBuilder = new EmbedBuilder();
+
+        embedBuilder.setTimestamp(ZonedDateTime.now());
+
+        if (title != null && !title.equalsIgnoreCase("")) embedBuilder.setTitle(title);
+        if (description != null && !description.equalsIgnoreCase("")) embedBuilder.setDescription(description);
+        if (footer != null && !footer.equalsIgnoreCase("")) embedBuilder.setFooter(footer);
+        if (thumbnail != null && !thumbnail.equalsIgnoreCase("")) embedBuilder.setThumbnail(thumbnail);
+        if (image != null && !image.equalsIgnoreCase("")) embedBuilder.setImage(image);
+
+        if (colorHex != null && !colorHex.equalsIgnoreCase("")) embedBuilder.setColor(Color.decode(colorHex));
+        if (defaultThumnail != null && !defaultThumnail.equalsIgnoreCase(""))
+            embedBuilder.setThumbnail(defaultThumnail);
+        if (defaultTitle != null && !defaultTitle.equalsIgnoreCase("")) embedBuilder.setTitle(defaultTitle);
+        if (defaultFooter != null && !defaultFooter.equalsIgnoreCase("")) embedBuilder.setFooter(defaultFooter);
+        for (MessageEmbed.Field field : fields) {
+            embedBuilder.addField(field);
         }
-        if (AvatarURL == null && Title != null) {
-            return new EmbedBuilder()
-                    .setTimestamp(ZonedDateTime.now())
-                    .setColor(Color.decode(colorHex))
-                    .setDescription(description)
-                    .setTitle(Title)
-                    .setFooter(Footer);
-        }
-        if (AvatarURL == null) {
-            return new EmbedBuilder()
-                    .setTimestamp(ZonedDateTime.now())
-                    .setColor(Color.decode(colorHex))
-                    .setDescription(description)
-                    .setTitle(this.Title)
-                    .setFooter(Footer);
-        }
-        return new EmbedBuilder()
-                .setTimestamp(ZonedDateTime.now())
-                .setColor(Color.decode(colorHex))
-                .setThumbnail(AvatarURL)
-                .setDescription(description)
-                .setTitle(Title)
-                .setFooter(Footer);
+
+        return embedBuilder;
     }
 
+    public static EmbedBuilder createImageEmbed(String title, String image) {
+        EmbedBuilder embedBuilder = new EmbedBuilder();
+        if (colorHex != null && !colorHex.equalsIgnoreCase("")) embedBuilder.setColor(Color.decode(colorHex));
 
+        embedBuilder.setTimestamp(ZonedDateTime.now());
+        embedBuilder.setImage(image);
+        embedBuilder.setTitle(title);
 
-    public EmbedBuilder createSimpleEmbed(String title, String description) {
-        if (title == null) {
-            return new EmbedBuilder()
-                    .setTimestamp(ZonedDateTime.now())
-                    .setColor(Color.decode(colorHex))
-                    .setThumbnail(Thumbnail)
-                    .setDescription(description)
-                    .setTitle(this.Title)
-                    .setFooter(Footer);
-        }
-        return new EmbedBuilder()
-                .setTimestamp(ZonedDateTime.now())
-                .setColor(Color.decode(colorHex))
-                .setThumbnail(Thumbnail)
-                .setDescription(description)
-                .setTitle(title)
-                .setFooter(Footer);
+        return embedBuilder;
     }
 
-    public EmbedBuilder imageEmbed(String title, String imageURL) {
-
-        return new EmbedBuilder()
-                .setColor(Color.decode(colorHex))
-                .setTitle(title)
-                .setImage(imageURL);
-    }
 }

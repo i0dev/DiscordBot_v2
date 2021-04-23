@@ -50,7 +50,7 @@ public class GiveawayCache {
             TimeoutMap.forEach((user, timout) -> {
                 if (System.currentTimeMillis() > timout) {
                     try {
-                        user.openPrivateChannel().complete().sendMessage(EmbedFactory.get().createSimpleEmbed("Your giveaway creator has timed out due to inactivity.").build()).queue();
+                        user.openPrivateChannel().complete().sendMessage(EmbedFactory.createEmbed("Your giveaway creator has timed out due to inactivity.").build()).queue();
                     } catch (Exception ignored) {
                     }
                     GiveawayCache.get().removeUser(user);

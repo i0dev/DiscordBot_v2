@@ -4,13 +4,15 @@ import com.i0dev.engine.discord.RoleQueue;
 import com.i0dev.engine.discord.TaskCheckActiveGiveaways;
 import com.i0dev.engine.discord.TaskCreatorTimeouts;
 import com.i0dev.engine.discord.TaskMemberCount;
-import com.i0dev.object.*;
-import com.i0dev.utility.GlobalConfig;
-import com.i0dev.utility.InternalJDA;
-import com.i0dev.utility.InviteTracking;
-import com.i0dev.utility.getConfig;
+import com.i0dev.engine.minecraft.UpdateCaches;
+import com.i0dev.object.discordLinking.DPlayerEngine;
+import com.i0dev.object.engines.*;
+import com.i0dev.object.objects.ReactionRoles;
+import com.i0dev.pointSystem.EventHandler;
+import com.i0dev.utility.*;
 import com.i0dev.utility.util.FileUtil;
-import org.json.simple.parser.ParseException;
+import lombok.Getter;
+import net.dv8tion.jda.api.entities.Activity;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +23,9 @@ import java.util.TimerTask;
 
 public class InitilizeBot {
 
+    @Getter
     public static boolean pluginMode = false;
+
 
     private static InitilizeBot instance = new InitilizeBot();
 
@@ -33,22 +37,21 @@ public class InitilizeBot {
         get().startUp();
     }
 
+
     public void startUp() {
         FileUtil.createDirectory(getStorageDirPath());
         FileUtil.createDirectory(getTicketsDirPath());
         FileUtil.createDirectory(getTicketLogsDirPath());
-        FileUtil.createFile(getConfigPath(), "Config.json");
+        FileUtil.createDirectory(getDPlayerDir());
 
-        FileUtil.createFile(getApplicationsPath(), "StorageFiles/Applications.json");
-        FileUtil.createFile(getBlacklistedPath(), "StorageFiles/Blacklisted.json");
-        FileUtil.createFile(getGiveawaysPath(), "StorageFiles/Giveaways.json");
-        FileUtil.createFile(getScreensharePath(), "StorageFiles/Screenshare.json");
-        FileUtil.createFile(getWarningsPath(), "StorageFiles/Warnings.json");
-        FileUtil.createFile(getTicketsPath(), "StorageFiles/Tickets.json");
-        FileUtil.createFile(getInvitesPath(), "StorageFiles/Invites.json");
+        FileUtil.createFile(getConfigPath(), "Config.json");
         FileUtil.createFile(getReactionRolesPath(), "StorageFiles/ReactionRoles.json");
-        FileUtil.createFile(getInviteMatcherPath(), "StorageFiles/InviteMatcher.json");
-        FileUtil.createFile(getTicketTopPath(), "StorageFiles/TicketTop.json");
+        FileUtil.createFile(getApplicationsPath(), "");
+        FileUtil.createFile(getGiveawaysPath(), "");
+        FileUtil.createFile(getScreensharePath(), "");
+        FileUtil.createFile(getTicketsPath(), "");
+        FileUtil.createFile(getSuggestionPath(), "");
+        FileUtil.createFile(getPointLogPath());
 
         if (!new File(getTicketCountPath()).exists()) {
             FileUtil.createFile(getTicketCountPath());
@@ -68,7 +71,7 @@ public class InitilizeBot {
 
     public static TimerTask createJDA = new TimerTask() {
         public void run() {
-            getConfig.get().reloadConfig();
+            Configuration.reloadConfig();
 
             try {
                 InternalJDA.get().createJDA();
@@ -80,28 +83,31 @@ public class InitilizeBot {
                     System.exit(0);
                 }
             }
-            try {
-                getConfig.get().putDefaultsIfAbsent();
-            } catch (ParseException | IOException ignored) {
-            }
 
-            Application.get().loadApplications();
-            Blacklist.get().loadBlacklist();
-            Warning.get().loadCacheFromFile();
-            Giveaway.get().loadGiveaways();
-            Screenshare.get().loadScreenshare();
-            Ticket.get().loadTickets();
-            Invites.get().loadCacheFromFile();
+
             ReactionRoles.get().loadObject();
-            InviteMatcher.get().loadCacheFromFile();
-            TicketTop.get().loadCacheFromFile();
+
+            ApplicationEngine.getInstance().load(FileUtil.getJsonArray(get().getApplicationsPath()));
+            GiveawayEngine.getInstance().load(FileUtil.getJsonArray(get().getGiveawaysPath()));
+            ScreenshareEngine.getInstance().load(FileUtil.getJsonArray(get().getScreensharePath()));
+            TicketEngine.getInstance().load(FileUtil.getJsonArray(get().getTicketsPath()));
+            SuggestionEngine.getInstance().load(FileUtil.getJsonArray(get().getSuggestionPath()));
+
+            DPlayerEngine.getInstance().load();
+
 
             Timer TaskTimer = new Timer();
+            TaskTimer.scheduleAtFixedRate(RoleQueue.applyRoles, 5000, 2000);
+
             TaskTimer.scheduleAtFixedRate(TaskCreatorTimeouts.TaskPollTimeout, 50000, 10000);
             TaskTimer.scheduleAtFixedRate(TaskMemberCount.MemberCountTimer, 50000, 10000);
             TaskTimer.scheduleAtFixedRate(TaskCreatorTimeouts.TaskGiveawayTimeout, 50000, 10000);
             TaskTimer.scheduleAtFixedRate(TaskCheckActiveGiveaways.get().TaskGiveawayTimeout, 5000, 10000);
-            TaskTimer.scheduleAtFixedRate(RoleQueue.applyRoles, 5000, 2000);
+            TaskTimer.scheduleAtFixedRate(UpdateCaches.taskUpdateCacheData, 5000, 3600000);
+            TaskTimer.scheduleAtFixedRate(DPlayerEngine.getInstance().taskUpdateUsers, 5000, 30000);
+            TaskTimer.scheduleAtFixedRate(EventHandler.taskCheckVoice, 15000, 45000);
+            LogsFile.initPoints();
+
             TaskTimer.schedule(runStartupLater, 1000);
 
         }
@@ -113,7 +119,26 @@ public class InitilizeBot {
             GlobalConfig.initGlobalConfig();
             InternalJDA.get().registerListeners();
             InviteTracking.attemptInviteCaching(GlobalConfig.GENERAL_MAIN_GUILD);
+
+            try {
+                String activity = Placeholders.convert(GlobalConfig.DISCORD_ACTIVITY);
+                switch (GlobalConfig.DISCORD_ACTIVITY_TYPE.toLowerCase()) {
+                    case "watching":
+                        InternalJDA.get().getJda().getPresence().setActivity(Activity.watching(activity));
+                        break;
+                    case "listening":
+                        InternalJDA.get().getJda().getPresence().setActivity(Activity.listening(activity));
+                        break;
+                    case "playing":
+                        InternalJDA.get().getJda().getPresence().setActivity(Activity.playing(activity));
+                        break;
+                }
+            } catch (Exception ignored) {
+
+            }
+
             System.out.println("Successfully loaded DiscordBot");
+
         }
     };
 
@@ -157,10 +182,6 @@ public class InitilizeBot {
         return pluginMode ? getDataFolder() + "/storage/Applications.json" : "DiscordBot/storage/Applications.json";
     }
 
-    public String getBlacklistedPath() {
-        return pluginMode ? getDataFolder() + "/storage/Blacklisted.json" : "DiscordBot/storage/Blacklisted.json";
-    }
-
     public String getGiveawaysPath() {
         return pluginMode ? getDataFolder() + "/storage/Giveaways.json" : "DiscordBot/storage/Giveaways.json";
     }
@@ -169,20 +190,12 @@ public class InitilizeBot {
         return pluginMode ? getDataFolder() + "/storage/Screenshare.json" : "DiscordBot/storage/Screenshare.json";
     }
 
-    public String getWarningsPath() {
-        return pluginMode ? getDataFolder() + "/storage/Warnings.json" : "DiscordBot/storage/Warnings.json";
+    public String getSuggestionPath() {
+        return pluginMode ? getDataFolder() + "/storage/Suggestion.json" : "DiscordBot/storage/Suggestion.json";
     }
 
     public String getTicketsPath() {
         return pluginMode ? getDataFolder() + "/storage/Tickets.json" : "DiscordBot/storage/Tickets.json";
-    }
-
-    public String getInvitesPath() {
-        return pluginMode ? getDataFolder() + "/storage/Invites.json" : "DiscordBot/storage/Invites.json";
-    }
-
-    public String getInviteMatcherPath() {
-        return pluginMode ? getDataFolder() + "/storage/InviteMatcher.json" : "DiscordBot/storage/InviteMatcher.json";
     }
 
     public String getReactionRolesPath() {
@@ -201,20 +214,21 @@ public class InitilizeBot {
         return pluginMode ? getDataFolder() + "/storage/tickets/logs" : "DiscordBot/storage/tickets/logs";
     }
 
+    public String getDPlayerDir() {
+        return pluginMode ? getDataFolder() + "/storage/dPlayerStorage" : "DiscordBot/storage/dPlayerStorage";
+    }
+
     public String getTicketCountPath() {
         return pluginMode ? getDataFolder() + "/storage/tickets/currentTicketCount.txt" : "DiscordBot/storage/tickets/currentTicketCount.txt";
     }
 
-    public String getTicketTopPath() {
-        return pluginMode ? getDataFolder() + "/storage/tickets/TicketTop.json" : "DiscordBot/storage/tickets/TicketTop.json";
+    public String getPointLogPath() {
+        return pluginMode ? getDataFolder() + "/storage/logs/pointLogs.txt" : "DiscordBot/storage/logs/pointLogs.txt";
     }
 
     public String getConfigPath() {
         return pluginMode ? getDataFolder() + "/Config.json" : "DiscordBot/Config.json";
     }
 
-    public boolean isPluginMode() {
-        return pluginMode;
-    }
 
 }

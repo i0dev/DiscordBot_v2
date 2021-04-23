@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="DiscordBot_v2:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3cb7b3dc-a952-4840-87a5-f05ee6171d8a" name="Default Changelist" comment="Added .profile [user] command, this will be more used in the future, just getting it setup for now.&#10;Added .role_all &lt;role&gt; command, to give that role to all users.&#10;&#10;Implemented a new queueing system for giving roles. This will be used for any event or command that gives a user a role. This is to help out welcome roles being given if a mass amount of members join at the same time. Discords API limits how fast you can give roles, so this is a fix for that. &#10;&#10;Added TimeUtil.java">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/StorageFiles/TicketTop.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/minecraftAPI/CmdRunCmd.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/engine/minecraft/LitebansNotifications.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/object/TicketTop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/DiscordBot_v2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DiscordBot_v2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/DiscordBot_v2_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/DiscordBot_v2_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/Config.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/DiscordBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/DiscordBot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/InitilizeBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/InitilizeBot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/cache/ApplicationCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/cache/ApplicationCache.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/cache/GiveawayCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/cache/GiveawayCache.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/cache/HelpCmdCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/cache/HelpCmdCache.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/cache/PollCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/cache/PollCache.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/cache/ReactionRoleCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/cache/ReactionRoleCache.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/CmdHeapDump.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/CmdHeapDump.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/CmdProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/CmdProfile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/applications/applyResponses.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/applications/applyResponses.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/applications/cmdAccept.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/applications/cmdAccept.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/applications/cmdApply.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/applications/cmdApply.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/applications/cmdReject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/applications/cmdReject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/basic/cmdAvatar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/basic/cmdAvatar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/basic/cmdMemberCount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/basic/cmdMemberCount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/basic/cmdReloadConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/basic/cmdReloadConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/basic/cmdRoleInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/basic/cmdRoleInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/basic/cmdRoles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/basic/cmdRoles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/basic/cmdServerIP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/basic/cmdServerIP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/basic/cmdServerInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/basic/cmdServerInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/basic/cmdSuggest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/basic/cmdSuggest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/basic/cmdUserInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/basic/cmdUserInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/cmdExportDiscordUsers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/cmdExportDiscordUsers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/cmdHelpPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/cmdHelpPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/cmdVersion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/cmdVersion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/fun/cmd8Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/fun/cmd8Ball.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/fun/cmdCoinFlip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/fun/cmdCoinFlip.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/fun/cmdDice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/fun/cmdDice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/fun/cmdHey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/fun/cmdHey.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/fun/cmdPat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/fun/cmdPat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/fun/cmdSlap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/fun/cmdSlap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/gamemodeSpecific/cmdCellLeader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/gamemodeSpecific/cmdCellLeader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/gamemodeSpecific/cmdConfirmCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/gamemodeSpecific/cmdConfirmCell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/gamemodeSpecific/cmdConfirmFaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/gamemodeSpecific/cmdConfirmFaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/gamemodeSpecific/cmdConfirmIsland.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/gamemodeSpecific/cmdConfirmIsland.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/gamemodeSpecific/cmdFactionLeader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/gamemodeSpecific/cmdFactionLeader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/gamemodeSpecific/cmdIslandLeader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/gamemodeSpecific/cmdIslandLeader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/giveaways/cmdGiveawayCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/giveaways/cmdGiveawayCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/giveaways/cmdGiveawayReroll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/giveaways/cmdGiveawayReroll.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/giveaways/giveawayCreatorResponses.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/giveaways/giveawayCreatorResponses.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/invite/cmdInviteLeaderboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/invite/cmdInviteLeaderboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/invite/cmdInviteResetData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/invite/cmdInviteResetData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/invite/cmdInvites.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/invite/cmdInvites.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/minecraftAPI/cmdMCServerInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/minecraftAPI/cmdMCServerInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/moderation/CmdRoleAll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/moderation/CmdRoleAll.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/moderation/blacklist/cmdBlacklistAdd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/moderation/blacklist/cmdBlacklistAdd.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/moderation/blacklist/cmdBlacklistClear.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/moderation/blacklist/cmdBlacklistClear.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/moderation/blacklist/cmdBlacklistList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/moderation/blacklist/cmdBlacklistList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/moderation/blacklist/cmdBlacklistRemove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/moderation/blacklist/cmdBlacklistRemove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/moderation/cmdAnnounce.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/moderation/cmdAnnounce.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/moderation/cmdBan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/moderation/cmdBan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/moderation/cmdChangelog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/moderation/cmdChangelog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/moderation/cmdKick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/moderation/cmdKick.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/moderation/cmdMessageClear.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/moderation/cmdMessageClear.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/moderation/cmdPrune.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/moderation/cmdPrune.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/moderation/cmdUnban.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/moderation/cmdUnban.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/moderation/mute/cmdCreateMutedRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/moderation/mute/cmdCreateMutedRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/moderation/mute/cmdGetMuted.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/moderation/mute/cmdGetMuted.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/moderation/mute/cmdMute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/moderation/mute/cmdMute.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/moderation/mute/cmdUnmute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/moderation/mute/cmdUnmute.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/moderation/screenshare/cmdScreenshareAdd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/moderation/screenshare/cmdScreenshareAdd.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/moderation/screenshare/cmdScreenshareClear.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/moderation/screenshare/cmdScreenshareClear.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/moderation/screenshare/cmdScreenshareList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/moderation/screenshare/cmdScreenshareList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/moderation/screenshare/cmdScreenshareRemove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/moderation/screenshare/cmdScreenshareRemove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/moderation/warn/cmdWarn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/moderation/warn/cmdWarn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/moderation/warn/cmdWarnClear.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/moderation/warn/cmdWarnClear.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/moderation/warn/cmdWarnList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/moderation/warn/cmdWarnList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/moderation/warn/cmdWarnRemove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/moderation/warn/cmdWarnRemove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/movements/cmdAssign.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/movements/cmdAssign.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/movements/cmdDemote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/movements/cmdDemote.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/movements/cmdPromote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/movements/cmdPromote.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/movements/cmdResign.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/movements/cmdResign.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/movements/cmdStaffClear.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/movements/cmdStaffClear.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/polls/cmdPollCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/polls/cmdPollCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/polls/pollCreatorResponses.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/polls/pollCreatorResponses.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/reactionroles/cmdReactionRoleCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/reactionroles/cmdReactionRoleCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/reactionroles/reactionRoleResponses.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/reactionroles/reactionRoleResponses.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/tebex/tebexGiftcardCreate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/tebex/tebexGiftcardCreate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/tebex/tebexInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/tebex/tebexInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/tebex/tebexPackageLookup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/tebex/tebexPackageLookup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/tebex/tebexPlayerLookup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/tebex/tebexPlayerLookup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/tebex/tebexTransactionLookup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/tebex/tebexTransactionLookup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/ticket/cmdCreateTicketPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/ticket/cmdCreateTicketPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/ticket/cmdTicketAdd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/ticket/cmdTicketAdd.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/ticket/cmdTicketAdminOnly.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/ticket/cmdTicketAdminOnly.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/ticket/cmdTicketClose.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/ticket/cmdTicketClose.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/ticket/cmdTicketInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/ticket/cmdTicketInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/ticket/cmdTicketRemove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/ticket/cmdTicketRemove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/ticket/cmdTicketRename.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/ticket/cmdTicketRename.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/verify/cmdVerifyPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/verify/cmdVerifyPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/discord/verify/eventReactVerify.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/discord/verify/eventReactVerify.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/command/minecraft/CommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/command/minecraft/CommandManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/engine/discord/RoleQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/engine/discord/RoleQueue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/engine/discord/TaskCheckActiveGiveaways.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/engine/discord/TaskCheckActiveGiveaways.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/engine/discord/TaskCreatorTimeouts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/engine/discord/TaskCreatorTimeouts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/engine/discord/TaskMemberCount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/engine/discord/TaskMemberCount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/event/discord/automod/eventAutoMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/event/discord/automod/eventAutoMod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/event/discord/inviteTracking/eventInviteTracking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/event/discord/inviteTracking/eventInviteTracking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/event/discord/reactionroles/onReactionRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/event/discord/reactionroles/onReactionRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/event/discord/ticket/eventCloseTicket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/event/discord/ticket/eventCloseTicket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/event/discord/ticket/eventReactAdminOnly.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/event/discord/ticket/eventReactAdminOnly.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/event/discord/ticket/eventTicketCreate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/event/discord/ticket/eventTicketCreate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/event/discord/welcome/eventWelcome.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/event/discord/welcome/eventWelcome.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/object/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/object/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/object/Blacklist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/object/Blacklist.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/object/Giveaway.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/object/Giveaway.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/object/InviteMatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/object/InviteMatcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/object/Invites.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/object/Invites.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/object/ReactionRoles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/object/ReactionRoles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/object/Screenshare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/object/Screenshare.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/object/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/object/Ticket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/object/Warning.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/object/Warning.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/utility/EmbedFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/EmbedFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/utility/FindFromString.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/FindFromString.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/utility/GlobalConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/GlobalConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/utility/InternalJDA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/InternalJDA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/utility/InviteData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/InviteData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/utility/InviteTracking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/InviteTracking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/utility/MessageAliases.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/MessageAliases.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/utility/Placeholders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/Placeholders.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/utility/getConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/getConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/utility/util/APIUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/APIUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/utility/util/EmojiUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/EmojiUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/utility/util/FileUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/FileUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/utility/util/FormatUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/FormatUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/utility/util/LogsUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/LogsUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/utility/util/MessageUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/MessageUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/utility/util/MovementUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/MovementUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/utility/util/PermissionUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/PermissionUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/utility/util/RoleUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/RoleUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/i0dev/utility/util/TimeUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/TimeUtil.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectId" id="1qczzw3hUqmIu0fOO9maVKNCk2e" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Desktop/LiteBansAPI-master/out/artifacts/api_jar/api.jar" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.3561151" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3cb7b3dc-a952-4840-87a5-f05ee6171d8a" name="Default Changelist" comment="" />
+      <created>1617393933488</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1617393933488</updated>
+      <workItem from="1617393935924" duration="2037000" />
+      <workItem from="1617419726313" duration="3348000" />
+      <workItem from="1617458597909" duration="6570000" />
+      <workItem from="1617481432612" duration="1225000" />
+      <workItem from="1617505751413" duration="231000" />
+      <workItem from="1617506217799" duration="913000" />
+      <workItem from="1617553904217" duration="2172000" />
+      <workItem from="1617594189892" duration="303000" />
+      <workItem from="1617637635797" duration="4472000" />
+      <workItem from="1617670543045" duration="345000" />
+      <workItem from="1617720031255" duration="8863000" />
+      <workItem from="1617732300183" duration="4556000" />
+      <workItem from="1617749786355" duration="13921000" />
+    </task>
+    <task id="LOCAL-00001" summary="Added .profile [user] command, this will be more used in the future, just getting it setup for now.&#10;Added .role_all &lt;role&gt; command, to give that role to all users.&#10;&#10;Implemented a new queueing system for giving roles. This will be used for any event or command that gives a user a role. This is to help out welcome roles being given if a mass amount of members join at the same time. Discords API limits how fast you can give roles, so this is a fix for that. &#10;&#10;Added TimeUtil.java">
+      <created>1617728711709</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1617728711709</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added .profile [user] command, this will be more used in the future, just getting it setup for now.&#10;Added .role_all &lt;role&gt; command, to give that role to all users.&#10;&#10;Implemented a new queueing system for giving roles. This will be used for any event or command that gives a user a role. This is to help out welcome roles being given if a mass amount of members join at the same time. Discords API limits how fast you can give roles, so this is a fix for that. &#10;&#10;Added TimeUtil.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added .profile [user] command, this will be more used in the future, just getting it setup for now.&#10;Added .role_all &lt;role&gt; command, to give that role to all users.&#10;&#10;Implemented a new queueing system for giving roles. This will be used for any event or command that gives a user a role. This is to help out welcome roles being given if a mass amount of members join at the same time. Discords API limits how fast you can give roles, so this is a fix for that. &#10;&#10;Added TimeUtil.java" />
+  </component>
+</project>

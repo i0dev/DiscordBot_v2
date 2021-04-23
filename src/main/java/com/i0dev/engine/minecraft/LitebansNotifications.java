@@ -1,7 +1,7 @@
 package com.i0dev.engine.minecraft;
 
+import com.i0dev.utility.Configuration;
 import com.i0dev.utility.GlobalConfig;
-import com.i0dev.utility.getConfig;
 import com.i0dev.utility.util.APIUtil;
 import com.i0dev.utility.util.MessageUtil;
 import litebans.api.Entry;
@@ -14,8 +14,8 @@ import java.awt.*;
 import java.time.ZonedDateTime;
 
 public class LitebansNotifications {
-    private static final boolean enabled = getConfig.get().getBoolean("minecraftModules.litebansLogs.enabled");
-    private static final String logMessage = getConfig.get().getString("minecraftModules.litebansLogs.logMessage");
+    private static final boolean enabled = Configuration.getBoolean("minecraftModules.litebansLogs.enabled");
+    private static final String logMessage = Configuration.getString("minecraftModules.litebansLogs.logMessage");
 
     public static void registerEvents() {
         if (!Bukkit.getPluginManager().isPluginEnabled("LiteBans")) {
@@ -30,7 +30,7 @@ public class LitebansNotifications {
                 APIUtil.refreshAPICache(e.getUuid());
 
                 EmbedBuilder embedBuilder = new EmbedBuilder()
-                        .setTitle(GlobalConfig.EMBED_TITLE)
+                        .setTitle(GlobalConfig.EMBED_TITLE.equals("") ? null : GlobalConfig.EMBED_TITLE)
                         .setFooter(GlobalConfig.EMBED_FOOTER)
                         .setTimestamp(ZonedDateTime.now())
                         .setThumbnail("https://crafatar.com/renders/head/" + e.getUuid())
@@ -40,10 +40,9 @@ public class LitebansNotifications {
                         .replace("{type}", StringUtils.capitalize(e.getType()))
                         .replace("{punisherName}", e.getExecutorName())
                         .replace("{punishedName}", APIUtil.getIGNFromUUID(e.getUuid()))
-                        .replace("{reason}", e.getReason())
+                        .replace("{reason}", e.getReason().equals("") ? "Nothing Provided" : e.getReason())
                         .replace("{duration}", e.getDurationString())
                         .replace("{uuid}", e.getUuid())
-                        .replace("{}", "")
                 );
 
                 MessageUtil.sendMessage(GlobalConfig.GENERAL_MAIN_LOGS_CHANNEL, embedBuilder.build());

@@ -8,3 +8,7 @@ softdepend: [ LiteBans ]
 commands:
   DiscordBot:
     description: Main command
+  Link:
+    description: link account
+  2fa:
+    description: tfa

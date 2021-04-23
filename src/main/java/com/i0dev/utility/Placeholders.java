@@ -1,12 +1,15 @@
 package com.i0dev.utility;
 
-import com.i0dev.object.Warning;
+import com.i0dev.DiscordBot;
 import com.i0dev.InitilizeBot;
-import com.i0dev.object.Invites;
+import com.i0dev.object.discordLinking.DPlayer;
+import com.i0dev.object.discordLinking.DPlayerEngine;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.User;
+
+import java.text.DecimalFormat;
 
 public class Placeholders {
 
@@ -14,41 +17,79 @@ public class Placeholders {
         return convert(s, null);
     }
 
+    public static String convert(String message, User author) {
+        return convert(message, null, author);
+    }
 
-    public static String convert(String initialMessage, User user) {
+    public static String convert(String message, User mentioned, User author) {
         JDA jda = InternalJDA.get().getJda();
-        Invites inviteManager = Invites.get();
         Guild guild = GlobalConfig.GENERAL_MAIN_GUILD;
+        if (message == null) return null;
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
 
+        //Mentioned User
+        if (mentioned != null) {
+            DPlayer dPlayer = DPlayerEngine.getInstance().getObject(mentioned);
+            message = message
+                    .replace("{mentionedUserName}", mentioned.getName())
+                    .replace("{mentionedUserTag}", mentioned.getAsTag())
+                    .replace("{mentionedUserTagBold}", "**" + mentioned.getAsTag() + "**")
+                    .replace("{mentionedUserMention}", mentioned.getAsMention())
+                    .replace("{mentionedUserID}", mentioned.getId())
+                    .replace("{mentionedUserAvatarUrl}", mentioned.getEffectiveAvatarUrl())
 
-        //User
-        if (user != null) {
-            initialMessage = initialMessage
-                    .replace("{userName}", user.getName())
-                    .replace("{userTag}", user.getAsTag())
-                    .replace("{userMention}", user.getAsMention())
-                    .replace("{userID}", user.getId())
-                    .replace("{UserAvatarUrl}", user.getEffectiveAvatarUrl())
-                    .replace("{inviteCount}", inviteManager.getUserInviteCount(user) + "")
-                    .replace("{userWarns}", Warning.get().getUserWarnCount(user) + "")
-                    .replace("{memberRoleCount}", guild.getMember(user).getRoles().size() + "")
-                    .replace("{memberIsAdministrator}", guild.getMember(user).getPermissions().contains(Permission.ADMINISTRATOR) + "")
-                    .replace("{memberEffectiveName}", guild.getMember(user).getEffectiveName());
+                    .replace("{mentionedUserLinkStatus}", dPlayer.getLinkInfo().isLinked() ? "Linked" : "Not Linked")
+                    .replace("{mentionedUserInvitedByTag}", dPlayer.getCachedData().getInvitedByDiscordTag().equals("") ? "No Data" : dPlayer.getCachedData().getInvitedByDiscordTag())
+                    .replace("{mentionedUserLinkedIGN}", dPlayer.getCachedData().getMinecraftIGN().equals("") ? "Not Linked" : dPlayer.getCachedData().getMinecraftIGN())
+                    .replace("{mentionedUserMinecraftUUID}", dPlayer.getLinkInfo().getMinecraftUUID().equals("") ? "Not Linked" : dPlayer.getLinkInfo().getMinecraftUUID())
+                    .replace("{mentionedUserIsBlacklisted}", dPlayer.isBlacklisted() ? "Yes" : "No")
+                    .replace("{mentionedUserPointsCount}", decimalFormat.format(dPlayer.getPoints()))
+                    .replace("{mentionedUserBoostCount}", dPlayer.getBoostCount() + "")
+
+                    .replace("{mentionedUserInviteCount}", DPlayerEngine.getInstance().getObject(mentioned).getInviteCount() + "")
+                    .replace("{mentionedUserTicketsClosed}", DPlayerEngine.getInstance().getObject(mentioned).getTicketsClosed() + "")
+                    .replace("{mentionedUserWarnCount}", DPlayerEngine.getInstance().getObject(mentioned).getWarnCount() + "")
+                    .replace("{mentionedUserRoleCount}", guild.getMember(mentioned).getRoles().size() + "")
+                    .replace("{mentionedUserIsAdministrator}", guild.getMember(mentioned).getPermissions().contains(Permission.ADMINISTRATOR) + "")
+                    .replace("{mentionedUserEffectiveName}", guild.getMember(mentioned).getEffectiveName());
+            dPlayer = null;
         }
+
+        //Author
+        if (author != null) {
+            DPlayer dPlayer = DPlayerEngine.getInstance().getObject(author);
+            message = message
+                    .replace("{authorName}", author.getName())
+                    .replace("{authorTag}", author.getAsTag())
+                    .replace("{authorTagBold}", "**" + author.getAsTag() + "**")
+                    .replace("{authorMention}", author.getAsMention())
+                    .replace("{authorID}", author.getId())
+                    .replace("{authorAvatarUrl}", author.getEffectiveAvatarUrl())
+
+                    .replace("{authorLinkStatus}", dPlayer.getLinkInfo().isLinked() ? "Linked" : "Not Linked")
+                    .replace("{authorInvitedByTag}", dPlayer.getCachedData().getInvitedByDiscordTag().equals("") ? "No Data" : dPlayer.getCachedData().getInvitedByDiscordTag())
+                    .replace("{authorLinkedIGN}", dPlayer.getCachedData().getMinecraftIGN().equals("") ? "Not Linked" : dPlayer.getCachedData().getMinecraftIGN())
+                    .replace("{authorIsBlacklisted}", dPlayer.isBlacklisted() ? "Yes" : "No")
+                    .replace("{authorPointsCount}", decimalFormat.format(dPlayer.getPoints()))
+                    .replace("{authorBoostCount}", dPlayer.getBoostCount() + "")
+
+                    .replace("{authorInviteCount}", DPlayerEngine.getInstance().getObject(author).getInviteCount() + "")
+                    .replace("{authorTicketsClosed}", DPlayerEngine.getInstance().getObject(author).getTicketsClosed() + "")
+                    .replace("{authorWarnCount}", DPlayerEngine.getInstance().getObject(author).getWarnCount() + "")
+                    .replace("{authorMemberRoleCount}", guild.getMember(author).getRoles().size() + "")
+                    .replace("{authorIsAdministrator}", guild.getMember(author).getPermissions().contains(Permission.ADMINISTRATOR) + "")
+                    .replace("{authorEffectiveName}", guild.getMember(author).getEffectiveName());
+            dPlayer = null;
+        }
+
+
         //Guild
         if (guild != null) {
-            String GuildBannerURL;
-            if (guild.getBannerUrl() == null) {
-                GuildBannerURL = "No Banner";
-            } else {
-                GuildBannerURL = guild.getBannerUrl();
-            }
-
-            initialMessage = initialMessage
+            message = message
                     .replace("{guildName}", guild.getName())
                     .replace("{guildMemberCount}", guild.getMemberCount() + "")
                     .replace("{guildBoostTier}", guild.getBoostTier().getKey() + "")
-                    .replace("{guildBannerUrl}", GuildBannerURL)
+                    .replace("{guildBannerUrl}", guild.getBannerUrl() == null ? "No Banner" : guild.getBannerUrl())
                     .replace("{guildOwnerTag}", guild.getOwner().getUser().getAsTag())
                     .replace("{guildOwnerMention}", guild.getOwner().getUser().getAsMention())
                     .replace("{guildOwnerID}", guild.getOwner().getUser().getId())
@@ -57,24 +98,27 @@ public class Placeholders {
         }
 
         //Self User
-        initialMessage = initialMessage
-                .replace("{BotUserTag}", jda.getSelfUser().getAsTag())
-                .replace("{BotUserMention}", jda.getSelfUser().getAsMention())
-                .replace("{BotUserAvatarUL}", jda.getSelfUser().getEffectiveAvatarUrl())
-                .replace("{BotUserID}", jda.getSelfUser().getId())
-                .replace("{BotUserName}", jda.getSelfUser().getName());
-
+        message = message
+                .replace("{botTag}", jda.getSelfUser().getAsTag())
+                .replace("{botMention}", jda.getSelfUser().getAsMention())
+                .replace("{botAvatarUL}", jda.getSelfUser().getEffectiveAvatarUrl())
+                .replace("{botID}", jda.getSelfUser().getId())
+                .replace("{botName}", jda.getSelfUser().getName());
 
         //General
-        initialMessage = initialMessage
+        message = message
                 .replace("{DiscordBotAuthor}", "i0#0001")
-                .replace("{}", "")
-                .replace("{}", "")
-                .replace("{DiscordBotPluginMode}", InitilizeBot.get().isPluginMode() ? "Yes" : "No")
+                .replace("{DiscordBotPluginMode}", InitilizeBot.isPluginMode() ? "Yes" : "No")
                 .replace("{DiscordBotPrefix}", GlobalConfig.GENERAL_BOT_PREFIX)
-                .replace("{DiscordBotVersion}", "2.0.24");
+                .replace("{DiscordBotVersion}", "2.1.1 BETA");
 
+        //plugin mode
+        if (InitilizeBot.isPluginMode()) {
+            message = message
+                    .replace("{serverTPS}", Lag.getTPS() + "")
+                    .replace("{serverOnlineCount}", DiscordBot.get().getServer().getOnlinePlayers().size() + "");
+        }
 
-        return initialMessage;
+        return message;
     }
 }

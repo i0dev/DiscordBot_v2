@@ -82,7 +82,17 @@ public class FindFromString {
         }
 
         return channel.retrieveMessageById(arg).complete();
+    }
 
+    public Message getMessage(String arg, long channelID) {
+
+        try {
+            Long.parseLong(arg);
+            Message message = GlobalConfig.GENERAL_MAIN_GUILD.getTextChannelById(channelID).retrieveMessageById(arg).complete();
+            return message;
+        } catch (Exception exception) {
+            return null;
+        }
 
     }
 }

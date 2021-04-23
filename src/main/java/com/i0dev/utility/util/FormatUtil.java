@@ -1,14 +1,18 @@
 package com.i0dev.utility.util;
 
-import com.i0dev.utility.getConfig;
+import com.i0dev.utility.Configuration;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.User;
+import org.apache.commons.lang.RandomStringUtils;
 
+import java.time.Instant;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
+
 
 public class FormatUtil {
 
@@ -19,6 +23,7 @@ public class FormatUtil {
 
     public static String formatNumber(int num) {
         String Formatted = "Extra, Beyond set formatting";
+
         switch (num) {
             case 1:
                 Formatted = "First";
@@ -124,10 +129,7 @@ public class FormatUtil {
 
         StringBuilder sb = new StringBuilder();
 
-        ArrayList<String> Stripped = new ArrayList<>();
-        for (String s : list) {
-            Stripped.add(capitalizeFirst(s));
-        }
+        ArrayList<String> Stripped = new ArrayList<>(list);
         for (int i = 0; i < Stripped.size(); i++) {
             sb.append(Stripped.get(i));
             if (Stripped.size() - 1 > i) {
@@ -180,7 +182,7 @@ public class FormatUtil {
     public static String ticketRemainingArgFormatter(String[] message, int startPos) {
         StringBuilder sb = new StringBuilder();
         if (message == null) {
-            sb.append(getConfig.get().getString("commands.ticketClose.defaultCloseReason"));
+            sb.append(Configuration.getString("commands.ticketClose.defaultCloseReason"));
             return sb.toString();
         }
         for (int i = startPos; i < message.length; i++) {
@@ -190,7 +192,7 @@ public class FormatUtil {
             }
         }
         if (message.length == startPos) {
-            sb.append(getConfig.get().getString("commands.ticketClose.defaultCloseReason"));
+            sb.append(Configuration.getString("commands.ticketClose.defaultCloseReason"));
         }
         return sb.toString();
     }
@@ -245,6 +247,30 @@ public class FormatUtil {
         String Second = time.getSecond() + "";
 
         return "[" + Month + "/" + Day + "/" + Year + " " + Hour + ":" + Minute + ":" + Second + "]";
+    }
+
+    public static String formatDate(Long instant) {
+        ZonedDateTime time = ZonedDateTime.ofInstant(Instant.ofEpochMilli(instant), ZoneId.of("America/New_York"));
+        String Month = time.getMonth().getValue() + "";
+        String Day = time.getDayOfMonth() + "";
+        String Year = time.getYear() + "";
+        String Hour = time.getHour() + "";
+        String Minute = time.getMinute() + "";
+        String Second = time.getSecond() + "";
+
+        return "[" + Month + "/" + Day + "/" + Year + " " + Hour + ":" + Minute + ":" + Second + "]";
+    }
+
+    public static String GenerateRandomString() {
+        return RandomStringUtils.random(10, true, true);
+    }
+
+    public static String GenerateRandomString(int length) {
+        return RandomStringUtils.random(length, true, true);
+    }
+
+    public static String c(String s) {
+        return org.bukkit.ChatColor.translateAlternateColorCodes('&',s);
     }
 
 }

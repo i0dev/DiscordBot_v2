@@ -1,25 +1,27 @@
 package com.i0dev.utility.util;
 
 import com.i0dev.InitilizeBot;
+import com.i0dev.object.objects.Ticket;
 import net.dv8tion.jda.api.entities.*;
-import org.json.simple.JSONObject;
 
 import java.io.File;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.TextStyle;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Locale;
 
 public class LogsUtil {
 
 
-    public static String getLogContents(MessageHistory messageHistory, JSONObject ticketObj, TextChannel ticketChannel, User ticketCloser, String ticketCloseReason) {
+    public static String getLogContents(MessageHistory messageHistory, Ticket ticketObj, TextChannel ticketChannel, User ticketCloser, String ticketCloseReason) {
 
         String Zone = ZonedDateTime.now().getZone().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
-        String ticketOwnerID = ticketObj.get("ticketOwnerID").toString();
-        String ticketOwnerAvatarURL = ticketObj.get("ticketOwnerAvatarURL").toString();
-        String ticketOwnerTag = ticketObj.get("ticketOwnerTag").toString();
-        String adminOnlyMode = ticketObj.get("adminOnlyMode").toString();
+        Long ticketOwnerID = ticketObj.getTicketOwnerID();
+        String ticketOwnerAvatarURL = ticketObj.getTicketOwnerAvatarURL();
+        String ticketOwnerTag = ticketObj.getTicketOwnerTag();
+        boolean adminOnlyMode = ticketObj.isAdminOnlyMode();
 
         StringBuilder toFile = new StringBuilder();
         toFile.append("Ticket information:").append("\n");

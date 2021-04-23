@@ -19,11 +19,5 @@ public class MessageAliases {
 
     public static boolean isChannelInList(TextChannel channel, List<Long> ids) {
         return ids.contains(channel.getIdLong());
-//        for (Long ID : ids) {
-//            if (channel.equals(channel.getJDA().getTextChannelById(ID))) {
-//                return true;
-//            }
-//        }
-//        return false;
     }
 }

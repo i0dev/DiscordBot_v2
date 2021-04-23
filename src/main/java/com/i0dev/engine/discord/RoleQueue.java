@@ -1,6 +1,7 @@
 package com.i0dev.engine.discord;
 
 import com.i0dev.utility.GlobalConfig;
+import lombok.Getter;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
@@ -17,21 +18,20 @@ public class RoleQueue {
         return queue;
     }
 
-    public static void addToQueue(Long userID, Long roleID) {
-        queue.add(new QueueObject(userID, roleID));
+    public static void addToQueue(Long userID, Long roleID, Type type) {
+        queue.add(new QueueObject(userID, roleID, type));
 
     }
 
-    public static void addToQueue(User user, Role role) {
-        addToQueue(user.getIdLong(), role.getIdLong());
+    public static void addToQueue(User user, Role role, Type type) {
+        try {
+            addToQueue(user.getIdLong(), role.getIdLong(), type);
+        } catch (Exception ignored) {
+        }
     }
 
-    public static void addToQueue(Member member, Role role) {
-        addToQueue(member.getIdLong(), role.getIdLong());
-    }
-
-    public static void addToQueue(String userID, String roleID) {
-        addToQueue(Long.valueOf(userID), Long.valueOf(roleID));
+    public static void addToQueue(Member member, Role role, Type type) {
+        addToQueue(member.getIdLong(), role.getIdLong(), type);
     }
 
     public static TimerTask applyRoles = new TimerTask() {
@@ -41,14 +41,23 @@ public class RoleQueue {
 
             QueueObject queueObject = queue.get(0);
 
-            User user = guild.getJDA().getUserById(queueObject.getUser());
-            Role role = guild.getRoleById(queueObject.getRole());
+            User user = guild.getJDA().getUserById(queueObject.getUserID());
+            Role role = guild.getRoleById(queueObject.getRoleID());
+
+            if (user == null || role == null) {
+                queue.remove(0);
+            }
 
             Member member = guild.getMemberById(user.getId());
 
-            if (role != null && member != null) {
-                guild.addRoleToMember(user.getId(), role).queue();
-                System.out.println("[LOG] Applied the role {" + role.getName() + "} to the user: {" + member.getEffectiveName() + "}");
+            if (queueObject.getType().equals(Type.ADD_ROLE)) {
+                if (role != null && member != null) {
+                    guild.addRoleToMember(user.getId(), role).queue();
+                    System.out.println("[LOG] Applied the role {" + role.getName() + "} to the user: {" + member.getEffectiveName() + "}");
+                }
+            } else if (queueObject.getType().equals(Type.REMOVE_ROLE)) {
+                guild.removeRoleFromMember(user.getId(), role).queue();
+                System.out.println("[LOG] Removed the role {" + role.getName() + "} to the user: {" + member.getEffectiveName() + "}");
             }
 
             queue.remove(0);
@@ -56,21 +65,17 @@ public class RoleQueue {
     };
 }
 
+@Getter
 class QueueObject {
 
     Long userID;
     Long roleID;
+    Type type;
 
-    QueueObject(Long userID, Long roleID) {
+    QueueObject(Long userID, Long roleID, Type type) {
         this.userID = userID;
         this.roleID = roleID;
+        this.type = type;
     }
 
-    public Long getRole() {
-        return roleID;
-    }
-
-    public Long getUser() {
-        return userID;
-    }
 }

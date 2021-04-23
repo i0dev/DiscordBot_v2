@@ -1,16 +1,16 @@
 package com.i0dev.engine.discord;
 
-import com.i0dev.object.Giveaway;
+import com.i0dev.object.objects.Giveaway;
+import com.i0dev.object.engines.GiveawayEngine;
+import com.i0dev.utility.Configuration;
 import com.i0dev.utility.EmbedFactory;
 import com.i0dev.utility.GlobalConfig;
 import com.i0dev.utility.Placeholders;
-import com.i0dev.utility.getConfig;
 import com.i0dev.utility.util.FormatUtil;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
-import org.json.simple.JSONObject;
 
 import java.awt.*;
 import java.time.Instant;
@@ -28,30 +28,32 @@ public class TaskCheckActiveGiveaways {
         return instance;
     }
 
-    private final String Emoji = getConfig.get().getString("commands.gcreate.giveawayEmoji");
-    private final String endedGiveawayTitle = getConfig.get().getString("commands.gcreate.endedGiveawayTitle");
-    private final String endedGiveawayContent = getConfig.get().getString("commands.gcreate.endedGiveawayContent");
-    private final String endedGiveawayFooter = getConfig.get().getString("commands.gcreate.endedGiveawayFooter");
-    private final String winnersMessageTitle = getConfig.get().getString("commands.gcreate.winnersMessageTitle");
-    private final String winnersMessageContent = getConfig.get().getString("commands.gcreate.winnersMessageContent");
-    private final String winnersMessageFooter = getConfig.get().getString("commands.gcreate.winnersMessageFooter");
-    private final String winnerDmMessage = getConfig.get().getString("commands.gcreate.winnerDmMessage");
-    private final String newWinnersTitle = getConfig.get().getString("commands.giveawayReroll.newWinnersTitle");
+    public static final String endedGiveawayTitle = Configuration.getString("modules.giveaway.message.endedGiveawayTitle");
+    public static final String endedGiveawayContent = Configuration.getString("modules.giveaway.message.endedGiveawayDesc");
+    public static final String endedGiveawayFooter = Configuration.getString("modules.giveaway.message.endedGiveawayFooter");
+
+    public static final String winnersMessageTitle = Configuration.getString("modules.giveaway.message.winnersMessageTitle");
+    public static final String winnersMessageContent = Configuration.getString("modules.giveaway.message.winnersMessageDesc");
+    public static final String winnersMessageFooter = Configuration.getString("modules.giveaway.message.winnersMessageFooter");
+
+    public static final String winnerDmMessage = Configuration.getString("modules.giveaway.message.winnerDirectMessageDesc");
+
+    public static final String newWinnersTitle = Configuration.getString("modules.giveaway.message.giveawayRerollTitle");
 
 
-    public void endGiveawayFull(JSONObject object, boolean byPassTime, boolean byPassEnding, boolean reroll, User reroller) {
-        Long endTime = (Long) object.get("endTime");
+    public void endGiveawayFull(Giveaway giveaway, boolean byPassTime, boolean byPassEnding, boolean reroll, User reroller) {
+        Long endTime = giveaway.getEndTime();
         if (System.currentTimeMillis() > endTime || byPassTime) {
             if (!byPassEnding) {
-                boolean ended = ((boolean) object.get("ended"));
+                boolean ended = giveaway.isEnded();
                 if (ended) return;
             }
-            String ChannelID = object.get("channelID").toString();
-            String MessageID = object.get("messageID").toString();
-            String HostID = object.get("hostID").toString();
-            String Prize = object.get("prize").toString();
-            Long EndTime = (Long) object.get("endTime");
-            String WinnerAmount = object.get("winnerAmount").toString();
+            Long ChannelID = giveaway.getChannelID();
+            Long MessageID = giveaway.getMessageID();
+            Long HostID = giveaway.getHostID();
+            String Prize = giveaway.getPrize();
+            Long EndTime = giveaway.getEndTime();
+            Long WinnerAmount = giveaway.getWinnerAmount();
             TextChannel Channel = GlobalConfig.GENERAL_MAIN_GUILD.getTextChannelById(ChannelID);
             User Host = GlobalConfig.GENERAL_MAIN_GUILD.getJDA().getUserById(HostID);
             Message Message = null;
@@ -68,14 +70,14 @@ public class TaskCheckActiveGiveaways {
             List<User> selectedWinners = new ArrayList<>();
             UsersReacted.removeIf(User::isBot);
 
-            for (int i = 0; i < Integer.parseInt(WinnerAmount); i++) {
+            for (int i = 0; i < WinnerAmount; i++) {
                 selectedWinners.add(UsersReacted.get(ThreadLocalRandom.current().nextInt(UsersReacted.size())));
             }
             String winnersFormatted = FormatUtil.FormatDoubleListUser(selectedWinners);
 
             EmbedBuilder editEmbed = new EmbedBuilder()
                     .setTimestamp(time)
-                    .setThumbnail(GlobalConfig.EMBED_THUMBNAIL)
+                    .setThumbnail(GlobalConfig.EMBED_THUMBNAIL.equals("") ? null : GlobalConfig.EMBED_THUMBNAIL)
                     .setColor(Color.decode(GlobalConfig.EMBED_COLOR_HEX_CODE))
                     .setDescription(Placeholders.convert(endedGiveawayContent
                             .replace("{hostMention}", Host.getAsMention())
@@ -89,7 +91,7 @@ public class TaskCheckActiveGiveaways {
                 newEmbed = new EmbedBuilder()
                         .setTimestamp(time)
                         .setColor(Color.decode(GlobalConfig.EMBED_COLOR_HEX_CODE))
-                        .setThumbnail(GlobalConfig.EMBED_THUMBNAIL)
+                        .setThumbnail(GlobalConfig.EMBED_THUMBNAIL.equals("") ? null : GlobalConfig.EMBED_THUMBNAIL)
                         .setDescription(winnersMessageContent
                                 .replace("{winners}", winnersFormatted)
                                 .replace("{messageLink}", ("https://discordapp.com/channels/" + GlobalConfig.GENERAL_MAIN_GUILD.getId() + "/" + ChannelID + "/" + MessageID))
@@ -100,7 +102,7 @@ public class TaskCheckActiveGiveaways {
                 newEmbed = new EmbedBuilder()
                         .setTimestamp(time)
                         .setColor(Color.decode(GlobalConfig.EMBED_COLOR_HEX_CODE))
-                        .setThumbnail(GlobalConfig.EMBED_THUMBNAIL)
+                        .setThumbnail(GlobalConfig.EMBED_THUMBNAIL.equals("") ? null : GlobalConfig.EMBED_THUMBNAIL)
                         .setDescription(winnersMessageContent
                                 .replace("{winners}", winnersFormatted)
                                 .replace("{messageLink}", ("https://discordapp.com/channels/" + GlobalConfig.GENERAL_MAIN_GUILD.getId() + "/" + ChannelID + "/" + MessageID))
@@ -112,7 +114,7 @@ public class TaskCheckActiveGiveaways {
             Channel.sendMessage(newEmbed.build()).queue();
             for (User winner : selectedWinners) {
                 try {
-                    winner.openPrivateChannel().complete().sendMessage(EmbedFactory.get().createSimpleEmbed(Placeholders.convert(winnerDmMessage
+                    winner.openPrivateChannel().complete().sendMessage(EmbedFactory.createEmbed(Placeholders.convert(winnerDmMessage
                                     .replace("{prize}", Prize)
                                     .replace("{messageLink}", ("https://discordapp.com/channels/" + GlobalConfig.GENERAL_MAIN_GUILD.getId() + "/" + ChannelID + "/" + MessageID))
                             , winner)).build()).queue();
@@ -120,16 +122,17 @@ public class TaskCheckActiveGiveaways {
 
                 }
             }
-            Giveaway.get().endGiveaway(MessageID);
+            GiveawayEngine.getInstance().setEnded(giveaway);
         }
     }
 
 
     public TimerTask TaskGiveawayTimeout = new TimerTask() {
         public void run() {
-            if (Giveaway.get().getCache().isEmpty()) return;
-            for (JSONObject object : Giveaway.get().getCache()) {
-                endGiveawayFull(object, false, false, false, null);
+            if (GiveawayEngine.getInstance().getCache().isEmpty()) return;
+            for (Object singleton : GiveawayEngine.getInstance().getCache()) {
+                Giveaway giveaway = (Giveaway) singleton;
+                endGiveawayFull(giveaway, false, false, false, null);
             }
         }
     };
