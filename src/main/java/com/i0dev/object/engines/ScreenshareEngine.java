@@ -3,7 +3,7 @@ package com.i0dev.object.engines;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.i0dev.InitilizeBot;
+import com.i0dev.InitializeBot;
 import com.i0dev.object.objects.Screenshare;
 import com.i0dev.utility.util.FileUtil;
 import lombok.Getter;
@@ -62,7 +62,7 @@ public class ScreenshareEngine {
     }
 
     public String getPath() {
-        return InitilizeBot.get().getScreensharePath();
+        return InitializeBot.get().getScreensharePath();
     }
 
     public void load(JsonArray array) {
@@ -77,5 +77,9 @@ public class ScreenshareEngine {
 
             getCache().add(screenshare);
         }
+
+
+
+
     }
 }

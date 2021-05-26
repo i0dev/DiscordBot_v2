@@ -1,6 +1,6 @@
 package com.i0dev.commands.discord.completedModules.linking;
 
-import com.i0dev.InitilizeBot;
+import com.i0dev.InitializeBot;
 import com.i0dev.utility.Configuration;
 import com.i0dev.utility.GlobalConfig;
 import com.i0dev.utility.util.MessageUtil;
@@ -36,7 +36,7 @@ public class LinkManager {
         String[] message = e.getMessage().getContentRaw().split(" ");
         if (message[0].equalsIgnoreCase(GlobalConfig.GENERAL_BOT_PREFIX + "link")) {
 
-            if (!InitilizeBot.isPluginMode()) {
+            if (!InitializeBot.isPluginMode()) {
                 MessageUtil.sendMessage(e.getChannel().getIdLong(), GlobalConfig.NOT_PLUGIN_MODE, e.getAuthor());
                 return;
             }

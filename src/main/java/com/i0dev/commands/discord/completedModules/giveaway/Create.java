@@ -1,12 +1,13 @@
 package com.i0dev.commands.discord.completedModules.giveaway;
 
-import com.i0dev.cache.GiveawayCache;
+import com.i0dev.commands.discord.completedModules.giveaway.cache.GiveawayCache;
 import com.i0dev.object.objects.Giveaway;
 import com.i0dev.object.engines.PermissionHandler;
 import com.i0dev.object.discordLinking.DPlayerEngine;
 import com.i0dev.utility.*;
 import com.i0dev.utility.util.FormatUtil;
 import com.i0dev.utility.util.MessageUtil;
+import com.i0dev.utility.util.TimeUtil;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -58,7 +59,7 @@ public class Create extends ListenerAdapter {
     @Override
     public void onPrivateMessageReceived(PrivateMessageReceivedEvent e) {
         if (e.getAuthor().isBot()) return;
-        if (DPlayerEngine.getInstance().isBlacklisted(e.getAuthor())) return;
+        if (DPlayerEngine.getObject(e.getAuthor().getIdLong()).isBlacklisted()) return;
         if (!GiveawayCache.get().getMap().containsKey(e.getAuthor())) return;
 
         if (!ENABLED) {
@@ -143,14 +144,13 @@ public class Create extends ListenerAdapter {
             TextChannel Giveawaychannel = e.getJDA().getTextChannelById(responsesInOrder.get(0));
             String Prize = responsesInOrder.get(1);
             String WinnerAmount = responsesInOrder.get(2);
-            String GiveawayTime = responsesInOrder.get(3);
             long endTimeMillis = System.currentTimeMillis() + FormatUtil.getTimeMilis(responsesInOrder.get(3));
             ZonedDateTime time = ZonedDateTime.ofInstant(Instant.ofEpochMilli(endTimeMillis), ZoneId.of("America/New_York"));
 
             desc.append(Placeholders.convert(createdGiveawayContent
                     .replace("{emoji}", giveawayEmojiText)
                     .replace("{winnerCount}", WinnerAmount)
-                    .replace("{length}", GiveawayTime)
+                    .replace("{timeLeft}", TimeUtil.formatTime(endTimeMillis - System.currentTimeMillis()))
                     .replace("{prize}", Prize), e.getAuthor()));
 
             EmbedBuilder embed = new EmbedBuilder()
@@ -173,6 +173,7 @@ public class Create extends ListenerAdapter {
             giveaway.setChannelID(Giveawaychannel.getIdLong());
             giveaway.setEndTime(endTimeMillis);
             giveaway.setWinnerAmount(Long.parseLong(WinnerAmount));
+            giveaway.setEnded(false);
             giveaway.addToCache();
 
             GiveawayCache.get().removeUser(e.getAuthor());

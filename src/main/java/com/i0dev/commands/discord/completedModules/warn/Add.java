@@ -43,7 +43,7 @@ public class Add {
 
         String reason = FormatUtil.remainingArgFormatter(message, 3);
 
-        DPlayerEngine.getInstance().increaseWarn(MentionedUser);
+        DPlayerEngine.increment(MentionedUser.getIdLong(), "warns");
 
         String desc = MESSAGE_CONTENT
                 .replace("{reason}", reason);
@@ -53,7 +53,7 @@ public class Add {
         if (OPTION_LOG) {
             String logMsg = MESSAGE_LOG_MESSAGE
                     .replace("{reason}", reason);
-            MessageUtil.sendMessage(GlobalConfig.GENERAL_MAIN_LOGS_CHANNEL, logMsg, e.getAuthor(),MentionedUser);
+            MessageUtil.sendMessage(GlobalConfig.GENERAL_MAIN_LOGS_CHANNEL, logMsg, e.getAuthor(), MentionedUser);
 
         }
     }

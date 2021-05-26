@@ -1,7 +1,7 @@
 package com.i0dev.commands.discord.completedModules.mute;
 
-import com.i0dev.engine.discord.RoleQueue;
-import com.i0dev.engine.discord.Type;
+import com.i0dev.object.objects.Type;
+import com.i0dev.object.objects.RoleQueueObject;
 import com.i0dev.object.engines.PermissionHandler;
 import com.i0dev.utility.Configuration;
 import com.i0dev.utility.FindFromString;
@@ -52,7 +52,7 @@ public class Remove {
             return;
         }
 
-        RoleQueue.addToQueue(MentionedMember.getUser(), MuteManager.ROLE_MUTED_ROLE, Type.REMOVE_ROLE);
+        new RoleQueueObject(MentionedMember.getIdLong(), MuteManager.ROLE_MUTED_ROLE.getIdLong(), Type.REMOVE_ROLE).add();
 
         MessageUtil.sendMessage(e.getChannel().getIdLong(), MESSAGE_CONTENT, e.getAuthor(), MentionedUser);
 

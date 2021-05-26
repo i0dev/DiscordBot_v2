@@ -1,7 +1,7 @@
 package com.i0dev.commands.discord.completedModules.mute;
 
-import com.i0dev.engine.discord.RoleQueue;
-import com.i0dev.engine.discord.Type;
+import com.i0dev.object.objects.Type;
+import com.i0dev.object.objects.RoleQueueObject;
 import com.i0dev.object.engines.PermissionHandler;
 import com.i0dev.utility.Configuration;
 import com.i0dev.utility.FindFromString;
@@ -55,7 +55,7 @@ public class Add {
             return;
         }
 
-        RoleQueue.addToQueue(MentionedMember.getUser(), MuteManager.ROLE_MUTED_ROLE, Type.ADD_ROLE);
+        new RoleQueueObject(MentionedUser.getIdLong(), MuteManager.ROLE_MUTED_ROLE.getIdLong(), Type.ADD_ROLE).add();
 
         String desc = MESSAGE_CONTENT
                 .replace("{reason}", reason);

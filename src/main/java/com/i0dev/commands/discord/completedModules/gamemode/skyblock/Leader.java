@@ -1,7 +1,7 @@
 package com.i0dev.commands.discord.completedModules.gamemode.skyblock;
 
-import com.i0dev.engine.discord.RoleQueue;
-import com.i0dev.engine.discord.Type;
+import com.i0dev.object.objects.Type;
+import com.i0dev.object.objects.RoleQueueObject;
 import com.i0dev.object.engines.PermissionHandler;
 import com.i0dev.utility.*;
 import com.i0dev.utility.util.MessageUtil;
@@ -33,7 +33,7 @@ public class Leader {
 
         }
 
-        RoleQueue.addToQueue(MentionedUser.getIdLong(), SkyBlockModule.ISLAND_LEADER_ROLE, Type.ADD_ROLE);
+        new RoleQueueObject(MentionedUser.getIdLong(), SkyBlockModule.ISLAND_LEADER_ROLE, Type.ADD_ROLE).add();
 
         e.getChannel().sendMessage(EmbedFactory.createEmbed(Placeholders.convert(MESSAGE_CONTENT.replace("{senderTag}", e.getAuthor().getAsTag()), MentionedUser, e.getAuthor())).build()).queue();
     }

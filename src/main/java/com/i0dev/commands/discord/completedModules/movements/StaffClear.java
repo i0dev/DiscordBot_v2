@@ -42,7 +42,7 @@ public class StaffClear {
         Member MentionedMember = e.getGuild().getMember(MentionedUser);
 
         if (!MovementUtil.isAlreadyStaff(MentionedMember)) {
-            MessageUtil.sendMessage(e.getChannel().getIdLong(), MovementManager.MESSAGE_NOT_STAFF, e.getAuthor());
+            MessageUtil.sendMessage(e.getChannel().getIdLong(), MovementManager.MESSAGE_NOT_STAFF, e.getAuthor(),MentionedUser);
             return;
         }
 

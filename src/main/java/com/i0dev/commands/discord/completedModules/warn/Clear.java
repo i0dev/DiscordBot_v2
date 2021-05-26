@@ -27,7 +27,7 @@ public class Clear {
             return;
         }
 
-        DPlayerEngine.getInstance().clearWarns();
+        DPlayerEngine.clear("warns");
 
         MessageUtil.sendMessage(e.getChannel().getIdLong(), MESSAGE_CONTENT, e.getAuthor());
         if (OPTION_LOG) {

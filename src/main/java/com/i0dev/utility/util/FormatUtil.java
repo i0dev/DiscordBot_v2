@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.User;
 import org.apache.commons.lang.RandomStringUtils;
 
+import java.text.DecimalFormat;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -238,6 +239,24 @@ public class FormatUtil {
         }
     }
 
+    public static boolean isLong(String s) {
+        try {
+            Long.parseLong(s);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public static boolean isDouble(String s) {
+        try {
+            Double.parseDouble(s);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
     public static String formatDate(ZonedDateTime time) {
         String Month = time.getMonth().getValue() + "";
         String Day = time.getDayOfMonth() + "";
@@ -270,7 +289,17 @@ public class FormatUtil {
     }
 
     public static String c(String s) {
-        return org.bukkit.ChatColor.translateAlternateColorCodes('&',s);
+        return org.bukkit.ChatColor.translateAlternateColorCodes('&', s);
     }
 
+    public static String formatValueSuffix(long number) {
+        String[] valueFormatSuffix = new String[]{"", "K", "M", "B", "T"};
+        String r = new DecimalFormat("##0E0").format(number);
+        r = r.replaceAll("E[0-9]", valueFormatSuffix[Character.getNumericValue(r.charAt(r.length() - 1)) / 3]);
+        int MAX_LENGTH = 6;
+        while (r.length() > MAX_LENGTH || r.matches("[0-9]+\\.[a-z]")) {
+            r = r.substring(0, r.length() - 2) + r.substring(r.length() - 1);
+        }
+        return r;
+    }
 }

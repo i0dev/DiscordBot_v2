@@ -35,14 +35,14 @@ public class Info {
         User MentionedUser = FindFromString.get().getUser(message[2], e.getMessage());
         DPlayer dPlayer;
         if (MentionedUser == null) {
-            if (DPlayerEngine.getInstance().getObjectFromIGN(message[2]) == null) {
+            if (DPlayerEngine.getObjectFromIGN(message[2]) == null) {
                 MessageUtil.sendMessage(e.getChannel().getIdLong(), MESSAGE_NOT_LINKED.replace("{arg}", message[2]), e.getAuthor());
                 return;
             } else {
-                dPlayer = DPlayerEngine.getInstance().getObjectFromIGN(message[2]);
+                dPlayer = DPlayerEngine.getObjectFromIGN(message[2]);
             }
         } else {
-            dPlayer = DPlayerEngine.getInstance().getObject(MentionedUser);
+            dPlayer = DPlayerEngine.getObject(MentionedUser.getIdLong());
         }
 
 

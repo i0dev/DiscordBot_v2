@@ -1,260 +1,189 @@
 package com.i0dev.object.discordLinking;
 
 import com.google.gson.JsonObject;
-import com.i0dev.InitilizeBot;
+import com.i0dev.InitializeBot;
+import com.i0dev.utility.GlobalConfig;
 import com.i0dev.utility.InternalJDA;
+import com.i0dev.utility.SQLManager;
 import com.i0dev.utility.util.FileUtil;
 import lombok.Getter;
 import lombok.Setter;
 import net.dv8tion.jda.api.entities.User;
 
 import java.io.File;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TimerTask;
 
 public class DPlayerEngine {
 
-    private static DPlayerEngine instance = new DPlayerEngine();
-
-    public static DPlayerEngine getInstance() {
-        return instance;
-    }
-
     @Setter
     @Getter
-    List<Object> cache = new ArrayList<>();
+    public static List<Object> cache = new ArrayList<>();
 
-    public void add(DPlayer object) {
-        getCache().add(object);
-        save(object.getDiscordID());
-    }
-
-    public void add(User user) {
-        getCache().add(getObject(user));
-        save(user);
-    }
-
-    public void remove(DPlayer object) {
-        getCache().remove(object);
-        save(object.getDiscordID());
-    }
-
-    public void remove(User user) {
-        getCache().remove(getObject(user));
-        save(user);
-    }
-
-    public boolean isOnList(User user) {
-        return cache.contains(getObject(user));
-    }
-
-
-    public DPlayer getObject(User user) {
+    public static DPlayer getObject(long userID) {
         for (Object singleton : getCache()) {
             DPlayer object = (DPlayer) singleton;
-            if (object.getDiscordID() == user.getIdLong()) {
+            if (object.getDiscordID() == userID) {
                 return object;
             }
         }
-
-        DPlayer dPlayer = new DPlayer(user);
-        Cache dCache = dPlayer.getCachedData();
-        dCache.setDiscordTag(user.getAsTag());
-        try {
-            dCache.setDiscordAvatarURL(user.getEffectiveAvatarUrl());
-        } catch (Exception e) {
+        DPlayer dPlayer = new DPlayer();
+        User user = InternalJDA.getJda().getUserById(userID);
+        dPlayer.setDiscordID(userID);
+        if (user != null) {
+            dPlayer.getCachedData().setDiscordTag(user.getAsTag());
+            dPlayer.getCachedData().setDiscordAvatarURL(user.getEffectiveAvatarUrl());
         }
-        dPlayer.addToCache();
+        dPlayer.add();
         return dPlayer;
     }
 
-    public DPlayer getObjectDontAdd(User user) {
-        for (Object singleton : getCache()) {
-            DPlayer object = (DPlayer) singleton;
-            if (object.getDiscordID() == user.getIdLong()) {
-                return object;
-            }
-        }
-        return null;
-    }
-
-
-    public void save(User user) {
-        FileUtil.saveFile(getObject(user), getPath() + "/" + user.getId() + ".json");
-    }
-
-    public void save(List<Object> objects) {
-        for (Object object : objects) {
-            FileUtil.saveFile(object, getPath() + "/" + ((DPlayer) object).getDiscordID() + ".json");
-        }
-    }
-
-
-    public void save(Long discordID) {
-        FileUtil.saveFile(getObject(InternalJDA.get().getJda().getUserById(discordID)), getPath() + "/" + discordID + ".json");
-    }
-
-    public void saveAll() {
-        File directory = new File(getPath());
-        for (String filename : directory.list()) {
-            File dFile = new File(getPath() + "/" + filename);
-            JsonObject jsonObject = FileUtil.getJsonObject(dFile.getPath());
-            save(jsonObject.get("discordID").getAsLong());
-        }
-    }
-
-    public String getPath() {
-        return InitilizeBot.get().getDPlayerDir();
-    }
-
-    public void load() {
-        File directory = new File(getPath());
-        for (String filename : directory.list()) {
-            File dFile = new File(getPath() + "/" + filename);
-            JsonObject jsonObject = FileUtil.getJsonObject(dFile.getPath());
-            DPlayer dPlayer = new DPlayer();
-            JsonObject linkingObject = jsonObject.get("linkInfo").getAsJsonObject();
-
-            dPlayer.setDiscordID(jsonObject.get("discordID").getAsLong());
-            dPlayer.getLinkInfo().setMinecraftUUID(linkingObject.get("minecraftUUID").getAsString());
-
-            dPlayer.setLastUpdatedMillis(jsonObject.get("lastUpdatedMillis").getAsLong());
-
-            dPlayer.setInviteCount(jsonObject.get("inviteCount").getAsLong());
-            dPlayer.setWarnCount(jsonObject.get("warnCount").getAsLong());
-            dPlayer.setTicketsClosed(jsonObject.get("ticketsClosed").getAsLong());
-            dPlayer.setBlacklisted(jsonObject.get("blacklisted").getAsBoolean());
-
-            dPlayer.setInvitedByDiscordID(jsonObject.get("invitedByDiscordID").getAsLong());
-            dPlayer.getLinkInfo().setLinkCode(linkingObject.get("linkCode").getAsString());
-            dPlayer.getLinkInfo().setLinkedTime(linkingObject.get("linkedTime").getAsLong());
-            dPlayer.getLinkInfo().setLinked(linkingObject.get("linked").getAsBoolean());
-
-            JsonObject cacheObject = jsonObject.get("cachedData").getAsJsonObject();
-            Cache cache = new Cache();
-            cache.setDiscordTag(cacheObject.get("discordTag").getAsString());
-            cache.setMinecraftIGN(cacheObject.get("minecraftIGN").getAsString());
-            cache.setDiscordAvatarURL(cacheObject.get("discordAvatarURL").getAsString());
-            cache.setInvitedByDiscordTag(cacheObject.get("invitedByDiscordTag").getAsString());
-            cache.setInvitedByDiscordAvatarURL(cacheObject.get("invitedByDiscordAvatarURL").getAsString());
-            dPlayer.setCachedData(cache);
-
-            //After initial update:
-            if (jsonObject.has("points")) {
-                dPlayer.setPoints(jsonObject.get("points").getAsDouble());
-            } else {
-                dPlayer.setPoints(0D);
-            }
-            if (jsonObject.has("lastBoostTime")) {
-                dPlayer.setLastBoostTime(jsonObject.get("lastBoostTime").getAsLong());
-            } else {
-                dPlayer.setLastBoostTime(0L);
-            }
-            if (jsonObject.has("boostCount")) {
-                dPlayer.setBoostCount(jsonObject.get("boostCount").getAsLong());
-            } else {
-                dPlayer.setBoostCount(0L);
-            }
-            getCache().add(dPlayer);
-        }
-    }
-
-    public TimerTask taskAddToCache = new TimerTask() {
-        public void run() {
-
-
-        }
-    };
-
-
-    public TimerTask taskUpdateUsers = new TimerTask() {
-        public void run() {
-
-            for (Object o : cache) {
-                DPlayer dPlayer = ((DPlayer) o);
-
-                File dFile = new File(getPath() + "/" + dPlayer.getDiscordID() + ".json");
-                JsonObject jsonObject = FileUtil.getJsonObject(dFile.getPath());
-
-                if (dPlayer.getPoints() != jsonObject.get("points").getAsDouble()) {
-                    save(dPlayer.getDiscordID());
+    public static void save(long... userIDs) {
+        for (long userID : userIDs) {
+            if (GlobalConfig.USING_DATABASE) {
+                try {
+                    SQLManager.addToDatabase(getObject(userID));
+                } catch (SQLException throwable) {
+                    throwable.printStackTrace();
                 }
+            } else {
+                FileUtil.saveFile(getObject(userID), InitializeBot.get().getDPlayerDir() + "/" + userID + ".json");
+            }
+        }
+    }
 
+    public static void saveAll() {
+        if (GlobalConfig.USING_DATABASE) {
+            try {
+                for (Long discordID : SQLManager.getDiscordIDS()) {
+                    DPlayer dPlayer = SQLManager.getDPlayer(discordID);
+                    if (dPlayer != null) dPlayer.add();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            File directory = new File(InitializeBot.get().getDPlayerDir());
+            for (String filename : directory.list()) {
+                File dFile = new File(InitializeBot.get().getDPlayerDir() + "/" + filename);
+                JsonObject jsonObject = FileUtil.getJsonObject(dFile.getPath());
+                save(jsonObject.get("discordID").getAsLong());
+            }
+        }
+    }
+
+    public static void load() {
+        if (GlobalConfig.USING_DATABASE) {
+            try {
+                for (Long discordID : SQLManager.getDiscordIDS()) {
+                    DPlayer dPlayer = SQLManager.getDPlayer(discordID);
+                    if (dPlayer != null) dPlayer.add();
+                }
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        } else {
+            File directory = new File(InitializeBot.get().getDPlayerDir());
+            for (String filename : directory.list()) {
+                File dFile = new File(InitializeBot.get().getDPlayerDir() + "/" + filename);
+                DPlayer dPlayer = getDPlayerFromJsonObject(FileUtil.getJsonObject(dFile.getPath()));
+                dPlayer.add();
+            }
+        }
+    }
+
+    public static DPlayer getDPlayerFromJsonObject(JsonObject jsonObject) {
+        DPlayer dPlayer = new DPlayer();
+        JsonObject linkingObject = jsonObject.get("linkInfo").getAsJsonObject();
+
+        dPlayer.setDiscordID(jsonObject.get("discordID").getAsLong());
+        dPlayer.getLinkInfo().setMinecraftUUID(linkingObject.get("minecraftUUID").getAsString());
+
+        dPlayer.setLastUpdatedMillis(jsonObject.get("lastUpdatedMillis").getAsLong());
+
+        dPlayer.setInviteCount(jsonObject.get("inviteCount").getAsLong());
+        dPlayer.setWarnCount(jsonObject.get("warnCount").getAsLong());
+        dPlayer.setTicketsClosed(jsonObject.get("ticketsClosed").getAsLong());
+        dPlayer.setBlacklisted(jsonObject.get("blacklisted").getAsBoolean());
+
+        dPlayer.setInvitedByDiscordID(jsonObject.get("invitedByDiscordID").getAsLong());
+        dPlayer.getLinkInfo().setLinkCode(linkingObject.get("linkCode").getAsString());
+        dPlayer.getLinkInfo().setLinkedTime(linkingObject.get("linkedTime").getAsLong());
+        dPlayer.getLinkInfo().setLinked(linkingObject.get("linked").getAsBoolean());
+
+        JsonObject cacheObject = jsonObject.get("cachedData").getAsJsonObject();
+        Cache cache = new Cache();
+        cache.setDiscordTag(cacheObject.get("discordTag").getAsString());
+        cache.setMinecraftIGN(cacheObject.get("minecraftIGN").getAsString());
+        cache.setDiscordAvatarURL(cacheObject.get("discordAvatarURL").getAsString());
+        cache.setInvitedByDiscordTag(cacheObject.get("invitedByDiscordTag").getAsString());
+        cache.setInvitedByDiscordAvatarURL(cacheObject.get("invitedByDiscordAvatarURL").getAsString());
+        dPlayer.setCachedData(cache);
+
+        //After initial update:
+        if (jsonObject.has("points")) {
+            dPlayer.setPoints(jsonObject.get("points").getAsDouble());
+        }
+        if (jsonObject.has("lastBoostTime")) {
+            dPlayer.setLastBoostTime(jsonObject.get("lastBoostTime").getAsLong());
+        }
+        if (jsonObject.has("boostCount")) {
+            dPlayer.setBoostCount(jsonObject.get("boostCount").getAsLong());
+        }
+        if (jsonObject.has("mapPointsMap")) {
+            dPlayer.setMapPointsMap(jsonObject.get("mapPointsMap").getAsJsonObject());
+        }
+        return dPlayer;
+    }
+
+    public static void increment(long userID, String type) {
+        DPlayer dPlayer = getObject(userID);
+        switch (type.toLowerCase()) {
+            case "invites":
+                dPlayer.setInviteCount(dPlayer.getInviteCount() + 1);
+            case "ticketsclosed":
+                dPlayer.setTicketsClosed(dPlayer.getTicketsClosed() + 1);
+            case "warns":
+                dPlayer.setWarnCount(dPlayer.getWarnCount() + 1);
+        }
+    }
+
+    public static void decrease(long userID, String type) {
+        DPlayer dPlayer = getObject(userID);
+        switch (type.toLowerCase()) {
+            case "invites":
+                dPlayer.setInviteCount(dPlayer.getInviteCount() - 1);
+            case "ticketsclosed":
+                dPlayer.setTicketsClosed(dPlayer.getTicketsClosed() - 1);
+            case "warns":
+                dPlayer.setWarnCount(dPlayer.getWarnCount() - 1);
+        }
+    }
+
+    public static void clear(String type) {
+        for (Object singleton : getCache()) {
+            DPlayer dPlayer = ((DPlayer) singleton);
+            switch (type) {
+                case "invites":
+                    dPlayer.setInviteCount(0);
+                case "blacklist":
+                    dPlayer.setBlacklisted(false);
+                case "warns":
+                    dPlayer.setWarnCount(0);
 
             }
-
         }
-    };
-    //special
-
-    public void increaseWarn(User user) {
-        getObject(user).setWarnCount(getObject(user).getWarnCount() + 1);
-        save(user);
     }
 
-    public void decreaseWarn(User user) {
-        getObject(user).setWarnCount(getObject(user).getWarnCount() - 1);
-        save(user);
+    public static void updateInviter(long userID, User inviter) {
+        getObject(userID).setInvitedByDiscordID(inviter.getIdLong());
+        getObject(userID).getCachedData().setInvitedByDiscordTag(inviter.getAsTag());
+        getObject(userID).getCachedData().setInvitedByDiscordAvatarURL(inviter.getEffectiveAvatarUrl());
+        save(userID);
     }
 
-    public void increaseTicketsClosed(User user) {
-        getObject(user).setTicketsClosed(getObject(user).getTicketsClosed() + 1);
-        save(user);
-    }
-
-
-    public void increaseInvites(User user) {
-        getObject(user).setInviteCount(getObject(user).getInviteCount() + 1);
-        save(user);
-    }
-
-    public void decreaseInvites(User user) {
-        getObject(user).setInviteCount(getObject(user).getInviteCount() - 1);
-        save(user);
-    }
-
-    public void clearWarns() {
-        for (Object singleton : getCache()) {
-            DPlayer dPlayer = ((DPlayer) singleton);
-            dPlayer.setWarnCount(0);
-        }
-        saveAll();
-    }
-
-    public void clearBlacklist() {
-        for (Object singleton : getCache()) {
-            DPlayer dPlayer = ((DPlayer) singleton);
-            dPlayer.setBlacklisted(false);
-        }
-        saveAll();
-    }
-
-    public void clearTicketsClosed() {
-        for (Object singleton : getCache()) {
-            DPlayer dPlayer = ((DPlayer) singleton);
-            dPlayer.setTicketsClosed(0);
-        }
-        saveAll();
-    }
-
-    public void clearInvites() {
-        for (Object singleton : getCache()) {
-            DPlayer dPlayer = ((DPlayer) singleton);
-            dPlayer.setInviteCount(0);
-        }
-        saveAll();
-    }
-
-    public void updateInviter(User user, User inviter) {
-        getObject(user).setInvitedByDiscordID(inviter.getIdLong());
-        getObject(user).getCachedData().setInvitedByDiscordTag(inviter.getAsTag());
-        getObject(user).getCachedData().setInvitedByDiscordAvatarURL(inviter.getEffectiveAvatarUrl());
-        save(user);
-    }
-
-
-    public DPlayer getObjectFromIGN(String ign) {
+    public static DPlayer getObjectFromIGN(String ign) {
         for (Object object : getCache()) {
             DPlayer dPlayer = (DPlayer) object;
             if (dPlayer.getCachedData().getMinecraftIGN().equalsIgnoreCase(ign)) {
@@ -264,33 +193,12 @@ public class DPlayerEngine {
         return null;
     }
 
-    public DPlayer getObjectFromDiscordID(Long discordID) {
-        for (Object object : getCache()) {
-            DPlayer dPlayer = (DPlayer) object;
-            if (dPlayer.getDiscordID() == discordID) {
-                return dPlayer;
-            }
-        }
-        return null;
+    public static void setLinked(long userID, String code, String ign, String UUID) {
+        getObject(userID).getLinkInfo().setLinkCode(code);
+        getObject(userID).getLinkInfo().setMinecraftUUID(UUID);
+        getObject(userID).getLinkInfo().setLinkedTime(System.currentTimeMillis());
+        getObject(userID).getLinkInfo().setLinked(true);
+        getObject(userID).getCachedData().setMinecraftIGN(ign);
+        save(userID);
     }
-
-    public void setLinked(User user, String code, String ign, String UUID) {
-        getObject(user).getLinkInfo().setLinkCode(code);
-        getObject(user).getLinkInfo().setMinecraftUUID(UUID);
-        getObject(user).getCachedData().setMinecraftIGN(ign);
-        getObject(user).getLinkInfo().setLinkedTime(System.currentTimeMillis());
-        getObject(user).getLinkInfo().setLinked(true);
-        save(user);
-    }
-
-    public boolean isBlacklisted(User user) {
-        DPlayer dPlayer = getObject(user);
-        if (dPlayer == null) {
-            return false;
-        } else {
-            return dPlayer.isBlacklisted();
-        }
-    }
-
-
 }

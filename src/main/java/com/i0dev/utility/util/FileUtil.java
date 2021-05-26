@@ -1,7 +1,7 @@
 package com.i0dev.utility.util;
 
 import com.google.gson.*;
-import com.i0dev.InitilizeBot;
+import com.i0dev.InitializeBot;
 
 import java.io.*;
 import java.net.URL;
@@ -67,7 +67,7 @@ public class FileUtil {
 
     public static InputStream getInternalStream(String filename) {
         try {
-            URL url = InitilizeBot.get().getClass().getClassLoader().getResource(filename);
+            URL url = InitializeBot.get().getClass().getClassLoader().getResource(filename);
             URLConnection connection = url.openConnection();
             connection.setUseCaches(false);
             return connection.getInputStream();

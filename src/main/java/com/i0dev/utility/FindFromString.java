@@ -20,11 +20,11 @@ public class FindFromString {
         }
         try {
             Long.parseLong(arg);
-            return InternalJDA.get().getJda().getUserById(Long.parseLong(arg));
+            return InternalJDA.getJda().getUserById(Long.parseLong(arg));
         } catch (Exception ignored) {
         }
         try {
-            return InternalJDA.get().getJda().getUserByTag(arg);
+            return InternalJDA.getJda().getUserByTag(arg);
 
         } catch (Exception ignored) {
         }
@@ -88,8 +88,7 @@ public class FindFromString {
 
         try {
             Long.parseLong(arg);
-            Message message = GlobalConfig.GENERAL_MAIN_GUILD.getTextChannelById(channelID).retrieveMessageById(arg).complete();
-            return message;
+            return GlobalConfig.GENERAL_MAIN_GUILD.getTextChannelById(channelID).retrieveMessageById(arg).complete();
         } catch (Exception exception) {
             return null;
         }

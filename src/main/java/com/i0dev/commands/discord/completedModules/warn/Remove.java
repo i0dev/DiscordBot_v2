@@ -40,12 +40,12 @@ public class Remove {
             return;
         }
 
-        if (DPlayerEngine.getInstance().getObject(MentionedUser).getWarnCount() == 0) {
+        if (DPlayerEngine.getObject(MentionedUser.getIdLong()).getWarnCount() == 0) {
             MessageUtil.sendMessage(e.getChannel().getIdLong(), MESSAGE_NO_WARNS, e.getAuthor(), MentionedUser);
             return;
         }
 
-        DPlayerEngine.getInstance().decreaseWarn(MentionedUser);
+        DPlayerEngine.decrease(MentionedUser.getIdLong(),"warns");
 
         MessageUtil.sendMessage(e.getChannel().getIdLong(), MESSAGE_CONTENT, e.getAuthor(), MentionedUser);
 

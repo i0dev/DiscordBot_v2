@@ -3,8 +3,9 @@ package com.i0dev.object.engines;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.i0dev.InitilizeBot;
+import com.i0dev.InitializeBot;
 import com.i0dev.object.objects.Suggestion;
+import com.i0dev.utility.InternalJDA;
 import com.i0dev.utility.util.FileUtil;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import net.dv8tion.jda.api.entities.Message;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class SuggestionEngine {
 
@@ -76,7 +78,7 @@ public class SuggestionEngine {
     }
 
     public String getPath() {
-        return InitilizeBot.get().getSuggestionPath();
+        return InitializeBot.get().getSuggestionPath();
     }
 
     public void load(JsonArray array) {
@@ -95,5 +97,23 @@ public class SuggestionEngine {
 
             getCache().add(suggestion);
         }
+
+        CompletableFuture.runAsync(() -> {
+            try {
+                Thread.sleep(9000);
+            } catch (InterruptedException ignored) {
+            }
+            for (Object o : cache) {
+                Suggestion suggestion = ((Suggestion) o);
+                try {
+                    InternalJDA.getJda().getTextChannelById(suggestion.getChannelID()).retrieveMessageById(suggestion.getMessageID()).complete();
+                } catch (Exception ignored) {
+                    remove(suggestion);
+                }
+            }
+            save();
+        });
+
+
     }
 }

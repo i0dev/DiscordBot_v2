@@ -31,11 +31,11 @@ public class CommandLink implements CommandExecutor {
 
         if (args.length == 1 && args[0].equalsIgnoreCase("generate")) {
 
-            DPlayer dPlayer = DPlayerEngine.getInstance().getObjectFromIGN(commandSender.getName());
+            DPlayer dPlayer = DPlayerEngine.getObjectFromIGN(commandSender.getName());
             if (dPlayer != null && dPlayer.getLinkInfo().isLinked()) {
                 List<String> formattedMsg = new ArrayList<>();
                 for (String message : LinkManager.INGAME_MESSAGE_ALREADY_LINKED) {
-                    formattedMsg.add(Placeholders.convert(message.replace("{ign}", commandSender.getName()), InternalJDA.get().getJda().getUserById(dPlayer.getDiscordID())));
+                    formattedMsg.add(Placeholders.convert(message.replace("{ign}", commandSender.getName()), InternalJDA.getJda().getUserById(dPlayer.getDiscordID())));
                 }
                 MessageUtil.sendMessageIngame(((Player) commandSender), formattedMsg);
                 return false;
@@ -59,11 +59,11 @@ public class CommandLink implements CommandExecutor {
         if (args.length == 2 && args[0].equalsIgnoreCase("code")) {
 
 
-            DPlayer dPlayer = DPlayerEngine.getInstance().getObjectFromIGN(commandSender.getName());
+            DPlayer dPlayer = DPlayerEngine.getObjectFromIGN(commandSender.getName());
             if (dPlayer != null && dPlayer.getLinkInfo().isLinked()) {
                 List<String> formattedMsg = new ArrayList<>();
                 for (String message : LinkManager.INGAME_MESSAGE_ALREADY_LINKED) {
-                    formattedMsg.add(Placeholders.convert(message.replace("{ign}", commandSender.getName()), InternalJDA.get().getJda().getUserById(dPlayer.getDiscordID())));
+                    formattedMsg.add(Placeholders.convert(message.replace("{ign}", commandSender.getName()), InternalJDA.getJda().getUserById(dPlayer.getDiscordID())));
                 }
                 MessageUtil.sendMessageIngame(((Player) commandSender), formattedMsg);
                 return false;
@@ -82,7 +82,7 @@ public class CommandLink implements CommandExecutor {
                 return false;
             }
 
-            DPlayerEngine.getInstance().setLinked(codeLinker.getUser(), code, commandSender.getName(), ((Player) commandSender).getUniqueId().toString());
+            DPlayerEngine.setLinked(codeLinker.getUser().getIdLong(), code, commandSender.getName(), ((Player) commandSender).getUniqueId().toString());
 
             List<String> formattedMsg = new ArrayList<>();
             for (String message : MESSAGE_INGAME_CONTENT) {
@@ -98,6 +98,7 @@ public class CommandLink implements CommandExecutor {
                         .replace("{uuid}", ((Player) commandSender).getUniqueId().toString());
                 MessageUtil.sendMessage(GlobalConfig.GENERAL_MAIN_LOGS_CHANNEL, logMsg, codeLinker.getUser());
             }
+            RoleRefreshHandler.RefreshUserRank(dPlayer);
 
             return true;
         }

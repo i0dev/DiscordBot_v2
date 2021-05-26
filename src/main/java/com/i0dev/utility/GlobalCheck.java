@@ -1,6 +1,6 @@
 package com.i0dev.utility;
 
-import com.i0dev.commands.DiscordCommandManager;
+import com.i0dev.modules.DiscordCommandManager;
 import com.i0dev.object.engines.PermissionHandler;
 import com.i0dev.object.discordLinking.DPlayerEngine;
 import com.i0dev.utility.util.MessageUtil;
@@ -16,7 +16,7 @@ public class GlobalCheck {
 
         if (event.getAuthor().isBot()) return false;
         if (!DiscordCommandManager.isGuild(event.getGuild())) return false;
-        if (DPlayerEngine.getInstance().isBlacklisted(event.getAuthor())) return false;
+        if (DPlayerEngine.getObject(event.getAuthor().getIdLong()).isBlacklisted()) return false;
 
         if (!PermissionUtil.get().hasPermission(event, permissionHandler.isStrict(), permissionHandler.isLite(), permissionHandler.isAdmin())) {
             MessageUtil.sendMessage(event.getChannel().getIdLong(), GlobalConfig.MESSAGE_COMMAND_NO_PERMISSION.replace("{command}", identifier), event.getAuthor(), null);
@@ -39,7 +39,7 @@ public class GlobalCheck {
     public static boolean check(GuildMessageReactionAddEvent event, String identifier, boolean enabled, boolean PERMISSION_STRICT, boolean PERMISSION_LITE, boolean PERMISSION_ADMIN) {
         if (event.getUser().isBot()) return false;
         if (!DiscordCommandManager.isGuild(event.getGuild())) return false;
-        if (DPlayerEngine.getInstance().isBlacklisted(event.getUser())) return false;
+        if (DPlayerEngine.getObject(event.getUser().getIdLong()).isBlacklisted()) return false;
         if (!enabled) {
             return false;
         }

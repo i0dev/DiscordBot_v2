@@ -159,21 +159,29 @@ public class TimeUtil {
         millis -= TimeUnit.MINUTES.toMillis(minutes);
         long seconds = TimeUnit.MILLISECONDS.toSeconds(millis);
 
-        if (days > 1) output += days + " days ";
-        else if (days == 1) output += days + " day ";
+        if (days > 1) output += bold(days) + " days, ";
+        else if (days == 1) output += bold(days) + " day, ";
 
-        if (hours > 1) output += hours + " hours ";
-        else if (hours == 1) output += hours + " hour ";
+        if (hours > 1) output += bold(hours) + " hours, ";
+        else if (hours == 1) output += bold(hours) + " hour, ";
 
-        if (minutes > 1) output += minutes + " minutes ";
-        else if (minutes == 1) output += minutes + " minute ";
+        if (minutes > 1) output += bold(minutes) + " minutes, ";
+        else if (minutes == 1) output += bold(minutes) + " minute, ";
 
-        if (seconds > 1) output += seconds + " seconds ";
-        else if (seconds == 1) output += seconds + " second ";
+        if (seconds > 1) output += bold(seconds) + " seconds ";
+        else if (seconds == 1) output += bold(seconds) + " second ";
 
         if (output.isEmpty()) return "just now ";
 
+        if (output.endsWith(",")){
+            output = output.substring(0,output.length()-1);
+        }
+
         return output;
+    }
+
+    static String bold(long t) {
+        return "**" + t + "**";
     }
 
     public static String formatTime(int seconds) {

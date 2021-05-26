@@ -1,9 +1,9 @@
 package com.i0dev.commands.discord.completedModules.giveaway;
 
-import com.i0dev.engine.discord.TaskCheckActiveGiveaways;
-import com.i0dev.object.objects.Giveaway;
+import com.i0dev.modules.giveaway.giveawayHandler;
 import com.i0dev.object.engines.GiveawayEngine;
 import com.i0dev.object.engines.PermissionHandler;
+import com.i0dev.object.objects.Giveaway;
 import com.i0dev.utility.Configuration;
 import com.i0dev.utility.GlobalCheck;
 import com.i0dev.utility.util.MessageUtil;
@@ -40,7 +40,7 @@ public class ReRoll {
         }
         MessageUtil.sendMessage(e.getChannel().getIdLong(), MESSAGE_CONTENT, e.getAuthor());
 
-        TaskCheckActiveGiveaways.get().endGiveawayFull(giveaway, true, true, true, e.getAuthor());
+        giveawayHandler.endGiveawayFull(giveaway, true, true, true, e.getAuthor());
 
     }
 }

@@ -1,6 +1,6 @@
 package com.i0dev.utility.util;
 
-import com.i0dev.InitilizeBot;
+import com.i0dev.InitializeBot;
 import com.i0dev.object.objects.Ticket;
 import net.dv8tion.jda.api.entities.*;
 
@@ -82,6 +82,6 @@ public class LogsUtil {
     }
 
     public static File getLogsFile(TextChannel channel) {
-        return new File(InitilizeBot.get().getTicketLogsDirPath() + "/" + channel.getName() + ".txt");
+        return new File(InitializeBot.get().getTicketLogsDirPath() + "/" + channel.getName() + ".txt");
     }
 }

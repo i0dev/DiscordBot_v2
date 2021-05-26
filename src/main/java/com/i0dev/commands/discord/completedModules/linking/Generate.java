@@ -1,10 +1,10 @@
 package com.i0dev.commands.discord.completedModules.linking;
 
-import com.i0dev.object.engines.PermissionHandler;
 import com.i0dev.object.discordLinking.CodeCache;
 import com.i0dev.object.discordLinking.DPlayer;
 import com.i0dev.object.discordLinking.DPlayerEngine;
 import com.i0dev.object.discordLinking.From_DiscordCodeLinker;
+import com.i0dev.object.engines.PermissionHandler;
 import com.i0dev.utility.Configuration;
 import com.i0dev.utility.GlobalCheck;
 import com.i0dev.utility.util.FormatUtil;
@@ -28,7 +28,7 @@ public class Generate {
             return;
         }
 
-        DPlayer dPlayer = DPlayerEngine.getInstance().getObject(e.getAuthor());
+        DPlayer dPlayer = DPlayerEngine.getObject(e.getAuthor().getIdLong());
         if (dPlayer != null && dPlayer.getLinkInfo().isLinked()) {
             MessageUtil.sendMessage(e.getChannel().getIdLong(), LinkManager.MESSAGE_ALREADY_LINKED.replace("{ign}", dPlayer.getCachedData().getMinecraftIGN()), e.getAuthor());
             return;
@@ -42,7 +42,10 @@ public class Generate {
         From_DiscordCodeLinker from_discordCodeLinker = new From_DiscordCodeLinker(e.getAuthor(), randomString);
         CodeCache.getInstance().getFrom_Discord_cache().add(from_discordCodeLinker);
 
-
-        MessageUtil.sendMessagePrivateChannel(e.getAuthor().openPrivateChannel().complete().getIdLong(), MESSAGE_CODE_MESSAGE.replace("{code}", randomString), null, e.getAuthor(), null);
+        try {
+            MessageUtil.sendMessagePrivateChannel(e.getAuthor().getIdLong(), MESSAGE_CODE_MESSAGE.replace("{code}", randomString), null, e.getAuthor(), null);
+        } catch (Exception eee) {
+            eee.printStackTrace();
+        }
     }
 }

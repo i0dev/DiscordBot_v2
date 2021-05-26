@@ -3,8 +3,9 @@ package com.i0dev.object.engines;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.i0dev.InitilizeBot;
+import com.i0dev.InitializeBot;
 import com.i0dev.object.objects.Ticket;
+import com.i0dev.utility.InternalJDA;
 import com.i0dev.utility.util.FileUtil;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import net.dv8tion.jda.api.entities.TextChannel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class TicketEngine {
 
@@ -70,13 +72,12 @@ public class TicketEngine {
     }
 
     public String getPath() {
-        return InitilizeBot.get().getTicketsPath();
+        return InitializeBot.get().getTicketsPath();
     }
 
     public void load(JsonArray array) {
         for (JsonElement element : array) {
             JsonObject jsonObject = element.getAsJsonObject();
-
             Ticket ticket = new Ticket();
             ticket.setChannelID(jsonObject.get("channelID").getAsLong());
             ticket.setTicketOwnerID(jsonObject.get("ticketOwnerID").getAsLong());
@@ -84,8 +85,22 @@ public class TicketEngine {
             ticket.setTicketOwnerTag(jsonObject.get("ticketOwnerTag").getAsString());
             ticket.setAdminOnlyMode(jsonObject.get("adminOnlyMode").getAsBoolean());
             ticket.setTicketNumber(jsonObject.get("ticketNumber").getAsLong());
-
             getCache().add(ticket);
         }
+
+        CompletableFuture.runAsync(() -> {
+            try {
+                Thread.sleep(9000);
+            } catch (InterruptedException ignored) {
+            }
+            for (Object o : cache) {
+                Ticket ticket = ((Ticket) o);
+                if (InternalJDA.getJda().getTextChannelById(ticket.getChannelID()) == null) {
+                    remove(ticket);
+                }
+            }
+            save();
+        });
+
     }
 }

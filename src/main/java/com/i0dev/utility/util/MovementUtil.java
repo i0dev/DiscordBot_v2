@@ -1,9 +1,9 @@
 package com.i0dev.utility.util;
 
-import com.i0dev.engine.discord.RoleQueue;
-import com.i0dev.engine.discord.Type;
-import com.i0dev.utility.GlobalConfig;
+import com.i0dev.object.objects.Type;
+import com.i0dev.object.objects.RoleQueueObject;
 import com.i0dev.utility.Configuration;
+import com.i0dev.utility.GlobalConfig;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import org.json.simple.JSONObject;
@@ -35,7 +35,7 @@ public class MovementUtil {
             for (long roleToGiveID : RoleIDS) {
                 Role roleToGive = GlobalConfig.GENERAL_MAIN_GUILD.getRoleById(roleToGiveID);
                 if (roleToGive == null) continue;
-                RoleQueue.addToQueue(member.getUser(), roleToGive, Type.ADD_ROLE);
+                new RoleQueueObject(member.getIdLong(), roleToGive.getIdLong(), Type.ADD_ROLE).add();
             }
         }
     }
@@ -125,6 +125,7 @@ public class MovementUtil {
         }
         return null;
     }
+
     public static Role getPreviousRole(Role role) {
 
         for (int i = 0; i < Tracks.size(); i++) {
@@ -171,6 +172,7 @@ public class MovementUtil {
         }
         return null;
     }
+
     public static JSONObject getPreviousRoleObject(Role role) {
         for (int i = 0; i < Tracks.size(); i++) {
             long mainRoleID = (long) Tracks.get(i).get("mainRole");

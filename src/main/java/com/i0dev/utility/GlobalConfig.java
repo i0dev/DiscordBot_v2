@@ -1,6 +1,5 @@
 package com.i0dev.utility;
 
-import com.i0dev.InitilizeBot;
 import net.dv8tion.jda.api.entities.Guild;
 
 public class GlobalConfig {
@@ -25,16 +24,17 @@ public class GlobalConfig {
     public static long MOVEMENT_CHANNEL_ID;
     public static String DISCORD_ACTIVITY;
     public static String DISCORD_ACTIVITY_TYPE;
+    public static String NOT_LINKED;
+    public static long F_TOP_LOGS_CHANNEL_ID;
+    public static boolean USING_DATABASE;
 
 
     public static void initGlobalConfig() {
         try {
-            GENERAL_MAIN_GUILD = InternalJDA.get().getJda().getGuildById(Configuration.getLong("general.guildID"));
+            GENERAL_MAIN_GUILD = InternalJDA.getJda().getGuildById(Configuration.getLong("general.guildID"));
         } catch (Exception ignored) {
             System.out.println("The guild ID in the GENERAL section of config is invalid!");
-            if (!InitilizeBot.get().isPluginMode()) {
-                System.exit(0);
-            }
+            InternalJDA.getJda().shutdown();
         }
 
         MESSAGE_COMMAND_NOT_ENABLED = Configuration.getString("messages.commandNotEnabled");
@@ -56,5 +56,8 @@ public class GlobalConfig {
         MOVEMENT_CHANNEL_ID = Configuration.getLong("channels.staffMovementsChannel");
         DISCORD_ACTIVITY = Configuration.getString("general.activity");
         DISCORD_ACTIVITY_TYPE = Configuration.getString("general.activityType");
+        NOT_LINKED = Configuration.getString("messages.notLinked");
+        F_TOP_LOGS_CHANNEL_ID = Configuration.getLong("channels.ftopLogsChannelID");
+        USING_DATABASE = Configuration.getBoolean("database.useDatabase");
     }
 }

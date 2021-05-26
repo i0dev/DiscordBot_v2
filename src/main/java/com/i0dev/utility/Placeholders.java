@@ -1,7 +1,7 @@
 package com.i0dev.utility;
 
 import com.i0dev.DiscordBot;
-import com.i0dev.InitilizeBot;
+import com.i0dev.InitializeBot;
 import com.i0dev.object.discordLinking.DPlayer;
 import com.i0dev.object.discordLinking.DPlayerEngine;
 import net.dv8tion.jda.api.JDA;
@@ -22,14 +22,14 @@ public class Placeholders {
     }
 
     public static String convert(String message, User mentioned, User author) {
-        JDA jda = InternalJDA.get().getJda();
+        JDA jda = InternalJDA.getJda();
         Guild guild = GlobalConfig.GENERAL_MAIN_GUILD;
         if (message == null) return null;
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
 
         //Mentioned User
         if (mentioned != null) {
-            DPlayer dPlayer = DPlayerEngine.getInstance().getObject(mentioned);
+            DPlayer dPlayer = DPlayerEngine.getObject(mentioned.getIdLong());
             message = message
                     .replace("{mentionedUserName}", mentioned.getName())
                     .replace("{mentionedUserTag}", mentioned.getAsTag())
@@ -46,9 +46,9 @@ public class Placeholders {
                     .replace("{mentionedUserPointsCount}", decimalFormat.format(dPlayer.getPoints()))
                     .replace("{mentionedUserBoostCount}", dPlayer.getBoostCount() + "")
 
-                    .replace("{mentionedUserInviteCount}", DPlayerEngine.getInstance().getObject(mentioned).getInviteCount() + "")
-                    .replace("{mentionedUserTicketsClosed}", DPlayerEngine.getInstance().getObject(mentioned).getTicketsClosed() + "")
-                    .replace("{mentionedUserWarnCount}", DPlayerEngine.getInstance().getObject(mentioned).getWarnCount() + "")
+                    .replace("{mentionedUserInviteCount}", DPlayerEngine.getObject(mentioned.getIdLong()).getInviteCount() + "")
+                    .replace("{mentionedUserTicketsClosed}", DPlayerEngine.getObject(mentioned.getIdLong()).getTicketsClosed() + "")
+                    .replace("{mentionedUserWarnCount}", DPlayerEngine.getObject(mentioned.getIdLong()).getWarnCount() + "")
                     .replace("{mentionedUserRoleCount}", guild.getMember(mentioned).getRoles().size() + "")
                     .replace("{mentionedUserIsAdministrator}", guild.getMember(mentioned).getPermissions().contains(Permission.ADMINISTRATOR) + "")
                     .replace("{mentionedUserEffectiveName}", guild.getMember(mentioned).getEffectiveName());
@@ -57,7 +57,7 @@ public class Placeholders {
 
         //Author
         if (author != null) {
-            DPlayer dPlayer = DPlayerEngine.getInstance().getObject(author);
+            DPlayer dPlayer = DPlayerEngine.getObject(author.getIdLong());
             message = message
                     .replace("{authorName}", author.getName())
                     .replace("{authorTag}", author.getAsTag())
@@ -73,9 +73,10 @@ public class Placeholders {
                     .replace("{authorPointsCount}", decimalFormat.format(dPlayer.getPoints()))
                     .replace("{authorBoostCount}", dPlayer.getBoostCount() + "")
 
-                    .replace("{authorInviteCount}", DPlayerEngine.getInstance().getObject(author).getInviteCount() + "")
-                    .replace("{authorTicketsClosed}", DPlayerEngine.getInstance().getObject(author).getTicketsClosed() + "")
-                    .replace("{authorWarnCount}", DPlayerEngine.getInstance().getObject(author).getWarnCount() + "")
+
+                    .replace("{authorInviteCount}", DPlayerEngine.getObject(author.getIdLong()).getInviteCount() + "")
+                    .replace("{authorTicketsClosed}", DPlayerEngine.getObject(author.getIdLong()).getTicketsClosed() + "")
+                    .replace("{authorWarnCount}", DPlayerEngine.getObject(author.getIdLong()).getWarnCount() + "")
                     .replace("{authorMemberRoleCount}", guild.getMember(author).getRoles().size() + "")
                     .replace("{authorIsAdministrator}", guild.getMember(author).getPermissions().contains(Permission.ADMINISTRATOR) + "")
                     .replace("{authorEffectiveName}", guild.getMember(author).getEffectiveName());
@@ -108,12 +109,12 @@ public class Placeholders {
         //General
         message = message
                 .replace("{DiscordBotAuthor}", "i0#0001")
-                .replace("{DiscordBotPluginMode}", InitilizeBot.isPluginMode() ? "Yes" : "No")
+                .replace("{DiscordBotPluginMode}", InitializeBot.isPluginMode() ? "Yes" : "No")
                 .replace("{DiscordBotPrefix}", GlobalConfig.GENERAL_BOT_PREFIX)
-                .replace("{DiscordBotVersion}", "2.1.1 BETA");
+                .replace("{DiscordBotVersion}", "2.1.3");
 
         //plugin mode
-        if (InitilizeBot.isPluginMode()) {
+        if (InitializeBot.isPluginMode()) {
             message = message
                     .replace("{serverTPS}", Lag.getTPS() + "")
                     .replace("{serverOnlineCount}", DiscordBot.get().getServer().getOnlinePlayers().size() + "");

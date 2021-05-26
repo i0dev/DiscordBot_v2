@@ -24,7 +24,7 @@ public class MessageUtil {
     }
 
     public static Message sendMessage(Long channelID, String message, String title, User author, User mentioned) {
-        MessageChannel messageChannel = InternalJDA.get().getJda().getTextChannelById(channelID);
+        MessageChannel messageChannel = InternalJDA.getJda().getTextChannelById(channelID);
         return messageChannel.sendMessage(
                 EmbedFactory.createEmbed(
                         Placeholders.convert(title, mentioned, author),
@@ -34,12 +34,12 @@ public class MessageUtil {
     }
 
     public static Message sendMessage(Long channelID, MessageEmbed messageEmbed) {
-        MessageChannel messageChannel = InternalJDA.get().getJda().getTextChannelById(channelID);
+        MessageChannel messageChannel = InternalJDA.getJda().getTextChannelById(channelID);
         return messageChannel.sendMessage(messageEmbed).complete();
     }
 
     public static void sendMessagePrivateChannel(Long userID, String message, String title, User author, User mentioned) {
-        PrivateChannel messageChannel = InternalJDA.get().getJda().getPrivateChannelById(userID);
+        PrivateChannel messageChannel = InternalJDA.getJda().openPrivateChannelById(userID).complete();
         messageChannel.sendMessage(
                 EmbedFactory.createEmbed(Placeholders.convert(title, mentioned, author), Placeholders.convert(message, mentioned, author)).build())
                 .queue(null, new ErrorHandler().ignore(ErrorResponse.UNKNOWN_CHANNEL));

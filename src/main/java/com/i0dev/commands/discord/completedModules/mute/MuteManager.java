@@ -26,7 +26,7 @@ public class MuteManager {
 
     public static String add = "`{prefix}mute Add <user>` *Mutes a user from speaking in any channel.*".replace("{prefix}", GlobalConfig.GENERAL_BOT_PREFIX);
     public static String remove = "`{prefix}mute Remove <user>` *Lifts the mute from a muted user.*".replace("{prefix}", GlobalConfig.GENERAL_BOT_PREFIX);
-    public static String create = "`{prefix}mute CreateRole` *Creates the a Muted role.*".replace("{prefix}", GlobalConfig.GENERAL_BOT_PREFIX);
+    public static String create = "`{prefix}mute Create` *Creates the a Muted role.*".replace("{prefix}", GlobalConfig.GENERAL_BOT_PREFIX);
     public static String list = "`{prefix}mute List` *Retrieves the list of muted members.*".replace("{prefix}", GlobalConfig.GENERAL_BOT_PREFIX);
     public static String clear = "`{prefix}mute Clear` *Clears the list of muted members*".replace("{prefix}", GlobalConfig.GENERAL_BOT_PREFIX);
 

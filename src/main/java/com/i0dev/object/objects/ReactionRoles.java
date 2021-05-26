@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import com.i0dev.InitilizeBot;
+import com.i0dev.InitializeBot;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import org.json.simple.JSONObject;
@@ -78,7 +78,7 @@ public class ReactionRoles {
         JsonElement el = parser.parse(all.toJSONString());
         String jsonString = gson.toJson(el);
         try {
-            Files.write(Paths.get(InitilizeBot.get().getReactionRolesPath()), jsonString.getBytes());
+            Files.write(Paths.get(InitializeBot.get().getReactionRolesPath()), jsonString.getBytes());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -87,7 +87,7 @@ public class ReactionRoles {
     public void loadObject() {
         JSONObject json = null;
         try {
-            json = (JSONObject) new JSONParser().parse(new FileReader(InitilizeBot.get().getReactionRolesPath()));
+            json = (JSONObject) new JSONParser().parse(new FileReader(InitializeBot.get().getReactionRolesPath()));
             ReactionRoleCache = (ArrayList<JSONObject>) json.get(KEY);
 
         } catch (IOException e) {

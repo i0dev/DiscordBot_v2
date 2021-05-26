@@ -43,8 +43,41 @@
     <orderEntry type="library" name="Maven: org.yaml:snakeyaml:1.14" level="project" />
     <orderEntry type="library" name="Maven: net.md-5:bungeecord-chat:1.8-SNAPSHOT" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.gitlab.ruany:LiteBansAPI:0.3.4" level="project" />
+    <orderEntry type="module-library">
+      <library name="Maven: FreezeGUI:FreezeGUI:1">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/FreezeGUI-PREMIUM_2.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntry type="library" name="Maven: com.googlecode.json-simple:json-simple:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: junit:junit:4.10" level="project" />
     <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-core:1.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: me.clip:placeholderapi:2.9.2" level="project" />
+    <orderEntry type="library" name="Maven: org.reflections:reflections:0.9.12" level="project" />
+    <orderEntry type="library" name="Maven: org.javassist:javassist:3.26.0-GA" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: net.luckperms:api:5.3" level="project" />
+    <orderEntry type="module-library">
+      <library name="Maven: FactionsMCRIvals:FactionsMCRIvals:1">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/Factions.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: MassiveCOre:MassiveCOre:1">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/MassiveCore.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:8.0.24" level="project" />
+    <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:3.11.4" level="project" />
   </component>
 </module>

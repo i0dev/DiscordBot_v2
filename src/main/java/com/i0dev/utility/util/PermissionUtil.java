@@ -29,7 +29,7 @@ public class PermissionUtil {
             }
         }
         for (long userID : Configuration.getLongList("roles.StrictAllowedUsers")) {
-            if (user.equals(InternalJDA.get().getJda().getUserById(userID))) {
+            if (user.equals(InternalJDA.getJda().getUserById(userID))) {
                 return true;
             }
         }
@@ -47,7 +47,7 @@ public class PermissionUtil {
             }
         }
         for (long userID : Configuration.getLongList("roles.LiteAllowedUsers")) {
-            if (user.equals(InternalJDA.get().getJda().getUserById(userID))) {
+            if (user.equals(InternalJDA.getJda().getUserById(userID))) {
                 return true;
             }
         }

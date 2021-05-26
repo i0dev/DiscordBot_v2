@@ -1,8 +1,8 @@
 package com.i0dev.commands.discord.completedModules.giveaway;
 
-import com.i0dev.object.objects.Giveaway;
 import com.i0dev.object.engines.GiveawayEngine;
 import com.i0dev.object.engines.PermissionHandler;
+import com.i0dev.object.objects.Giveaway;
 import com.i0dev.utility.Configuration;
 import com.i0dev.utility.GlobalCheck;
 import com.i0dev.utility.util.FormatUtil;
@@ -36,7 +36,7 @@ public class Info {
         String description = MESSAGE_CONTENT
                 .replace("{channelMention}", giveaway.getChannelID().toString())
                 .replace("{messageID}", giveaway.getMessageID().toString())
-                .replace("{winnerCount}", giveaway.getHostID().toString())
+                .replace("{winnerCount}", giveaway.getWinnerAmount() + "")
                 .replace("{hostTag}", giveaway.getPrize())
                 .replace("{endTime}", FormatUtil.formatDate(giveaway.getEndTime()))
                 .replace("{ended}", giveaway.isEnded() ? "Yes" : "No");

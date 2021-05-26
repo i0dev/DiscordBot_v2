@@ -17,7 +17,7 @@ public class ScreenshareManager {
         return builder.toString();
     }
 
-    public static String add = "`{prefix}screenshare Add <IGN>` *Adds a player to the screenshare list*".replace("{prefix}", GlobalConfig.GENERAL_BOT_PREFIX);
+    public static String add = "`{prefix}screenshare Add <IGN> [reason]` *Adds a player to the screenshare list*".replace("{prefix}", GlobalConfig.GENERAL_BOT_PREFIX);
     public static String remove = "`{prefix}screenshare Remove <IGN>` *Removes a player from the screenshare list*".replace("{prefix}", GlobalConfig.GENERAL_BOT_PREFIX);
     public static String list = "`{prefix}screenshare List` *Retrieves the players on the screenshare list*".replace("{prefix}", GlobalConfig.GENERAL_BOT_PREFIX);
     public static String clear = "`{prefix}screenshare Clear` *Clears the screenshare list*".replace("{prefix}", GlobalConfig.GENERAL_BOT_PREFIX);

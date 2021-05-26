@@ -42,7 +42,7 @@ public class Code {
             return;
         }
 
-        DPlayer dPlayer = DPlayerEngine.getInstance().getObject(e.getAuthor());
+        DPlayer dPlayer = DPlayerEngine.getObject(e.getAuthor().getIdLong());
         if (dPlayer != null && dPlayer.getLinkInfo().isLinked()) {
             MessageUtil.sendMessage(e.getChannel().getIdLong(), LinkManager.MESSAGE_ALREADY_LINKED.replace("{ign}", dPlayer.getCachedData().getMinecraftIGN()), e.getAuthor());
             return;
@@ -56,14 +56,14 @@ public class Code {
             return;
         }
 
-        DPlayerEngine.getInstance().setLinked(e.getAuthor(), code, codeLinker.getPlayer().getName(), codeLinker.getPlayer().getUniqueId().toString());
-
+        DPlayerEngine.setLinked(e.getAuthor().getIdLong(), code, codeLinker.getPlayer().getName(), codeLinker.getPlayer().getUniqueId().toString());
 
         List<String> formattedMsg = new ArrayList<>();
         for (String msg : MESSAGE_INGAME_CONTENT) {
             formattedMsg.add(Placeholders.convert(msg.replace("{code}", code).replace("{ign}", codeLinker.getPlayer().getName()), e.getAuthor()));
         }
         MessageUtil.sendMessageIngame(codeLinker.getPlayer(), formattedMsg);
+
 
 
         String desc = MESSAGE_CONTENT
@@ -79,5 +79,7 @@ public class Code {
                     .replace("{uuid}", codeLinker.getPlayer().getUniqueId().toString());
             MessageUtil.sendMessage(GlobalConfig.GENERAL_MAIN_LOGS_CHANNEL, logMsg, e.getAuthor());
         }
+        RoleRefreshHandler.RefreshUserRank(dPlayer);
+
     }
 }

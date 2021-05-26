@@ -3,7 +3,7 @@ package com.i0dev.object.engines;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.i0dev.InitilizeBot;
+import com.i0dev.InitializeBot;
 import com.i0dev.object.objects.Application;
 import com.i0dev.utility.util.FileUtil;
 import lombok.Getter;
@@ -63,7 +63,7 @@ public class ApplicationEngine {
     }
 
     public String getPath() {
-        return InitilizeBot.get().getApplicationsPath();
+        return InitializeBot.get().getApplicationsPath();
     }
 
     public void load(JsonArray array) {

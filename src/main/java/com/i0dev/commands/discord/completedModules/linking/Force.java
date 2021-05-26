@@ -39,12 +39,14 @@ public class Force {
 
         String ign = message[3];
 
-        DPlayerEngine.getInstance().setLinked(MentionedUser, FormatUtil.GenerateRandomString(), ign, APIUtil.getUUIDFromIGN(ign));
+        DPlayerEngine.setLinked(MentionedUser.getIdLong(), FormatUtil.GenerateRandomString(), ign, APIUtil.getUUIDFromIGN(ign));
 
         MessageUtil.sendMessage(e.getChannel().getIdLong(), MESSAGE_CONTENT, e.getAuthor(), MentionedUser);
 
         if (OPTION_LOG) {
             MessageUtil.sendMessage(GlobalConfig.GENERAL_MAIN_LOGS_CHANNEL, MESSAGE_LOG_MESSAGE, e.getAuthor(), MentionedUser);
         }
+        RoleRefreshHandler.RefreshUserRank(DPlayerEngine.getObject(MentionedUser.getIdLong()));
+
     }
 }

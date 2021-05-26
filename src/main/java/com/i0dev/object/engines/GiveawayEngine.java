@@ -3,8 +3,9 @@ package com.i0dev.object.engines;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.i0dev.InitilizeBot;
+import com.i0dev.InitializeBot;
 import com.i0dev.object.objects.Giveaway;
+import com.i0dev.utility.InternalJDA;
 import com.i0dev.utility.util.FileUtil;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import net.dv8tion.jda.api.entities.Message;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class GiveawayEngine {
 
@@ -85,7 +87,7 @@ public class GiveawayEngine {
     }
 
     public String getPath() {
-        return InitilizeBot.get().getGiveawaysPath();
+        return InitializeBot.get().getGiveawaysPath();
     }
 
     public void load(JsonArray array) {
@@ -102,6 +104,22 @@ public class GiveawayEngine {
             giveaway.setEnded(jsonObject.get("ended").getAsBoolean());
 
             getCache().add(giveaway);
+
+            CompletableFuture.runAsync(() -> {
+                try {
+                    Thread.sleep(9000);
+                } catch (InterruptedException ignored) {
+                }
+                for (Object o : cache) {
+                    Giveaway giveaway1 = ((Giveaway) o);
+                    try {
+                        InternalJDA.getJda().getTextChannelById(giveaway1.getChannelID()).retrieveMessageById(giveaway1.getMessageID()).complete();
+                    } catch (Exception ignored) {
+                        remove(giveaway1);
+                    }
+                }
+                save();
+            });
         }
     }
 }

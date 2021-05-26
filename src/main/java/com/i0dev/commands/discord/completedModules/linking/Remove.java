@@ -1,9 +1,9 @@
 package com.i0dev.commands.discord.completedModules.linking;
 
-import com.i0dev.object.engines.PermissionHandler;
 import com.i0dev.object.discordLinking.DPlayer;
 import com.i0dev.object.discordLinking.DPlayerEngine;
-import com.i0dev.object.discordLinking.Linking;
+import com.i0dev.object.discordLinking.LinkInfo;
+import com.i0dev.object.engines.PermissionHandler;
 import com.i0dev.utility.Configuration;
 import com.i0dev.utility.FindFromString;
 import com.i0dev.utility.GlobalCheck;
@@ -39,14 +39,14 @@ public class Remove {
         User MentionedUser = FindFromString.get().getUser(message[2], e.getMessage());
         DPlayer dPlayer;
         if (MentionedUser == null) {
-            if (DPlayerEngine.getInstance().getObjectFromIGN(message[2]) == null) {
+            if (DPlayerEngine.getObjectFromIGN(message[2]) == null) {
                 MessageUtil.sendMessage(e.getChannel().getIdLong(), MESSAGE_NOT_LINKED.replace("{arg}", message[2]), e.getAuthor());
                 return;
             } else {
-                dPlayer = DPlayerEngine.getInstance().getObjectFromIGN(message[2]);
+                dPlayer = DPlayerEngine.getObjectFromIGN(message[2]);
             }
         } else {
-            dPlayer = DPlayerEngine.getInstance().getObject(MentionedUser);
+            dPlayer = DPlayerEngine.getObject(MentionedUser.getIdLong());
         }
 
         if (dPlayer == null || dPlayer.getLinkInfo().getLinkedTime() == 0) {
@@ -55,8 +55,9 @@ public class Remove {
         }
 
 
-        dPlayer.setLinkInfo(new Linking());
-        DPlayerEngine.getInstance().save(dPlayer.getDiscordID());
+        dPlayer.setLinkInfo(new LinkInfo());
+        dPlayer.getCachedData().setMinecraftIGN("");
+        DPlayerEngine.save(dPlayer.getDiscordID());
 
 
         String desc = MESSAGE_CONTENT

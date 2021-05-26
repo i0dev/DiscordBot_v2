@@ -12,3 +12,12 @@ commands:
     description: link account
   2fa:
     description: tfa
+  points:
+    description: points
+permissions:
+  discordbot.points.add:
+    description: points add
+    default: op
+  discordbot.link.nickname.bypass:
+    description: modifys discord name
+    default: op

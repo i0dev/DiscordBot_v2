@@ -34,7 +34,7 @@ public class Retrieve {
             return;
         }
 
-        List<Object> list = DPlayerEngine.getInstance().getCache();
+        List<Object> list = DPlayerEngine.getCache();
         List<DPlayer> discPlayers = new ArrayList<>();
         for (Object o : list) {
             DPlayer dPlayer = ((DPlayer) o);

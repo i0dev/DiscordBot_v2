@@ -7,8 +7,20 @@
     "creatorTimeouts": 300000,
     "tebexSecret": "Your secret here",
     "guildID": 717818320887349267,
-    "token": "Your Token Here",
-    "updatePlayerCacheMillis": 259200000
+    "token": "Your Token",
+    "updatePlayerCacheMillis": 259200000,
+    "autoFtopOnMinute": [
+      "0",
+      "30"
+    ]
+  },
+  "database": {
+    "useDatabase": false,
+    "username": "username",
+    "password": "password",
+    "address": "localhost",
+    "port": "3306",
+    "database": "database"
   },
   "channels": {
     "incomingApplicationsChannel": 766330396832432150,
@@ -17,7 +29,7 @@
     "ticketCreateCategoryID": 766177636875239435,
     "confirmedFactionChannelID": 766328319318556702,
     "staffMovementsChannel": 824750623311659068,
-    "suggestionChannelID": 766330396832432150,
+    "suggestionChannelID": 766324555551211520,
     "logsChannelID": 766330396832432150,
     "inviteTrackingChannelID": 766330396832432150,
     "welcomeChannelID": 766324415364857918,
@@ -27,7 +39,8 @@
     "ticketCreateChannelID": 766322425323192330,
     "changelogChannelID": 766324291565781042,
     "acceptedSuggestionChannelID": 766330396832432150,
-    "rejectedSuggestionChannelID": 766330396832432150
+    "rejectedSuggestionChannelID": 766330396832432150,
+    "ftopLogsChannelID": 793715082881662986
   },
   "roles": {
     "islandLeaderRoleID": 766183477024260107,
@@ -101,6 +114,7 @@
     "channelNotFound": "The channel ``{arg}`` cannot be found. Please try again!\n\n**Quick Tip!**\n*You can use multiple inputs for entering channel information.*\n*You can use the ID, Mention, or name!*\n\n**Example:**\n`823925370126073876`, `#general`, `general`",
     "userNotFound": "The user ``{arg}`` cannot be found. Please try again!\n\n**Quick Tip!**\n*You can use multiple inputs for entering user information.*\n*You can use the ID, Mention, or tag!*\n\n**Example:**\n`823925370126073876`, `@i0`, `i0#0001`",
     "botNotInPluginMode": "This command will only work if the bot is ran as a plugin on a Spigot Minecraft Server!",
+    "notLinked": "You must be linked in order to run this command. Link yourself now with `.link generate`, and follow the instructions.",
     "embeds": {
       "Footer": "Play.MCRivals.com",
       "Title": "MCRivals Discord Bot",
@@ -110,8 +124,14 @@
   },
   "pointShop": {
     "general": {
-      "discordTitleFormat": "ID: {id} - {displayName} - Price: {price} points",
-      "discordDescFormat": "{description}\n\n*To buy this item, use the command `.points buy {id} [amount]`*"
+      "itemsPerPage": 5,
+      "inline": true,
+      "discordTitleFormat": "#{id}: {displayName} (${price})",
+      "discordDescFormat": "{description}",
+      "ingameBottomLore": [
+        "&7",
+        "&cRight-Click to buy. Price: &f{price} points"
+      ]
     },
     "options": [
       {
@@ -119,7 +139,7 @@
         "discordDisplayName": "Carnage Crate Key",
         "ingameDisplayName": "&c&lCarnage Crate Key",
         "commandsToRun": [
-          "crate give {authorLinkedIGN} carnage {amount}"
+          "crate give {player} carnage {amount}"
         ],
         "discordDescription": "Use this create key at **/warp crates** to unlock!",
         "ingameDescription": [
@@ -128,86 +148,225 @@
         ],
         "itemMaterial": "TRIPWIRE_HOOK",
         "itemAmount": 1,
+        "glow": true,
         "itemData": 0
       },
       {
-        "price": 500,
-        "discordDisplayName": "Carnage Crate Key",
-        "ingameDisplayName": "&c&lCarnage Crate Key",
+        "price": 250,
+        "discordDisplayName": "Tier V EXP Pouch",
+        "ingameDisplayName": "&c&lTier V EXP Pouch",
         "commandsToRun": [
-          "crate give {authorLinkedIGN} carnage {amount}"
+          "mp exp5 {player} {amount}"
         ],
-        "discordDescription": "Use this create key at **/warp crates** to unlock!",
+        "discordDescription": "Click EXP puch to get a random amount of experience!",
         "ingameDescription": [
           "&f",
-          "&7Use this key at &c/warp crates&7 to unlock"
+          "&7Right-Click this pouch to get a random amount of experience!"
         ],
-        "itemMaterial": "TRIPWIRE_HOOK",
+        "itemMaterial": "ENDER_CHEST",
         "itemAmount": 1,
+        "glow": true,
         "itemData": 0
       },
       {
-        "price": 500,
-        "discordDisplayName": "Carnage Crate Key",
-        "ingameDisplayName": "&c&lCarnage Crate Key",
+        "price": 25,
+        "discordDisplayName": "Chunk Buster",
+        "ingameDisplayName": "&c&lChunk Buster",
         "commandsToRun": [
-          "crate give {authorLinkedIGN} carnage {amount}"
+          "chunkbuster give {player} {amount}"
         ],
-        "discordDescription": "Use this create key at **/warp crates** to unlock!",
+        "discordDescription": "Place this Chunk Buster on the ground to break all the blocks in that chunk!",
         "ingameDescription": [
           "&f",
-          "&7Use this key at &c/warp crates&7 to unlock"
+          "&7Place this Chunk Buster on the ground to break all the blocks in that chunk!"
         ],
-        "itemMaterial": "TRIPWIRE_HOOK",
+        "itemMaterial": "ENDER_PORTAL_FRAME",
         "itemAmount": 1,
+        "glow": true,
         "itemData": 0
       },
       {
-        "price": 500,
-        "discordDisplayName": "Carnage Crate Key",
-        "ingameDisplayName": "&c&lCarnage Crate Key",
+        "price": 100,
+        "discordDisplayName": "Charged Throwable Creeper Egg",
+        "ingameDisplayName": "&c&lCharged Throwable Creeper Egg",
         "commandsToRun": [
-          "crate give {authorLinkedIGN} carnage {amount}"
+          "cegg give {player} charged {amount}"
         ],
-        "discordDescription": "Use this create key at **/warp crates** to unlock!",
+        "discordDescription": "Throw this creeper egg to summon a sticky Charged Creeper in its location!",
         "ingameDescription": [
           "&f",
-          "&7Use this key at &c/warp crates&7 to unlock"
+          "&7Throw this creeper egg to summon a sticky Charged Creeper in its location!"
         ],
-        "itemMaterial": "TRIPWIRE_HOOK",
+        "itemMaterial": "MONSTER_EGG",
         "itemAmount": 1,
+        "glow": true,
+        "itemData": 50
+      },
+      {
+        "price": 1500,
+        "discordDisplayName": "Mortal Kit One Time",
+        "ingameDisplayName": "&c&lMortal Kit One Time",
+        "commandsToRun": [
+          "voucher give {player} KitMortalOneTime {amount}"
+        ],
+        "discordDescription": "Get the Mortal God Kit, for a one time use.",
+        "ingameDescription": [
+          "&f",
+          "&7Get the Mortal God Kit, for a one time use."
+        ],
+        "itemMaterial": "PAPER",
+        "itemAmount": 1,
+        "glow": true,
         "itemData": 0
       },
       {
-        "price": 500,
-        "discordDisplayName": "Carnage Crate Key",
-        "ingameDisplayName": "&c&lCarnage Crate Key",
+        "price": 250,
+        "discordDisplayName": "Creeper Spawner",
+        "ingameDisplayName": "&c&lCreeper Spawner",
         "commandsToRun": [
-          "crate give {authorLinkedIGN} carnage {amount}"
+          "ss give {player} creeper {amount}"
         ],
-        "discordDescription": "Use this create key at **/warp crates** to unlock!",
-        "ingameDescription": [
-          "&f",
-          "&7Use this key at &c/warp crates&7 to unlock"
-        ],
-        "itemMaterial": "TRIPWIRE_HOOK",
+        "discordDescription": "Creepers drop TNT!",
+        "ingameDescription": [],
+        "itemMaterial": "MOB_SPAWNER",
         "itemAmount": 1,
+        "glow": true,
         "itemData": 0
       },
       {
-        "price": 500,
-        "discordDisplayName": "Carnage Crate Key",
-        "ingameDisplayName": "&c&lCarnage Crate Key",
+        "price": 100,
+        "discordDisplayName": "Collector",
+        "ingameDisplayName": "&c&lCollector",
         "commandsToRun": [
-          "crate give {authorLinkedIGN} carnage {amount}"
+          "collector {player} {amount}"
         ],
-        "discordDescription": "Use this create key at **/warp crates** to unlock!",
+        "discordDescription": "Place this collector in your base to collect all mob drops that fall in that chunk!",
         "ingameDescription": [
           "&f",
-          "&7Use this key at &c/warp crates&7 to unlock"
+          "&7Place this collector in your base to collect all mob drops that fall in that chunk!"
+        ],
+        "itemMaterial": "BEACON",
+        "itemAmount": 1,
+        "glow": true,
+        "itemData": 0
+      },
+      {
+        "price": 1000,
+        "discordDisplayName": "Ancient Crate Key",
+        "ingameDisplayName": "&c&lAncient Crate Key",
+        "commandsToRun": [
+          "crate give {player} Ancient {amount}"
+        ],
+        "discordDescription": "Use this key at **/warp crates** to unlock it!",
+        "ingameDescription": [
+          "&f",
+          "&7Use this key at &c/warp crates&7 to unlock it!"
         ],
         "itemMaterial": "TRIPWIRE_HOOK",
         "itemAmount": 1,
+        "glow": true,
+        "itemData": 0
+      },
+      {
+        "price": 5000,
+        "discordDisplayName": "May Monthly Crate",
+        "ingameDisplayName": "&a&lAoril Monthly Crate",
+        "commandsToRun": [
+          "cratebox give {player} MayMonthlyCrate {amount}"
+        ],
+        "discordDescription": "Place this crate on the ground to open it!",
+        "ingameDescription": [
+          "&f",
+          "&7Place this crate on the ground to open it!"
+        ],
+        "itemMaterial": "BEACON",
+        "itemAmount": 1,
+        "glow": true,
+        "itemData": 0
+      },
+      {
+        "price": 1000,
+        "discordDisplayName": "Kit Bard One Time",
+        "ingameDisplayName": "&e&lKit Bard One Time",
+        "commandsToRun": [
+          "voucher give {player} KitBardOneTime {amount}"
+        ],
+        "discordDescription": "Use this voucher to redeem kit bard one time",
+        "ingameDescription": [
+          "&f",
+          "&7Use this voucher to redeem kit bard one time"
+        ],
+        "itemMaterial": "GOLD_CHESTPLATE",
+        "itemAmount": 1,
+        "glow": true,
+        "itemData": 0
+      },
+      {
+        "price": 350,
+        "discordDisplayName": "Tier V Money Pouch",
+        "ingameDisplayName": "&c&lTier V Money Pouch",
+        "commandsToRun": [
+          "mp money5 {player} {amount}"
+        ],
+        "discordDescription": "Use this pouch to get a random amount of money",
+        "ingameDescription": [
+          "&f",
+          "&7Use this pouch to get a random amount of money"
+        ],
+        "itemMaterial": "ENDER_CHEST",
+        "itemAmount": 1,
+        "glow": true,
+        "itemData": 0
+      },
+      {
+        "price": 2500,
+        "discordDisplayName": "Fix Hand Perk (Permanent)",
+        "ingameDisplayName": "&c&lFix Hand Perk &7(Permanent)",
+        "commandsToRun": [
+          "voucher give {player} FixHandPerm {amount}"
+        ],
+        "discordDescription": "Use this voucher to gain access to /fix hand!",
+        "ingameDescription": [
+          "&f",
+          "&7Use this voucher to gain access to /fix hand!"
+        ],
+        "itemMaterial": "PAPER",
+        "itemAmount": 1,
+        "glow": true,
+        "itemData": 0
+      },
+      {
+        "price": 3000,
+        "discordDisplayName": "Jelly Legs Perk (Permanent)",
+        "ingameDisplayName": "&c&lJelly Legs Perk  &7(Permanent)",
+        "commandsToRun": [
+          "voucher give {player} JellyLegsPerm {amount}"
+        ],
+        "discordDescription": "Use this voucher to gain access to /jellylegs!",
+        "ingameDescription": [
+          "&f",
+          "&7Use this voucher to gain access to /jellylegs!"
+        ],
+        "itemMaterial": "DIAMOND_BOOTS",
+        "itemAmount": 1,
+        "glow": true,
+        "itemData": 0
+      },
+      {
+        "price": 2000,
+        "discordDisplayName": "Pot Fill Perk (Permanent)",
+        "ingameDisplayName": "&c&lJelly Pot Fill  &7(Permanent)",
+        "commandsToRun": [
+          "voucher give {player} PotFillPerk {amount}"
+        ],
+        "discordDescription": "Use this voucher to gain access to /potfill!",
+        "ingameDescription": [
+          "&f",
+          "&7Use this voucher to gain access to /potfill!"
+        ],
+        "itemMaterial": "POTION",
+        "itemAmount": 1,
+        "glow": true,
         "itemData": 0
       }
     ]
@@ -231,6 +390,12 @@
       "memberCountEnabled": false,
       "channelNameFormat": "Members: {guildMemberCount}"
     },
+    "autoFtop": {
+      "enabled": false,
+      "title": "Faction Top for Allegiance",
+      "footer": "play.mcrivals.com",
+      "format": "{place}. **{faction}** » ${total} `{change}`"
+    },
     "twoFactorAuth": {
       "enabled": true,
       "permission": "discordbot.2fa",
@@ -247,6 +412,8 @@
       "dmToTicketCreatorDescription": "You created a new ticket in the **{guildName}** discord!\n Click the channel to go to it! {ticketCreatedMention}\n\nPlease do not mention staff members, help will come as soon as one of our staff members is available! \nThank you for your patience",
       "requirePermission": false,
       "enabled": true,
+      "maxTicketsPerUser": 4,
+      "maxTicketsMessage": "{authorTagBold}, you already have {max} tickets open, which is the maxiumum amount of tickets open! ",
       "ticketCreatedEmbedFieldBase": "```{Questions}```",
       "RolesToAllowSeeingTickets": [
         795324267969249310
@@ -271,6 +438,7 @@
     },
     "event_welcome": {
       "welcomeMessageThumbnailUseNewMember": true,
+      "welcomeImage": "https://cdn.discordapp.com/attachments/766323223960616990/828300815667167312/McRivals2.png",
       "pingUser": true,
       "welcomeMessageTitle": "Welcome {authorTag} to {guildName}!",
       "welcomeMessageDesc": "**For support go to:** <#766322425323192330>\n**Server IP:** `play.mcrivals.com`\n**Website:** [shop.mcrivals.com](https://shop.mcrivals.com)\n**MemberCount:** `{guildMemberCount}`",
@@ -499,7 +667,7 @@
       "permissionLiteMode": false,
       "requirePermission": true,
       "format": "**Format:** ``{command} <channel> <content>``\n\n*Use this command to make an announcement in a certain channel!*",
-      "announcementTitle": "Announcement from: {userName}",
+      "announcementTitle": "Announcement from: {authorUserName}",
       "enabled": true,
       "messageContent": "{authorTagBold} You have successfully made an announcement in {channel}!"
     },
@@ -819,7 +987,8 @@
             "What is your issue?"
           ],
           "AdminOnlyDefault": false,
-          "PanelDescription": "General questions, concerns or any support you need."
+          "PanelDescription": "General questions, concerns or any support you need.",
+          "CategoryID": 766177636875239435
         },
         {
           "ChannelName": "support-{ticketNumber}",
@@ -832,7 +1001,8 @@
             "What is your issue?"
           ],
           "AdminOnlyDefault": true,
-          "PanelDescription": "Tickets that admins and above can see."
+          "PanelDescription": "Tickets that admins and above can see.",
+          "CategoryID": 766177636875239435
         }
       ],
       "pinTicketPanel": false,
@@ -915,7 +1085,7 @@
         "cantFind": "{authorTagBold}, Cannot find that giveaway! Please try again!",
         "winnerDirectMessageDesc": "Congratulations! You won the giveaway for ``{prize}`` in the **{guildName}**\n[Click to see the giveaway]({messageLink})",
         "createdGiveawayTitle": "New Giveaway",
-        "createdGiveawayDesc": "**React with **{emoji}** to enter\n\n**Prize:** `{prize}`\n**Length:** {length}\n**Winners:** {winnerCount}\n**Hosted By:** {authorMention}\n**",
+        "createdGiveawayDesc": "**React with **{emoji}** to enter**\n\n**Prize:** `{prize}`\n**Time Remaining:** {timeLeft}\n**Winners:** {winnerCount}\n**Hosted By:** {authorMention}",
         "createdGiveawayFooter": "Ending at",
         "endedGiveawayTitle": "Giveaway Ended!",
         "endedGiveawayDesc": "**Prize:** `{prize}`\n**Hosted By:** {authorMention}\n**Total Entries:** {totalEntries}\n**Winners:** {winners}",
@@ -1162,7 +1332,7 @@
     },
     "mute": {
       "message": {
-        "roleNotFound": "{authorTagBold}, There was an error getting the muted role. If you do not have a muted role, you can run the command ``{DiscordBotPrefix}createMutedRole`` and then copy the ID into config."
+        "roleNotFound": "{authorTagBold}, There was an error getting the muted role. If you do not have a muted role, you can run the command ``{DiscordBotPrefix}mute create`` and then copy the ID into config."
       },
       "parts": {
         "add": {
@@ -1468,6 +1638,31 @@
         }
       }
     },
+    "mapPoints": {
+      "general": {
+        "servers": [
+          "allegiance",
+          "defiance"
+        ]
+      },
+      "message": {
+        "isNotNumber": "{authorTagBold}, The number `{arg}` is not a valid number. Please try again.",
+        "notValidServer": "{authorTagBold}, the server `{arg}` is not a valid server. Please try one that is valid.\n**Valid Options:**\n`{list}`"
+      },
+      "parts": {
+        "add": {
+          "enabled": true,
+          "message": {
+            "general": "{authorTagBold}, you've added `{amount}` points to `{mentionedUserTag}'s` balance.\nThey now have a total of: `{coming soon}`"
+          },
+          "permission": {
+            "strict": true,
+            "lite": false,
+            "admin": false
+          }
+        }
+      }
+    },
     "points": {
       "message": {
         "isNotNumber": "{authorTagBold}, The number `{arg}` is not a valid number. Please try again.",
@@ -1509,6 +1704,26 @@
         },
         "shop": {
           "enabled": true,
+          "message": {
+            "title": "Discord Points Shop | Page [{page} / {max}]",
+            "desc": "**To buy an item, use the command `.points buy <id> [amount]`**"
+          },
+          "permission": {
+            "strict": false,
+            "lite": false,
+            "admin": false
+          }
+        },
+        "buy": {
+          "option": {
+            "maxBuyAmount": 64
+          },
+          "enabled": true,
+          "message": {
+            "general": ":white_check_mark: {authorTag}, you've sucsessfully purchased x{amount} {displayName} for {totalCost} points",
+            "notValidID": "{authorTagBold}, the id `{arg}` is not a valid ID, use `.points shop`, to find the ID of an item to buy.",
+            "maxBuyAmount": "{authorTagBold}, the amount you entered: `{arg}`, is to high, the maximum amount size is {max}"
+          },
           "permission": {
             "strict": false,
             "lite": false,
@@ -1559,7 +1774,7 @@
             "log": true
           },
           "message": {
-            "general": "You have warned `{mentionedUserTag}` With the reason: `{reason}`\n{userName} now has a total of `{mentionedUserWarnCount}` warns!",
+            "general": "You have warned `{mentionedUserTag}` With the reason: `{reason}`\n{mentionedUserName} now has a total of `{mentionedUserWarnCount}` warns!",
             "logMessage": "``{mentionedUserTag}`` has been warned by {authorTagBold}\nWith the reason: `{reason}`\n{mentionedUserName} now has a total of `{mentionedUserWarnCount}` warns!"
           },
           "permission": {
@@ -1614,6 +1829,17 @@
       }
     },
     "link": {
+      "general": {
+        "nicknameFormat": "[VIP] {ign}",
+        "rolesToGiveAlways": [
+          791840904251834398
+        ],
+        "ranksToLink": {
+          "rival": 791840959687163914,
+          "gladiator": 791840960585793556,
+          "knight": 791840962489221120
+        }
+      },
       "message": {
         "alreadyLinked": "{authorTagBold}, you are already linked to the minecraft account `{authorLinkedIGN}`",
         "ingameAlreadyLinked": [

@@ -4,8 +4,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import com.i0dev.InitilizeBot;
-import net.dv8tion.jda.api.JDA;
+import com.i0dev.InitializeBot;
+import lombok.Getter;
+import lombok.Setter;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -18,31 +19,36 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Configuration {
 
+    @Getter
+    @Setter
     private static JSONObject json;
 
-    public static JSONObject getJson() {
-        return json;
-    }
-
-    public static void reloadConfig() {
+    public static JSONObject getNewJson() {
+        JSONObject object = new JSONObject();
         try {
-            json = (JSONObject) new JSONParser().parse(new FileReader(InitilizeBot.get().getConfigPath()));
+            object = (JSONObject) new JSONParser().parse(new FileReader(InitializeBot.get().getConfigPath()));
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
+        return object;
+    }
+
+    public static void reloadConfig() {
+        setJson(getNewJson());
         absenceCheck(getInternalConfig(), getJson());
         saveJSON();
     }
 
     public static void absenceCheck(JSONObject internal, JSONObject external) {
+        if (json == null) return;
+        if (!json.containsKey("general")) return;
         for (Object o : internal.keySet()) {
             external.putIfAbsent(o, internal.get(o));
             if (internal.get(o) instanceof JSONObject) {
+                if (o.toString().equalsIgnoreCase("ranksToLink")) continue;
                 absenceCheck((JSONObject) internal.get(o), ((JSONObject) external.get(o)));
             }
         }
@@ -54,7 +60,7 @@ public class Configuration {
         JsonElement el = parser.parse(json.toJSONString());
         String jsonString = gson.toJson(el);
         try {
-            Files.write(Paths.get(InitilizeBot.get().getConfigPath()), jsonString.getBytes());
+            Files.write(Paths.get(InitializeBot.get().getConfigPath()), jsonString.getBytes());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -111,7 +117,7 @@ public class Configuration {
 
     public static JSONObject getInternalConfig() {
         try {
-            URLConnection connection = InitilizeBot.get().getClass().getClassLoader().getResource("Config.json").openConnection();
+            URLConnection connection = InitializeBot.get().getClass().getClassLoader().getResource("Config.json").openConnection();
             connection.setUseCaches(false);
             return (JSONObject) new JSONParser().parse(
                     new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8));
@@ -121,26 +127,4 @@ public class Configuration {
         return new JSONObject();
     }
 
-    public static void reload() {
-        JDA jda = InternalJDA.get().getJda();
-        jda.shutdown();
-        Timer createJDATimer = new Timer();
-        createJDATimer.schedule(createJDALater, 1000);
-    }
-
-    public static TimerTask createJDALater = new TimerTask() {
-        public void run() {
-            InternalJDA.get().createJDA();
-            GlobalConfig.initGlobalConfig();
-            Configuration.reloadConfig();
-            Timer TaskTimer = new Timer();
-            TaskTimer.schedule(runStartupLater, 1000);
-        }
-    };
-
-    public static TimerTask runStartupLater = new TimerTask() {
-        public void run() {
-            InternalJDA.get().registerListeners();
-        }
-    };
 }

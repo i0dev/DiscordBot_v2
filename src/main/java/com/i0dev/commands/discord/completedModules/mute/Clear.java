@@ -1,10 +1,10 @@
 package com.i0dev.commands.discord.completedModules.mute;
 
-import com.i0dev.engine.discord.RoleQueue;
-import com.i0dev.engine.discord.Type;
+import com.i0dev.object.objects.Type;
+import com.i0dev.object.objects.RoleQueueObject;
 import com.i0dev.object.engines.PermissionHandler;
-import com.i0dev.utility.GlobalCheck;
 import com.i0dev.utility.Configuration;
+import com.i0dev.utility.GlobalCheck;
 import com.i0dev.utility.util.MessageUtil;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -35,7 +35,7 @@ public class Clear {
 
         for (Member member : e.getGuild().getMembers()) {
             if (member.getRoles().contains(MuteManager.ROLE_MUTED_ROLE)) {
-                RoleQueue.addToQueue(member, MuteManager.ROLE_MUTED_ROLE, Type.REMOVE_ROLE);
+                new RoleQueueObject(member.getIdLong(), MuteManager.ROLE_MUTED_ROLE.getIdLong(), Type.ADD_ROLE).add();
             }
         }
 
