@@ -36,17 +36,27 @@ public class EmbedFactory {
 
         embedBuilder.setTimestamp(ZonedDateTime.now());
 
-        if (title != null && !title.equalsIgnoreCase("")) embedBuilder.setTitle(title);
-        if (description != null && !description.equalsIgnoreCase("")) embedBuilder.setDescription(description);
-        if (footer != null && !footer.equalsIgnoreCase("")) embedBuilder.setFooter(footer);
-        if (thumbnail != null && !thumbnail.equalsIgnoreCase("")) embedBuilder.setThumbnail(thumbnail);
-        if (image != null && !image.equalsIgnoreCase("")) embedBuilder.setImage(image);
 
+        if (title != null && !title.equalsIgnoreCase("")) embedBuilder.setTitle(title);
+        else {
+            if (defaultTitle != null && !defaultTitle.equalsIgnoreCase("")) embedBuilder.setTitle(defaultTitle);
+
+        }
+        if (footer != null && !footer.equalsIgnoreCase("")) embedBuilder.setFooter(footer);
+        else {
+            if (defaultFooter != null && !defaultFooter.equalsIgnoreCase("")) embedBuilder.setFooter(defaultFooter);
+
+        }
+        if (thumbnail != null && !thumbnail.equalsIgnoreCase("")) embedBuilder.setThumbnail(thumbnail);
+        else {
+            if (defaultThumnail != null && !defaultThumnail.equalsIgnoreCase(""))
+                embedBuilder.setThumbnail(defaultThumnail);
+        }
+
+        if (description != null && !description.equalsIgnoreCase("")) embedBuilder.setDescription(description);
+        if (image != null && !image.equalsIgnoreCase("")) embedBuilder.setImage(image);
         if (colorHex != null && !colorHex.equalsIgnoreCase("")) embedBuilder.setColor(Color.decode(colorHex));
-        if (defaultThumnail != null && !defaultThumnail.equalsIgnoreCase(""))
-            embedBuilder.setThumbnail(defaultThumnail);
-        if (defaultTitle != null && !defaultTitle.equalsIgnoreCase("")) embedBuilder.setTitle(defaultTitle);
-        if (defaultFooter != null && !defaultFooter.equalsIgnoreCase("")) embedBuilder.setFooter(defaultFooter);
+
         for (MessageEmbed.Field field : fields) {
             embedBuilder.addField(field);
         }
