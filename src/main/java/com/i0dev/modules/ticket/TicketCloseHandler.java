@@ -52,7 +52,7 @@ public class TicketCloseHandler extends ListenerAdapter {
     static void closeTicket(Ticket ticket, String reason, User closer) {
         File ticketLogsFile = new File(InitializeBot.get().getTicketLogsDirPath() + "/" + ticket.getChannelID() + ".log");
         TextChannel ticketChannel = GlobalConfig.GENERAL_MAIN_GUILD.getTextChannelById(ticket.getChannelID());
-        String toFile = "\nClosed Ticket Information:\n " +
+        String toFile = "\n\nClosed Ticket Information:\n " +
                 "  Ticket Closer Tag: " + closer.getAsTag() + "\n" +
                 "   Ticket Closer ID: " + closer.getId() + "\n" +
                 "   Ticket Close reason: " + reason;
