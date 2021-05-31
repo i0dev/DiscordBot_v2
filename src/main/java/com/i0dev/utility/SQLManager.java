@@ -59,7 +59,7 @@ public class SQLManager {
     public static void migrateData() throws SQLException {
         List<String> tables = getTables();
         createTables();
-        if (!tables.contains("dPlayers")) {
+        if (!tables.contains("dplayers")) {
             InitializeBot.getAsyncService().schedule(() -> {
                 try {
                     System.out.println("Migrating data from physical storage to database form. This may take a few seconds...");
