@@ -1,5 +1,7 @@
 package com.i0dev.commands.discord.completedModules.linking;
 
+import com.i0dev.DiscordBot;
+import com.i0dev.InitializeBot;
 import com.i0dev.object.discordLinking.DPlayer;
 import com.i0dev.object.discordLinking.DPlayerEngine;
 import com.i0dev.object.objects.RoleQueueObject;
@@ -7,6 +9,7 @@ import com.i0dev.object.objects.Type;
 import com.i0dev.utility.Configuration;
 import com.i0dev.utility.GlobalConfig;
 import com.i0dev.utility.InternalJDA;
+import com.i0dev.utility.util.FormatUtil;
 import com.i0dev.utility.util.TempNicknameUtil;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.User;
@@ -32,10 +35,12 @@ public class RoleRefreshHandler implements Listener {
     }
 
     public static void RefreshUserRank(DPlayer dPlayer) {
+        if (dPlayer == null) return;
         if (InternalJDA.getJda().getUserById(dPlayer.getDiscordID()) == null) return;
         if (!dPlayer.getLinkInfo().isLinked()) return;
         if (dPlayer.getCachedData().getMinecraftIGN().equalsIgnoreCase("")) return;
-
+        if (!InitializeBot.isPluginMode()) return;
+        if (!DiscordBot.get().getServer().getPluginManager().isPluginEnabled("LuckPerms")) return;
         try {
             Player player = Bukkit.getPlayer(dPlayer.getCachedData().getMinecraftIGN());
             if (player != null) {
