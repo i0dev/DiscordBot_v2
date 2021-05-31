@@ -8,8 +8,8 @@ public class TempNicknameUtil {
     public static void modifyNickname(User user, String nickname) {
         try {
             GlobalConfig.GENERAL_MAIN_GUILD.getMember(user).modifyNickname(nickname).queue();
-        } catch (Exception ignored) {
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
