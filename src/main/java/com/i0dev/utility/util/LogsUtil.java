@@ -1,10 +1,8 @@
 package com.i0dev.utility.util;
 
-import com.i0dev.InitializeBot;
 import com.i0dev.object.objects.Ticket;
 import net.dv8tion.jda.api.entities.*;
 
-import java.io.File;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.TextStyle;
@@ -34,7 +32,7 @@ public class LogsUtil {
         toFile.append("     Ticket Closer Tag: ").append(ticketCloser.getAsTag()).append("\n");
         toFile.append("     Ticket Closer ID: ").append(ticketCloser.getId()).append("\n");
         toFile.append("     Ticket Close reason: ").append(ticketCloseReason).append("\n");
-        toFile.append("\nTicket logs (TimeZone: ").append(Zone).append("):").append("\n");
+        toFile.append("\n\n\nTicket logs (TimeZone: ").append(Zone).append("):").append("\n");
 
         ArrayList<Message> messageHistoryList = new ArrayList<>(messageHistory.getRetrievedHistory());
         Collections.reverse(messageHistoryList);
@@ -79,9 +77,5 @@ public class LogsUtil {
             }
         }
         return toFile.toString();
-    }
-
-    public static File getLogsFile(TextChannel channel) {
-        return new File(InitializeBot.get().getTicketLogsDirPath() + "/" + channel.getName() + ".txt");
     }
 }
