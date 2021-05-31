@@ -48,7 +48,10 @@ public class RoleRefreshHandler implements Listener {
                     User discordUser = InternalJDA.getJda().getUserById(dPlayer.getDiscordID());
                     if (discordUser != null) {
                         String format = Configuration.getString("modules.link.general.nicknameFormat");
-                        TempNicknameUtil.modifyNickname(discordUser, format.replace("{ign}", dPlayer.getCachedData().getMinecraftIGN()));
+                        TempNicknameUtil.modifyNickname(discordUser, format
+                                .replace("{faction}", FormatUtil.getFactionName(dPlayer))
+                                .replace("{prefix}", FormatUtil.getPrefix(dPlayer))
+                                .replace("{ign}", dPlayer.getCachedData().getMinecraftIGN()));
                     }
                 }
             }
