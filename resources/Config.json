@@ -671,6 +671,17 @@
       "enabled": true,
       "messageContent": "{authorTagBold} You have successfully made an announcement in {channel}!"
     },
+    "embedMaker": {
+      "aliases": [
+        "createEmbed",
+        "newEmbed"
+      ],
+      "permissionLiteMode": false,
+      "requirePermission": true,
+      "format": "**Format:** ``{command} <channel> <pattern>``\n\n*Use this command to make a custom embed in a certain channel!\nUsing this link: https://robyul.chat/embed-creator*",
+      "enabled": true,
+      "messageContent": "{authorTagBold} You have successfully made an custom embed in {channel}!"
+    },
     "changelog": {
       "aliases": [
         "changelog"
