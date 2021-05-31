@@ -111,7 +111,7 @@ public class Placeholders {
                 .replace("{DiscordBotAuthor}", "i0#0001")
                 .replace("{DiscordBotPluginMode}", InitializeBot.isPluginMode() ? "Yes" : "No")
                 .replace("{DiscordBotPrefix}", GlobalConfig.GENERAL_BOT_PREFIX)
-                .replace("{DiscordBotVersion}", "2.1.3");
+                .replace("{DiscordBotVersion}", "2.1.4");
 
         //plugin mode
         if (InitializeBot.isPluginMode()) {
