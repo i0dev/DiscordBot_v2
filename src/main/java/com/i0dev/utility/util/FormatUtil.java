@@ -302,4 +302,119 @@ public class FormatUtil {
         }
         return r;
     }
+
+    public static String getFactionName(DPlayer dPlayer) {
+        String uid = dPlayer.getLinkInfo().getMinecraftUUID();
+        UUID uuid = uid.equals("") ? null : UUID.fromString(uid);
+        if (uuid == null) return "";
+        org.bukkit.entity.Player p = org.bukkit.Bukkit.getPlayer(uuid);
+        com.massivecraft.factions.entity.Faction f = com.massivecraft.factions.entity.MPlayer.get(p).getFaction();
+        return f.isNone() ? "Wilderness" : f.getName();
+    }
+
+    public static String getPrefix(DPlayer dPlayer) {
+        UUID uuid = dPlayer.getLinkInfo().getMinecraftUUID().equals("") ? null : UUID.fromString(dPlayer.getLinkInfo().getMinecraftUUID());
+        if (uuid == null) return "";
+        org.bukkit.entity.Player p = org.bukkit.Bukkit.getPlayer(uuid);
+        com.massivecraft.factions.entity.Faction f = com.massivecraft.factions.entity.MPlayer.get(p).getFaction();
+        return f.isNone() ? "" : com.massivecraft.factions.entity.MPlayer.get(p).getRole().getPrefix();
+    }
+
+    public static MessageEmbed getEmbedFromEncode(String string) {
+        EmbedBuilder eb = new EmbedBuilder();
+        if (!string.startsWith("_embed")) return null;
+        string = string.replace("#channel ", "");
+        string = string.replace("_embed ", "");
+        String[] partsArray = string.split("\\|");
+        String[] news = new String[partsArray.length];
+        for (int i = 0; i < news.length; i++) {
+            news[i] = partsArray[i].trim();
+        }
+        partsArray = news;
+        List<String> parts = Arrays.stream(partsArray).collect(Collectors.toList());
+        if (partContain("description=", parts)) {
+            eb.setDescription(getRemain("description=", parts));
+        }
+        if (partContain("title=", parts)) {
+            eb.setTitle(getRemain("title=", parts));
+        }
+        if (partContain("author=", parts)) {
+            String part = getPart("author=", parts);
+            int indexAuthor = part.indexOf("name=");
+            int indexIcon = part.indexOf("icon=");
+            int indexUrl = part.indexOf("url=");
+            String name = !part.contains("name=") ? null : part.substring(indexAuthor, part.contains("icon=") ? indexIcon : (part.contains("url=") ? indexUrl : part.length()));
+            String icon = !part.contains("icon=") ? null : part.substring(indexIcon, indexUrl != -1 ? indexUrl : part.length() - 1);
+            String url = !part.contains("url=") ? null : part.substring(indexUrl);
+            eb.setAuthor(name != null ? name.replaceFirst("name=", "") : null, url != null ? url.replaceAll("url=", "") : null, icon != null ? icon.replaceFirst("icon=", "") : null);
+        }
+        if (partContain("thumbnail=", parts)) {
+            eb.setThumbnail(getRemain("thumbnail=", parts));
+        }
+        if (partContain("image=", parts)) {
+            eb.setImage(getRemain("image=", parts));
+        }
+        if (partContain("footer=", parts)) {
+            String part = getPart("footer=", parts);
+            if (part.contains("icon=")) {
+                int indexAuthor = part.indexOf("name=");
+                int indexIcon = part.indexOf("icon=");
+                String name = !part.contains("name=") ? null : part.substring(indexAuthor, part.contains("icon=") ? indexIcon : part.length());
+                String icon = !part.contains("icon=") ? null : part.substring(indexIcon);
+                eb.setFooter(name != null ? name.replaceFirst("name=", "") : null, icon != null ? icon.replaceFirst("icon=", "") : null);
+            } else {
+                eb.setFooter(getRemain("footer=", parts));
+
+            }
+        }
+        if (partContain("color=", parts)) {
+            eb.setColor(Color.decode(getRemain("color=", parts)));
+        }
+
+        for (String part : getParts("field=", parts)) {
+            int indexAuthor = part.indexOf("name=");
+            int indexIcon = part.indexOf("value=");
+            int indexUrl = part.indexOf("inline=");
+            String name = !part.contains("name=") ? null : part.substring(indexAuthor, part.contains("value=") ? indexIcon : (part.contains("inline=") ? indexUrl : part.length()));
+            String icon = !part.contains("value=") ? null : part.substring(indexIcon, indexUrl != -1 ? indexUrl : part.length() - 1).equals("") ? "" : part.substring(indexIcon, indexUrl != -1 ? indexUrl : part.length() - 1);
+            boolean inline = !part.contains("inline=");
+            eb.addField(name != null ? name.replaceFirst("name=", "") : "", icon != null ? icon.replaceAll("value=", "") : "", inline);
+        }
+        return eb.build();
+    }
+
+    public static boolean partContain(String s, List<String> ls) {
+        for (String l : ls) {
+            if (l.startsWith(s)) return true;
+        }
+        return false;
+    }
+
+    public static String getPart(String s, List<String> ls) {
+        for (String l : ls) {
+            if (l.startsWith(s)) return l;
+        }
+        return "";
+    }
+
+    public static List<String> getParts(String s, List<String> ls) {
+        List<String> ret = new ArrayList<>();
+        for (String l : ls) {
+            if (l.startsWith(s)) {
+                ret.add(l);
+            }
+        }
+        return ret;
+    }
+
+    public static String getRemain(String s, List<String> ls) {
+        for (String l : ls) {
+            if (l.startsWith(s)) {
+                return l.substring(s.length());
+            }
+        }
+        return "";
+    }
+
+
 }
