@@ -1,18 +1,22 @@
 package com.i0dev.utility.util;
 
+import com.i0dev.object.discordLinking.DPlayer;
 import com.i0dev.utility.Configuration;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.User;
 import org.apache.commons.lang.RandomStringUtils;
 
+import java.awt.*;
 import java.text.DecimalFormat;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class FormatUtil {
