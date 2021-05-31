@@ -70,6 +70,7 @@ public class DiscordCommandManager extends ListenerAdapter {
     public static final List<String> HELP_ALIASES = Configuration.getStringList("commands.help.aliases");
     public static final List<String> PROFILE_ALIASES = Configuration.getStringList("commands.profile.aliases");
     public static final List<String> HEAP_DUMP_ALIASES = Configuration.getStringList("commands.heapDumpToDiscord.aliases");
+    public static final List<String> EMBED_MAKER_ALIASES = Configuration.getStringList("commands.embedMaker.aliases");
 
     //Fun Commands
     public static final List<String> EIGHTBALL_COMMAND_ALIASES = Configuration.getStringList("commands.fun_8ball.aliases");
@@ -134,6 +135,7 @@ public class DiscordCommandManager extends ListenerAdapter {
         }
         //Moderation
         if (isCommand(ANNOUNCE_ALIASES, e.getMessage())) CommandAnnounce.run(e);
+        else if (isCommand(EMBED_MAKER_ALIASES, e.getMessage())) CommandEmbedMaker.run(e);
         else if (isCommand(BAN_ALIASES, e.getMessage())) CommandBan.run(e);
         else if (isCommand(CHANGELOG_ALIASES, e.getMessage())) CommandChangelog.run(e);
         else if (isCommand(KICK_ALIASES, e.getMessage())) CommandKick.run(e);
@@ -183,7 +185,7 @@ public class DiscordCommandManager extends ListenerAdapter {
         else if (isCommand(TICKET_REMOVE_ALIASES, e.getMessage())) CommandTicketRemove.run(e);
         else if (isCommand(TICKET_RENAME_ALIASES, e.getMessage())) CommandTicketRename.run(e);
         else if (isCommand(TICKET_TOP_LEADERBOARD_ALIASES, e.getMessage())) CommandTicketTopLeaderboard.run(e);
-        //dev
+            //dev
         else if (isCommand("ftop", e.getMessage())) CommandFtop.run(e);
             //Modules
         else if (isCommand("blacklist", e.getMessage())) BlacklistManager.run(e);
