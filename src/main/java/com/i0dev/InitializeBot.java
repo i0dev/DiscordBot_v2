@@ -1,9 +1,10 @@
 package com.i0dev;
 
+import com.i0dev.modules.boosting.BoostHandler;
 import com.i0dev.modules.invite.InviteTracking;
-import com.i0dev.modules.points.EventHandler;
 import com.i0dev.modules.points.ingame.Shop;
 import com.i0dev.modules.ticket.TicketCreateHandler;
+import com.i0dev.object.discordLinking.DPlayer;
 import com.i0dev.object.discordLinking.DPlayerEngine;
 import com.i0dev.object.engines.*;
 import com.i0dev.object.objects.DiscordCommand;
@@ -118,13 +119,14 @@ public class InitializeBot {
                     SQLManager.init();
                     SQLManager.connect();
                     SQLManager.migrateData();
+                    SQLManager.absenceCheck(DPlayer.class);
+
                 }
                 DPlayerEngine.load();
 
                 TicketCreateHandler.init();
                 InviteTracking.attemptInviteCaching(GlobalConfig.GENERAL_MAIN_GUILD);
-                EventHandler.setBoostCount(GlobalConfig.GENERAL_MAIN_GUILD.getBoostCount());
-                EventHandler.setLastUpdateBoost(System.currentTimeMillis());
+                BoostHandler.setBoostCountCache(GlobalConfig.GENERAL_MAIN_GUILD.getBoostCount());
 
                 initializeCommands();
                 InternalJDA.registerListeners();
@@ -149,7 +151,11 @@ public class InitializeBot {
                 if (!isPluginMode()) {
                     if (command.getName().equals("com.i0dev.modules.points.discord.Buy")) continue;
                     if (command.getName().equals("com.i0dev.modules.basic.CommandRunCommand")) continue;
+                    if (command.getName().equals("com.i0dev.modules.basic.CommandReclaim")) continue;
+                    if (command.getName().equals("com.i0dev.modules.basic.CommandReclaimReset")) continue;
+                    if (command.getName().equals("com.i0dev.modules.boosting.Claim")) continue;
                 }
+                // System.out.println(command.getName());
                 Method init = command.getMethod("init");
                 init.invoke(command.newInstance());
                 count++;
