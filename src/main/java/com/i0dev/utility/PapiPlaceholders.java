@@ -44,8 +44,8 @@ public class PapiPlaceholders extends PlaceholderExpansion {
             return dPlayer == null ? "0" : FormatUtil.formatValueSuffix(Math.round(dPlayer.getPoints())) + "";
         }
 
-        if (params.startsWith("mapPoints_")) {
-            return dPlayer == null ? "0" : dPlayer.getMapPointsMap().get(params.substring("mapPoints_".length())).getAsString();
+        if (params.startsWith("mapPoints")) {
+            return dPlayer == null ? "0" : dPlayer.getMapPoints() + "";
         }
         return super.onPlaceholderRequest(p, params);
     }
