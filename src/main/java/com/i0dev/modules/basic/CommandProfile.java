@@ -55,6 +55,9 @@ public class CommandProfile extends DiscordCommand {
         desc.append("**Boost Count:** ").append("`{authorBoostCount}`").append("\n");
         desc.append("**Points:** ").append("`{authorPointsCount}`").append("\n");
         desc.append("**Map Points:** ").append("`{authorMapPoints}`").append("\n");
+        desc.append("**Boost Credits:** ").append("`{authorBoostCredits}`").append("\n");
+        desc.append("**Rewards Claimed:** ").append("`{authorRewardsClaimed}`").append("\n");
+        desc.append("**Claimed Reclaim:** ").append("`{authorHasReclaim}`").append("\n");
 
         e.getChannel().sendMessage(EmbedFactory.createEmbed(Placeholders.convert(MESSAGE_TITLE, null, MentionedUser), Placeholders.convert(desc.toString(), null, MentionedUser), null, MentionedUser.getEffectiveAvatarUrl()).build()).queue();
 
