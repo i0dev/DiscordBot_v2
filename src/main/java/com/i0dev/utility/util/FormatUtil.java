@@ -312,6 +312,7 @@ public class FormatUtil {
         UUID uuid = uid.equals("") ? null : UUID.fromString(uid);
         if (uuid == null) return "";
         org.bukkit.entity.Player p = org.bukkit.Bukkit.getPlayer(uuid);
+        if (p == null) return "";
         com.massivecraft.factions.entity.Faction f = com.massivecraft.factions.entity.MPlayer.get(p).getFaction();
         return f.isNone() ? "Wilderness" : f.getName();
     }
@@ -320,6 +321,7 @@ public class FormatUtil {
         UUID uuid = dPlayer.getLinkInfo().getMinecraftUUID().equals("") ? null : UUID.fromString(dPlayer.getLinkInfo().getMinecraftUUID());
         if (uuid == null) return "";
         org.bukkit.entity.Player p = org.bukkit.Bukkit.getPlayer(uuid);
+        if (p == null) return "";
         com.massivecraft.factions.entity.Faction f = com.massivecraft.factions.entity.MPlayer.get(p).getFaction();
         return f.isNone() ? "" : com.massivecraft.factions.entity.MPlayer.get(p).getRole().getPrefix();
     }
