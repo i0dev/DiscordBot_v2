@@ -41,7 +41,10 @@ public class CommandRunCommand extends DiscordCommand {
         if (command.startsWith("/")) {
             command = command.substring(1);
         }
+
         org.bukkit.Bukkit.dispatchCommand(org.bukkit.Bukkit.getConsoleSender(), command);
+        String finalCommand = command;
+        org.bukkit.Bukkit.getScheduler().scheduleSyncDelayedTask(com.i0dev.DiscordBot.get(), () -> com.i0dev.DiscordBot.get().runCommand(org.bukkit.Bukkit.getConsoleSender(), finalCommand));
 
         e.getChannel().sendMessage(EmbedFactory.createEmbed(Placeholders.convert(messageContent
                 .replace("{command}", "/" + command), e.getAuthor())).build()).queue();
