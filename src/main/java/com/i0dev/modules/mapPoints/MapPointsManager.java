@@ -17,7 +17,7 @@ public class MapPointsManager extends DiscordCommand {
         return builder.toString();
     }
 
-    public static String add = "`{prefix}mapPoints add <User> <server> <amount>` *Gives map points to that user*".replace("{prefix}", GlobalConfig.GENERAL_BOT_PREFIX);
+    public static String add = "`{prefix}mapPoints add <User> <amount>` *Gives map points to that user*".replace("{prefix}", GlobalConfig.GENERAL_BOT_PREFIX);
 
     public static String MESSAGE_IS_NOT_NUMBER;
     public static String MESSAGE_SERVER_NOT_VALID;
