@@ -1,7 +1,7 @@
 package com.i0dev;
 
-import com.google.gson.JsonObject;
 import com.i0dev.commands.discord.completedModules.giveaway.cache.GiveawayCache;
+import com.i0dev.commands.discord.completedModules.linking.RoleRefreshHandler;
 import com.i0dev.modules.creators.caches.PollCache;
 import com.i0dev.modules.giveaway.giveawayHandler;
 import com.i0dev.modules.other.FactionsTopHandler;
@@ -16,7 +16,7 @@ import com.i0dev.object.objects.RoleQueueObject;
 import com.i0dev.object.objects.Type;
 import com.i0dev.utility.*;
 import com.i0dev.utility.util.APIUtil;
-import com.i0dev.utility.util.FileUtil;
+import com.i0dev.utility.util.FormatUtil;
 import com.i0dev.utility.util.MessageUtil;
 import com.i0dev.utility.util.TimeUtil;
 import com.massivecraft.factions.task.TaskFactionTopCalculate;
@@ -27,8 +27,10 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
 
 import java.awt.*;
-import java.io.*;
-import java.sql.SQLException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -36,6 +38,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
@@ -49,7 +52,6 @@ public class Engine {
         executorService.scheduleAtFixedRate(taskExecuteGiveawayCreator, 1, 30, TimeUnit.SECONDS);
         executorService.scheduleAtFixedRate(taskExecutePollCreator, 1, 30, TimeUnit.SECONDS);
         executorService.scheduleAtFixedRate(taskUpdateDPlayerCache, 1, 24, TimeUnit.HOURS);
-        executorService.scheduleAtFixedRate(taskUpdateDPlayersPoints, 1, 1, TimeUnit.MINUTES);
         executorService.scheduleAtFixedRate(taskPointsCheckVoiceChannels, 1, 2, TimeUnit.SECONDS);
         executorService.scheduleAtFixedRate(taskExecuteGiveaways, 1, 10, TimeUnit.SECONDS);
         executorService.scheduleAtFixedRate(taskAppendToFile, 1, 10, TimeUnit.SECONDS);
@@ -58,6 +60,9 @@ public class Engine {
         executorService.scheduleAtFixedRate(taskUpdateGiveawayTimes, 15, 30, TimeUnit.SECONDS);
         executorService.scheduleAtFixedRate(taskAutoUpdateConfig, 60, 60, TimeUnit.SECONDS);
         executorService.scheduleAtFixedRate(taskSendFTOP, 45, 45, TimeUnit.SECONDS);
+        ScheduledExecutorService SlowedExecutorService = Executors.newScheduledThreadPool(10);
+        SlowedExecutorService.scheduleAtFixedRate(taskFlushDPLayers, 1, 30, TimeUnit.MINUTES);
+
     }
 
     @Getter
@@ -163,25 +168,25 @@ public class Engine {
         DPlayerEngine.save(toSaveArray);
     };
 
-    static Runnable taskUpdateDPlayersPoints = () -> {
+    static Runnable taskFlushDPLayers = () -> {
+        System.out.println("Started auto-saving DPlayers into storage.");
         for (Object o : DPlayerEngine.getCache()) {
-            DPlayer dPlayer = ((DPlayer) o);
-            if (GlobalConfig.USING_DATABASE) {
-                try {
-                    DPlayer inDB = SQLManager.getDPlayer(dPlayer.getDiscordID());
-                    if (dPlayer.getPoints() != inDB.getPoints()) {
-                        DPlayerEngine.save(dPlayer.getDiscordID());
+            try {
+                DPlayer dPlayer = ((DPlayer) o);
+                if (dPlayer.getLinkInfo().isLinked()) {
+                    RoleRefreshHandler.RefreshUserRank(dPlayer);
+                  //  System.out.println("DEBUG: read user " + dPlayer.getCachedData().getMinecraftIGN());
+                    Thread.sleep(100);
+                    if (!FormatUtil.isUUID(dPlayer.getLinkInfo().getMinecraftUUID())) {
+                        String newUUID = APIUtil.getUUIDFromIGN(dPlayer.getCachedData().getMinecraftIGN());
+                        if (newUUID != null) {
+                            dPlayer.getLinkInfo().setMinecraftUUID(newUUID);
+                        }
                     }
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
                 }
-            } else {
-
-                File dFile = new File(InitializeBot.get().getDPlayerDir() + "/" + dPlayer.getDiscordID() + ".json");
-                JsonObject jsonObject = FileUtil.getJsonObject(dFile.getPath());
-                if (dPlayer.getPoints() != jsonObject.get("points").getAsDouble()) {
-                    DPlayerEngine.save(dPlayer.getDiscordID());
-                }
+                dPlayer.save();
+            } catch (Exception exception) {
+                exception.printStackTrace();
             }
         }
     };
