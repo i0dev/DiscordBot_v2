@@ -78,9 +78,11 @@ public class Engine {
         Member member = guild.getMemberById(user.getId());
 
         if (queueObject.getType().equals(Type.ADD_ROLE)) {
+            if (member.getRoles().contains(role)) return;
             guild.addRoleToMember(user.getId(), role).queue();
             System.out.println("[LOG] Applied the role {" + role.getName() + "} to the user: {" + member.getEffectiveName() + "}");
         } else if (queueObject.getType().equals(Type.REMOVE_ROLE)) {
+            if (!member.getRoles().contains(role)) return;
             guild.removeRoleFromMember(user.getId(), role).queue();
             System.out.println("[LOG] Removed the role {" + role.getName() + "} to the user: {" + member.getEffectiveName() + "}");
         }
