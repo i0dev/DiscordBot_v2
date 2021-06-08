@@ -25,10 +25,12 @@ public class PointsManager extends DiscordCommand {
         builder.append(leaderboard).append("\n");
         builder.append(shop).append("\n");
         builder.append(buy).append("\n");
+        builder.append(info).append("\n");
         return builder.toString();
     }
 
     public static String add = "`{prefix}points add <User> <amount>` *Gives points to that user*".replace("{prefix}", GlobalConfig.GENERAL_BOT_PREFIX);
+    public static String info = "`{prefix}points info` *Sends information about points.*".replace("{prefix}", GlobalConfig.GENERAL_BOT_PREFIX);
     public static String remove = "`{prefix}points remove <User> <amount>` *Removes points from that user*".replace("{prefix}", GlobalConfig.GENERAL_BOT_PREFIX);
     public static String set = "`{prefix}points set <User> <amount>` *Sets points count to that user*".replace("{prefix}", GlobalConfig.GENERAL_BOT_PREFIX);
 
@@ -36,7 +38,7 @@ public class PointsManager extends DiscordCommand {
     public static String leaderboard = "`{prefix}points leaderboard` *Gets the leaderboard of points*".replace("{prefix}", GlobalConfig.GENERAL_BOT_PREFIX);
     public static String pay = "`{prefix}points pay <User> <amount>` *Pays that user some of your points*".replace("{prefix}", GlobalConfig.GENERAL_BOT_PREFIX);
 
-    public static String shop = "`{prefix}points shop` *Opens the shop menu*".replace("{prefix}", GlobalConfig.GENERAL_BOT_PREFIX);
+    public static String shop = "`{prefix}points shop [page]` *Opens the shop menu*".replace("{prefix}", GlobalConfig.GENERAL_BOT_PREFIX);
     public static String buy = "`{prefix}points buy <ID> [amount]` *Buys that item from shop.*".replace("{prefix}", GlobalConfig.GENERAL_BOT_PREFIX);
 
     public static String MESSAGE_IS_NOT_NUMBER;
@@ -104,6 +106,15 @@ public class PointsManager extends DiscordCommand {
                     break;
                 case "buy":
                     Buy.run(e);
+                    break;
+                case "info":
+                    Info.run(e);
+                    break;
+                case "howto":
+                    Info.run(e);
+                    break;
+                case "help":
+                    Info.run(e);
                     break;
                 default:
                     MessageUtil.sendMessage(e.getChannel().getIdLong(), usage(), e.getAuthor());
