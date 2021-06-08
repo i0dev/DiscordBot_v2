@@ -1,86 +1,49 @@
 package com.i0dev.object.discordLinking;
 
-import com.google.gson.JsonObject;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import net.dv8tion.jda.api.entities.User;
 
 @Getter
 @Setter
+@ToString
 public class DPlayer {
 
-    private Cache cachedData;
-    private LinkInfo linkInfo;
-
-    private long discordID;
+    private Cache cachedData = new Cache();
+    private LinkInfo linkInfo = new LinkInfo();
+    private long discordID = 0;
     private long lastUpdatedMillis;
-    private long invitedByDiscordID;
-    private long ticketsClosed;
-    private long inviteCount;
-    private long warnCount;
-    private boolean blacklisted;
-
-    private double points;
-    private long lastBoostTime;
-    private long boostCount;
-
-    private JsonObject mapPointsMap;
+    private long invitedByDiscordID = 0;
+    private long ticketsClosed = 0;
+    private long inviteCount = 0;
+    private long warnCount = 0;
+    private boolean blacklisted = false;
+    private double points = 0.0;
+    private long lastBoostTime = 0;
+    private long boostCount = 0;
+    private long mapPoints = 0;
+    private long lastRewardsClaim = 0;
+    private boolean claimedReclaim = false;
+    private long boostCredits = 0;
+    private long rewardsClaimed = 0;
 
 
     public DPlayer(User user) {
-        this.blacklisted = false;
         this.discordID = user.getIdLong();
         this.lastUpdatedMillis = System.currentTimeMillis();
-        this.ticketsClosed = 0L;
-        this.inviteCount = 0L;
-        this.warnCount = 0L;
-        this.invitedByDiscordID = 0L;
         this.cachedData = new Cache(user);
-        this.linkInfo = new LinkInfo();
-
-        this.points = 0D;
-        this.lastBoostTime = 0L;
-        this.boostCount = 0L;
-        mapPointsMap = new JsonObject();
-
-
     }
 
     public DPlayer(String UUID, String IGN) {
-        this.blacklisted = false;
-        this.discordID = 0L;
         this.lastUpdatedMillis = System.currentTimeMillis();
-        this.ticketsClosed = 0L;
-        this.inviteCount = 0L;
-        this.warnCount = 0L;
-        this.invitedByDiscordID = 0L;
         this.cachedData = new Cache(IGN);
         this.linkInfo = new LinkInfo(UUID);
 
-        this.points = 0D;
-        this.lastBoostTime = 0L;
-        this.boostCount = 0L;
-        mapPointsMap = new JsonObject();
-
     }
 
-    @Deprecated
     public DPlayer() {
-        this.discordID = 0L;
-        this.blacklisted = false;
         this.lastUpdatedMillis = System.currentTimeMillis();
-        this.ticketsClosed = 0L;
-        this.inviteCount = 0L;
-        this.warnCount = 0L;
-        this.invitedByDiscordID = 0L;
-        this.cachedData = new Cache();
-        this.linkInfo = new LinkInfo();
-
-        this.points = 0D;
-        this.lastBoostTime = 0L;
-        this.boostCount = 0L;
-        mapPointsMap = new JsonObject();
-
     }
 
     public DPlayer add() {
@@ -90,7 +53,7 @@ public class DPlayer {
     }
 
     public DPlayer save() {
-        DPlayerEngine.save(this.getDiscordID());
+        DPlayerEngine.save(this);
         return this;
     }
 
@@ -98,24 +61,5 @@ public class DPlayer {
         DPlayerEngine.getCache().remove(this);
         this.save();
         return this;
-    }
-
-    @Override
-    public String toString() {
-        return "DPlayer{" +
-                "cachedData=" + cachedData + "\n" +
-                ", linkInfo=" + linkInfo + "\n" +
-                ", discordID=" + discordID + "\n" +
-                ", lastUpdatedMillis=" + lastUpdatedMillis + "\n" +
-                ", invitedByDiscordID=" + invitedByDiscordID + "\n" +
-                ", ticketsClosed=" + ticketsClosed + "\n" +
-                ", inviteCount=" + inviteCount + "\n" +
-                ", warnCount=" + warnCount + "\n" +
-                ", blacklisted=" + blacklisted + "\n" +
-                ", points=" + points + "\n" +
-                ", lastBoostTime=" + lastBoostTime + "\n" +
-                ", boostCount=" + boostCount + "\n" +
-                ", mapPointsMap=" + mapPointsMap +
-                '}';
     }
 }

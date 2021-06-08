@@ -1,20 +1,22 @@
 package com.i0dev.object.discordLinking;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import net.dv8tion.jda.api.entities.User;
 
 @Setter
 @Getter
+@NoArgsConstructor
 public class Cache {
 
-    private String minecraftIGN;
+    private String minecraftIGN = "";
 
-    private String discordTag;
-    private String discordAvatarURL;
+    private String discordTag = "";
+    private String discordAvatarURL = "";
 
-    private String invitedByDiscordTag;
-    private String invitedByDiscordAvatarURL;
+    private String invitedByDiscordTag = "";
+    private String invitedByDiscordAvatarURL = "";
 
     public Cache(User user) {
         this.minecraftIGN = "";
@@ -32,12 +34,4 @@ public class Cache {
         this.invitedByDiscordTag = "";
     }
 
-    @Deprecated
-    public Cache() {
-        this.minecraftIGN = "";
-        this.discordTag = "";
-        this.discordAvatarURL = "";
-        this.invitedByDiscordAvatarURL = "";
-        this.invitedByDiscordTag = "";
-    }
 }

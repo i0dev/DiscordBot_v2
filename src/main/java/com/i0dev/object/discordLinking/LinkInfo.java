@@ -1,30 +1,21 @@
 package com.i0dev.object.discordLinking;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class LinkInfo {
 
-    private String linkCode;
-    private long linkedTime;
-    private String minecraftUUID;
-    private boolean linked;
-
-    public LinkInfo() {
-        this.linkCode = "";
-        this.linkedTime = 0;
-        this.minecraftUUID = "";
-        this.linked = false;
-    }
+    private String linkCode = "";
+    private long linkedTime = 0;
+    private String minecraftUUID = "";
+    private boolean linked = false;
 
     public LinkInfo(String UUID) {
-        this.linkCode = "";
-        this.linkedTime = 0;
         this.minecraftUUID = UUID;
-        this.linked = false;
     }
-
 
 }
