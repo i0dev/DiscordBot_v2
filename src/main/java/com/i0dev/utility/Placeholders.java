@@ -45,6 +45,10 @@ public class Placeholders {
                     .replace("{mentionedUserIsBlacklisted}", dPlayer.isBlacklisted() ? "Yes" : "No")
                     .replace("{mentionedUserPointsCount}", decimalFormat.format(dPlayer.getPoints()))
                     .replace("{mentionedUserBoostCount}", dPlayer.getBoostCount() + "")
+                    .replace("{mentionedUserMapPoints}", dPlayer.getMapPoints() + "")
+                    .replace("{mentionedUserBoostCredits}", dPlayer.getBoostCredits() + "")
+                    .replace("{mentionedUserRewardsClaimed}", dPlayer.getRewardsClaimed() + "")
+                    .replace("{mentionedUserHasReclaim}", dPlayer.isClaimedReclaim() + "")
 
                     .replace("{mentionedUserInviteCount}", DPlayerEngine.getObject(mentioned.getIdLong()).getInviteCount() + "")
                     .replace("{mentionedUserTicketsClosed}", DPlayerEngine.getObject(mentioned.getIdLong()).getTicketsClosed() + "")
@@ -71,8 +75,11 @@ public class Placeholders {
                     .replace("{authorLinkedIGN}", dPlayer.getCachedData().getMinecraftIGN().equals("") ? "Not Linked" : dPlayer.getCachedData().getMinecraftIGN())
                     .replace("{authorIsBlacklisted}", dPlayer.isBlacklisted() ? "Yes" : "No")
                     .replace("{authorPointsCount}", decimalFormat.format(dPlayer.getPoints()))
+                    .replace("{authorMapPoints}", dPlayer.getMapPoints() + "")
                     .replace("{authorBoostCount}", dPlayer.getBoostCount() + "")
-
+                    .replace("{authorBoostCredits}", dPlayer.getBoostCredits() + "")
+                    .replace("{authorRewardsClaimed}", dPlayer.getRewardsClaimed() + "")
+                    .replace("{authorHasReclaim}", dPlayer.isClaimedReclaim() + "")
 
                     .replace("{authorInviteCount}", DPlayerEngine.getObject(author.getIdLong()).getInviteCount() + "")
                     .replace("{authorTicketsClosed}", DPlayerEngine.getObject(author.getIdLong()).getTicketsClosed() + "")
@@ -80,7 +87,6 @@ public class Placeholders {
                     .replace("{authorMemberRoleCount}", guild.getMember(author).getRoles().size() + "")
                     .replace("{authorIsAdministrator}", guild.getMember(author).getPermissions().contains(Permission.ADMINISTRATOR) + "")
                     .replace("{authorEffectiveName}", guild.getMember(author).getEffectiveName());
-            dPlayer = null;
         }
 
 
