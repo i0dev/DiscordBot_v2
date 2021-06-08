@@ -12,6 +12,7 @@ import com.i0dev.commands.discord.completedModules.warn.WarnManager;
 import com.i0dev.modules.DiscordCommandManager;
 import com.i0dev.modules.basic.cache.HelpCmdCache;
 import com.i0dev.modules.blacklist.BlacklistManager;
+import com.i0dev.modules.boosting.BoostingManager;
 import com.i0dev.modules.mapPoints.MapPointsManager;
 import com.i0dev.modules.points.discord.PointsManager;
 import com.i0dev.object.engines.PermissionHandler;
@@ -34,6 +35,8 @@ public class CommandHelp extends ListenerAdapter {
         desc.append("``{cmd} <user>`` - *Get information about a user.*\n".replace("{cmd}", GlobalConfig.GENERAL_BOT_PREFIX + Configuration.getStringList("commands.userInfo.aliases").get(0)));
         desc.append("``{cmd}`` - *Gets the member count of the server.*\n".replace("{cmd}", GlobalConfig.GENERAL_BOT_PREFIX + Configuration.getStringList("commands.memberCount.aliases").get(0)));
         desc.append("``{cmd}`` - *Sends the server's IP address.*\n".replace("{cmd}", GlobalConfig.GENERAL_BOT_PREFIX + Configuration.getStringList("commands.serverIP.aliases").get(0)));
+        desc.append("``{cmd}`` - *Claims your daily rewards.*\n".replace("{cmd}", GlobalConfig.GENERAL_BOT_PREFIX + Configuration.getStringList("commands.rewards.aliases").get(0)));
+        desc.append("``{cmd}`` - *Reclaim rewards from your rank.*\n".replace("{cmd}", GlobalConfig.GENERAL_BOT_PREFIX + Configuration.getStringList("commands.reclaim.aliases").get(0)));
         desc.append("\n**:rofl: Fun Commands :rofl:**\n");
         desc.append("``{cmd} <user>`` - *Slap that user.*\n".replace("{cmd}", GlobalConfig.GENERAL_BOT_PREFIX + Configuration.getStringList("commands.fun_slap.aliases").get(0)));
         desc.append("``{cmd}`` - *Role a die.*\n".replace("{cmd}", GlobalConfig.GENERAL_BOT_PREFIX + Configuration.getStringList("commands.fun_dice.aliases").get(0)));
@@ -59,6 +62,7 @@ public class CommandHelp extends ListenerAdapter {
         desc.append("``{cmd} <user> [reason]`` - *Kick a user from the server.*\n".replace("{cmd}", GlobalConfig.GENERAL_BOT_PREFIX + Configuration.getStringList("commands.kick.aliases").get(0)));
         desc.append("``{cmd}`` - *Clear channel messages.*\n".replace("{cmd}", GlobalConfig.GENERAL_BOT_PREFIX + Configuration.getStringList("commands.messageClear.aliases").get(0)));
         desc.append("``{cmd} <amt> [user]`` - *Delete that number of messages.*\n".replace("{cmd}", GlobalConfig.GENERAL_BOT_PREFIX + Configuration.getStringList("commands.prune.aliases").get(0)));
+        desc.append("``{cmd}`` - *Resets all reclaim data.*\n".replace("{cmd}", GlobalConfig.GENERAL_BOT_PREFIX + Configuration.getStringList("commands.reclaim_reset.aliases").get(0)));
         desc.append("\n");
         desc.append(ScreenshareManager.usage());
         desc.append("\n");
@@ -119,6 +123,8 @@ public class CommandHelp extends ListenerAdapter {
         desc.append(PointsManager.usage());
         desc.append("\n");
         desc.append(MapPointsManager.usage());
+        desc.append("\n");
+        desc.append(BoostingManager.usage());
         return desc.toString();
     }
 

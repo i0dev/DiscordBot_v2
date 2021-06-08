@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="DiscordBot_v2:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3cb7b3dc-a952-4840-87a5-f05ee6171d8a" name="Default Changelist" comment="Months and months of work">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/DiscordBot_v2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DiscordBot_v2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/discord.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_17_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_17_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_protobuf_protobuf_java_3_11_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_protobuf_protobuf_java_3_11_4.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_googlecode_json_simple_json_simple_1_1_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_googlecode_json_simple_json_simple_1_1_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_lang_commons_lang_2_6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_lang_commons_lang_2_6.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_lang_commons_lang_2_62.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_lang_commons_lang_2_62.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_persistence_persistence_api_1_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_persistence_persistence_api_1_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__me_clip_placeholderapi_2_9_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__me_clip_placeholderapi_2_9_2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_8_0_24.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_8_0_24.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_luckperms_api_5_3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_luckperms_api_5_3.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_md_5_bungeecord_chat_1_8_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_md_5_bungeecord_chat_1_8_SNAPSHOT.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_avaje_ebean_2_8_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_avaje_ebean_2_8_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_javassist_javassist_3_26_0_GA.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_javassist_javassist_3_26_0_GA.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_18_20.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_18_20.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_reflections_reflections_0_9_12.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_reflections_reflections_0_9_12.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_25.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_25.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_14.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_14.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace-DESKTOP-I6C8QV0-2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace-DESKTOP-I6C8QV0-2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace-DESKTOP-I6C8QV0-3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace-DESKTOP-I6C8QV0-3.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace-DESKTOP-I6C8QV0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace-DESKTOP-I6C8QV0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace-M-98G934N9ION3-2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace-M-98G934N9ION3-2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace-M-98G934N9ION3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace-M-98G934N9ION3.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/Config.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/resources/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/StorageFiles/ReactionRoles.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/StorageFiles/ReactionRoles.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/DiscordBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/DiscordBot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/Engine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/InitializeBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/InitializeBot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/CommandExportData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/CommandExportData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/CommandMessageClear.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/CommandMessageClear.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/gamemode/GamemodeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/gamemode/GamemodeManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/gamemode/factions/Confirm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/gamemode/factions/Confirm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/gamemode/factions/FactionsModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/gamemode/factions/FactionsModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/gamemode/factions/Leader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/gamemode/factions/Leader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/gamemode/prison/Confirm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/gamemode/prison/Confirm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/gamemode/prison/Leader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/gamemode/prison/Leader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/gamemode/prison/PrisonModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/gamemode/prison/PrisonModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/gamemode/skyblock/Confirm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/gamemode/skyblock/Confirm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/gamemode/skyblock/Leader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/gamemode/skyblock/Leader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/gamemode/skyblock/SkyBlockModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/gamemode/skyblock/SkyBlockModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/giveaway/Retrieve.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/giveaway/Retrieve.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/giveaway/cache/GiveawayCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/giveaway/cache/GiveawayCache.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/linking/Code.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/linking/Code.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/linking/CommandLink.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/linking/CommandLink.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/linking/Force.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/linking/Force.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/linking/Generate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/linking/Generate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/linking/Info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/linking/Info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/linking/LinkManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/linking/LinkManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/linking/RoleRefreshHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/linking/RoleRefreshHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/movements/Assign.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/movements/Assign.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/movements/Demote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/movements/Demote.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/movements/MovementManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/movements/MovementManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/movements/Promote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/movements/Promote.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/movements/Resign.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/movements/Resign.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/movements/StaffClear.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/movements/StaffClear.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/screenshare/ScreenshareManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/screenshare/ScreenshareManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/suggestion/Accept.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/suggestion/Accept.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/suggestion/Info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/suggestion/Info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/suggestion/Reject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/suggestion/Reject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/suggestion/SuggestionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/suggestion/SuggestionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/Info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/Info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/PlayerLookup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/PlayerLookup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/TebexManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/TebexManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/giftcard/Create.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/giftcard/Create.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/giftcard/Delete.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/giftcard/Delete.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/giftcard/Get.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/giftcard/Get.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/giftcard/GiftcardMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/giftcard/GiftcardMod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/giftcard/Retrieve.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/giftcard/Retrieve.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/giftcard/TopUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/giftcard/TopUp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/packageTebex/Get.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/packageTebex/Get.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/packageTebex/PackageMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/packageTebex/PackageMod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/packageTebex/Retrieve.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/packageTebex/Retrieve.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/packageTebex/Update.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/packageTebex/Update.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/payment/Get.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/payment/Get.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/payment/PaymentMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/payment/PaymentMod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/payment/Receieve.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/payment/Receieve.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/payment/Update.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/tebex/payment/Update.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/warn/WarnManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/commands/discord/completedModules/warn/WarnManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/DiscordCommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/DiscordCommandManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/MinecraftCommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/MinecraftCommandManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/applications/ApplyResponses.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/applications/ApplyResponses.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/applications/CommandAccept.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/applications/CommandAccept.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/applications/CommandApply.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/applications/CommandApply.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/applications/CommandReject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/applications/CommandReject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/applications/cache/ApplicationCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/applications/cache/ApplicationCache.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/CommandAvatar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/CommandAvatar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/CommandFtop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/CommandFtop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/CommandHeapDump.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/CommandHeapDump.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/CommandHelp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/CommandHelp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/CommandMcServerInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/CommandMcServerInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/CommandMemberCount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/CommandMemberCount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/CommandProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/CommandProfile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/CommandReloadConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/CommandReloadConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/CommandRoleInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/CommandRoleInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/CommandRoles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/CommandRoles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/CommandRunCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/CommandRunCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/CommandServerIP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/CommandServerIP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/CommandServerInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/CommandServerInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/CommandUserInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/CommandUserInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/CommandVersion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/CommandVersion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/cache/HelpCmdCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/basic/cache/HelpCmdCache.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/creators/PollCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/creators/PollCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/creators/PollCreatorResponses.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/creators/PollCreatorResponses.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/creators/ReactionRoles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/creators/ReactionRoles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/creators/ReactionRolesResponses.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/creators/ReactionRolesResponses.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/creators/caches/PollCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/creators/caches/PollCache.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/creators/caches/ReactionRoleCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/creators/caches/ReactionRoleCache.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/fun/CommandCoinflip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/fun/CommandCoinflip.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/fun/CommandDice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/fun/CommandDice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/fun/CommandEightBall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/fun/CommandEightBall.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/fun/CommandHey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/fun/CommandHey.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/fun/CommandPat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/fun/CommandPat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/fun/CommandSlap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/fun/CommandSlap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/giveaway/giveawayHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/giveaway/giveawayHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/invite/CommandInviteLeaderboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/invite/CommandInviteLeaderboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/invite/CommandInvites.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/invite/CommandInvites.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/invite/CommandInvitesResetData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/invite/CommandInvitesResetData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/invite/InviteData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/invite/InviteData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/invite/InviteTracking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/invite/InviteTracking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/invite/InviteTrackingHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/invite/InviteTrackingHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/mapPoints/Add.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/mapPoints/Add.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/mapPoints/MapPointsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/mapPoints/MapPointsManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/moderation/CommandAnnounce.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/moderation/CommandAnnounce.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/moderation/CommandBan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/moderation/CommandBan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/moderation/CommandChangelog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/moderation/CommandChangelog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/moderation/CommandKick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/moderation/CommandKick.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/moderation/CommandPrune.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/moderation/CommandPrune.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/moderation/CommandRoleAll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/moderation/CommandRoleAll.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/moderation/CommandUnban.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/moderation/CommandUnban.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/moderation/CommandVerifyPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/moderation/CommandVerifyPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/other/AutoModHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/other/AutoModHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/other/FactionsTopHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/other/FactionsTopHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/other/FreezeLogHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/other/FreezeLogHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/other/InGameChatFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/other/InGameChatFormatter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/other/LitebansNotifications.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/other/LitebansNotifications.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/other/ReactionRolesHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/other/ReactionRolesHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/other/VerifyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/other/VerifyHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/other/WelcomeHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/other/WelcomeHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/points/EventHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/points/EventHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/points/Option.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/points/Option.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/points/discord/Add.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/points/discord/Add.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/points/discord/Balance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/points/discord/Balance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/points/discord/Buy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/points/discord/Buy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/points/discord/Leaderboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/points/discord/Leaderboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/points/discord/Pay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/points/discord/Pay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/points/discord/PointsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/points/discord/PointsManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/points/discord/Remove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/points/discord/Remove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/points/discord/Set.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/points/discord/Set.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/points/discord/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/points/discord/Shop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/points/ingame/Add.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/points/ingame/Add.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/points/ingame/PointsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/points/ingame/PointsManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/points/ingame/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/points/ingame/Shop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/points/ingame/ShopEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/points/ingame/ShopEvents.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/ticket/AdminOnlyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/ticket/AdminOnlyHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/ticket/CommandAdminOnly.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/ticket/CommandAdminOnly.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/ticket/CommandTicketAdd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/ticket/CommandTicketAdd.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/ticket/CommandTicketClose.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/ticket/CommandTicketClose.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/ticket/CommandTicketInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/ticket/CommandTicketInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/ticket/CommandTicketPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/ticket/CommandTicketPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/ticket/CommandTicketRemove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/ticket/CommandTicketRemove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/ticket/CommandTicketRename.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/ticket/CommandTicketRename.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/ticket/CommandTicketTopLeaderboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/ticket/CommandTicketTopLeaderboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/ticket/TicketCloseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/ticket/TicketCloseHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/ticket/TicketCreateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/ticket/TicketCreateHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/ticket/TicketLogHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/ticket/TicketLogHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/twoFactor/Cache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/twoFactor/Cache.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/twoFactor/Command2fa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/twoFactor/Command2fa.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/twoFactor/TwoFactor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/twoFactor/TwoFactor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/twoFactor/TwoFactorAuthentication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/modules/twoFactor/TwoFactorAuthentication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/object/discordLinking/CodeCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/object/discordLinking/CodeCache.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/object/discordLinking/From_DiscordCodeLinker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/object/discordLinking/From_DiscordCodeLinker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/object/discordLinking/From_IngameCodeLinker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/object/discordLinking/From_IngameCodeLinker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/object/engines/ApplicationEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/object/engines/ApplicationEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/object/engines/GiveawayEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/object/engines/GiveawayEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/object/engines/PermissionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/object/engines/PermissionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/object/engines/ScreenshareEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/object/engines/ScreenshareEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/object/engines/SuggestionEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/object/engines/SuggestionEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/object/engines/TicketEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/object/engines/TicketEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/object/objects/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/object/objects/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/object/objects/DiscordCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/object/objects/DiscordCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/object/objects/Giveaway.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/object/objects/Giveaway.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/object/objects/LogObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/object/objects/LogObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/object/objects/ReactionRoles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/object/objects/ReactionRoles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/object/objects/RoleQueueObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/object/objects/RoleQueueObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/object/objects/Screenshare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/object/objects/Screenshare.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/object/objects/Suggestion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/object/objects/Suggestion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/object/objects/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/object/objects/Ticket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/object/objects/Type.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/object/objects/Type.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/Configuration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/Configuration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/EmbedFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/EmbedFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/Encrypt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/Encrypt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/FindFromString.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/FindFromString.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/GlobalCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/GlobalCheck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/GlobalConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/GlobalConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/InternalJDA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/InternalJDA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/Lag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/Lag.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/MessageAliases.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/MessageAliases.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/PapiPlaceholders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/PapiPlaceholders.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/Placeholders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/Placeholders.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/SQLManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/SQLManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/APIUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/APIUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/EmojiUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/EmojiUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/FileUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/FileUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/FormatUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/FormatUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/LogsUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/LogsUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/MessageUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/MessageUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/MovementUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/MovementUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/PermissionUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/PermissionUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/RoleUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/RoleUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/TempNicknameUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/TempNicknameUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/TimeUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/i0dev/utility/util/TimeUtil.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$MAVEN_REPOSITORY$/net/dv8tion/JDA/4.2.1_259/JDA-4.2.1_259.jar!/net/dv8tion/jda/api/entities/MessageReaction.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/net/dv8tion/JDA/4.2.1_259/JDA-4.2.1_259.jar!/net/dv8tion/jda/api/requests/restaction/pagination/PaginationAction.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/net/dv8tion/JDA/4.2.1_259/JDA-4.2.1_259.jar!/net/dv8tion/jda/api/requests/RestAction.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/net/dv8tion/JDA/4.2.1_259/JDA-4.2.1_259.jar!/net/dv8tion/jda/api/requests/restaction/pagination/ReactionPaginationAction.class" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="ProjectId" id="1qczzw3hUqmIu0fOO9maVKNCk2e" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ACTIVE_CLOUD_PROJECT_ACCOUNT" value="andrewomagnuson@gmail.com" />
+    <property name="ACTIVE_CLOUD_PROJECT_ID" value="speech-to-text-4j" />
+    <property name="ACTIVE_CLOUD_PROJECT_NAME" value="Speech To Text 4j" />
+    <property name="ACTIVE_CLOUD_PROJECT_NUMBER" value="503669550385" />
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.google.cloudcode.ide_session_index" value="20210529_0000" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Desktop/FactionsCore" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.3561151" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Andre\OneDrive\Development\IntelleJ Projects\DiscordBot_v2\src\main\java\com\i0dev\command\discord\gamemodeSpecific\skyblock" />
+      <recent name="C:\Users\Andre\OneDrive\Development\IntelleJ Projects\DiscordBot_v2\src\main\java\com\i0dev\command\discord\gamemodeSpecific\prison" />
+      <recent name="C:\Users\Andre\OneDrive\Development\IntelleJ Projects\DiscordBot_v2\src\main\java\com\i0dev\command\discord\moderation\blacklist" />
+      <recent name="C:\Users\Andre\OneDrive\Development\IntelleJ Projects\DiscordBot_v2\src\main\java\com\i0dev\command\discord\moderation\suggestion" />
+      <recent name="C:\Users\Andre\OneDrive\Development\IntelleJ Projects\DiscordBot_v2\src\main\java\com\i0dev\command\discord\moderation\warn" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Andre\OneDrive\Development\IntelleJ Projects\DiscordBot_v2\resources" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.i0dev.command.discord.gamemodeSpecific.skyblock" />
+      <recent name="com.i0dev.command.discord.gamemodeSpecific.prison" />
+      <recent name="com.i0dev.command.discord.tebex.payment" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="DiscordBot [clean,package]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="clean" />
+                <option value="package" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3cb7b3dc-a952-4840-87a5-f05ee6171d8a" name="Default Changelist" comment="" />
+      <created>1617393933488</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1617393933488</updated>
+      <workItem from="1617393935924" duration="2037000" />
+      <workItem from="1617419726313" duration="3348000" />
+      <workItem from="1617458597909" duration="6570000" />
+      <workItem from="1617481432612" duration="1225000" />
+      <workItem from="1617505751413" duration="231000" />
+      <workItem from="1617506217799" duration="913000" />
+      <workItem from="1617553904217" duration="2172000" />
+      <workItem from="1617594189892" duration="303000" />
+      <workItem from="1617637635797" duration="4472000" />
+      <workItem from="1617670543045" duration="345000" />
+      <workItem from="1617720031255" duration="8863000" />
+      <workItem from="1617813656751" duration="1061000" />
+      <workItem from="1617889727990" duration="288000" />
+      <workItem from="1617899966788" duration="3295000" />
+      <workItem from="1617913808194" duration="23682000" />
+      <workItem from="1617984242646" duration="96000" />
+      <workItem from="1617984351045" duration="1060000" />
+      <workItem from="1617993414449" duration="33012000" />
+      <workItem from="1618066213367" duration="17000" />
+      <workItem from="1618066243827" duration="5589000" />
+      <workItem from="1618113302843" duration="19000" />
+      <workItem from="1618113334615" duration="9760000" />
+      <workItem from="1618186328430" duration="20000" />
+      <workItem from="1618186362112" duration="12633000" />
+      <workItem from="1618245670271" duration="205000" />
+      <workItem from="1618245923900" duration="252000" />
+      <workItem from="1618246268764" duration="3779000" />
+      <workItem from="1618261031734" duration="18952000" />
+      <workItem from="1618346138081" duration="7501000" />
+      <workItem from="1618371923317" duration="4082000" />
+      <workItem from="1618410487650" duration="12383000" />
+      <workItem from="1618426828727" duration="1120000" />
+      <workItem from="1618504917132" duration="2672000" />
+      <workItem from="1618510368601" duration="969000" />
+      <workItem from="1618670856891" duration="1336000" />
+      <workItem from="1618677973839" duration="9313000" />
+      <workItem from="1618693757799" duration="1725000" />
+      <workItem from="1618703133240" duration="19700000" />
+      <workItem from="1618757141765" duration="7970000" />
+      <workItem from="1618775272657" duration="1405000" />
+      <workItem from="1618782068325" duration="1946000" />
+      <workItem from="1618801059074" duration="1997000" />
+      <workItem from="1618850629478" duration="1705000" />
+      <workItem from="1618853011235" duration="624000" />
+      <workItem from="1618955364082" duration="484000" />
+      <workItem from="1618955869018" duration="16546000" />
+      <workItem from="1619015111492" duration="299000" />
+      <workItem from="1619015428651" duration="1594000" />
+      <workItem from="1619017062066" duration="9291000" />
+      <workItem from="1619060248324" duration="11000" />
+      <workItem from="1619060275569" duration="8679000" />
+      <workItem from="1619183383320" duration="31662000" />
+      <workItem from="1619268771419" duration="209000" />
+      <workItem from="1619269003117" duration="19430000" />
+      <workItem from="1619316261168" duration="23000" />
+      <workItem from="1619316299825" duration="12153000" />
+      <workItem from="1619360615995" duration="982000" />
+      <workItem from="1619362110937" duration="419000" />
+      <workItem from="1619362552701" duration="15821000" />
+      <workItem from="1619444381671" duration="4277000" />
+      <workItem from="1619449926172" duration="18072000" />
+      <workItem from="1619541589923" duration="2307000" />
+      <workItem from="1619557190361" duration="16000" />
+      <workItem from="1619557223891" duration="592000" />
+      <workItem from="1619566399556" duration="390000" />
+      <workItem from="1619571050280" duration="336000" />
+      <workItem from="1619579965456" duration="2605000" />
+      <workItem from="1619624196578" duration="887000" />
+      <workItem from="1619642269732" duration="31000" />
+      <workItem from="1619642320272" duration="1188000" />
+      <workItem from="1619789509664" duration="573000" />
+      <workItem from="1619816577178" duration="18000" />
+      <workItem from="1619816612512" duration="10159000" />
+      <workItem from="1619875544694" duration="6484000" />
+      <workItem from="1619929396859" duration="189000" />
+      <workItem from="1619929639524" duration="5910000" />
+      <workItem from="1619965512231" duration="1684000" />
+      <workItem from="1620010600424" duration="4651000" />
+      <workItem from="1620060288791" duration="2695000" />
+      <workItem from="1620063546900" duration="7845000" />
+      <workItem from="1620096387162" duration="4968000" />
+      <workItem from="1620160182636" duration="2222000" />
+      <workItem from="1620184022700" duration="29000" />
+      <workItem from="1620234935406" duration="710000" />
+      <workItem from="1620253097721" duration="452000" />
+      <workItem from="1620253570668" duration="2095000" />
+      <workItem from="1620256654445" duration="4919000" />
+      <workItem from="1620269046115" duration="34000" />
+      <workItem from="1620323142125" duration="1150000" />
+      <workItem from="1620335363070" duration="3014000" />
+      <workItem from="1620352343505" duration="5136000" />
+      <workItem from="1620420688414" duration="5364000" />
+      <workItem from="1620482926722" duration="15000" />
+      <workItem from="1620489098954" duration="7878000" />
+      <workItem from="1620529851289" duration="3121000" />
+      <workItem from="1620567484186" duration="8580000" />
+      <workItem from="1620593249372" duration="4216000" />
+      <workItem from="1620597789394" duration="183000" />
+      <workItem from="1620605852068" duration="7000" />
+      <workItem from="1620608192194" duration="1534000" />
+      <workItem from="1620615451447" duration="7000" />
+      <workItem from="1620616741218" duration="2769000" />
+      <workItem from="1620655033362" duration="321000" />
+      <workItem from="1620660682727" duration="11304000" />
+      <workItem from="1620748100842" duration="4137000" />
+      <workItem from="1620756496070" duration="701000" />
+      <workItem from="1620765249211" duration="2702000" />
+      <workItem from="1620769450101" duration="59000" />
+      <workItem from="1620791809984" duration="594000" />
+      <workItem from="1620795849141" duration="8000" />
+      <workItem from="1620870469887" duration="2025000" />
+      <workItem from="1620918476293" duration="995000" />
+      <workItem from="1621042305384" duration="151000" />
+      <workItem from="1621179561137" duration="2583000" />
+      <workItem from="1621182209685" duration="324000" />
+      <workItem from="1621198940379" duration="323000" />
+      <workItem from="1621212496186" duration="591000" />
+      <workItem from="1621257417174" duration="260000" />
+      <workItem from="1621307757854" duration="1284000" />
+      <workItem from="1621909089422" duration="2879000" />
+      <workItem from="1622034349944" duration="394000" />
+      <workItem from="1622035030532" duration="371000" />
+      <workItem from="1622035422592" duration="1399000" />
+      <workItem from="1622173729409" duration="194000" />
+      <workItem from="1622205081675" duration="311000" />
+      <workItem from="1622258502513" duration="5004000" />
+      <workItem from="1622299551048" duration="604000" />
+      <workItem from="1622323456637" duration="1633000" />
+    </task>
+    <task id="LOCAL-00001" summary="Added .profile [user] command, this will be more used in the future, just getting it setup for now.&#10;Added .role_all &lt;role&gt; command, to give that role to all users.&#10;&#10;Implemented a new queueing system for giving roles. This will be used for any event or command that gives a user a role. This is to help out welcome roles being given if a mass amount of members join at the same time. Discords API limits how fast you can give roles, so this is a fix for that. &#10;&#10;Added TimeUtil.java">
+      <created>1617728711709</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1617728711709</updated>
+    </task>
+    <task id="LOCAL-00002" summary="MEGA">
+      <created>1619211148620</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1619211148620</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added Hi">
+      <created>1619211318997</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1619211318997</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added Bye">
+      <created>1619211329182</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1619211329182</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Months and months of work">
+      <created>1622035620357</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1622035620360</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.facetType" implementationName="minecraft" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added .profile [user] command, this will be more used in the future, just getting it setup for now.&#10;Added .role_all &lt;role&gt; command, to give that role to all users.&#10;&#10;Implemented a new queueing system for giving roles. This will be used for any event or command that gives a user a role. This is to help out welcome roles being given if a mass amount of members join at the same time. Discords API limits how fast you can give roles, so this is a fix for that. &#10;&#10;Added TimeUtil.java" />
+    <MESSAGE value="MEGA" />
+    <MESSAGE value="Added Hi" />
+    <MESSAGE value="Added Bye" />
+    <MESSAGE value="Months and months of work" />
+    <option name="LAST_COMMIT_MESSAGE" value="Months and months of work" />
+  </component>
+</project>

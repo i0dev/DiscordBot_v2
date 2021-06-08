@@ -55,7 +55,7 @@ public class CommandMessageClear extends ListenerAdapter {
                 e.getChannel().purgeMessages(messages);
             }
 
-            e.getChannel().sendMessage(EmbedFactory.createEmbed(Placeholders.convert(MESSAGE_CONTENT.replace("{messages}", message[1]), e.getAuthor())).build()).queue();
+            e.getChannel().sendMessage(EmbedFactory.createEmbed(Placeholders.convert(MESSAGE_CONTENT, e.getAuthor())).build()).queue();
 
             if (LOGS_ENABLED) {
                 MessageUtil.sendMessage(GlobalConfig.GENERAL_MAIN_LOGS_CHANNEL, EmbedFactory.createEmbed(LOGS_MESSAGE

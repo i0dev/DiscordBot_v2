@@ -59,6 +59,8 @@ public class Add extends DiscordCommand {
                 .replace("{amount}", PointsManager.decimalFormat.format(Double.parseDouble(amount)));
 
         MessageUtil.sendMessage(e.getChannel().getIdLong(), desc, e.getAuthor(), MentionedUser);
+
+
         String message1 = ("[{tag}] has received [{points}] points from [{staff}]"
                 .replace("{tag}", MentionedUser.getAsTag())
                 .replace("{points}", amount)

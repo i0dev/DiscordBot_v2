@@ -14,6 +14,7 @@ import com.i0dev.modules.applications.CommandApply;
 import com.i0dev.modules.applications.CommandReject;
 import com.i0dev.modules.basic.*;
 import com.i0dev.modules.blacklist.BlacklistManager;
+import com.i0dev.modules.boosting.BoostingManager;
 import com.i0dev.modules.creators.PollCreator;
 import com.i0dev.modules.creators.ReactionRoles;
 import com.i0dev.modules.fun.*;
@@ -71,6 +72,9 @@ public class DiscordCommandManager extends ListenerAdapter {
     public static final List<String> PROFILE_ALIASES = Configuration.getStringList("commands.profile.aliases");
     public static final List<String> HEAP_DUMP_ALIASES = Configuration.getStringList("commands.heapDumpToDiscord.aliases");
     public static final List<String> EMBED_MAKER_ALIASES = Configuration.getStringList("commands.embedMaker.aliases");
+    public static final List<String> REWARDS_ALIASES = Configuration.getStringList("commands.rewards.aliases");
+    public static final List<String> RECLAIM_ALIASES = Configuration.getStringList("commands.reclaim.aliases");
+    public static final List<String> RECLAIM_RESET_ALIASES = Configuration.getStringList("commands.reclaim_reset.aliases");
 
     //Fun Commands
     public static final List<String> EIGHTBALL_COMMAND_ALIASES = Configuration.getStringList("commands.fun_8ball.aliases");
@@ -118,7 +122,6 @@ public class DiscordCommandManager extends ListenerAdapter {
     public static final List<String> TICKET_RENAME_ALIASES = Configuration.getStringList("commands.ticketRename.aliases");
     public static final List<String> TICKET_TOP_LEADERBOARD_ALIASES = Configuration.getStringList("commands.ticketTopLeaderboard.aliases");
 
-
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
         if (e.getAuthor().isBot()) return;
@@ -142,7 +145,10 @@ public class DiscordCommandManager extends ListenerAdapter {
         else if (isCommand(PRUNE_ALIASES, e.getMessage())) CommandPrune.run(e);
         else if (isCommand(ROLE_ALL_ALIASES, e.getMessage())) CommandRoleAll.run(e);
         else if (isCommand(UNBAN_ALIASES, e.getMessage())) CommandUnban.run(e);
+
         else if (isCommand(VERIFY_PANEL_ALIASES, e.getMessage())) CommandVerifyPanel.run(e);
+        else if (isCommand(RECLAIM_RESET_ALIASES, e.getMessage())) CommandReclaimReset.run(e);
+        else if (isCommand(RECLAIM_ALIASES, e.getMessage())) CommandReclaim.run(e);
             //Basic
         else if (isCommand(AVATAR_COMMAND_ALIASES, e.getMessage())) CommandAvatar.run(e);
         else if (isCommand(MEMBER_COUNT_COMMAND_ALIASES, e.getMessage())) CommandMemberCount.run(e);
@@ -155,6 +161,7 @@ public class DiscordCommandManager extends ListenerAdapter {
         else if (isCommand(HELP_ALIASES, e.getMessage())) CommandHelp.run(e);
         else if (isCommand(PROFILE_ALIASES, e.getMessage())) CommandProfile.run(e);
         else if (isCommand(HEAP_DUMP_ALIASES, e.getMessage())) CommandHeapDump.run(e);
+        else if (isCommand(REWARDS_ALIASES, e.getMessage())) CommandRewards.run(e);
             //Fun
         else if (isCommand(EIGHTBALL_COMMAND_ALIASES, e.getMessage())) CommandEightBall.run(e);
         else if (isCommand(COINFLIP_COMMAND_ALIASES, e.getMessage())) CommandCoinflip.run(e);
@@ -200,5 +207,6 @@ public class DiscordCommandManager extends ListenerAdapter {
         else if (isCommand("warn", e.getMessage())) WarnManager.run(e);
         else if (isCommand("points", e.getMessage())) PointsManager.run(e);
         else if (isCommand("mapPoints", e.getMessage())) MapPointsManager.run(e);
+        else if (isCommand("boosting", e.getMessage())) BoostingManager.run(e);
     }
 }

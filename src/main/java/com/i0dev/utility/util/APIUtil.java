@@ -32,7 +32,8 @@ public class APIUtil {
             while ((line = rd.readLine()) != null) result.append(line);
             rd.close();
             return (JSONObject) new JSONParser().parse(result.toString());
-        } catch (MalformedURLException | ParseException ignored) {
+        } catch (ParseException | IOException exception) {
+            exception.printStackTrace();
             return null;
         } catch (IOException ignored) {
         }

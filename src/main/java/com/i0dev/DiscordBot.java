@@ -7,6 +7,7 @@ import com.i0dev.modules.other.FreezeLogHandler;
 import com.i0dev.modules.other.InGameChatFormatter;
 import com.i0dev.modules.other.LitebansNotifications;
 import com.i0dev.modules.points.ingame.PointsManager;
+import com.i0dev.modules.points.ingame.Reclaim;
 import com.i0dev.modules.points.ingame.ShopEvents;
 import com.i0dev.modules.twoFactor.Command2fa;
 import com.i0dev.modules.twoFactor.TwoFactorAuthentication;
@@ -39,12 +40,14 @@ public class DiscordBot extends JavaPlugin {
             getCommand("Link").setExecutor(new CommandLink());
             getCommand("2fa").setExecutor(new Command2fa());
             getCommand("points").setExecutor(new PointsManager());
+            getCommand("reclaim").setExecutor(new Reclaim());
             getServer().getPluginManager().registerEvents(new TwoFactorAuthentication(), this);
             getServer().getPluginManager().registerEvents(new ShopEvents(), this);
             getServer().getPluginManager().registerEvents(new InGameChatFormatter(), this);
             getServer().getPluginManager().registerEvents(new FreezeLogHandler(), this);
             getServer().getPluginManager().registerEvents(new RoleRefreshHandler(), this);
         }, 200L);
+
 
         Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Lag(), 100L, 1L);
         if (getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {

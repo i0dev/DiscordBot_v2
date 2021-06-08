@@ -40,7 +40,8 @@
     "changelogChannelID": 766324291565781042,
     "acceptedSuggestionChannelID": 766330396832432150,
     "rejectedSuggestionChannelID": 766330396832432150,
-    "ftopLogsChannelID": 793715082881662986
+    "ftopLogsChannelID": 793715082881662986,
+    "boostingMessageChannelID": 768102290245550092
   },
   "roles": {
     "islandLeaderRoleID": 766183477024260107,
@@ -784,6 +785,73 @@
       "messageTitle": "List of all roles on the server",
       "enabled": true
     },
+    "rewards": {
+      "pointsToGive": 125,
+      "aliases": [
+        "rewards",
+        "reward",
+        "daily"
+      ],
+      "permissionLiteMode": false,
+      "requirePermission": false,
+      "format": "**Format:** ``{command}``\n\n*Use this command to claim your daily reward when linked!!*",
+      "messageContent": "**{authorTag}**, you've claimed your daily reward! You've recieved {points} points.",
+      "messageWait": "**{authorTag}**, you have to wait {timeLeft} before claiming your daily reward again!",
+      "enabled": true,
+      "rewardsClaimCooldownMillis": 86400000
+    },
+    "reclaim": {
+      "options": [
+        {
+          "displayName": "Knight",
+          "permission": "discordbot.reclaim.knight",
+          "commands": [
+            "points add {ign} 500",
+            "tokens add {ign} 20000",
+            "eco give {ign} 250000"
+          ]
+        },
+        {
+          "displayName": "Gladiator",
+          "permission": "discordbot.reclaim.gladiator",
+          "commands": [
+            "points add {ign} 1000",
+            "tokens add {ign} 60000",
+            "eco give {ign} 1000000"
+          ]
+        },
+        {
+          "displayName": "Rival",
+          "permission": "discordbot.reclaim.rival",
+          "commands": [
+            "points add {ign} 2500",
+            "tokens add {ign} 100000",
+            "eco give {ign} 2500000"
+          ]
+        }
+      ],
+      "aliases": [
+        "reclaim"
+      ],
+      "permissionLiteMode": false,
+      "requirePermission": false,
+      "format": "**Format:** ``{command}``\n\n*Use this command to re-claim your rank rewards for every map!*",
+      "messageContent": "**{authorTag}**, you've claimed your reclaim for the ranks: `{dnames}`",
+      "alreadyClaimed": "**{authorTag}**, you have already claimed your reclaim for this map. Please wait until next one.",
+      "noReclaim": "**{authorTag}**, you do not have any avaliable reclaims!",
+      "enabled": true
+    },
+    "reclaim_reset": {
+      "aliases": [
+        "reclaim_reset",
+        "resetReclaim"
+      ],
+      "permissionLiteMode": false,
+      "requirePermission": true,
+      "format": "**Format:** ``{command}``\n\n*Use this command to reset all reclaim data.*",
+      "messageContent": "**{authorTag}**, you've reset all reclaim data.",
+      "enabled": true
+    },
     "ticketRename": {
       "aliases": [
         "ticketRename",
@@ -1089,6 +1157,74 @@
     }
   },
   "modules": {
+    "boosting": {
+      "general": {
+        "boostMessageEnabled": true,
+        "rewardOptions": [
+          {
+            "displayName": "10 mill $",
+            "command": "eco give {ign} 10000000"
+          },
+          {
+            "displayName": "500 points",
+            "command": "points add {ign} 500"
+          }
+        ]
+      },
+      "parts": {
+        "info": {
+          "permission": {
+            "admin": false,
+            "strict": false,
+            "lite": false
+          },
+          "message": {
+            "title": ""
+          },
+          "enabled": true
+        },
+        "claim": {
+          "permission": {
+            "admin": false,
+            "strict": false,
+            "lite": false
+          },
+          "message": {
+            "content": "**{authorTag}**, you have sucsessfully claimed one boost credit. You have {authorBoostCredits} left!",
+            "noPoints" : "**{authorTag}**, you do not have enough boost credits to claim rewards! Boost to get more."
+          },
+          "enabled": true
+        },
+        "leaderboard": {
+          "enabled": true,
+          "message": {
+            "general": "**Boosting Leaderboard:**\n\n{list}",
+            "format": "**#{place}.** *{authorTag}:* `{authorBoostCount} boosts`"
+          },
+          "permission": {
+            "strict": false,
+            "lite": false,
+            "admin": false
+          }
+        },
+        "list": {
+          "enabled": true,
+          "message": {
+            "general": "**List of active boosters:**\n{boosters}",
+            "format": "**{authorTag}** - {authorBoostCount}"
+          },
+          "permission": {
+            "strict": true,
+            "lite": false,
+            "admin": false
+          }
+        }
+      },
+      "message": {
+        "title": "",
+        "content": "**{authorTag}** has boosted the server `{times}` time{s}!"
+      }
+    },
     "giveaway": {
       "giveawayEmojiText": ":tada:",
       "giveawayEmoji": "U+1F389",
@@ -1687,6 +1823,17 @@
           },
           "permission": {
             "strict": true,
+            "lite": false,
+            "admin": false
+          }
+        },
+        "info": {
+          "enabled": true,
+          "message": {
+            "title": "Points information"
+          },
+          "permission": {
+            "strict": false,
             "lite": false,
             "admin": false
           }
