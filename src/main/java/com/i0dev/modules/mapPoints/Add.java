@@ -44,13 +44,8 @@ public class Add extends DiscordCommand {
             MessageUtil.sendMessage(e.getChannel().getIdLong(), GlobalConfig.MESSAGE_USER_NOT_FOUND.replace("{arg}", message[2]), e.getAuthor());
             return;
         }
-        String server = message[3];
-        if (!MapPointsManager.GENERAL_SERVER_LIST.contains(server.toLowerCase())) {
-            MessageUtil.sendMessage(e.getChannel().getIdLong(), MapPointsManager.MESSAGE_SERVER_NOT_VALID.replace("{list}", FormatUtil.FormatListString(MapPointsManager.GENERAL_SERVER_LIST)).replace("{arg}", message[3]), e.getAuthor());
-            return;
-        }
 
-        String amount = message[4];
+        String amount = message[3];
         if (!FormatUtil.isLong(amount)) {
             MessageUtil.sendMessage(e.getChannel().getIdLong(), MapPointsManager.MESSAGE_IS_NOT_NUMBER.replace("{arg}", message[4]), e.getAuthor());
             return;
@@ -58,8 +53,7 @@ public class Add extends DiscordCommand {
 
         DPlayer dPlayer = DPlayerEngine.getObject(MentionedUser.getIdLong());
 
-        long alreadyAmount = dPlayer.getMapPointsMap().has(server.toLowerCase()) ? (dPlayer.getMapPointsMap().get(server.toLowerCase()).getAsLong()) : 0;
-        dPlayer.getMapPointsMap().addProperty(server.toLowerCase(), alreadyAmount + Long.parseLong(amount));
+        dPlayer.setMapPoints(dPlayer.getMapPoints() + Long.parseLong(amount));
         DPlayerEngine.save(MentionedUser.getIdLong());
         String desc = MESSAGE_CONTENT
                 .replace("{amount}", amount);
