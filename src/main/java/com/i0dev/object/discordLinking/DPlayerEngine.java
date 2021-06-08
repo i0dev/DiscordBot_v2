@@ -11,6 +11,7 @@ import lombok.Setter;
 import net.dv8tion.jda.api.entities.User;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +44,8 @@ public class DPlayerEngine {
         for (long userID : userIDs) {
             if (GlobalConfig.USING_DATABASE) {
                 try {
-                    SQLManager.addToDatabase(getObject(userID));
-                } catch (SQLException throwable) {
+                    SQLManager.save(getObject(userID), "discordID", userID);
+                } catch (SQLException | NoSuchMethodException | InvocationTargetException | IllegalAccessException throwable) {
                     throwable.printStackTrace();
                 }
             } else {
@@ -53,14 +54,28 @@ public class DPlayerEngine {
         }
     }
 
+    public static void save(DPlayer... dPlayers) {
+        for (DPlayer dPlayer : dPlayers) {
+            if (GlobalConfig.USING_DATABASE) {
+                try {
+                    SQLManager.save(dPlayer, "discordID", dPlayer.getDiscordID());
+                } catch (SQLException | NoSuchMethodException | InvocationTargetException | IllegalAccessException throwable) {
+                    throwable.printStackTrace();
+                }
+            } else {
+                FileUtil.saveFile(dPlayer, InitializeBot.get().getDPlayerDir() + "/" + dPlayer.getDiscordID() + ".json");
+            }
+        }
+    }
+
     public static void saveAll() {
         if (GlobalConfig.USING_DATABASE) {
             try {
-                for (Long discordID : SQLManager.getDiscordIDS()) {
-                    DPlayer dPlayer = SQLManager.getDPlayer(discordID);
+                for (Long discordID : SQLManager.getDiscordIDS("discordID", DPlayer.class)) {
+                    DPlayer dPlayer = SQLManager.makeDPlayerObject(discordID, "discordID", DPlayer.class);
                     if (dPlayer != null) dPlayer.add();
                 }
-            } catch (SQLException e) {
+            } catch (SQLException | InvocationTargetException | NoSuchMethodException | IllegalAccessException | InstantiationException e) {
                 e.printStackTrace();
             }
         } else {
@@ -76,8 +91,8 @@ public class DPlayerEngine {
     public static void load() {
         if (GlobalConfig.USING_DATABASE) {
             try {
-                for (Long discordID : SQLManager.getDiscordIDS()) {
-                    DPlayer dPlayer = SQLManager.getDPlayer(discordID);
+                for (Long discordID : SQLManager.getDiscordIDS("discordID", DPlayer.class)) {
+                    DPlayer dPlayer = SQLManager.makeDPlayerObject(discordID, "discordID", DPlayer.class);
                     if (dPlayer != null) dPlayer.add();
                 }
             } catch (Exception exception) {
@@ -94,47 +109,66 @@ public class DPlayerEngine {
     }
 
     public static DPlayer getDPlayerFromJsonObject(JsonObject jsonObject) {
-        DPlayer dPlayer = new DPlayer();
-        JsonObject linkingObject = jsonObject.get("linkInfo").getAsJsonObject();
+        try {
+            DPlayer dPlayer = new DPlayer();
+            JsonObject linkingObject = jsonObject.get("linkInfo").getAsJsonObject();
+            dPlayer.setDiscordID(jsonObject.get("discordID").getAsLong());
+            LinkInfo linkInfo = dPlayer.getLinkInfo();
+            String uuid = linkingObject.get("minecraftUUID").getAsString();
+            linkInfo.setMinecraftUUID(uuid);
 
-        dPlayer.setDiscordID(jsonObject.get("discordID").getAsLong());
-        dPlayer.getLinkInfo().setMinecraftUUID(linkingObject.get("minecraftUUID").getAsString());
+            dPlayer.setLastUpdatedMillis(jsonObject.get("lastUpdatedMillis").getAsLong());
 
-        dPlayer.setLastUpdatedMillis(jsonObject.get("lastUpdatedMillis").getAsLong());
+            dPlayer.setInviteCount(jsonObject.get("inviteCount").getAsLong());
+            dPlayer.setWarnCount(jsonObject.get("warnCount").getAsLong());
+            dPlayer.setTicketsClosed(jsonObject.get("ticketsClosed").getAsLong());
+            dPlayer.setBlacklisted(jsonObject.get("blacklisted").getAsBoolean());
 
-        dPlayer.setInviteCount(jsonObject.get("inviteCount").getAsLong());
-        dPlayer.setWarnCount(jsonObject.get("warnCount").getAsLong());
-        dPlayer.setTicketsClosed(jsonObject.get("ticketsClosed").getAsLong());
-        dPlayer.setBlacklisted(jsonObject.get("blacklisted").getAsBoolean());
+            dPlayer.setInvitedByDiscordID(jsonObject.get("invitedByDiscordID").getAsLong());
+            dPlayer.getLinkInfo().setLinkCode(linkingObject.get("linkCode").getAsString());
+            dPlayer.getLinkInfo().setLinkedTime(linkingObject.get("linkedTime").getAsLong());
+            dPlayer.getLinkInfo().setLinked(linkingObject.get("linked").getAsBoolean());
 
-        dPlayer.setInvitedByDiscordID(jsonObject.get("invitedByDiscordID").getAsLong());
-        dPlayer.getLinkInfo().setLinkCode(linkingObject.get("linkCode").getAsString());
-        dPlayer.getLinkInfo().setLinkedTime(linkingObject.get("linkedTime").getAsLong());
-        dPlayer.getLinkInfo().setLinked(linkingObject.get("linked").getAsBoolean());
+            JsonObject cacheObject = jsonObject.get("cachedData").getAsJsonObject();
+            Cache cache = new Cache();
+            cache.setDiscordTag(cacheObject.get("discordTag").getAsString());
+            cache.setMinecraftIGN(cacheObject.get("minecraftIGN").getAsString());
+            cache.setDiscordAvatarURL(cacheObject.get("discordAvatarURL").getAsString());
+            cache.setInvitedByDiscordTag(cacheObject.get("invitedByDiscordTag").getAsString());
+            cache.setInvitedByDiscordAvatarURL(cacheObject.get("invitedByDiscordAvatarURL").getAsString());
+            dPlayer.setCachedData(cache);
 
-        JsonObject cacheObject = jsonObject.get("cachedData").getAsJsonObject();
-        Cache cache = new Cache();
-        cache.setDiscordTag(cacheObject.get("discordTag").getAsString());
-        cache.setMinecraftIGN(cacheObject.get("minecraftIGN").getAsString());
-        cache.setDiscordAvatarURL(cacheObject.get("discordAvatarURL").getAsString());
-        cache.setInvitedByDiscordTag(cacheObject.get("invitedByDiscordTag").getAsString());
-        cache.setInvitedByDiscordAvatarURL(cacheObject.get("invitedByDiscordAvatarURL").getAsString());
-        dPlayer.setCachedData(cache);
+            //After initial update:
+            if (jsonObject.has("points")) {
+                dPlayer.setPoints(jsonObject.get("points").getAsDouble());
+            }
+            if (jsonObject.has("lastBoostTime")) {
+                dPlayer.setLastBoostTime(jsonObject.get("lastBoostTime").getAsLong());
+            }
+            if (jsonObject.has("boostCount")) {
+                dPlayer.setBoostCount(jsonObject.get("boostCount").getAsLong());
+            }
+            if (jsonObject.has("mapPoints")) {
+                dPlayer.setMapPoints(jsonObject.get("mapPoints").getAsLong());
+            }
+            if (jsonObject.has("lastRewardsClaim")) {
+                dPlayer.setLastRewardsClaim(jsonObject.get("lastRewardsClaim").getAsLong());
+            }
+            if (jsonObject.has("rewardsClaimed")) {
+                dPlayer.setRewardsClaimed(jsonObject.get("rewardsClaimed").getAsLong());
+            }
+            if (jsonObject.has("claimedReclaim")) {
+                dPlayer.setClaimedReclaim(jsonObject.get("claimedReclaim").getAsBoolean());
+            }
+            if (jsonObject.has("boostCredits")) {
+                dPlayer.setBoostCredits(jsonObject.get("boostCredits").getAsLong());
+            }
 
-        //After initial update:
-        if (jsonObject.has("points")) {
-            dPlayer.setPoints(jsonObject.get("points").getAsDouble());
+            return dPlayer;
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            return null;
         }
-        if (jsonObject.has("lastBoostTime")) {
-            dPlayer.setLastBoostTime(jsonObject.get("lastBoostTime").getAsLong());
-        }
-        if (jsonObject.has("boostCount")) {
-            dPlayer.setBoostCount(jsonObject.get("boostCount").getAsLong());
-        }
-        if (jsonObject.has("mapPointsMap")) {
-            dPlayer.setMapPointsMap(jsonObject.get("mapPointsMap").getAsJsonObject());
-        }
-        return dPlayer;
     }
 
     public static void increment(long userID, String type) {
