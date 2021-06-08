@@ -326,6 +326,16 @@ public class FormatUtil {
         return f.isNone() ? "" : com.massivecraft.factions.entity.MPlayer.get(p).getRole().getPrefix();
     }
 
+    public static boolean isUUID(String uid) {
+        try {
+            UUID.fromString(uid);
+            return true;
+        } catch (Exception exception) {
+            return false;
+        }
+    }
+
+
     public static MessageEmbed getEmbedFromEncode(String string) {
         EmbedBuilder eb = new EmbedBuilder();
         if (!string.startsWith("_embed")) return null;
