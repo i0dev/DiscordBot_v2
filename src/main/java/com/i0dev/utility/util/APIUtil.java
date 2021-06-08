@@ -35,9 +35,7 @@ public class APIUtil {
         } catch (ParseException | IOException exception) {
             exception.printStackTrace();
             return null;
-        } catch (IOException ignored) {
         }
-        return null;
     }
 
     private static JSONObject getGeneralRequest(String method, String url, String param) {
@@ -127,7 +125,9 @@ public class APIUtil {
     }
 
     public static String getUUIDFromIGN(String ign) {
-        return convertUUID(getGeneralRequest("GET", "https://api.mojang.com/users/profiles/minecraft/", ign).get("id").toString());
+        JSONObject req = getGeneralRequest("GET", "https://api.mojang.com/users/profiles/minecraft/", ign);
+        if (req == null) return null;
+        return convertUUID(req.get("id").toString());
     }
 
     public static String getIGNFromUUID(String uuid) {
@@ -143,6 +143,7 @@ public class APIUtil {
     }
 
     public static String convertUUID(String s) {
-        return s.substring(0, 7) + "-" + s.substring(7, 11) + "-" + s.substring(11, 15) + "-" + s.substring(15);
+        if (s == null) return null;
+        return s.substring(0, 7) + "-" + s.substring(7, 11) + "-" + s.substring(11, 15) + "-" + s.substring(15, 19) + "-" + s.substring(19);
     }
 }
