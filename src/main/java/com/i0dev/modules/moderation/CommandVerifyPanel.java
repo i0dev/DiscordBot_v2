@@ -4,10 +4,11 @@ import com.i0dev.modules.DiscordCommandManager;
 import com.i0dev.object.engines.PermissionHandler;
 import com.i0dev.object.objects.DiscordCommand;
 import com.i0dev.utility.*;
-import com.i0dev.utility.util.EmojiUtil;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Emoji;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.interactions.components.Button;
 
 import java.awt.*;
 import java.time.ZonedDateTime;
@@ -21,6 +22,7 @@ public class CommandVerifyPanel extends DiscordCommand {
     public static boolean COMMAND_ENABLED;
     public static boolean PIN_MESSAGE;
     public static String VERIFY_EMOJI;
+    public static String VERIFY_BUTTON_LABEL;
 
     @Override
     public void init() {
@@ -32,6 +34,7 @@ public class CommandVerifyPanel extends DiscordCommand {
         COMMAND_ENABLED = Configuration.getBoolean("commands.createVerifyPanel.enabled");
         PIN_MESSAGE = Configuration.getBoolean("commands.createVerifyPanel.pinVerifyPanel");
         VERIFY_EMOJI = Configuration.getString("commands.createVerifyPanel.verifyEmoji");
+        VERIFY_BUTTON_LABEL = Configuration.getString("commands.createVerifyPanel.verifyButtonLabel");
     }
 
     public static void run(GuildMessageReceivedEvent e) {
@@ -53,11 +56,9 @@ public class CommandVerifyPanel extends DiscordCommand {
                 .setDescription(MESSAGE_CONTENT)
                 .setTimestamp(ZonedDateTime.now());
 
-        Message PanelMessage = e.getChannel().sendMessage(Embed.build()).complete();
+        Message PanelMessage = e.getChannel().sendMessage(Embed.build())
+                .setActionRow(Button.success("BUTTON_VERIFY_PANEL", VERIFY_BUTTON_LABEL).withEmoji(Emoji.fromMarkdown(VERIFY_EMOJI)))
+                .complete();
         if (PIN_MESSAGE) PanelMessage.pin().queue();
-        String Emoji = EmojiUtil.getEmojiWithoutArrow(VERIFY_EMOJI);
-        PanelMessage.addReaction(Emoji).queue();
-
-
     }
 }
