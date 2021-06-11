@@ -48,7 +48,7 @@ public class Placeholders {
                     .replace("{mentionedUserMapPoints}", dPlayer.getMapPoints() + "")
                     .replace("{mentionedUserBoostCredits}", dPlayer.getBoostCredits() + "")
                     .replace("{mentionedUserRewardsClaimed}", dPlayer.getRewardsClaimed() + "")
-                    .replace("{mentionedUserHasReclaim}", dPlayer.isClaimedReclaim() + "")
+                    .replace("{mentionedUserHasReclaim}", dPlayer.isClaimedReclaim() ? "Yes" : "No")
 
                     .replace("{mentionedUserInviteCount}", DPlayerEngine.getObject(mentioned.getIdLong()).getInviteCount() + "")
                     .replace("{mentionedUserTicketsClosed}", DPlayerEngine.getObject(mentioned.getIdLong()).getTicketsClosed() + "")
@@ -79,7 +79,7 @@ public class Placeholders {
                     .replace("{authorBoostCount}", dPlayer.getBoostCount() + "")
                     .replace("{authorBoostCredits}", dPlayer.getBoostCredits() + "")
                     .replace("{authorRewardsClaimed}", dPlayer.getRewardsClaimed() + "")
-                    .replace("{authorHasReclaim}", dPlayer.isClaimedReclaim() + "")
+                    .replace("{authorHasReclaim}", dPlayer.isClaimedReclaim() ? "Yes" : "No")
 
                     .replace("{authorInviteCount}", DPlayerEngine.getObject(author.getIdLong()).getInviteCount() + "")
                     .replace("{authorTicketsClosed}", DPlayerEngine.getObject(author.getIdLong()).getTicketsClosed() + "")
