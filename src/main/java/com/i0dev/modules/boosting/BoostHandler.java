@@ -31,7 +31,7 @@ public class BoostHandler extends ListenerAdapter {
                 .replace("{s}", timesBoosted > 1 ? "s" : "");
         boolean enabled = Configuration.getBoolean("modules.boosting.general.boostMessageEnabled");
         if (!enabled) return;
-        EventHandler.performBoost(boostCountCache, e.getUser());
+        EventHandler.performBoost(timesBoosted, e.getUser());
         MessageUtil.sendMessage(channelID, EmbedFactory.createEmbed(Placeholders.convert(title, e.getUser()), Placeholders.convert(message, e.getUser())).build());
         DPlayer dPlayer = DPlayerEngine.getObject(e.getUser().getIdLong());
         dPlayer.setBoostCount(dPlayer.getBoostCount() + timesBoosted);

@@ -38,7 +38,6 @@ public class EventHandler extends ListenerAdapter {
         if (prevBoostsEffectBoostPoints) {
             int boostMath = 0;
             for (int i = 0; i < boosts; i++) {
-                dpLayer.setBoostCount(dpLayer.getBoostCount() + 1);
                 long numerator = 2;
                 long denominator = dpLayer.getBoostCount();
                 if (dpLayer.getBoostCount() == 0 || dpLayer.getBoostCount() == 1) {
@@ -59,7 +58,6 @@ public class EventHandler extends ListenerAdapter {
             message1 = "" + FormatUtil.formatDate(System.currentTimeMillis()) + ": " + message1;
             Engine.getToLog().add(new LogObject(message1, new File(InitializeBot.get().getPointLogPath())));
         } else {
-            dpLayer.setBoostCount(dpLayer.getBoostCount() + boosts);
             for (int i = 0; i < boosts; i++) {
                 pointsToGive += boost;
             }
