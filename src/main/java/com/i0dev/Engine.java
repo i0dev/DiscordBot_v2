@@ -149,7 +149,7 @@ public class Engine {
                     playerCache.setDiscordTag(user.getAsTag());
                     playerCache.setDiscordAvatarURL(user.getEffectiveAvatarUrl());
                 }
-                if (APIUtil.getIGNFromUUID(dPlayer.getLinkInfo().getMinecraftUUID()) != null) {
+                if (dPlayer.getLinkInfo().isLinked() && APIUtil.getIGNFromUUID(dPlayer.getLinkInfo().getMinecraftUUID()) != null) {
                     playerCache.setMinecraftIGN(APIUtil.getIGNFromUUID(dPlayer.getLinkInfo().getMinecraftUUID()));
                 }
                 User inviter = InternalJDA.getJda().getUserById(dPlayer.getInvitedByDiscordID());
@@ -175,7 +175,7 @@ public class Engine {
                 DPlayer dPlayer = ((DPlayer) o);
                 if (dPlayer.getLinkInfo().isLinked()) {
                     RoleRefreshHandler.RefreshUserRank(dPlayer);
-                  //  System.out.println("DEBUG: read user " + dPlayer.getCachedData().getMinecraftIGN());
+                    //  System.out.println("DEBUG: read user " + dPlayer.getCachedData().getMinecraftIGN());
                     Thread.sleep(100);
                     if (!FormatUtil.isUUID(dPlayer.getLinkInfo().getMinecraftUUID())) {
                         String newUUID = APIUtil.getUUIDFromIGN(dPlayer.getCachedData().getMinecraftIGN());
