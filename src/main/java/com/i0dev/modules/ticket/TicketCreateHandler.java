@@ -21,6 +21,7 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.interactions.components.Button;
 import org.json.simple.JSONObject;
 
 import java.awt.*;
@@ -174,10 +175,16 @@ public class TicketCreateHandler extends ListenerAdapter {
                 NewTicketCreated.sendMessage(e.getMember().getAsMention()).queue();
             }
 
-            NewTicketCreated.sendMessage(Embed.build()).queue(message -> {
-                message.addReaction(EmojiUtil.getEmojiWithoutArrow(Configuration.getString("events.event_ticketCreate.closeTicketEmoji"))).queue();
-                message.addReaction(EmojiUtil.getEmojiWithoutArrow(Configuration.getString("events.event_ticketCreate.adminOnlyEmoji"))).queue();
-            });
+            String closeLabel = Configuration.getString("events.event_ticketCreate.closeTicketButtonLabel");
+            String adminOnlyLabel = Configuration.getString("events.event_ticketCreate.adminOnlyButtonLabel");
+            String adminOnlyEmoji = Configuration.getString("events.event_ticketCreate.adminOnlyEmoji");
+            String closeEmoji = Configuration.getString("events.event_ticketCreate.closeTicketEmoji");
+
+            NewTicketCreated.sendMessage(Embed.build())
+                    .setActionRow(Button.danger("BUTTON_TICKET_CLOSE", closeLabel).withEmoji(net.dv8tion.jda.api.entities.Emoji.fromMarkdown(closeEmoji)),
+                            Button.success("BUTTON_TICKET_ADMIN_ONLY", adminOnlyLabel).withEmoji(net.dv8tion.jda.api.entities.Emoji.fromMarkdown(adminOnlyEmoji)))
+                    .queue();
+
             Ticket ticket = new Ticket();
             ticket.setAdminOnlyMode(AdminOnlyDefault);
             ticket.setTicketOwnerID(e.getUser().getIdLong());
@@ -219,6 +226,8 @@ public class TicketCreateHandler extends ListenerAdapter {
                 e.getUser().openPrivateChannel().complete().sendMessage(EmbedPM.build()).complete();
             } catch (Exception ignored) {
             }
+
+
             CurrentTicketNumber = Integer.parseInt(CurrentTicketNumber) + 1 + "";
             saveFile();
         }

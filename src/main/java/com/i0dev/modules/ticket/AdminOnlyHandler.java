@@ -7,11 +7,10 @@ import com.i0dev.utility.Configuration;
 import com.i0dev.utility.EmbedFactory;
 import com.i0dev.utility.GlobalConfig;
 import com.i0dev.utility.Placeholders;
-import com.i0dev.utility.util.EmojiUtil;
 import com.i0dev.utility.util.PermissionUtil;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Role;
-import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
+import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.List;
@@ -24,35 +23,34 @@ public class AdminOnlyHandler extends ListenerAdapter {
     public static final String MESSAGE_CONTENT = Configuration.getString("commands.ticketAdminOnly.messageContent");
     public static final boolean EVENT_ENABLED = Configuration.getBoolean("commands.ticketAdminOnly.enabled");
     public static final String MESSAGE_ADMINALREADY = Configuration.getString("commands.ticketAdminOnly.alreadyAdminOnly");
-    public static final String AdminOnlyEmoji = Configuration.getString("events.event_ticketCreate.adminOnlyEmoji");
     private final List<Long> ROLES_TO_GIVE_ALLOW_FOR_TICKET = Configuration.getLongList("events.event_ticketCreate.RolesToAllowSeeingTickets");
     private final List<Long> ROLES_ALLOWED_TO_SEE_ADMINONLY = Configuration.getLongList("events.event_ticketCreate.RolesToAllowSeeingAdminOnlyTickets");
 
+
     @Override
-    public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent e) {
+    public void onButtonClick(ButtonClickEvent e) {
+        if (!e.getButton().getId().equalsIgnoreCase("BUTTON_TICKET_ADMIN_ONLY")) return;
         if (e.getUser().isBot()) return;
         if (!EVENT_ENABLED) return;
         if (!e.getGuild().equals(GlobalConfig.GENERAL_MAIN_GUILD)) return;
         if (DPlayerEngine.getObject(e.getUser().getIdLong()).isBlacklisted()) return;
         if (!PermissionUtil.get().hasPermission(REQUIRE_PERMISSIONS, REQUIRE_LITE_PERMISSIONS, e.getGuild(), e.getUser()))
             return;
-        if (!TicketEngine.getInstance().isOnList(e.getChannel())) return;
+        if (!TicketEngine.getInstance().isOnList(e.getChannel().getIdLong())) return;
 
-        if (!EmojiUtil.isEmojiValid(e.getReactionEmote(), AdminOnlyEmoji)) return;
 
-        e.getChannel().removeReactionById(e.getMessageId(), EmojiUtil.getEmojiWithoutArrow(AdminOnlyEmoji), e.getUser()).queue();
-
-        Ticket ticketObject = TicketEngine.getInstance().getObject(e.getChannel());
+        Ticket ticketObject = TicketEngine.getInstance().getObject(e.getChannel().getIdLong());
         if (ticketObject.isAdminOnlyMode()) {
             e.getChannel().sendMessage(EmbedFactory.createEmbed(Placeholders.convert(MESSAGE_ADMINALREADY, e.getUser())).build()).queue();
+            e.deferEdit().queue();
             return;
         }
-        TicketEngine.getInstance().setAdminOnly(TicketEngine.getInstance().getObject(e.getChannel()));
+        TicketEngine.getInstance().setAdminOnly(TicketEngine.getInstance().getObject(e.getChannel().getIdLong()));
 
         for (Long roleID : ROLES_TO_GIVE_ALLOW_FOR_TICKET) {
             Role role = e.getGuild().getRoleById(roleID);
             try {
-                e.getChannel().putPermissionOverride(role)
+                e.getTextChannel().putPermissionOverride(role)
                         .setDeny(Permission.MESSAGE_READ, Permission.MESSAGE_WRITE, Permission.MESSAGE_ATTACH_FILES,
                                 Permission.MESSAGE_EXT_EMOJI, Permission.MESSAGE_EMBED_LINKS,
                                 Permission.MESSAGE_HISTORY, Permission.MESSAGE_ADD_REACTION,
@@ -66,7 +64,7 @@ public class AdminOnlyHandler extends ListenerAdapter {
         for (Long roleID : ROLES_ALLOWED_TO_SEE_ADMINONLY) {
             Role role = e.getGuild().getRoleById(roleID);
             try {
-                e.getChannel().putPermissionOverride(role)
+                e.getTextChannel().putPermissionOverride(role)
                         .setAllow(Permission.MESSAGE_READ, Permission.MESSAGE_WRITE, Permission.MESSAGE_ATTACH_FILES,
                                 Permission.MESSAGE_EXT_EMOJI, Permission.MESSAGE_EMBED_LINKS, Permission.MESSAGE_HISTORY,
                                 Permission.MESSAGE_ADD_REACTION, Permission.CREATE_INSTANT_INVITE)
@@ -76,9 +74,8 @@ public class AdminOnlyHandler extends ListenerAdapter {
             } catch (Exception ignored) {
             }
         }
-
         e.getChannel().sendMessage(EmbedFactory.createEmbed(Placeholders.convert(MESSAGE_CONTENT, e.getUser())).build()).queue();
-
-
+        e.deferEdit().queue();
     }
+
 }
