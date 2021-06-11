@@ -29,7 +29,7 @@ public class CommandTicketRename extends DiscordCommand {
         if (!GlobalCheck.checkBasic(e, COMMAND_ENABLED, new PermissionHandler(REQUIRE_LITE_PERMISSIONS, REQUIRE_PERMISSIONS, false), "Ticket Rename")) {
             return;
         }
-        if (!TicketEngine.getInstance().isOnList(e.getChannel())) return;
+        if (!TicketEngine.getInstance().isOnList(e.getChannel().getIdLong())) return;
 
         String[] message = e.getMessage().getContentRaw().split(" ");
         if (message.length == 1) {
@@ -37,7 +37,7 @@ public class CommandTicketRename extends DiscordCommand {
             return;
         }
 
-        Ticket ticketObject = TicketEngine.getInstance().getObject(e.getChannel());
+        Ticket ticketObject = TicketEngine.getInstance().getObject(e.getChannel().getIdLong());
         String newTicketName = FormatUtil.remainingArgFormatter(message, 1).replace(" ", "-") + "-" + ticketObject.getTicketNumber();
         e.getChannel().getManager().setName(newTicketName).queue();
 

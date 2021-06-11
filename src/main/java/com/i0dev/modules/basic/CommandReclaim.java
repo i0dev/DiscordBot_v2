@@ -10,6 +10,7 @@ import com.i0dev.utility.*;
 import com.i0dev.utility.util.FormatUtil;
 import com.i0dev.utility.util.MessageUtil;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import org.bukkit.Bukkit;
 import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class CommandReclaim extends DiscordCommand {
     public static String MESSAGE_FORMAT;
     public static String alreadyClaimed;
     public static String noReclaim;
+    public static String needOnline;
     public static boolean COMMAND_ENABLED;
 
     @Override
@@ -34,6 +36,7 @@ public class CommandReclaim extends DiscordCommand {
         COMMAND_ENABLED = Configuration.getBoolean("commands.reclaim.enabled");
         alreadyClaimed = Configuration.getString("commands.reclaim.alreadyClaimed");
         noReclaim = Configuration.getString("commands.reclaim.noReclaim");
+        needOnline = Configuration.getString("commands.reclaim.needOnline");
         registerOptions();
     }
 
@@ -55,6 +58,11 @@ public class CommandReclaim extends DiscordCommand {
 
         if (dPlayer.isClaimedReclaim()) {
             MessageUtil.sendMessage(e.getChannel().getIdLong(), alreadyClaimed, e.getAuthor());
+            return;
+        }
+
+        if (Bukkit.getPlayer(dPlayer.getCachedData().getMinecraftIGN()) == null) {
+            MessageUtil.sendMessage(e.getChannel().getIdLong(), needOnline, e.getAuthor());
             return;
         }
 
@@ -104,7 +112,6 @@ public class CommandReclaim extends DiscordCommand {
         List<ReclaimOption> ret = new ArrayList<>();
         org.bukkit.entity.Player player = org.bukkit.Bukkit.getPlayer(dPlayer.getCachedData().getMinecraftIGN());
         if (player == null) {
-            System.out.println("null");
             return ret;
         }
         for (ReclaimOption option : options) {

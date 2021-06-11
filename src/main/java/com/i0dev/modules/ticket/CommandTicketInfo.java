@@ -28,7 +28,7 @@ public class CommandTicketInfo extends DiscordCommand {
         if (!GlobalCheck.checkBasic(e, COMMAND_ENABLED, new PermissionHandler(REQUIRE_LITE_PERMISSIONS, REQUIRE_PERMISSIONS, false), "Ticket Info")) {
             return;
         }
-        if (!TicketEngine.getInstance().isOnList(e.getChannel())) return;
+        if (!TicketEngine.getInstance().isOnList(e.getChannel().getIdLong())) return;
 
         String[] message = e.getMessage().getContentRaw().split(" ");
         if (message.length != 1) {
@@ -36,7 +36,7 @@ public class CommandTicketInfo extends DiscordCommand {
             return;
         }
 
-        Ticket ticketObject = TicketEngine.getInstance().getObject(e.getChannel());
+        Ticket ticketObject = TicketEngine.getInstance().getObject(e.getChannel().getIdLong());
 
         e.getChannel().sendMessage(EmbedFactory.createEmbed(Placeholders.convert(MESSAGE_CONTENT
                 .replace("{channelName}", e.getChannel().getName())

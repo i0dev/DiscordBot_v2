@@ -38,7 +38,7 @@ public class CommandAdminOnly extends DiscordCommand {
         if (!GlobalCheck.checkBasic(e, COMMAND_ENABLED, new PermissionHandler(REQUIRE_LITE_PERMISSIONS, REQUIRE_PERMISSIONS, false), "Admin Only")) {
             return;
         }
-        if (!TicketEngine.getInstance().isOnList(e.getChannel())) return;
+        if (!TicketEngine.getInstance().isOnList(e.getChannel().getIdLong())) return;
 
         String[] message = e.getMessage().getContentRaw().split(" ");
         if (message.length != 1) {
@@ -46,7 +46,7 @@ public class CommandAdminOnly extends DiscordCommand {
             return;
         }
 
-        Ticket ticketObject = TicketEngine.getInstance().getObject(e.getChannel());
+        Ticket ticketObject = TicketEngine.getInstance().getObject(e.getChannel().getIdLong());
         if (ticketObject.isAdminOnlyMode()) {
             e.getChannel().sendMessage(EmbedFactory.createEmbed(Placeholders.convert(MESSAGE_ADMINALREADY, e.getAuthor())).build()).queue();
             return;

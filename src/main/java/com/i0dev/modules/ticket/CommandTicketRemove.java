@@ -29,7 +29,7 @@ public class CommandTicketRemove extends DiscordCommand {
         if (!GlobalCheck.checkBasic(e, COMMAND_ENABLED, new PermissionHandler(REQUIRE_LITE_PERMISSIONS, REQUIRE_PERMISSIONS, false), "Ticket Remove")) {
             return;
         }
-        if (!TicketEngine.getInstance().isOnList(e.getChannel())) return;
+        if (!TicketEngine.getInstance().isOnList(e.getChannel().getIdLong())) return;
 
         String[] message = e.getMessage().getContentRaw().split(" ");
         if (message.length == 1 || message.length > 2) {

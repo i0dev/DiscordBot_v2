@@ -36,8 +36,8 @@ public class CommandTicketClose extends DiscordCommand {
         if (!GlobalCheck.checkBasic(e, COMMAND_ENABLED, new PermissionHandler(REQUIRE_LITE_PERMISSIONS, REQUIRE_PERMISSIONS, false), "Ticket Close")) {
             return;
         }
-        if (!TicketEngine.getInstance().isOnList(e.getChannel())) return;
+        if (!TicketEngine.getInstance().isOnList(e.getChannel().getIdLong())) return;
         String[] message = e.getMessage().getContentRaw().split(" ");
-        TicketCloseHandler.closeTicket(TicketEngine.getInstance().getObject(e.getChannel()), FormatUtil.ticketRemainingArgFormatter(message, 1), e.getAuthor());
+        TicketCloseHandler.closeTicket(TicketEngine.getInstance().getObject(e.getChannel().getIdLong()), FormatUtil.ticketRemainingArgFormatter(message, 1), e.getAuthor());
     }
 }

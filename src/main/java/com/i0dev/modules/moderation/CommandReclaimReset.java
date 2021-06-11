@@ -9,9 +9,6 @@ import com.i0dev.utility.*;
 import com.i0dev.utility.util.MessageUtil;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-
 public class CommandReclaimReset extends DiscordCommand {
 
     public static boolean REQUIRE_PERMISSIONS;
@@ -38,18 +35,13 @@ public class CommandReclaimReset extends DiscordCommand {
             e.getChannel().sendMessage(EmbedFactory.createEmbed(Placeholders.convert(MESSAGE_FORMAT.replace("{command}", GlobalConfig.GENERAL_BOT_PREFIX + DiscordCommandManager.RECLAIM_RESET_ALIASES.get(0)), e.getAuthor())).build()).queue();
             return;
         }
+        for (Object o : DPlayerEngine.getCache()) {
+            DPlayer dPlayer = ((DPlayer) o);
+            dPlayer.setClaimedReclaim(false);
+            dPlayer.save();
+        }
+        MessageUtil.sendMessage(e.getChannel().getIdLong(), MESSAGE_CONTENT, e.getAuthor());
 
-        ScheduledExecutorService service = Executors.newScheduledThreadPool(10);
-        service.execute(() -> {
-            for (Object o : DPlayerEngine.getCache()) {
-                DPlayer dPlayer = ((DPlayer) o);
-                dPlayer.setClaimedReclaim(false);
-                dPlayer.save();
-            }
-        });
-        service.shutdown();
-
-        MessageUtil.sendMessage(e.getMessageIdLong(), MESSAGE_CONTENT, e.getAuthor());
     }
 }
 
