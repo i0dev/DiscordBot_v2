@@ -15,7 +15,7 @@ public class TicketLogHandler extends ListenerAdapter {
 
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
-        if (!TicketEngine.getInstance().isOnList(e.getChannel())) return;
+        if (!TicketEngine.getInstance().isOnList(e.getChannel().getIdLong())) return;
         try {
             File ticketLogsFile = new File(InitializeBot.get().getTicketLogsDirPath() + "/" + e.getChannel().getId() + ".log");
             StringBuilder toFile = new StringBuilder();

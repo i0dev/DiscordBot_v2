@@ -7,12 +7,11 @@ import com.i0dev.object.engines.TicketEngine;
 import com.i0dev.object.objects.LogObject;
 import com.i0dev.object.objects.Ticket;
 import com.i0dev.utility.*;
-import com.i0dev.utility.util.EmojiUtil;
 import com.i0dev.utility.util.PermissionUtil;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
-import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
+import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.io.File;
@@ -25,27 +24,24 @@ public class TicketCloseHandler extends ListenerAdapter {
     public static boolean REQUIRE_LITE_PERMISSIONS = Configuration.getBoolean("commands.ticketClose.permissionLiteMode");
     public static String MESSAGE_CONTENT = Configuration.getString("commands.ticketClose.messageContent");
     public static boolean EVENT_ENABLED = Configuration.getBoolean("commands.ticketClose.enabled");
-    public static String closeTicketEmoji = Configuration.getString("events.event_ticketCreate.closeTicketEmoji");
     public static String MESSAGE_TICKET_LOG = Configuration.getString("commands.ticketClose.ticketLogsMessage");
     public static String MESSAGE_TICKET_LOG_TITLE = Configuration.getString("commands.ticketClose.ticketLogsTitle");
     public static String TICKET_LOGS_ID = Configuration.getString("channels.ticketLogsID");
     public static String ADMIN_LOGS_ID = Configuration.getString("channels.ticketAdminLogsID");
     public static long delayToCloseTicketMilis = Configuration.getLong("commands.ticketClose.delayToCloseTicketMilis");
 
-
     @Override
-    public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent e) {
+    public void onButtonClick(ButtonClickEvent e) {
+        if (!e.getButton().getId().equalsIgnoreCase("BUTTON_TICKET_CLOSE")) return;
         if (e.getUser().isBot()) return;
         if (!EVENT_ENABLED) return;
         if (!e.getGuild().equals(GlobalConfig.GENERAL_MAIN_GUILD)) return;
         if (DPlayerEngine.getObject(e.getUser().getIdLong()).isBlacklisted()) return;
         if (!PermissionUtil.get().hasPermission(REQUIRE_PERMISSIONS, REQUIRE_LITE_PERMISSIONS, e.getGuild(), e.getUser()))
             return;
-        if (!TicketEngine.getInstance().isOnList(e.getChannel())) return;
-        String Emoji = (closeTicketEmoji);
-        if (!EmojiUtil.isEmojiValid(e.getReactionEmote(), Emoji)) return;
-        e.getChannel().removeReactionById(e.getMessageId(), EmojiUtil.getEmojiWithoutArrow(Emoji), e.getUser()).queue();
-        closeTicket(TicketEngine.getInstance().getObject(e.getChannel()), Configuration.getString("commands.ticketClose.defaultCloseReason"), e.getUser());
+        if (!TicketEngine.getInstance().isOnList(e.getChannel().getIdLong())) return;
+        closeTicket(TicketEngine.getInstance().getObject(e.getChannel().getIdLong()), Configuration.getString("commands.ticketClose.defaultCloseReason"), e.getUser());
+        e.deferEdit().queue();
     }
 
 
@@ -61,7 +57,7 @@ public class TicketCloseHandler extends ListenerAdapter {
         ticketLogsFile = new File(InitializeBot.get().getTicketLogsDirPath() + "/" + ticket.getChannelID() + ".log");
         User ticketOwner = InternalJDA.getJda().getUserById(ticket.getTicketOwnerID());
         TicketEngine.getInstance().remove(ticket);
-        DPlayerEngine.increment(closer.getIdLong(),"ticketsclosed");
+        DPlayerEngine.increment(closer.getIdLong(), "ticketsclosed");
         ticketChannel.delete().queueAfter(delayToCloseTicketMilis, TimeUnit.MILLISECONDS);
         ticketChannel.sendMessage(EmbedFactory.createEmbed(null, Placeholders.convert(MESSAGE_CONTENT.replace("{channelName}", ticketChannel.getName()), closer), null).build()).queue();
 

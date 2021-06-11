@@ -38,7 +38,7 @@ public class TicketEngine {
     }
 
     public void remove(TextChannel channel) {
-        getCache().remove(getObject(channel));
+        getCache().remove(getObject(channel.getIdLong()));
         save();
     }
 
@@ -53,14 +53,15 @@ public class TicketEngine {
         save();
     }
 
-    public boolean isOnList(TextChannel channel) {
-        return cache.contains(getObject(channel));
+    public boolean isOnList(long channelID) {
+        return cache.contains(getObject(channelID));
     }
 
-    public Ticket getObject(TextChannel channel) {
+
+    public Ticket getObject(long channelID) {
         for (Object singleton : getCache()) {
             Ticket object = (Ticket) singleton;
-            if (object.getChannelID().equals(channel.getIdLong())) {
+            if (object.getChannelID().equals(channelID)) {
                 return object;
             }
         }

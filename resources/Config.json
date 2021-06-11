@@ -24,7 +24,6 @@
   },
   "channels": {
     "incomingApplicationsChannel": 766330396832432150,
-    "verifyChannelID": 766330396832432150,
     "ticketLogsID": 766322437309988865,
     "ticketCreateCategoryID": 766177636875239435,
     "confirmedFactionChannelID": 766328319318556702,
@@ -420,6 +419,8 @@
         795324267969249310
       ],
       "permissionLiteMode": false,
+      "adminOnlyButtonLabel": "Admin Only",
+      "closeTicketButtonLabel": "Close Ticket",
       "ticketCreatedEmbedTitle": "New ticket from {authorTag}",
       "ticketCreatedEmbedFieldHeader": "Please follow the question format below:",
       "dmToTicketCreatorTicket": "{authorTag}, You have successfully created a ticket!",
@@ -838,6 +839,7 @@
       "format": "**Format:** ``{command}``\n\n*Use this command to re-claim your rank rewards for every map!*",
       "messageContent": "**{authorTag}**, you've claimed your reclaim for the ranks: `{dnames}`",
       "alreadyClaimed": "**{authorTag}**, you have already claimed your reclaim for this map. Please wait until next one.",
+      "needOnline": "**{authorTag}**, you need to be online in order to reclaim rewards.",
       "noReclaim": "**{authorTag}**, you do not have any avaliable reclaims!",
       "enabled": true
     },
@@ -870,6 +872,7 @@
         "verify_panel"
       ],
       "verifyEmoji": "U+2705",
+      "verifyButtonLabel": "React to verify",
       "permissionLiteMode": false,
       "requirePermission": true,
       "format": "**Format:** ``{command}``\n\n*Use this command to create the verify panel. In order for this to fully work, you need to set the channel properly in config!*",
