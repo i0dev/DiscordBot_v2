@@ -56,7 +56,10 @@ public class Placeholders {
                     .replace("{mentionedUserRoleCount}", guild.getMember(mentioned).getRoles().size() + "")
                     .replace("{mentionedUserIsAdministrator}", guild.getMember(mentioned).getPermissions().contains(Permission.ADMINISTRATOR) + "")
                     .replace("{mentionedUserEffectiveName}", guild.getMember(mentioned).getEffectiveName());
-            dPlayer = null;
+        } else {
+            message = message
+                    .replace("{mentionedUserTag}", "Unknown");
+
         }
 
         //Author
@@ -87,6 +90,10 @@ public class Placeholders {
                     .replace("{authorMemberRoleCount}", guild.getMember(author).getRoles().size() + "")
                     .replace("{authorIsAdministrator}", guild.getMember(author).getPermissions().contains(Permission.ADMINISTRATOR) + "")
                     .replace("{authorEffectiveName}", guild.getMember(author).getEffectiveName());
+        } else {
+            message = message
+                    .replace("{authorTag}", "Unknown");
+
         }
 
 
