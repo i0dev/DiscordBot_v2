@@ -47,7 +47,6 @@ public class Engine {
 
     static void run() {
         ScheduledExecutorService executorService = InitializeBot.getAsyncService();
-        executorService.scheduleAtFixedRate(taskExecuteRoleQueue, 1, 2, TimeUnit.SECONDS);
         executorService.scheduleAtFixedRate(taskExecuteMemberCountUpdate, 1, 2, TimeUnit.MINUTES);
         executorService.scheduleAtFixedRate(taskExecuteGiveawayCreator, 1, 30, TimeUnit.SECONDS);
         executorService.scheduleAtFixedRate(taskExecutePollCreator, 1, 30, TimeUnit.SECONDS);
@@ -60,9 +59,9 @@ public class Engine {
         executorService.scheduleAtFixedRate(taskUpdateGiveawayTimes, 15, 30, TimeUnit.SECONDS);
         executorService.scheduleAtFixedRate(taskAutoUpdateConfig, 60, 60, TimeUnit.SECONDS);
         executorService.scheduleAtFixedRate(taskSendFTOP, 45, 45, TimeUnit.SECONDS);
-        ScheduledExecutorService SlowedExecutorService = Executors.newScheduledThreadPool(10);
-        SlowedExecutorService.scheduleAtFixedRate(taskFlushDPLayers, 1, 30, TimeUnit.MINUTES);
-
+        executorService.scheduleAtFixedRate(taskFlushDPLayers, 1, 30, TimeUnit.MINUTES);
+        ScheduledExecutorService newService = Executors.newScheduledThreadPool(1);
+        newService.scheduleAtFixedRate(taskExecuteRoleQueue, 1, 2, TimeUnit.SECONDS);
     }
 
     @Getter
