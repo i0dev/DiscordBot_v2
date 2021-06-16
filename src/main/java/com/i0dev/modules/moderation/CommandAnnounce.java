@@ -42,7 +42,13 @@ public class CommandAnnounce extends DiscordCommand {
         }
 
         String content = FormatUtil.remainingArgFormatter(message, 2);
-        Channel.sendMessage(EmbedFactory.createEmbed(Placeholders.convert(announcementTitle, e.getAuthor()), content).build()).queue();
+
+        if (content.endsWith("-normal")) {
+            content = content.substring(0, content.length() - " -normal".length());
+            Channel.sendMessage(content).queue();
+        } else {
+            Channel.sendMessage(EmbedFactory.createEmbed(Placeholders.convert(announcementTitle, e.getAuthor()), content).build()).queue();
+        }
         e.getChannel().sendMessage(EmbedFactory.createEmbed(Placeholders.convert(MESSAGE_CONTENT.replace("{channel}", Channel.getAsMention()), e.getAuthor())).build()).queue();
 
     }
