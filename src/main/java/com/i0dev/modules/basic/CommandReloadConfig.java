@@ -35,6 +35,7 @@ public class CommandReloadConfig extends DiscordCommand {
         }
         Configuration.reloadConfig();
         InitializeBot.initializeCommands();
+        GlobalConfig.initGlobalConfig();
         e.getChannel().sendMessage(EmbedFactory.createEmbed(Placeholders.convert(MESSAGE_DESCRIPTION.replace("{tag}", e.getAuthor().getAsTag()), e.getAuthor())).build()).queue();
 
     }
