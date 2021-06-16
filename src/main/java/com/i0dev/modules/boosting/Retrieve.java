@@ -1,16 +1,17 @@
 package com.i0dev.modules.boosting;
 
+import com.i0dev.object.discordLinking.DPlayer;
+import com.i0dev.object.discordLinking.DPlayerEngine;
 import com.i0dev.object.engines.PermissionHandler;
-import com.i0dev.utility.Configuration;
-import com.i0dev.utility.GlobalCheck;
-import com.i0dev.utility.GlobalConfig;
-import com.i0dev.utility.Placeholders;
+import com.i0dev.utility.*;
 import com.i0dev.utility.util.FormatUtil;
 import com.i0dev.utility.util.MessageUtil;
-import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Retrieve {
@@ -28,8 +29,16 @@ public class Retrieve {
         }
 
         List<String> lines = new ArrayList<>();
-        for (Member booster : GlobalConfig.GENERAL_MAIN_GUILD.getBoosters()) {
-            lines.add(Placeholders.convert(MESSAGE_LIST_FORMAT, booster.getUser()));
+        List<DPlayer> orderedDPlayer = new ArrayList<>();
+        GlobalConfig.GENERAL_MAIN_GUILD.getBoosters().forEach(member -> orderedDPlayer.add(DPlayerEngine.getObject(member.getIdLong())));
+        Collections.reverse(orderedDPlayer);
+
+        orderedDPlayer.sort(Comparator.comparing(DPlayer::getBoostCount));
+
+        for (DPlayer booster : orderedDPlayer) {
+            User user = InternalJDA.getJda().getUserById(booster.getDiscordID());
+            if (user == null) continue;
+            lines.add(Placeholders.convert(MESSAGE_LIST_FORMAT, user));
         }
 
         String desc = MESSAGE_CONTENT.replace("{boosters}", FormatUtil.FormatListString(lines));
