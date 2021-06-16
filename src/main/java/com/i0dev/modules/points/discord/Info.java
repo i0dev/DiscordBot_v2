@@ -45,7 +45,7 @@ public class Info extends DiscordCommand {
         desc.append("**Sending an image:** `{points}` points.\n".replace("{points}", obj.get("imageSent") + ""));
         desc.append("**Sending a video:** `{points}` points.\n".replace("{points}", obj.get("videoSent") + ""));
         desc.append("**Reacting to a message:** `{points}` points.\n".replace("{points}", obj.get("reaction") + ""));
-        desc.append("**Being in a voice channel:** `{points}` points for every `{time}` seconds.\n".replace("{time}", ((int) obj.get("voiceChannelSeconds")) + "").replace("{points}", obj.get("voiceChannelXSecondsPoints") + ""));
+        desc.append("**Being in a voice channel:** `{points}` points for every `{time}` seconds.\n".replace("{time}", obj.get("voiceChannelSeconds") + "").replace("{points}", obj.get("voiceChannelXSecondsPoints") + ""));
         desc.append("**Inviting a user to the discord:** `{points}` points.\n".replace("{points}", obj.get("inviteUser") + ""));
         desc.append("**Invited user leaving the discord:** `-{points}` points.\n".replace("{points}", obj.get("inviteUser") + ""));
         desc.append("\n\n**Boosting**\n");

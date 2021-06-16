@@ -15,7 +15,7 @@ public class Reclaim implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
-        if (!PointsManager.hasPermission(sender, "discordbot.points.reclaim")) {
+        if (!PointsManager.hasPermission(sender, "discordbot.reclaim")) {
             //no permission
             sender.sendMessage("No Permission");
             return false;

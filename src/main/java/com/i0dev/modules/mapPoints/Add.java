@@ -35,7 +35,7 @@ public class Add extends DiscordCommand {
             return;
         }
         String[] message = e.getMessage().getContentRaw().split(" ");
-        if (message.length <= 4) {
+        if (message.length <= 3) {
             MessageUtil.sendMessage(e.getChannel().getIdLong(), MapPointsManager.add, e.getAuthor());
             return;
         }

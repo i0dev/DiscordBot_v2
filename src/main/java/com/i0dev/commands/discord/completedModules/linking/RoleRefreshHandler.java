@@ -9,6 +9,7 @@ import com.i0dev.object.objects.Type;
 import com.i0dev.utility.Configuration;
 import com.i0dev.utility.InternalJDA;
 import com.i0dev.utility.util.FormatUtil;
+import com.i0dev.utility.util.RoleUtil;
 import com.i0dev.utility.util.TempNicknameUtil;
 import net.dv8tion.jda.api.entities.User;
 import org.bukkit.Bukkit;
@@ -46,13 +47,14 @@ public class RoleRefreshHandler implements Listener {
         List<String> groups = user.getNodes(net.luckperms.api.node.NodeType.INHERITANCE).stream()
                 .map(net.luckperms.api.node.types.InheritanceNode::getGroupName)
                 .collect(Collectors.toList());
-
-        Player player = Bukkit.getPlayer(dPlayer.getCachedData().getMinecraftIGN());
-        if (player != null && !player.hasPermission("discordbot.link.nickname.bypass")) {
-            TempNicknameUtil.modifyNickname(discordUser, Configuration.getString("modules.link.general.nicknameFormat")
-                    .replace("{faction}", FormatUtil.getFactionName(dPlayer))
-                    .replace("{prefix}", FormatUtil.getPrefix(dPlayer))
-                    .replace("{ign}", dPlayer.getCachedData().getMinecraftIGN()));
+        if (!RoleUtil.hasRole(discordUser, Configuration.getLongList("modules.link.general.rolesThatBypassNicknameChange"))) {
+            Player player = Bukkit.getPlayer(dPlayer.getCachedData().getMinecraftIGN());
+            if (player == null || !player.hasPermission("discordbot.link.nickname.bypass")) {
+                TempNicknameUtil.modifyNickname(discordUser, Configuration.getString("modules.link.general.nicknameFormat")
+                        .replace("{faction}", FormatUtil.getFactionName(dPlayer))
+                        .replace("{prefix}", FormatUtil.getPrefix(dPlayer))
+                        .replace("{ign}", dPlayer.getCachedData().getMinecraftIGN()));
+            }
         }
 
 

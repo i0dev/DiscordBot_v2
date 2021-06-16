@@ -23,3 +23,6 @@ permissions:
   discordbot.link.nickname.bypass:
     description: modifys discord name
     default: op
+  discordbot.reclaim:
+    description: reclaim
+    default: not op

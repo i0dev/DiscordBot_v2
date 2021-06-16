@@ -1194,7 +1194,7 @@
           },
           "message": {
             "content": "**{authorTag}**, you have sucsessfully claimed one boost credit. You have {authorBoostCredits} left!",
-            "noPoints" : "**{authorTag}**, you do not have enough boost credits to claim rewards! Boost to get more."
+            "noPoints": "**{authorTag}**, you do not have enough boost credits to claim rewards! Boost to get more."
           },
           "enabled": true
         },
@@ -1999,7 +1999,20 @@
           "rival": 791840959687163914,
           "gladiator": 791840960585793556,
           "knight": 791840962489221120
-        }
+        },
+        "rolesThatBypassNicknameChange": [
+          766183468383338526,
+          766183472749871114,
+          786977069422084116,
+          786977110266347561,
+          766183475035373568,
+          766183475761774603,
+          766183476520943616,
+          788087143096516634,
+          766183900422209557,
+          766183899381628988,
+          829146819769401435
+        ]
       },
       "message": {
         "alreadyLinked": "{authorTagBold}, you are already linked to the minecraft account `{authorLinkedIGN}`",

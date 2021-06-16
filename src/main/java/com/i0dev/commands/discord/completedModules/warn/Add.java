@@ -1,7 +1,7 @@
 package com.i0dev.commands.discord.completedModules.warn;
 
-import com.i0dev.object.engines.PermissionHandler;
 import com.i0dev.object.discordLinking.DPlayerEngine;
+import com.i0dev.object.engines.PermissionHandler;
 import com.i0dev.utility.Configuration;
 import com.i0dev.utility.FindFromString;
 import com.i0dev.utility.GlobalCheck;
@@ -12,8 +12,6 @@ import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 public class Add {
-
-    private static final String Identifier = "Warn Add";
 
     private static final boolean PERMISSION_STRICT = Configuration.getBoolean("modules.warn.parts.add.permission.strict");
     private static final boolean PERMISSION_LITE = Configuration.getBoolean("modules.warn.parts.add.permission.lite");
