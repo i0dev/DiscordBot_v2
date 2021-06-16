@@ -1,7 +1,7 @@
 package com.i0dev.utility.util;
 
-import com.i0dev.object.objects.Type;
 import com.i0dev.object.objects.RoleQueueObject;
+import com.i0dev.object.objects.Type;
 import com.i0dev.utility.GlobalConfig;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
@@ -94,6 +94,15 @@ public class RoleUtil {
             if (!member.getRoles().contains(role)) continue;
             member.getGuild().removeRoleFromMember(member, role).queue();
         }
+    }
+
+    public static boolean hasRole(User user, List<Long> roleIDS) {
+        List<Role> roles = GlobalConfig.GENERAL_MAIN_GUILD.getMember(user).getRoles();
+        for (long roleID : roleIDS) {
+            Role toRole = GlobalConfig.GENERAL_MAIN_GUILD.getRoleById(roleID);
+            if (roles.contains(toRole)) return true;
+        }
+        return false;
     }
 
 
