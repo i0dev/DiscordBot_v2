@@ -5,6 +5,7 @@ import com.i0dev.modules.DiscordCommandManager;
 import com.i0dev.object.engines.PermissionHandler;
 import com.i0dev.object.objects.DiscordCommand;
 import com.i0dev.utility.*;
+import com.i0dev.utility.util.TPSUtil;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.lang.management.ManagementFactory;
@@ -48,7 +49,7 @@ public class CommandHeapDump extends DiscordCommand {
         if (InitializeBot.get().isPluginMode()) {
             desc.append("\n**__Minecraft Server Information:__**\n");
             desc.append("**Version:** ").append("`" + org.bukkit.Bukkit.getVersion() + "`").append("\n");
-            desc.append("**Ticks Per Second:** ").append("`" + Math.round(Lag.getTPS()) + "`").append("\n");
+            desc.append("**Ticks Per Second:** ").append("`" + Math.round(TPSUtil.getTPS()) + "`").append("\n");
             desc.append("**Online Players:** ").append("`" + org.bukkit.Bukkit.getOnlinePlayers().size() + " / " + org.bukkit.Bukkit.getMaxPlayers() + "`").append("\n");
         }
 

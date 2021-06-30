@@ -1,9 +1,10 @@
-package com.i0dev.commands.discord.completedModules.linking;
+package com.i0dev.modules.linking;
 
 import com.i0dev.object.discordLinking.DPlayer;
 import com.i0dev.object.discordLinking.DPlayerEngine;
 import com.i0dev.object.discordLinking.LinkInfo;
 import com.i0dev.object.engines.PermissionHandler;
+import com.i0dev.object.objects.DiscordCommand;
 import com.i0dev.utility.Configuration;
 import com.i0dev.utility.FindFromString;
 import com.i0dev.utility.GlobalCheck;
@@ -12,19 +13,32 @@ import com.i0dev.utility.util.MessageUtil;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
-public class Remove {
+public class Remove extends DiscordCommand {
 
-    private static final boolean PERMISSION_STRICT = Configuration.getBoolean("modules.link.parts.remove.permission.strict");
-    private static final boolean PERMISSION_LITE = Configuration.getBoolean("modules.link.parts.remove.permission.lite");
-    private static final boolean PERMISSION_ADMIN = Configuration.getBoolean("modules.link.parts.remove.permission.admin");
-    private static final boolean ENABLED = Configuration.getBoolean("modules.link.parts.remove.enabled");
+    private static boolean PERMISSION_STRICT;
+    private static boolean PERMISSION_LITE;
+    private static boolean PERMISSION_ADMIN;
+    private static boolean ENABLED;
 
-    private static final String MESSAGE_CONTENT = Configuration.getString("modules.link.parts.remove.message.general");
-    private static final String MESSAGE_LOG_MESSAGE = Configuration.getString("modules.link.parts.remove.message.logMessage");
-    private static final boolean OPTION_LOG = Configuration.getBoolean("modules.link.parts.remove.option.log");
+    private static String MESSAGE_CONTENT;
+    private static String MESSAGE_LOG_MESSAGE;
+    private static boolean OPTION_LOG;
 
-    private static final String MESSAGE_NOT_LINKED = Configuration.getString("modules.link.parts.remove.message.notLinked");
+    private static String MESSAGE_NOT_LINKED;
 
+    @Override
+    public void init() {
+        PERMISSION_STRICT = Configuration.getBoolean("modules.link.parts.remove.permission.strict");
+        PERMISSION_LITE = Configuration.getBoolean("modules.link.parts.remove.permission.lite");
+        PERMISSION_ADMIN = Configuration.getBoolean("modules.link.parts.remove.permission.admin");
+        ENABLED = Configuration.getBoolean("modules.link.parts.remove.enabled");
+
+        MESSAGE_CONTENT = Configuration.getString("modules.link.parts.remove.message.general");
+        MESSAGE_LOG_MESSAGE = Configuration.getString("modules.link.parts.remove.message.logMessage");
+        OPTION_LOG = Configuration.getBoolean("modules.link.parts.remove.option.log");
+
+        MESSAGE_NOT_LINKED = Configuration.getString("modules.link.parts.remove.message.notLinked");
+    }
 
     public static void run(GuildMessageReceivedEvent e) {
         if (!GlobalCheck.checkBasic(e, ENABLED, new PermissionHandler(PERMISSION_LITE, PERMISSION_STRICT, PERMISSION_ADMIN), "Link Remove")) {

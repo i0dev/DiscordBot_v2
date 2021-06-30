@@ -1,4 +1,4 @@
-package com.i0dev.commands.discord.completedModules.linking;
+package com.i0dev.modules.linking;
 
 import com.i0dev.object.discordLinking.*;
 import com.i0dev.utility.Configuration;

@@ -1,7 +1,7 @@
 package com.i0dev;
 
-import com.i0dev.commands.discord.completedModules.linking.CommandLink;
-import com.i0dev.commands.discord.completedModules.linking.RoleRefreshHandler;
+import com.i0dev.modules.linking.CommandLink;
+import com.i0dev.modules.linking.RoleRefreshHandler;
 import com.i0dev.modules.MinecraftCommandManager;
 import com.i0dev.modules.other.FreezeLogHandler;
 import com.i0dev.modules.other.InGameChatFormatter;
@@ -12,7 +12,7 @@ import com.i0dev.modules.points.ingame.ShopEvents;
 import com.i0dev.modules.twoFactor.Command2fa;
 import com.i0dev.modules.twoFactor.TwoFactorAuthentication;
 import com.i0dev.utility.InternalJDA;
-import com.i0dev.utility.Lag;
+import com.i0dev.utility.util.TPSUtil;
 import com.i0dev.utility.PapiPlaceholders;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -49,7 +49,7 @@ public class DiscordBot extends JavaPlugin {
         }, 200L);
 
 
-        Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Lag(), 100L, 1L);
+        Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new TPSUtil(), 100L, 1L);
         if (getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             new PapiPlaceholders().register();
         }

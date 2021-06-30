@@ -1,9 +1,9 @@
 package com.i0dev;
 
 import com.i0dev.commands.discord.completedModules.giveaway.cache.GiveawayCache;
-import com.i0dev.commands.discord.completedModules.linking.RoleRefreshHandler;
 import com.i0dev.modules.creators.caches.PollCache;
 import com.i0dev.modules.giveaway.giveawayHandler;
+import com.i0dev.modules.linking.RoleRefreshHandler;
 import com.i0dev.modules.other.FactionsTopHandler;
 import com.i0dev.modules.points.EventHandler;
 import com.i0dev.object.discordLinking.Cache;
@@ -19,7 +19,6 @@ import com.i0dev.utility.util.APIUtil;
 import com.i0dev.utility.util.FormatUtil;
 import com.i0dev.utility.util.MessageUtil;
 import com.i0dev.utility.util.TimeUtil;
-import com.massivecraft.factions.task.TaskFactionTopCalculate;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.experimental.FieldDefaults;
@@ -34,11 +33,8 @@ import java.io.PrintWriter;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.Executors;
+import java.util.*;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
@@ -60,35 +56,39 @@ public class Engine {
         executorService.scheduleAtFixedRate(taskAutoUpdateConfig, 60, 60, TimeUnit.SECONDS);
         executorService.scheduleAtFixedRate(taskSendFTOP, 45, 45, TimeUnit.SECONDS);
         executorService.scheduleAtFixedRate(taskFlushDPLayers, 1, 30, TimeUnit.MINUTES);
-        ScheduledExecutorService newService = Executors.newScheduledThreadPool(1);
-        newService.scheduleAtFixedRate(taskExecuteRoleQueue, 1, 2, TimeUnit.SECONDS);
+        executorService.scheduleAtFixedRate(taskGiveContinuousRoles, 1, 60, TimeUnit.MINUTES);
+        executorService.scheduleAtFixedRate(taskExecuteRoleQueue, 1, 2, TimeUnit.SECONDS);
     }
 
     @Getter
     private static final ArrayList<RoleQueueObject> roleQueueList = new ArrayList<>();
 
     static Runnable taskExecuteRoleQueue = () -> {
+        try {
+            if (roleQueueList.isEmpty()) return;
+            Guild guild = GlobalConfig.GENERAL_MAIN_GUILD;
+            RoleQueueObject queueObject = roleQueueList.get(0);
+            roleQueueList.remove(0);
 
-        if (roleQueueList.isEmpty()) return;
-        Guild guild = GlobalConfig.GENERAL_MAIN_GUILD;
-        RoleQueueObject queueObject = roleQueueList.get(0);
-        roleQueueList.remove(0);
+            User user = guild.getJDA().getUserById(queueObject.getUserID());
+            Role role = guild.getRoleById(queueObject.getRoleID());
 
-        User user = guild.getJDA().getUserById(queueObject.getUserID());
-        Role role = guild.getRoleById(queueObject.getRoleID());
+            if (user == null || role == null) return;
 
-        if (user == null || role == null) return;
+            Member member = guild.getMemberById(user.getId());
 
-        Member member = guild.getMemberById(user.getId());
+            if (queueObject.getType().equals(Type.ADD_ROLE)) {
+                if (member.getRoles().contains(role)) return;
+                guild.addRoleToMember(user.getId(), role).queue();
+                System.out.println("[LOG] Applied the role {" + role.getName() + "} to the user: {" + member.getEffectiveName() + "}");
+            } else if (queueObject.getType().equals(Type.REMOVE_ROLE)) {
+                if (!member.getRoles().contains(role)) return;
+                guild.removeRoleFromMember(user.getId(), role).queue();
+                System.out.println("[LOG] Removed the role {" + role.getName() + "} to the user: {" + member.getEffectiveName() + "}");
+            }
 
-        if (queueObject.getType().equals(Type.ADD_ROLE)) {
-            if (member.getRoles().contains(role)) return;
-            guild.addRoleToMember(user.getId(), role).queue();
-            System.out.println("[LOG] Applied the role {" + role.getName() + "} to the user: {" + member.getEffectiveName() + "}");
-        } else if (queueObject.getType().equals(Type.REMOVE_ROLE)) {
-            if (!member.getRoles().contains(role)) return;
-            guild.removeRoleFromMember(user.getId(), role).queue();
-            System.out.println("[LOG] Removed the role {" + role.getName() + "} to the user: {" + member.getEffectiveName() + "}");
+        } catch (Exception ignored) {
+
         }
     };
 
@@ -168,7 +168,7 @@ public class Engine {
     };
 
     static Runnable taskFlushDPLayers = () -> {
-        System.out.println("Started auto-saving DPlayers into storage.");
+        System.out.println("[DEBUG] Started auto-saving DPlayers into storage.");
         for (Object o : DPlayerEngine.getCache()) {
             try {
                 DPlayer dPlayer = ((DPlayer) o);
@@ -177,9 +177,9 @@ public class Engine {
                     //  System.out.println("DEBUG: read user " + dPlayer.getCachedData().getMinecraftIGN());
                     Thread.sleep(100);
                     if (!FormatUtil.isUUID(dPlayer.getLinkInfo().getMinecraftUUID())) {
-                        String newUUID = APIUtil.getUUIDFromIGN(dPlayer.getCachedData().getMinecraftIGN());
+                        UUID newUUID = APIUtil.getUUIDFromIGN(dPlayer.getCachedData().getMinecraftIGN());
                         if (newUUID != null) {
-                            dPlayer.getLinkInfo().setMinecraftUUID(newUUID);
+                            dPlayer.getLinkInfo().setMinecraftUUID(newUUID.toString());
                         }
                     }
                 }
@@ -260,6 +260,20 @@ public class Engine {
         }
     };
 
+    static Runnable taskGiveContinuousRoles = () -> {
+        System.out.println("[DEBUG] Started giving missing roles to users.");
+        List<Long> roles = Configuration.getLongList("events.event_welcome.rolesToContinuouslyGive");
+        for (User user : InternalJDA.getJda().getUsers()) {
+            for (Long roleID : roles) {
+                Role role = InternalJDA.getJda().getRoleById(roleID);
+                if (role == null) continue;
+                Member member = GlobalConfig.GENERAL_MAIN_GUILD.getMember(user);
+                if (member == null || member.getRoles().contains(role)) continue;
+                new RoleQueueObject(user.getIdLong(), roleID, Type.ADD_ROLE).add();
+            }
+        }
+    };
+
     static Runnable taskUpdateGiveawayTimes = () -> {
         for (Object o : GiveawayEngine.getInstance().getCache()) {
             Giveaway giveaway = ((Giveaway) o);
@@ -308,9 +322,8 @@ public class Engine {
         ZonedDateTime time = ZonedDateTime.ofInstant(Instant.ofEpochMilli(System.currentTimeMillis()), ZoneId.of("America/New_York"));
         if (minutes.contains(time.getMinute() + "") && System.currentTimeMillis() > lastSentFTopTime + (120 * 1000)) {
             MessageEmbed embed = FactionsTopHandler.getFTOPEmbed();
-            if (embed == null) return;
             MessageUtil.sendMessage(GlobalConfig.F_TOP_LOGS_CHANNEL_ID, embed);
-            TaskFactionTopCalculate.get().run();
+            com.massivecraft.factions.task.TaskFactionTopCalculate.get().run();
             lastSentFTopTime = System.currentTimeMillis();
         }
     };

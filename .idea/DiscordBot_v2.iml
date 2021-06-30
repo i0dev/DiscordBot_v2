@@ -44,7 +44,7 @@
     <orderEntry type="library" name="Maven: net.md-5:bungeecord-chat:1.8-SNAPSHOT" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.gitlab.ruany:LiteBansAPI:0.3.4" level="project" />
     <orderEntry type="module-library">
-      <library name="Maven: FreezeGUI:FreezeGUI:1">
+      <library name="Maven: FreezeGUI:FreezeGUI:122">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/FreezeGUI-PREMIUM_2.4.jar!/" />
         </CLASSES>

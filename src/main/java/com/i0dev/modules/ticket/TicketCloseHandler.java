@@ -75,8 +75,12 @@ public class TicketCloseHandler extends ListenerAdapter {
                 GlobalConfig.GENERAL_MAIN_GUILD.getTextChannelById(TICKET_LOGS_ID).sendFile(ticketLogsFile).queueAfter(delayToCloseTicketMilis + 1000, TimeUnit.MILLISECONDS);
             }
 
-            ticketOwner.openPrivateChannel().complete().sendMessage(embedBuilder.build()).queueAfter(delayToCloseTicketMilis, TimeUnit.MILLISECONDS);
-            ticketOwner.openPrivateChannel().complete().sendFile(ticketLogsFile).queueAfter(delayToCloseTicketMilis, TimeUnit.MILLISECONDS);
+            try {
+                ticketOwner.openPrivateChannel().complete().sendMessage(embedBuilder.build()).queueAfter(delayToCloseTicketMilis, TimeUnit.MILLISECONDS);
+                ticketOwner.openPrivateChannel().complete().sendFile(ticketLogsFile).queueAfter(delayToCloseTicketMilis, TimeUnit.MILLISECONDS);
+            } catch (Exception ignored) {
+
+            }
         } catch (Exception ignored) {
 
         }

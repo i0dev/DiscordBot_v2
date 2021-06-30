@@ -1,6 +1,7 @@
-package com.i0dev.commands.discord.completedModules.linking;
+package com.i0dev.modules.linking;
 
 import com.i0dev.InitializeBot;
+import com.i0dev.object.objects.DiscordCommand;
 import com.i0dev.utility.Configuration;
 import com.i0dev.utility.GlobalConfig;
 import com.i0dev.utility.util.MessageUtil;
@@ -8,10 +9,9 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.List;
 
-public class LinkManager {
+public class LinkManager extends DiscordCommand {
 
     public static String usage() {
-
         StringBuilder builder = new StringBuilder();
         builder.append("**:link: Linking Commands :link:**").append("\n");
         builder.append(code).append("\n");
@@ -28,9 +28,14 @@ public class LinkManager {
     public static String force = "`{prefix}link force <user> <ign>` *Force a linkage onto a player.*".replace("{prefix}", GlobalConfig.GENERAL_BOT_PREFIX);
     public static String remove = "`{prefix}link remove <user | ign>` *Removes the link from that user.*".replace("{prefix}", GlobalConfig.GENERAL_BOT_PREFIX);
 
-    public static final String MESSAGE_ALREADY_LINKED = Configuration.getString("modules.link.message.alreadyLinked");
-    public static final List<String> INGAME_MESSAGE_ALREADY_LINKED = Configuration.getStringList("modules.link.message.ingameAlreadyLinked");
+    public static String MESSAGE_ALREADY_LINKED;
+    public static List<String> INGAME_MESSAGE_ALREADY_LINKED;
 
+    @Override
+    public void init() {
+        MESSAGE_ALREADY_LINKED = Configuration.getString("modules.link.message.alreadyLinked");
+        INGAME_MESSAGE_ALREADY_LINKED = Configuration.getStringList("modules.link.message.ingameAlreadyLinked");
+    }
 
     public static void run(GuildMessageReceivedEvent e) {
         String[] message = e.getMessage().getContentRaw().split(" ");

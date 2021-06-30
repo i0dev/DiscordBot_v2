@@ -67,6 +67,7 @@
             </resource>
         </resources>
     </build>
+
     <repositories>
         <repository>
             <id>spigotmc-repo</id>
@@ -128,7 +129,7 @@
         <dependency>
             <groupId>FreezeGUI</groupId>
             <artifactId>FreezeGUI</artifactId>
-            <version>1</version>
+            <version>122</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/FreezeGUI-PREMIUM_2.4.jar</systemPath>
         </dependency>

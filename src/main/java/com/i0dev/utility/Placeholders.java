@@ -4,6 +4,7 @@ import com.i0dev.DiscordBot;
 import com.i0dev.InitializeBot;
 import com.i0dev.object.discordLinking.DPlayer;
 import com.i0dev.object.discordLinking.DPlayerEngine;
+import com.i0dev.utility.util.TPSUtil;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
@@ -124,12 +125,12 @@ public class Placeholders {
                 .replace("{DiscordBotAuthor}", "i0#0001")
                 .replace("{DiscordBotPluginMode}", InitializeBot.isPluginMode() ? "Yes" : "No")
                 .replace("{DiscordBotPrefix}", GlobalConfig.GENERAL_BOT_PREFIX)
-                .replace("{DiscordBotVersion}", "2.1.4");
+                .replace("{DiscordBotVersion}", "2.1.5");
 
         //plugin mode
         if (InitializeBot.isPluginMode()) {
             message = message
-                    .replace("{serverTPS}", Lag.getTPS() + "")
+                    .replace("{serverTPS}", TPSUtil.getTPS() + "")
                     .replace("{serverOnlineCount}", DiscordBot.get().getServer().getOnlinePlayers().size() + "");
         }
 

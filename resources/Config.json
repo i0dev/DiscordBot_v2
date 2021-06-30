@@ -445,11 +445,10 @@
       "welcomeMessageTitle": "Welcome {authorTag} to {guildName}!",
       "welcomeMessageDesc": "**For support go to:** <#766322425323192330>\n**Server IP:** `play.mcrivals.com`\n**Website:** [shop.mcrivals.com](https://shop.mcrivals.com)\n**MemberCount:** `{guildMemberCount}`",
       "enabled": true,
+      "rolesToContinuouslyGive":[
+        766183896202346516
+      ],
       "rolesToGive": [
-        795336501709242409,
-        795336444519645234,
-        795336443668594745,
-        795336442985185320,
         766183896202346516
       ]
     },
@@ -1054,6 +1053,7 @@
         "admin_panel"
       ],
       "permissionLiteMode": false,
+      "ticketImage" : "",
       "messageSentBeforePanel": "https://cdn.discordapp.com/attachments/766323223960616990/828300815667167312/McRivals2.png",
       "ticketPanelDescription": "Click to one of the emojis to create a corresponding ticket!",
       "ticketPanelFieldBaseFormat": "{panelDescription}",

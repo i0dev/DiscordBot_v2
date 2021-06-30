@@ -35,7 +35,7 @@ public class FreezeLogHandler implements Listener {
                         .replace("{type}", "Freeze")
                         .replace("{punisherName}", e.getPlayer().getName())
                         .replace("{punishedName}", user)
-                        .replace("{uuid}", APIUtil.getUUIDFromIGN(user))
+                        .replace("{uuid}", APIUtil.getUUIDFromIGN(user).toString())
                 );
                 MessageUtil.sendMessage(GlobalConfig.GENERAL_MAIN_LOGS_CHANNEL, embedBuilder.build());
             }
@@ -61,7 +61,7 @@ public class FreezeLogHandler implements Listener {
                         .replace("{type}", "UnFreeze")
                         .replace("{punisherName}", e.getPlayer().getName())
                         .replace("{punishedName}", user)
-                        .replace("{uuid}", APIUtil.getUUIDFromIGN(user))
+                        .replace("{uuid}", APIUtil.getUUIDFromIGN(user).toString())
                 );
                 MessageUtil.sendMessage(GlobalConfig.GENERAL_MAIN_LOGS_CHANNEL, embedBuilder.build());
             }

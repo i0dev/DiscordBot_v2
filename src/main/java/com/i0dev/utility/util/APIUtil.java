@@ -13,6 +13,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.UUID;
+import java.util.regex.Pattern;
 
 public class APIUtil {
 
@@ -124,7 +126,7 @@ public class APIUtil {
         return getTebexRequest("GET", "user/" + UUID);
     }
 
-    public static String getUUIDFromIGN(String ign) {
+    public static UUID getUUIDFromIGN(String ign) {
         JSONObject req = getGeneralRequest("GET", "https://api.mojang.com/users/profiles/minecraft/", ign);
         if (req == null) return null;
         return convertUUID(req.get("id").toString());
@@ -142,8 +144,14 @@ public class APIUtil {
         getGeneralRequest("GET", "https://crafatar.com/renders/head/", uuid);
     }
 
-    public static String convertUUID(String s) {
-        if (s == null) return null;
-        return s.substring(0, 7) + "-" + s.substring(7, 11) + "-" + s.substring(11, 15) + "-" + s.substring(15, 19) + "-" + s.substring(19);
+    private static final Pattern UUID_FIX = Pattern.compile("(\\w{8})(\\w{4})(\\w{4})(\\w{4})(\\w{12})");
+
+    public static UUID convertUUID(String uuid) {
+        return UUID.fromString(UUID_FIX.matcher(uuid.replace("-", "")).replaceAll("$1-$2-$3-$4-$5"));
     }
+
+//    public static String convertUUID(String s) {
+//        if (s == null) return null;
+//        return s.substring(0, 7) + "-" + s.substring(7, 11) + "-" + s.substring(11, 15) + "-" + s.substring(15, 19) + "-" + s.substring(19);
+//    }
 }

@@ -1,4 +1,4 @@
-package com.i0dev.commands.discord.completedModules.linking;
+package com.i0dev.modules.linking;
 
 import com.i0dev.DiscordBot;
 import com.i0dev.InitializeBot;

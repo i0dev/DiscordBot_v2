@@ -46,7 +46,7 @@ public class InitializeBot {
     }
 
     @Getter
-    public static ScheduledExecutorService asyncService = Executors.newScheduledThreadPool(Math.max(Runtime.getRuntime().availableProcessors() / 2, 8));
+    public static ScheduledExecutorService asyncService = Executors.newScheduledThreadPool(Math.max(Runtime.getRuntime().availableProcessors() / 2, 10));
 
     public void startUp() {
         try {
@@ -134,8 +134,6 @@ public class InitializeBot {
                 if (isPluginMode()) {
                     Shop.loadInventory();
                 }
-
-
                 System.out.println("Successfully loaded DiscordBot");
             } catch (Exception ee) {
                 ee.printStackTrace();

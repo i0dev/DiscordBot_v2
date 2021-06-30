@@ -3,7 +3,7 @@ package com.i0dev.modules.twoFactor;
 import com.i0dev.object.discordLinking.DPlayer;
 import com.i0dev.object.discordLinking.DPlayerEngine;
 import com.i0dev.utility.Configuration;
-import com.i0dev.utility.Encrypt;
+import com.i0dev.utility.util.EncryptionUtil;
 import com.i0dev.utility.InternalJDA;
 import com.i0dev.utility.util.FormatUtil;
 import com.i0dev.utility.util.MessageUtil;
@@ -68,7 +68,7 @@ public class TwoFactorAuthentication implements Listener {
         if (!ENABLED) return;
         if (!e.getPlayer().hasPermission(PERMISSION_STRING)) return;
         if (getIpCache().containsKey(e.getPlayer().getUniqueId())
-                && Encrypt.encrypt(Arrays.toString(e.getPlayer().getAddress().getAddress().getAddress()), e.getPlayer().getUniqueId().toString()).equalsIgnoreCase(getIpCache().get(e.getPlayer().getUniqueId()))) {
+                && EncryptionUtil.encrypt(Arrays.toString(e.getPlayer().getAddress().getAddress().getAddress()), e.getPlayer().getUniqueId().toString()).equalsIgnoreCase(getIpCache().get(e.getPlayer().getUniqueId()))) {
             return;
         }
         DPlayer dPlayer = DPlayerEngine.getObjectFromIGN(e.getPlayer().getName());

@@ -1,9 +1,9 @@
-package com.i0dev.utility;
+package com.i0dev.utility.util;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
-public class Encrypt {
+public class EncryptionUtil {
     public static String encrypt(String strClearText, String strKey) {
         String strData = "";
         try {

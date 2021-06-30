@@ -55,6 +55,10 @@ public class CommandTicketPanel extends DiscordCommand {
                 .setDescription(ticketPanelDescription)
                 .setTimestamp(ZonedDateTime.now());
 
+        String image = Configuration.getString("commands.createTicketPanel.ticketImage");
+        if (!image.equals("")) {
+            Embed.setImage(image);
+        }
         for (JSONObject object : TicketOptions) {
             String PanelHeader = object.get("PanelHeader").toString();
             String PanelDescription = object.get("PanelDescription").toString();

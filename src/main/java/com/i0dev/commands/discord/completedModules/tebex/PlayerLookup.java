@@ -43,7 +43,7 @@ public class PlayerLookup {
             return;
         }
 
-        JSONObject json = APIUtil.lookupUser(APIUtil.getUUIDFromIGN(playerIGN));
+        JSONObject json = APIUtil.lookupUser(APIUtil.getUUIDFromIGN(playerIGN).toString());
 
         ArrayList<JSONObject> payments = (ArrayList<JSONObject>) json.get("payments");
         StringBuilder paymentSection = new StringBuilder();

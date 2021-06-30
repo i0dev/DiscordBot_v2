@@ -1,10 +1,11 @@
-package com.i0dev.commands.discord.completedModules.linking;
+package com.i0dev.modules.linking;
 
-import com.i0dev.object.engines.PermissionHandler;
 import com.i0dev.object.discordLinking.CodeCache;
 import com.i0dev.object.discordLinking.DPlayer;
 import com.i0dev.object.discordLinking.DPlayerEngine;
 import com.i0dev.object.discordLinking.From_IngameCodeLinker;
+import com.i0dev.object.engines.PermissionHandler;
+import com.i0dev.object.objects.DiscordCommand;
 import com.i0dev.utility.Configuration;
 import com.i0dev.utility.GlobalCheck;
 import com.i0dev.utility.GlobalConfig;
@@ -15,22 +16,37 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Code {
-    private static final String Identifier = "Link Code";
+public class Code extends DiscordCommand {
 
-    private static final boolean PERMISSION_STRICT = Configuration.getBoolean("modules.link.parts.code.permission.strict");
-    private static final boolean PERMISSION_LITE = Configuration.getBoolean("modules.link.parts.code.permission.lite");
-    private static final boolean PERMISSION_ADMIN = Configuration.getBoolean("modules.link.parts.code.permission.admin");
-    private static final boolean ENABLED = Configuration.getBoolean("modules.link.parts.code.enabled");
+    private static boolean PERMISSION_STRICT;
+    private static boolean PERMISSION_LITE;
+    private static boolean PERMISSION_ADMIN;
+    private static boolean ENABLED;
 
-    private static final String MESSAGE_CONTENT = Configuration.getString("modules.link.parts.code.message.general");
-    private static final String MESSAGE_LOG_MESSAGE = Configuration.getString("modules.link.parts.code.message.logMessage");
-    private static final String MESSAGE_CODE_NOT_VALID = Configuration.getString("modules.link.parts.code.message.codeNotValid");
+    private static String MESSAGE_CONTENT;
+    private static String MESSAGE_LOG_MESSAGE;
+    private static String MESSAGE_CODE_NOT_VALID;
 
-    private static final List<String> MESSAGE_INGAME_CONTENT = Configuration.getStringList("modules.link.parts.code.message.ingameGeneral");
+    private static List<String> MESSAGE_INGAME_CONTENT;
 
-    private static final boolean OPTION_LOG = Configuration.getBoolean("modules.link.parts.code.option.log");
+    private static boolean OPTION_LOG;
 
+
+    @Override
+    public void init() {
+        PERMISSION_STRICT = Configuration.getBoolean("modules.link.parts.code.permission.strict");
+        PERMISSION_LITE = Configuration.getBoolean("modules.link.parts.code.permission.lite");
+        PERMISSION_ADMIN = Configuration.getBoolean("modules.link.parts.code.permission.admin");
+        ENABLED = Configuration.getBoolean("modules.link.parts.code.enabled");
+
+        MESSAGE_CONTENT = Configuration.getString("modules.link.parts.code.message.general");
+        MESSAGE_LOG_MESSAGE = Configuration.getString("modules.link.parts.code.message.logMessage");
+        MESSAGE_CODE_NOT_VALID = Configuration.getString("modules.link.parts.code.message.codeNotValid");
+
+        MESSAGE_INGAME_CONTENT = Configuration.getStringList("modules.link.parts.code.message.ingameGeneral");
+
+        OPTION_LOG = Configuration.getBoolean("modules.link.parts.code.option.log");
+    }
 
     public static void run(GuildMessageReceivedEvent e) {
         if (!GlobalCheck.checkBasic(e, ENABLED, new PermissionHandler(PERMISSION_LITE, PERMISSION_STRICT, PERMISSION_ADMIN), "Link Code")) {
@@ -63,7 +79,6 @@ public class Code {
             formattedMsg.add(Placeholders.convert(msg.replace("{code}", code).replace("{ign}", codeLinker.getPlayer().getName()), e.getAuthor()));
         }
         MessageUtil.sendMessageIngame(codeLinker.getPlayer(), formattedMsg);
-
 
 
         String desc = MESSAGE_CONTENT

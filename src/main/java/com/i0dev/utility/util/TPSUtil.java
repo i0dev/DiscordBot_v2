@@ -1,6 +1,6 @@
-package com.i0dev.utility;
+package com.i0dev.utility.util;
 
-public class Lag implements Runnable {
+public class TPSUtil implements Runnable {
     public static int TICK_COUNT = 0;
     public static long[] TICKS = new long[600];
 

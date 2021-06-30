@@ -2,7 +2,7 @@ package com.i0dev.modules;
 
 import com.i0dev.commands.discord.completedModules.gamemode.GamemodeManager;
 import com.i0dev.commands.discord.completedModules.giveaway.GiveawayManager;
-import com.i0dev.commands.discord.completedModules.linking.LinkManager;
+import com.i0dev.modules.linking.LinkManager;
 import com.i0dev.commands.discord.completedModules.movements.MovementManager;
 import com.i0dev.commands.discord.completedModules.mute.MuteManager;
 import com.i0dev.commands.discord.completedModules.screenshare.ScreenshareManager;

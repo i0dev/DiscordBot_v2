@@ -102,8 +102,12 @@ public class DPlayerEngine {
             File directory = new File(InitializeBot.get().getDPlayerDir());
             for (String filename : directory.list()) {
                 File dFile = new File(InitializeBot.get().getDPlayerDir() + "/" + filename);
-                DPlayer dPlayer = getDPlayerFromJsonObject(FileUtil.getJsonObject(dFile.getPath()));
-                dPlayer.add();
+                try {
+                    DPlayer dPlayer = getDPlayerFromJsonObject(FileUtil.getJsonObject(dFile.getPath()));
+                    dPlayer.add();
+                } catch (Exception e) {
+                    System.out.println("There was an error loading the user: " + dFile.getName() + " Please manually edit their file.");
+                }
             }
         }
     }
