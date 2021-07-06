@@ -29,14 +29,14 @@ public class BoostHandler extends ListenerAdapter {
         String message = Configuration.getString("modules.boosting.message.content")
                 .replace("{times}", timesBoosted + "")
                 .replace("{s}", timesBoosted > 1 ? "s" : "");
-        boolean enabled = Configuration.getBoolean("modules.boosting.general.boostMessageEnabled");
-        if (!enabled) return;
+
         if (timesBoosted <= 0) {
             setBoostCountCache(e.getGuild().getBoostCount());
             return;
         }
         EventHandler.performBoost(timesBoosted, e.getUser());
-        MessageUtil.sendMessage(channelID, EmbedFactory.createEmbed(Placeholders.convert(title, e.getUser()), Placeholders.convert(message, e.getUser())).build());
+        if (Configuration.getBoolean("modules.boosting.general.boostMessageEnabled"))
+            MessageUtil.sendMessage(channelID, EmbedFactory.createEmbed(Placeholders.convert(title, e.getUser()), Placeholders.convert(message, e.getUser())).build());
         DPlayer dPlayer = DPlayerEngine.getObject(e.getUser().getIdLong());
         dPlayer.setBoostCount(dPlayer.getBoostCount() + timesBoosted);
         dPlayer.setBoostCredits(dPlayer.getBoostCredits() + timesBoosted);

@@ -133,4 +133,8 @@ public class FileUtil {
         }
         return new Gson().fromJson(reader, JsonObject.class);
     }
+
+    public static JsonObject getJsonObject(StringBuilder contents) {
+        return new Gson().fromJson(contents.toString(), JsonObject.class);
+    }
 }

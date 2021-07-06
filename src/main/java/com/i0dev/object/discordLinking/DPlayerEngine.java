@@ -10,7 +10,9 @@ import lombok.Getter;
 import lombok.Setter;
 import net.dv8tion.jda.api.entities.User;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -103,8 +105,16 @@ public class DPlayerEngine {
             for (String filename : directory.list()) {
                 File dFile = new File(InitializeBot.get().getDPlayerDir() + "/" + filename);
                 try {
-                    DPlayer dPlayer = getDPlayerFromJsonObject(FileUtil.getJsonObject(dFile.getPath()));
+                    BufferedReader br = new BufferedReader(new FileReader(dFile));
+                    String st;
+                    StringBuilder fileContents = new StringBuilder();
+                    while ((st = br.readLine()) != null) {
+                        fileContents.append(st.replace("�", ""));
+                    }
+                    DPlayer dPlayer = getDPlayerFromJsonObject(FileUtil.getJsonObject(fileContents));
+                    if (dPlayer == null) continue;
                     dPlayer.add();
+                    dPlayer.save();
                 } catch (Exception e) {
                     System.out.println("There was an error loading the user: " + dFile.getName() + " Please manually edit their file.");
                 }
