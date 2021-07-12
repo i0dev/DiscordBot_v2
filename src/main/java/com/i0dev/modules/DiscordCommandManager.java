@@ -2,7 +2,6 @@ package com.i0dev.modules;
 
 import com.i0dev.commands.discord.completedModules.gamemode.GamemodeManager;
 import com.i0dev.commands.discord.completedModules.giveaway.GiveawayManager;
-import com.i0dev.modules.linking.LinkManager;
 import com.i0dev.commands.discord.completedModules.movements.MovementManager;
 import com.i0dev.commands.discord.completedModules.mute.MuteManager;
 import com.i0dev.commands.discord.completedModules.screenshare.ScreenshareManager;
@@ -21,6 +20,7 @@ import com.i0dev.modules.fun.*;
 import com.i0dev.modules.invite.CommandInviteLeaderboard;
 import com.i0dev.modules.invite.CommandInvites;
 import com.i0dev.modules.invite.CommandInvitesResetData;
+import com.i0dev.modules.linking.LinkManager;
 import com.i0dev.modules.mapPoints.MapPointsManager;
 import com.i0dev.modules.moderation.*;
 import com.i0dev.modules.points.discord.PointsManager;
@@ -99,6 +99,7 @@ public class DiscordCommandManager extends ListenerAdapter {
 
     //Moderation
     public static final List<String> ANNOUNCE_ALIASES = Configuration.getStringList("commands.announce.aliases");
+    public static final List<String> DIRECT_MESSAGE_ALIASES = Configuration.getStringList("commands.directMessage.aliases");
     public static final List<String> BAN_ALIASES = Configuration.getStringList("commands.ban.aliases");
     public static final List<String> CHANGELOG_ALIASES = Configuration.getStringList("commands.changelog.aliases");
     public static final List<String> KICK_ALIASES = Configuration.getStringList("commands.kick.aliases");
@@ -145,7 +146,7 @@ public class DiscordCommandManager extends ListenerAdapter {
         else if (isCommand(PRUNE_ALIASES, e.getMessage())) CommandPrune.run(e);
         else if (isCommand(ROLE_ALL_ALIASES, e.getMessage())) CommandRoleAll.run(e);
         else if (isCommand(UNBAN_ALIASES, e.getMessage())) CommandUnban.run(e);
-
+        else if (isCommand(DIRECT_MESSAGE_ALIASES, e.getMessage())) CommandDm.run(e);
         else if (isCommand(VERIFY_PANEL_ALIASES, e.getMessage())) CommandVerifyPanel.run(e);
         else if (isCommand(RECLAIM_RESET_ALIASES, e.getMessage())) CommandReclaimReset.run(e);
         else if (isCommand(RECLAIM_ALIASES, e.getMessage())) CommandReclaim.run(e);

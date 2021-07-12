@@ -445,7 +445,7 @@
       "welcomeMessageTitle": "Welcome {authorTag} to {guildName}!",
       "welcomeMessageDesc": "**For support go to:** <#766322425323192330>\n**Server IP:** `play.mcrivals.com`\n**Website:** [shop.mcrivals.com](https://shop.mcrivals.com)\n**MemberCount:** `{guildMemberCount}`",
       "enabled": true,
-      "rolesToContinuouslyGive":[
+      "rolesToContinuouslyGive": [
         766183896202346516
       ],
       "rolesToGive": [
@@ -667,10 +667,22 @@
       ],
       "permissionLiteMode": false,
       "requirePermission": true,
-      "format": "**Format:** ``{command} <channel> <content>``\n\n*Use this command to make an announcement in a certain channel!*",
+      "format": "**Format:** ``{command} <channel> <content>``\n\n*Use this command to make an announcement in a certain channel!\nUse ' -normal' at the end of the message to send it without an embed.*",
       "announcementTitle": "Announcement from: {authorUserName}",
       "enabled": true,
       "messageContent": "{authorTagBold} You have successfully made an announcement in {channel}!"
+    },
+    "directMessage": {
+      "aliases": [
+        "dm",
+        "directMessage"
+      ],
+      "permissionLiteMode": false,
+      "requirePermission": true,
+      "format": "**Format:** ``{command} <user> <content>``\n\n*Use this command to direct message a user!\nUse ' -normal' at the end of the message to send it without an embed.*",
+      "dmTitle": "Incoming direct message from {guildName}",
+      "enabled": true,
+      "messageContent": "{authorTagBold} You have successfully messaged {mentionedUserTag}!"
     },
     "embedMaker": {
       "aliases": [
@@ -1053,7 +1065,7 @@
         "admin_panel"
       ],
       "permissionLiteMode": false,
-      "ticketImage" : "",
+      "ticketImage": "",
       "messageSentBeforePanel": "https://cdn.discordapp.com/attachments/766323223960616990/828300815667167312/McRivals2.png",
       "ticketPanelDescription": "Click to one of the emojis to create a corresponding ticket!",
       "ticketPanelFieldBaseFormat": "{panelDescription}",

@@ -22,11 +22,12 @@ public class Placeholders {
         return convert(message, null, author);
     }
 
+    static DecimalFormat decimalFormat = new DecimalFormat("#.##");
+
     public static String convert(String message, User mentioned, User author) {
         JDA jda = InternalJDA.getJda();
         Guild guild = GlobalConfig.GENERAL_MAIN_GUILD;
         if (message == null) return null;
-        DecimalFormat decimalFormat = new DecimalFormat("#.##");
 
         //Mentioned User
         if (mentioned != null) {
@@ -60,7 +61,6 @@ public class Placeholders {
         } else {
             message = message
                     .replace("{mentionedUserTag}", "Unknown");
-
         }
 
         //Author
@@ -94,9 +94,7 @@ public class Placeholders {
         } else {
             message = message
                     .replace("{authorTag}", "Unknown");
-
         }
-
 
         //Guild
         if (guild != null) {

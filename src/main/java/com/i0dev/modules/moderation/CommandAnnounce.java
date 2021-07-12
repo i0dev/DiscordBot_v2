@@ -43,7 +43,7 @@ public class CommandAnnounce extends DiscordCommand {
 
         String content = FormatUtil.remainingArgFormatter(message, 2);
 
-        if (content.endsWith("-normal")) {
+        if (content.endsWith(" -normal")) {
             content = content.substring(0, content.length() - " -normal".length());
             Channel.sendMessage(content).queue();
         } else {
