@@ -39,8 +39,8 @@ public class SuggestionManager {
     public static String info = "`{prefix}suggestion Info <messageID>` *Sends information about that suggestion*".replace("{prefix}", GlobalConfig.GENERAL_BOT_PREFIX);
     public static String list = "`{prefix}suggestion List` *Retrieves the list of suggestions.*".replace("{prefix}", GlobalConfig.GENERAL_BOT_PREFIX);
     public static String clear = "`{prefix}suggestion Clear` *Clears all the suggestions from storage. Doesn't delete the suggestion message.*".replace("{prefix}", GlobalConfig.GENERAL_BOT_PREFIX);
-    public static String accept = "`{prefix}suggestion Accept <messageID>` *Accepts that suggestion and moves it to a accepted channel.*".replace("{prefix}", GlobalConfig.GENERAL_BOT_PREFIX);
-    public static String reject = "`{prefix}suggestion Reject <messageID>` *Rejects that suggestion and moves it to a rejected channel.".replace("{prefix}", GlobalConfig.GENERAL_BOT_PREFIX);
+    public static String accept = "`{prefix}suggestion Accept <messageID> [note]` *Accepts that suggestion and moves it to a accepted channel.*".replace("{prefix}", GlobalConfig.GENERAL_BOT_PREFIX);
+    public static String reject = "`{prefix}suggestion Reject <messageID> [note]` *Rejects that suggestion and moves it to a rejected channel.".replace("{prefix}", GlobalConfig.GENERAL_BOT_PREFIX);
 
 
     public static void run(GuildMessageReceivedEvent e) {

@@ -38,7 +38,7 @@ public class FindFromString {
         }
         try {
             Long.parseLong(arg);
-            return GlobalConfig.GENERAL_MAIN_GUILD.getRoleById(Long.parseLong(arg));
+            return  InternalJDA.getJda().getRoleById(Long.parseLong(arg));
         } catch (Exception ignored) {
         }
         try {
@@ -59,7 +59,7 @@ public class FindFromString {
         }
         try {
             Long.parseLong(arg);
-            return GlobalConfig.GENERAL_MAIN_GUILD.getTextChannelById(Long.parseLong(arg));
+            return InternalJDA.getJda().getTextChannelById(Long.parseLong(arg));
         } catch (Exception ignored) {
         }
         try {
@@ -88,7 +88,7 @@ public class FindFromString {
 
         try {
             Long.parseLong(arg);
-            return GlobalConfig.GENERAL_MAIN_GUILD.getTextChannelById(channelID).retrieveMessageById(arg).complete();
+            return InternalJDA.getJda().getTextChannelById(channelID).retrieveMessageById(arg).complete();
         } catch (Exception exception) {
             return null;
         }

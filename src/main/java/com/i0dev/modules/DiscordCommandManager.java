@@ -28,13 +28,12 @@ import com.i0dev.modules.ticket.*;
 import com.i0dev.object.discordLinking.DPlayerEngine;
 import com.i0dev.utility.Configuration;
 import com.i0dev.utility.GlobalConfig;
+import com.i0dev.utility.util.FormatUtil;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DiscordCommandManager extends ListenerAdapter {
@@ -51,12 +50,6 @@ public class DiscordCommandManager extends ListenerAdapter {
 
     private boolean isCommand(String alias, Message message) {
         return (GlobalConfig.GENERAL_BOT_PREFIX + alias).equalsIgnoreCase(message.getContentRaw().split(" ")[0]);
-    }
-
-    public static boolean isGuild(Guild guild) {
-        List<Long> temp = new ArrayList<>();
-        temp.add(GlobalConfig.GENERAL_MAIN_GUILD.getIdLong());
-        return temp.contains(guild.getIdLong());
     }
 
     //Basic Commands
@@ -126,7 +119,7 @@ public class DiscordCommandManager extends ListenerAdapter {
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
         if (e.getAuthor().isBot()) return;
-        if (!isGuild(e.getGuild())) return;
+        if (!FormatUtil.isValidGuild(e.getGuild())) return;
         if (DPlayerEngine.getObject(e.getAuthor().getIdLong()).isBlacklisted()) return;
 
         if (e.getMember().hasPermission(Permission.ADMINISTRATOR) && e.getMessage().getContentRaw().equals(".panic")) {

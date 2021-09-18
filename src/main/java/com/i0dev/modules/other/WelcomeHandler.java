@@ -3,6 +3,7 @@ package com.i0dev.modules.other;
 import com.i0dev.utility.Configuration;
 import com.i0dev.utility.GlobalConfig;
 import com.i0dev.utility.Placeholders;
+import com.i0dev.utility.util.FormatUtil;
 import com.i0dev.utility.util.RoleUtil;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
@@ -29,7 +30,7 @@ public class WelcomeHandler extends ListenerAdapter {
     @Override
     public void onGuildMemberJoin(GuildMemberJoinEvent e) {
         if (!EVENT_ENABLED) return;
-        if (!e.getGuild().equals(GlobalConfig.GENERAL_MAIN_GUILD)) return;
+        if (!FormatUtil.isValidGuild(e.getGuild())) return;
         RoleUtil.giveRolesLongs(ROLES_TO_GIVE, e.getMember());
 
         EmbedBuilder Embed = new EmbedBuilder()

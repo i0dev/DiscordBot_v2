@@ -46,6 +46,7 @@ public class DiscordBot extends JavaPlugin {
             getServer().getPluginManager().registerEvents(new InGameChatFormatter(), this);
             getServer().getPluginManager().registerEvents(new FreezeLogHandler(), this);
             getServer().getPluginManager().registerEvents(new RoleRefreshHandler(), this);
+
         }, 200L);
 
 

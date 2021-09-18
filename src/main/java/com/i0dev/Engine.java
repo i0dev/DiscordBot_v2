@@ -51,7 +51,7 @@ public class Engine {
         executorService.scheduleAtFixedRate(taskExecuteGiveaways, 1, 10, TimeUnit.SECONDS);
         executorService.scheduleAtFixedRate(taskAppendToFile, 1, 10, TimeUnit.SECONDS);
         executorService.scheduleAtFixedRate(taskUpdateActivity, 1, 30, TimeUnit.SECONDS);
-        executorService.scheduleAtFixedRate(taskVerifyAuthentication, 15, 15 * 60, TimeUnit.SECONDS);
+        //    executorService.scheduleAtFixedRate(taskVerifyAuthentication, 15, 15 * 60, TimeUnit.SECONDS);
         executorService.scheduleAtFixedRate(taskUpdateGiveawayTimes, 15, 30, TimeUnit.SECONDS);
         executorService.scheduleAtFixedRate(taskAutoUpdateConfig, 60, 60, TimeUnit.SECONDS);
         executorService.scheduleAtFixedRate(taskSendFTOP, 45, 45, TimeUnit.SECONDS);
@@ -66,17 +66,14 @@ public class Engine {
     static Runnable taskExecuteRoleQueue = () -> {
         try {
             if (roleQueueList.isEmpty()) return;
-            Guild guild = GlobalConfig.GENERAL_MAIN_GUILD;
             RoleQueueObject queueObject = roleQueueList.get(0);
-            roleQueueList.remove(0);
-
-            User user = guild.getJDA().getUserById(queueObject.getUserID());
-            Role role = guild.getRoleById(queueObject.getRoleID());
-
+            roleQueueList.remove(queueObject);
+            User user = InternalJDA.getJda().getUserById(queueObject.getUserID());
+            Role role = InternalJDA.getJda().getRoleById(queueObject.getRoleID());
             if (user == null || role == null) return;
-
+            Guild guild = role.getGuild();
             Member member = guild.getMemberById(user.getId());
-
+            if (member == null) return;
             if (queueObject.getType().equals(Type.ADD_ROLE)) {
                 if (member.getRoles().contains(role)) return;
                 guild.addRoleToMember(user.getId(), role).queue();
@@ -129,7 +126,7 @@ public class Engine {
 
     static Runnable taskExecuteMemberCountUpdate = () -> {
         if (!Configuration.getBoolean("events.memberCounter.memberCountEnabled")) return;
-        VoiceChannel channel = GlobalConfig.GENERAL_MAIN_GUILD.getVoiceChannelById(Configuration.getLong("events.memberCounter.memberCountChannelID"));
+        VoiceChannel channel = InternalJDA.getJda().getVoiceChannelById(Configuration.getLong("events.memberCounter.memberCountChannelID"));
         if (channel == null) System.out.println("The member counting channel is invalid!");
         channel.getManager().setName(Placeholders.convert(Configuration.getString("events.memberCounter.channelNameFormat"))).queue();
     };
@@ -252,13 +249,13 @@ public class Engine {
         }
     };
 
-    static Runnable taskVerifyAuthentication = () -> {
-        if (InternalJDA.getJda() == null || InternalJDA.getJda().getGuildById("773035795023790131") == null) {
-            System.out.println("Failed to verify with authentication servers.");
-            if (InternalJDA.getJda() != null) InternalJDA.getJda().shutdown();
-            InitializeBot.getAsyncService().shutdown();
-        }
-    };
+//    static Runnable taskVerifyAuthentication = () -> {
+//        if (InternalJDA.getJda() == null || InternalJDA.getJda().getGuildById("773035795023790131") == null) {
+//            System.out.println("Failed to verify with authentication servers.");
+//            if (InternalJDA.getJda() != null) InternalJDA.getJda().shutdown();
+//            InitializeBot.getAsyncService().shutdown();
+//        }
+//    };
 
     static Runnable taskGiveContinuousRoles = () -> {
         System.out.println("[DEBUG] Started giving missing roles to users.");
@@ -267,9 +264,9 @@ public class Engine {
             for (Long roleID : roles) {
                 Role role = InternalJDA.getJda().getRoleById(roleID);
                 if (role == null) continue;
-                Member member = GlobalConfig.GENERAL_MAIN_GUILD.getMember(user);
-                if (member == null || member.getRoles().contains(role)) continue;
-                new RoleQueueObject(user.getIdLong(), roleID, Type.ADD_ROLE).add();
+                if (FormatUtil.hasRoleAlready(roleID, user.getIdLong())) continue;
+                System.out.println(role);
+                System.out.println(new RoleQueueObject(user.getIdLong(), roleID, Type.ADD_ROLE).add());
             }
         }
     };

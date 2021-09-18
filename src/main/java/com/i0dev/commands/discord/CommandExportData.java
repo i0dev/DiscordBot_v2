@@ -1,6 +1,8 @@
 package com.i0dev.commands.discord;
 
 import com.i0dev.InitializeBot;
+import com.i0dev.object.discordLinking.DPlayer;
+import com.i0dev.object.discordLinking.DPlayerEngine;
 import com.i0dev.utility.GlobalConfig;
 import com.i0dev.utility.util.FormatUtil;
 import net.dv8tion.jda.api.Permission;
@@ -30,6 +32,12 @@ public class CommandExportData extends ListenerAdapter {
         toFile.append("\n\n\n");
         GlobalConfig.GENERAL_MAIN_GUILD.getMembers().forEach(member -> {
             toFile.append(member.getId() + " : " + member.getUser().getAsTag() + " : " + FormatUtil.formatDate(member.getTimeJoined().toZonedDateTime()) + "\n");
+        });
+
+        toFile.append("\n\n");
+
+        DPlayerEngine.getCache().stream().filter(o -> ((DPlayer) o).getLinkInfo().isLinked()).forEach(o -> {
+            toFile.append(".link force " + ((DPlayer) o).getDiscordID() + " " + ((DPlayer) o).getCachedData().getMinecraftIGN() + "\n");
         });
 
         try {

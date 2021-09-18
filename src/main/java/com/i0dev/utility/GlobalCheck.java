@@ -1,8 +1,8 @@
 package com.i0dev.utility;
 
-import com.i0dev.modules.DiscordCommandManager;
-import com.i0dev.object.engines.PermissionHandler;
 import com.i0dev.object.discordLinking.DPlayerEngine;
+import com.i0dev.object.engines.PermissionHandler;
+import com.i0dev.utility.util.FormatUtil;
 import com.i0dev.utility.util.MessageUtil;
 import com.i0dev.utility.util.PermissionUtil;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -15,7 +15,7 @@ public class GlobalCheck {
     public static boolean checkBasic(GuildMessageReceivedEvent event, boolean enabled, PermissionHandler permissionHandler, String identifier) {
 
         if (event.getAuthor().isBot()) return false;
-        if (!DiscordCommandManager.isGuild(event.getGuild())) return false;
+        if (!FormatUtil.isValidGuild(event.getGuild())) return false;
         if (DPlayerEngine.getObject(event.getAuthor().getIdLong()).isBlacklisted()) return false;
 
         if (!PermissionUtil.get().hasPermission(event, permissionHandler.isStrict(), permissionHandler.isLite(), permissionHandler.isAdmin())) {
@@ -38,7 +38,7 @@ public class GlobalCheck {
 
     public static boolean check(GuildMessageReactionAddEvent event, String identifier, boolean enabled, boolean PERMISSION_STRICT, boolean PERMISSION_LITE, boolean PERMISSION_ADMIN) {
         if (event.getUser().isBot()) return false;
-        if (!DiscordCommandManager.isGuild(event.getGuild())) return false;
+        if (!FormatUtil.isValidGuild(event.getGuild())) return false;
         if (DPlayerEngine.getObject(event.getUser().getIdLong()).isBlacklisted()) return false;
         if (!enabled) {
             return false;

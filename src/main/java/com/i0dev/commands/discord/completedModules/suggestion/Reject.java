@@ -25,7 +25,7 @@ public class Reject extends ListenerAdapter {
     private static final boolean ENABLED = Configuration.getBoolean("modules.suggestion.parts.reject.enabled");
 
     private static final String MESSAGE_CONTENT = Configuration.getString("modules.suggestion.parts.reject.message.general");
-    private static final String MESSAGE_REJECTED_MESSAGE = Configuration.getString("modules.suggestion.parts.reject.message.rejectedTitle");
+    private static final String MESSAGE_REJECTED_MESSAGE = Configuration.getString("modules.suggestion.parts.reject.message.rejectedMessage");
     private static final String MESSAGE_REJECTED_TITLE = Configuration.getString("modules.suggestion.parts.reject.message.rejectedTitle");
 
 
@@ -53,6 +53,10 @@ public class Reject extends ListenerAdapter {
             note = "Nothing Provided";
         }
 
+        String icon = GlobalConfig.EMBED_THUMBNAIL;
+        if (Configuration.getBoolean("modules.suggestion.parts.reject.useSuggesterIcon")) {
+            icon = suggestion.getUserAvatarUrl();
+        }
 
         String rejectedDesc = MESSAGE_REJECTED_MESSAGE
                 .replace("{suggestionUserTag}", suggestion.getUserTag())
@@ -64,7 +68,7 @@ public class Reject extends ListenerAdapter {
                 .setTimestamp(ZonedDateTime.now())
                 .setDescription(Placeholders.convert(rejectedDesc, e.getAuthor()))
                 .setFooter(GlobalConfig.EMBED_FOOTER)
-                .setThumbnail(suggestion.getUserAvatarUrl())
+                .setThumbnail(icon)
                 .setColor(Color.decode(SuggestionManager.REJECT_COLOR));
 
         MessageUtil.sendMessage(SuggestionManager.CHANNEL_REJECTED_SUGGESTION_CHANNEL_ID, embedFactory.build());
@@ -76,8 +80,6 @@ public class Reject extends ListenerAdapter {
 
         MessageUtil.sendMessage(e.getChannel().getIdLong(), desc, e.getAuthor());
         SuggestionEngine.getInstance().setAccepted(suggestion);
-
-
     }
 
 
@@ -103,6 +105,10 @@ public class Reject extends ListenerAdapter {
 
         String note = "Nothing Provided";
 
+        String icon = GlobalConfig.EMBED_THUMBNAIL;
+        if (Configuration.getBoolean("modules.suggestion.parts.reject.useSuggesterIcon")) {
+            icon = suggestion.getUserAvatarUrl();
+        }
 
         String Desc = MESSAGE_REJECTED_MESSAGE
                 .replace("{suggestionUserTag}", suggestion.getUserTag())
@@ -114,7 +120,7 @@ public class Reject extends ListenerAdapter {
                 .setTimestamp(ZonedDateTime.now())
                 .setDescription(Placeholders.convert(Desc, e.getUser()))
                 .setFooter(GlobalConfig.EMBED_FOOTER)
-                .setThumbnail(suggestion.getUserAvatarUrl())
+                .setThumbnail(icon)
                 .setColor(Color.decode(SuggestionManager.REJECT_COLOR));
 
         MessageUtil.sendMessage(SuggestionManager.CHANNEL_REJECTED_SUGGESTION_CHANNEL_ID, embedFactory.build());

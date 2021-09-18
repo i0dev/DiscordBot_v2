@@ -50,16 +50,19 @@ public class RoleRefreshHandler implements Listener {
         if (!RoleUtil.hasRole(discordUser, Configuration.getLongList("modules.link.general.rolesThatBypassNicknameChange"))) {
             Player player = Bukkit.getPlayer(dPlayer.getCachedData().getMinecraftIGN());
             if (player == null || !player.hasPermission("discordbot.link.nickname.bypass")) {
-                TempNicknameUtil.modifyNickname(discordUser, Configuration.getString("modules.link.general.nicknameFormat")
+                String nickname = Configuration.getString("modules.link.general.nicknameFormat")
                         .replace("{faction}", FormatUtil.getFactionName(dPlayer))
                         .replace("{prefix}", FormatUtil.getPrefix(dPlayer))
-                        .replace("{ign}", dPlayer.getCachedData().getMinecraftIGN()));
+                        .replace("{ign}", dPlayer.getCachedData().getMinecraftIGN());
+                if (!TempNicknameUtil.isNicknameSame(discordUser.getIdLong(), nickname))
+                    TempNicknameUtil.modifyNickname(discordUser, nickname);
             }
         }
 
 
         List<Long> ranksAlways = Configuration.getLongList("modules.link.general.rolesToGiveAlways");
         for (Long roleID : ranksAlways) {
+            if (FormatUtil.hasRoleAlready(roleID, dPlayer.getDiscordID())) continue;
             new RoleQueueObject(dPlayer.getDiscordID(), roleID, Type.ADD_ROLE).add();
         }
 
@@ -68,9 +71,11 @@ public class RoleRefreshHandler implements Listener {
         for (Object key : ranksToGive.keySet()) {
             if (groups.contains(key.toString())) {
                 long roleID = ((long) ranksToGive.get(key));
+                if (FormatUtil.hasRoleAlready(roleID, dPlayer.getDiscordID())) continue;
                 new RoleQueueObject(dPlayer.getDiscordID(), roleID, Type.ADD_ROLE).add();
             } else {
                 long roleID = ((long) ranksToGive.get(key));
+                if (!FormatUtil.hasRoleAlready(roleID, dPlayer.getDiscordID())) continue;
                 new RoleQueueObject(dPlayer.getDiscordID(), roleID, Type.REMOVE_ROLE).add();
             }
         }

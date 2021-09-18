@@ -2,8 +2,7 @@ package com.i0dev.modules.invite;
 
 import net.dv8tion.jda.api.entities.Invite;
 
-public class InviteData
-{
+public class InviteData {
     private final long guildId;
     private int uses;
 
@@ -20,8 +19,7 @@ public class InviteData
         return uses;
     }
 
-    public void incrementUses()
-    {
+    public void incrementUses() {
         this.uses++;
     }
 }

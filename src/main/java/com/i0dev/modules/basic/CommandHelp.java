@@ -2,7 +2,6 @@ package com.i0dev.modules.basic;
 
 import com.i0dev.commands.discord.completedModules.gamemode.GamemodeManager;
 import com.i0dev.commands.discord.completedModules.giveaway.GiveawayManager;
-import com.i0dev.modules.linking.LinkManager;
 import com.i0dev.commands.discord.completedModules.movements.MovementManager;
 import com.i0dev.commands.discord.completedModules.mute.MuteManager;
 import com.i0dev.commands.discord.completedModules.screenshare.ScreenshareManager;
@@ -13,10 +12,12 @@ import com.i0dev.modules.DiscordCommandManager;
 import com.i0dev.modules.basic.cache.HelpCmdCache;
 import com.i0dev.modules.blacklist.BlacklistManager;
 import com.i0dev.modules.boosting.BoostingManager;
+import com.i0dev.modules.linking.LinkManager;
 import com.i0dev.modules.mapPoints.MapPointsManager;
 import com.i0dev.modules.points.discord.PointsManager;
 import com.i0dev.object.engines.PermissionHandler;
 import com.i0dev.utility.*;
+import com.i0dev.utility.util.FormatUtil;
 import com.i0dev.utility.util.PermissionUtil;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -192,7 +193,7 @@ public class CommandHelp extends ListenerAdapter {
     @Override
     public void onMessageReactionAdd(MessageReactionAddEvent e) {
         if (e.getUser().isBot()) return;
-        if (!e.getGuild().equals(GlobalConfig.GENERAL_MAIN_GUILD)) return;
+        if (!FormatUtil.isValidGuild(e.getGuild())) return;
         if (!COMMAND_ENABLED) return;
         if (!PermissionUtil.get().hasPermission(REQUIRE_PERMISSIONS, REQUIRE_LITE_PERMISSIONS, e.getGuild(), e.getUser()))
             return;

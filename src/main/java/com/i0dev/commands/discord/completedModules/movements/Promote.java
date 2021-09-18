@@ -29,60 +29,65 @@ public class Promote {
 
 
     public static void run(GuildMessageReceivedEvent e) {
-        if (!GlobalCheck.checkBasic(e, ENABLED, new PermissionHandler(PERMISSION_LITE, PERMISSION_STRICT, PERMISSION_ADMIN), "Movement Promote")) {
-            return;
-        }
-        String[] message = e.getMessage().getContentRaw().split(" ");
-        if (message.length == 2) {
-            MessageUtil.sendMessage(e.getChannel().getIdLong(), MovementManager.promote, e.getAuthor());
-            return;
-        }
-        User MentionedUser = FindFromString.get().getUser(message[2], e.getMessage());
-        if (MentionedUser == null) {
-            MessageUtil.sendMessage(e.getChannel().getIdLong(), GlobalConfig.MESSAGE_USER_NOT_FOUND.replace("{arg}", message[2]), e.getAuthor());
-            return;
-        }
+        try {
+            if (!GlobalCheck.checkBasic(e, ENABLED, new PermissionHandler(PERMISSION_LITE, PERMISSION_STRICT, PERMISSION_ADMIN), "Movement Promote")) {
+                return;
+            }
+            String[] message = e.getMessage().getContentRaw().split(" ");
+            if (message.length == 2) {
+                MessageUtil.sendMessage(e.getChannel().getIdLong(), MovementManager.promote, e.getAuthor());
+                return;
+            }
+            User MentionedUser = FindFromString.get().getUser(message[2], e.getMessage());
+            if (MentionedUser == null) {
+                MessageUtil.sendMessage(e.getChannel().getIdLong(), GlobalConfig.MESSAGE_USER_NOT_FOUND.replace("{arg}", message[2]), e.getAuthor());
+                return;
+            }
 
-        Member MentionedMember = e.getGuild().getMember(MentionedUser);
+            Member MentionedMember = e.getGuild().getMember(MentionedUser);
 
-        if (!MovementUtil.isAlreadyStaff(MentionedMember)) {
-            JSONObject firstRoleObject = MovementUtil.getTracks().get(0);
-            MovementUtil.giveNewRoles(MentionedMember, (Long) MovementUtil.getTracks().get(0).get("mainRole"));
+            if (!MovementUtil.isAlreadyStaff(MentionedMember)) {
+                JSONObject firstRoleObject = MovementUtil.getTracks().get(0);
+                MovementUtil.giveNewRoles(MentionedMember, (Long) MovementUtil.getTracks().get(0).get("mainRole"));
+
+
+                String desc = MESSAGE_CONTENT
+                        .replace("{position}", firstRoleObject.get("displayName").toString());
+
+                String mvtDesc = MESSAGE_MOVEMENT_MESSAGE
+                        .replace("{position}", firstRoleObject.get("displayName").toString());
+
+                MessageUtil.sendMessage(e.getChannel().getIdLong(), desc, e.getAuthor(), MentionedUser);
+                MessageUtil.sendMessage(GlobalConfig.MOVEMENT_CHANNEL_ID, mvtDesc, e.getAuthor(), MentionedUser);
+                TempNicknameUtil.modifyNickname(MentionedUser, MovementManager.NICKNAME_FORMAT.replace("{userName}", MentionedUser.getName()).replace("{displayName}", firstRoleObject.get("displayName").toString()));
+                return;
+            }
+            if (MovementUtil.isHighestStaff(MentionedMember)) {
+                MessageUtil.sendMessage(e.getChannel().getIdLong(), MESSAGE_HIGHEST_POS, e.getAuthor(), MentionedUser);
+                return;
+            }
+
+            Role currentParentRole = MovementUtil.getParentStaff(MentionedMember);
+            Role nextRole = MovementUtil.getNextRole(currentParentRole);
+            JSONObject nextRoleObject = MovementUtil.getNextRoleObject(currentParentRole);
+
+            MovementUtil.removeOldRoles(MentionedMember, currentParentRole.getIdLong());
+            MovementUtil.giveNewRoles(MentionedMember, nextRole.getIdLong());
+
+            TempNicknameUtil.modifyNickname(MentionedUser, MovementManager.NICKNAME_FORMAT.replace("{userName}", MentionedUser.getName()).replace("{displayName}", nextRoleObject.get("displayName").toString()));
 
 
             String desc = MESSAGE_CONTENT
-                    .replace("{position}", firstRoleObject.get("displayName").toString());
+                    .replace("{position}", nextRoleObject.get("displayName").toString());
 
             String mvtDesc = MESSAGE_MOVEMENT_MESSAGE
-                    .replace("{position}", firstRoleObject.get("displayName").toString());
+                    .replace("{position}", nextRoleObject.get("displayName").toString())
+                    .replace("{roleMention}", nextRole.getAsMention());
 
             MessageUtil.sendMessage(e.getChannel().getIdLong(), desc, e.getAuthor(), MentionedUser);
             MessageUtil.sendMessage(GlobalConfig.MOVEMENT_CHANNEL_ID, mvtDesc, e.getAuthor(), MentionedUser);
-            return;
+        } catch (Exception er) {
+            er.printStackTrace();
         }
-        if (MovementUtil.isHighestStaff(MentionedMember)) {
-            MessageUtil.sendMessage(e.getChannel().getIdLong(), MESSAGE_HIGHEST_POS, e.getAuthor(), MentionedUser);
-            return;
-        }
-
-        Role currentParentRole = MovementUtil.getParentStaff(MentionedMember);
-        Role nextRole = MovementUtil.getNextRole(currentParentRole);
-        JSONObject nextRoleObject = MovementUtil.getNextRoleObject(currentParentRole);
-
-        MovementUtil.removeOldRoles(MentionedMember, Long.valueOf(currentParentRole.getId()));
-        MovementUtil.giveNewRoles(MentionedMember, Long.valueOf(nextRole.getId()));
-
-        TempNicknameUtil.modifyNickname(MentionedUser, MovementManager.NICKNAME_FORMAT.replace("{userName}", MentionedUser.getName()).replace("{displayName}", nextRoleObject.get("displayName").toString()));
-
-
-        String desc = MESSAGE_CONTENT
-                .replace("{position}", nextRoleObject.get("displayName").toString());
-
-        String mvtDesc = MESSAGE_MOVEMENT_MESSAGE
-                .replace("{position}", nextRoleObject.get("displayName").toString())
-                .replace("{roleMention}", nextRole.getAsMention());
-
-        MessageUtil.sendMessage(e.getChannel().getIdLong(), desc, e.getAuthor(), MentionedUser);
-        MessageUtil.sendMessage(GlobalConfig.MOVEMENT_CHANNEL_ID, mvtDesc, e.getAuthor(), MentionedUser);
     }
 }

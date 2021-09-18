@@ -7,6 +7,7 @@ import com.i0dev.object.engines.TicketEngine;
 import com.i0dev.object.objects.LogObject;
 import com.i0dev.object.objects.Ticket;
 import com.i0dev.utility.*;
+import com.i0dev.utility.util.FormatUtil;
 import com.i0dev.utility.util.PermissionUtil;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -35,7 +36,7 @@ public class TicketCloseHandler extends ListenerAdapter {
         if (!e.getButton().getId().equalsIgnoreCase("BUTTON_TICKET_CLOSE")) return;
         if (e.getUser().isBot()) return;
         if (!EVENT_ENABLED) return;
-        if (!e.getGuild().equals(GlobalConfig.GENERAL_MAIN_GUILD)) return;
+        if (!FormatUtil.isValidGuild(e.getGuild())) return;
         if (DPlayerEngine.getObject(e.getUser().getIdLong()).isBlacklisted()) return;
         if (!PermissionUtil.get().hasPermission(REQUIRE_PERMISSIONS, REQUIRE_LITE_PERMISSIONS, e.getGuild(), e.getUser()))
             return;
@@ -46,8 +47,9 @@ public class TicketCloseHandler extends ListenerAdapter {
 
 
     static void closeTicket(Ticket ticket, String reason, User closer) {
+
         File ticketLogsFile = new File(InitializeBot.get().getTicketLogsDirPath() + "/" + ticket.getChannelID() + ".log");
-        TextChannel ticketChannel = GlobalConfig.GENERAL_MAIN_GUILD.getTextChannelById(ticket.getChannelID());
+        TextChannel ticketChannel = InternalJDA.getJda().getTextChannelById(ticket.getChannelID());
         String toFile = "\n\nClosed Ticket Information:\n " +
                 "  Ticket Closer Tag: " + closer.getAsTag() + "\n" +
                 "   Ticket Closer ID: " + closer.getId() + "\n" +
@@ -68,11 +70,11 @@ public class TicketCloseHandler extends ListenerAdapter {
 
         try {
             if (ticket.isAdminOnlyMode()) {
-                GlobalConfig.GENERAL_MAIN_GUILD.getTextChannelById(ADMIN_LOGS_ID).sendMessage(embedBuilder.build()).queueAfter(delayToCloseTicketMilis, TimeUnit.MILLISECONDS);
-                GlobalConfig.GENERAL_MAIN_GUILD.getTextChannelById(ADMIN_LOGS_ID).sendFile(ticketLogsFile).queueAfter(delayToCloseTicketMilis + 1000, TimeUnit.MILLISECONDS);
+                InternalJDA.getJda().getTextChannelById(ADMIN_LOGS_ID).sendMessage(embedBuilder.build()).queueAfter(delayToCloseTicketMilis, TimeUnit.MILLISECONDS);
+                InternalJDA.getJda().getTextChannelById(ADMIN_LOGS_ID).sendFile(ticketLogsFile).queueAfter(delayToCloseTicketMilis + 1000, TimeUnit.MILLISECONDS);
             } else {
-                GlobalConfig.GENERAL_MAIN_GUILD.getTextChannelById(TICKET_LOGS_ID).sendMessage(embedBuilder.build()).queueAfter(delayToCloseTicketMilis, TimeUnit.MILLISECONDS);
-                GlobalConfig.GENERAL_MAIN_GUILD.getTextChannelById(TICKET_LOGS_ID).sendFile(ticketLogsFile).queueAfter(delayToCloseTicketMilis + 1000, TimeUnit.MILLISECONDS);
+                InternalJDA.getJda().getTextChannelById(TICKET_LOGS_ID).sendMessage(embedBuilder.build()).queueAfter(delayToCloseTicketMilis, TimeUnit.MILLISECONDS);
+                InternalJDA.getJda().getTextChannelById(TICKET_LOGS_ID).sendFile(ticketLogsFile).queueAfter(delayToCloseTicketMilis + 1000, TimeUnit.MILLISECONDS);
             }
 
             try {

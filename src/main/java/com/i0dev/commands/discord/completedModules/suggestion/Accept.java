@@ -59,12 +59,17 @@ public class Accept extends ListenerAdapter {
                 .replace("{suggestion}", suggestion.getSuggestion())
                 .replace("{note}", note);
 
+        String icon = GlobalConfig.EMBED_THUMBNAIL;
+        if (Configuration.getBoolean("modules.suggestion.parts.accept.useSuggesterIcon")) {
+            icon = suggestion.getUserAvatarUrl();
+        }
+
         EmbedBuilder embedFactory = new EmbedBuilder()
                 .setTitle(Placeholders.convert(MESSAGE_ACCEPTED_TITLE, e.getAuthor()))
                 .setTimestamp(ZonedDateTime.now())
                 .setDescription(Placeholders.convert(acceptedDesc, e.getAuthor()))
                 .setFooter(GlobalConfig.EMBED_FOOTER)
-                .setThumbnail(suggestion.getUserAvatarUrl())
+                .setThumbnail(icon)
                 .setColor(Color.decode(SuggestionManager.ACCEPT_COLOR));
 
         MessageUtil.sendMessage(SuggestionManager.CHANNEL_ACCEPTED_SUGGESTION_CHANNEL_ID, embedFactory.build());
@@ -105,6 +110,11 @@ public class Accept extends ListenerAdapter {
 
         String note = "Nothing Provided";
 
+        String icon = GlobalConfig.EMBED_THUMBNAIL;
+        if (Configuration.getBoolean("modules.suggestion.parts.accept.useSuggesterIcon")) {
+            icon = suggestion.getUserAvatarUrl();
+        }
+
         String acceptedDesc = MESSAGE_ACCEPTED_MESSAGE
                 .replace("{suggestionUserTag}", suggestion.getUserTag())
                 .replace("{suggestion}", suggestion.getSuggestion())
@@ -115,7 +125,7 @@ public class Accept extends ListenerAdapter {
                 .setTimestamp(ZonedDateTime.now())
                 .setDescription(Placeholders.convert(acceptedDesc, e.getUser()))
                 .setFooter(GlobalConfig.EMBED_FOOTER)
-                .setThumbnail(suggestion.getUserAvatarUrl())
+                .setThumbnail(icon)
                 .setColor(Color.decode(SuggestionManager.ACCEPT_COLOR));
 
         MessageUtil.sendMessage(SuggestionManager.CHANNEL_ACCEPTED_SUGGESTION_CHANNEL_ID, embedFactory.build());

@@ -1,13 +1,11 @@
 package com.i0dev.modules.other;
 
-import com.i0dev.object.objects.Type;
-import com.i0dev.object.objects.RoleQueueObject;
 import com.i0dev.object.discordLinking.DPlayerEngine;
 import com.i0dev.object.objects.ReactionRoles;
-import com.i0dev.utility.Configuration;
-import com.i0dev.utility.EmbedFactory;
-import com.i0dev.utility.GlobalConfig;
-import com.i0dev.utility.Placeholders;
+import com.i0dev.object.objects.RoleQueueObject;
+import com.i0dev.object.objects.Type;
+import com.i0dev.utility.*;
+import com.i0dev.utility.util.FormatUtil;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionRemoveEvent;
@@ -29,7 +27,7 @@ public class ReactionRolesHandler extends ListenerAdapter {
         if (e.getUser() == null) return;
         if (e.getUser().isBot()) return;
         if (!EVENT_ENABLED) return;
-        if (!e.getGuild().equals(GlobalConfig.GENERAL_MAIN_GUILD)) return;
+        if (!FormatUtil.isValidGuild(e.getGuild())) return;
         if (DPlayerEngine.getObject(e.getUser().getIdLong()).isBlacklisted()) return;
         for (JSONObject object : ReactionRoles.get().getCache()) {
             String ChannelID = object.get("channelID").toString();
@@ -43,7 +41,7 @@ public class ReactionRolesHandler extends ListenerAdapter {
 
             for (JSONObject Option : (ArrayList<JSONObject>) object.get("options")) {
                 String Emoji = Option.get("Emoji").toString();
-                Role role = GlobalConfig.GENERAL_MAIN_GUILD.getRoleById(Option.get("roleID").toString());
+                Role role =  InternalJDA.getJda().getRoleById(Option.get("roleID").toString());
                 if (role == null) continue;
                 if (e.getReactionEmote().isEmoji()) {
                     String ReactedEmojiHexacode = String.format("%x", (int) e.getReactionEmote().getEmoji().charAt(0));
@@ -75,7 +73,7 @@ public class ReactionRolesHandler extends ListenerAdapter {
 
         if (e.getUser().isBot()) return;
         if (!EVENT_ENABLED) return;
-        if (!e.getGuild().equals(GlobalConfig.GENERAL_MAIN_GUILD)) return;
+        if (!FormatUtil.isValidGuild(e.getGuild())) return;
         if (DPlayerEngine.getObject(e.getUser().getIdLong()).isBlacklisted()) return;
 
         for (JSONObject object : ReactionRoles.get().getCache()) {
@@ -90,7 +88,7 @@ public class ReactionRolesHandler extends ListenerAdapter {
 
             for (JSONObject Option : (ArrayList<JSONObject>) object.get("options")) {
                 String Emoji = Option.get("Emoji").toString();
-                Role role = GlobalConfig.GENERAL_MAIN_GUILD.getRoleById(Option.get("roleID").toString());
+                Role role =  InternalJDA.getJda().getRoleById(Option.get("roleID").toString());
                 if (role == null) continue;
                 if (e.getReactionEmote().isEmoji()) {
                     String ReactedEmojiHexacode = String.format("%x", (int) e.getReactionEmote().getEmoji().charAt(0));

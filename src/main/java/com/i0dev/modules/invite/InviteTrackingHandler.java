@@ -25,7 +25,7 @@ public class InviteTrackingHandler extends ListenerAdapter {
     @Override
     public void onGuildMemberLeave(final GuildMemberLeaveEvent e) {
         if (!EVENT_ENABLED) return;
-        if (!e.getGuild().equals(GlobalConfig.GENERAL_MAIN_GUILD)) return;
+        if (!FormatUtil.isValidGuild(e.getGuild())) return;
         DPlayer object = DPlayerEngine.getObject(e.getUser().getIdLong());
         if (object == null) return;
         User inviter = e.getJDA().getUserById(object.getInvitedByDiscordID());
@@ -41,7 +41,6 @@ public class InviteTrackingHandler extends ListenerAdapter {
 
         message = "" + FormatUtil.formatDate(System.currentTimeMillis()) + ": " + message;
         Engine.getToLog().add(new LogObject(message, new File(InitializeBot.get().getPointLogPath())));
-
     }
 
     private static final double inviteUser = Configuration.getDouble("events.pointEvents.giveAmounts.inviteUser");
@@ -49,7 +48,7 @@ public class InviteTrackingHandler extends ListenerAdapter {
     @Override
     public void onGuildMemberJoin(final GuildMemberJoinEvent e) {
         if (!EVENT_ENABLED) return;
-        if (!e.getGuild().equals(GlobalConfig.GENERAL_MAIN_GUILD)) return;
+        if (!FormatUtil.isValidGuild(e.getGuild())) return;
 
         e.getGuild().retrieveInvites().queue(retrievedInvites -> {
             for (final Invite retrievedInvite : retrievedInvites) {

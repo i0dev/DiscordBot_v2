@@ -2,6 +2,9 @@ package com.i0dev.utility;
 
 import net.dv8tion.jda.api.entities.Guild;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GlobalConfig {
 
     public static String MESSAGE_USER_NOT_FOUND;
@@ -27,7 +30,7 @@ public class GlobalConfig {
     public static String NOT_LINKED;
     public static long F_TOP_LOGS_CHANNEL_ID;
     public static boolean USING_DATABASE;
-
+    public static List<Guild> GUILDS = new ArrayList<>();
 
     public static void initGlobalConfig() {
         try {
@@ -58,6 +61,13 @@ public class GlobalConfig {
         DISCORD_ACTIVITY_TYPE = Configuration.getString("general.activityType");
         NOT_LINKED = Configuration.getString("messages.notLinked");
         F_TOP_LOGS_CHANNEL_ID = Configuration.getLong("channels.ftopLogsChannelID");
-        USING_DATABASE = Configuration.getBoolean("database.useDatabase");
+        //USING_DATABASE = Configuration.getBoolean("database.useDatabase");
+        USING_DATABASE = false;
+        GUILDS.add(GENERAL_MAIN_GUILD);
+        Configuration.getLongList("general.secondaryGuildIDs").forEach(aLong -> {
+            Guild guild = InternalJDA.getJda().getGuildById(aLong);
+            if (guild != null)
+                GUILDS.add(guild);
+        });
     }
 }

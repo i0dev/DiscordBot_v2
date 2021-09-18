@@ -5,8 +5,8 @@ import com.i0dev.object.engines.TicketEngine;
 import com.i0dev.object.objects.Ticket;
 import com.i0dev.utility.Configuration;
 import com.i0dev.utility.EmbedFactory;
-import com.i0dev.utility.GlobalConfig;
 import com.i0dev.utility.Placeholders;
+import com.i0dev.utility.util.FormatUtil;
 import com.i0dev.utility.util.PermissionUtil;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Role;
@@ -32,7 +32,7 @@ public class AdminOnlyHandler extends ListenerAdapter {
         if (!e.getButton().getId().equalsIgnoreCase("BUTTON_TICKET_ADMIN_ONLY")) return;
         if (e.getUser().isBot()) return;
         if (!EVENT_ENABLED) return;
-        if (!e.getGuild().equals(GlobalConfig.GENERAL_MAIN_GUILD)) return;
+        if (!FormatUtil.isValidGuild(e.getGuild())) return;
         if (DPlayerEngine.getObject(e.getUser().getIdLong()).isBlacklisted()) return;
         if (!PermissionUtil.get().hasPermission(REQUIRE_PERMISSIONS, REQUIRE_LITE_PERMISSIONS, e.getGuild(), e.getUser()))
             return;

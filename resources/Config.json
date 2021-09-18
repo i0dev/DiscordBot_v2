@@ -12,6 +12,9 @@
     "autoFtopOnMinute": [
       "0",
       "30"
+    ],
+    "secondaryGuildIDs": [
+      724900283804680303
     ]
   },
   "database": {
@@ -1637,8 +1640,8 @@
             "log": true
           },
           "message": {
-            "general": "{authorTagBold}, you have removed a suggestion from: `{suggestionUserTag}`\n**Suggestion:** |{suggestion}|",
-            "logMessage": "{authorTagBold} has removed a suggestion from: `{suggestionUserTag}`\n**Suggestion:** |{suggestion}|"
+            "general": "{authorTagBold}, you have removed a suggestion from: `{suggestionUserTag}`\n**Suggestion:** ||{suggestion}||",
+            "logMessage": "{authorTagBold} has removed a suggestion from: `{suggestionUserTag}`\n**Suggestion:** ||{suggestion}||"
           },
           "permission": {
             "strict": true,
@@ -1648,10 +1651,11 @@
         },
         "accept": {
           "enabled": true,
+          "useSuggesterIcon": false,
           "message": {
             "general": "{authorTagBold}, you have accepted a suggestion from {suggestionUserTag}\n**Suggestion:** `{suggestion}`\n**With the note:** `{note}`",
             "acceptedTitle": "Suggestion accepted by {authorTag}",
-            "acceptedMessage": "Suggestion from {suggestionUserTag} was accepted!\n**Suggestion:**\n`{suggestion}`\n\n**Note from {authorTag}:**\n`{note}"
+            "acceptedMessage": "Suggestion from {suggestionUserTag} was accepted!\n**Suggestion:**\n`{suggestion}`\n\n**Note from {authorTag}:**\n`{note}`"
           },
           "permission": {
             "strict": true,
@@ -1661,10 +1665,11 @@
         },
         "reject": {
           "enabled": true,
+          "useSuggesterIcon": false,
           "message": {
             "general": "{authorTagBold}, you have rejected a suggestion from {suggestionUserTag}\n**Suggestion:** `{suggestion}`\n**With the note:** `{note}`",
             "rejectedTitle": "Suggestion rejected by {authorTag}",
-            "rejectedMessage": "Suggestion from {suggestionUserTag} was rejected!\n**Suggestion:**\n`{suggestion}`\n\n**Note from {authorTag}:**\n`{note}"
+            "rejectedMessage": "Suggestion from {suggestionUserTag} was rejected!\n**Suggestion:**\n`{suggestion}`\n\n**Note from {authorTag}:**\n`{note}`"
           },
           "permission": {
             "strict": true,

@@ -77,6 +77,7 @@ public class Placeholders {
                     .replace("{authorLinkStatus}", dPlayer.getLinkInfo().isLinked() ? "Linked" : "Not Linked")
                     .replace("{authorInvitedByTag}", dPlayer.getCachedData().getInvitedByDiscordTag().equals("") ? "No Data" : dPlayer.getCachedData().getInvitedByDiscordTag())
                     .replace("{authorLinkedIGN}", dPlayer.getCachedData().getMinecraftIGN().equals("") ? "Not Linked" : dPlayer.getCachedData().getMinecraftIGN())
+                    .replace("{authorLinkedIGNOrDiscordName}", dPlayer.getCachedData().getMinecraftIGN().equals("") ? author.getName() : dPlayer.getCachedData().getMinecraftIGN())
                     .replace("{authorIsBlacklisted}", dPlayer.isBlacklisted() ? "Yes" : "No")
                     .replace("{authorPointsCount}", decimalFormat.format(dPlayer.getPoints()))
                     .replace("{authorMapPoints}", dPlayer.getMapPoints() + "")
@@ -123,7 +124,7 @@ public class Placeholders {
                 .replace("{DiscordBotAuthor}", "i0#0001")
                 .replace("{DiscordBotPluginMode}", InitializeBot.isPluginMode() ? "Yes" : "No")
                 .replace("{DiscordBotPrefix}", GlobalConfig.GENERAL_BOT_PREFIX)
-                .replace("{DiscordBotVersion}", "2.1.5");
+                .replace("{DiscordBotVersion}", "2.1.8");
 
         //plugin mode
         if (InitializeBot.isPluginMode()) {

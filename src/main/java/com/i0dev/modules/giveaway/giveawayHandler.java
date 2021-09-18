@@ -2,10 +2,7 @@ package com.i0dev.modules.giveaway;
 
 import com.i0dev.object.engines.GiveawayEngine;
 import com.i0dev.object.objects.Giveaway;
-import com.i0dev.utility.Configuration;
-import com.i0dev.utility.EmbedFactory;
-import com.i0dev.utility.GlobalConfig;
-import com.i0dev.utility.Placeholders;
+import com.i0dev.utility.*;
 import com.i0dev.utility.util.FormatUtil;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
@@ -46,7 +43,7 @@ public class giveawayHandler {
                 String Prize = giveaway.getPrize();
                 Long EndTime = giveaway.getEndTime();
                 Long WinnerAmount = giveaway.getWinnerAmount();
-                TextChannel Channel = GlobalConfig.GENERAL_MAIN_GUILD.getTextChannelById(ChannelID);
+                TextChannel Channel = InternalJDA.getJda().getTextChannelById(ChannelID);
                 User Host = GlobalConfig.GENERAL_MAIN_GUILD.getJDA().getUserById(HostID);
                 Message Message;
                 try {

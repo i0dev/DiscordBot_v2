@@ -1,9 +1,9 @@
 package com.i0dev.utility.util;
 
-import com.i0dev.object.objects.Type;
 import com.i0dev.object.objects.RoleQueueObject;
+import com.i0dev.object.objects.Type;
 import com.i0dev.utility.Configuration;
-import com.i0dev.utility.GlobalConfig;
+import com.i0dev.utility.InternalJDA;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import org.json.simple.JSONObject;
@@ -18,7 +18,8 @@ public class MovementUtil {
     public static Role getParentStaff(Member member) {
         for (JSONObject object : Tracks) {
             long mainRoleID = (long) object.get("mainRole");
-            Role mainRole = GlobalConfig.GENERAL_MAIN_GUILD.getRoleById(mainRoleID);
+
+            Role mainRole = InternalJDA.getJda().getRoleById(mainRoleID);
             if (mainRole == null) continue;
             if (member.getRoles().contains(mainRole)) {
                 return mainRole;
@@ -33,7 +34,7 @@ public class MovementUtil {
             List<Long> RoleIDS = (ArrayList<Long>) object.get("extraRoles");
             RoleIDS.add(mainRoleID);
             for (long roleToGiveID : RoleIDS) {
-                Role roleToGive = GlobalConfig.GENERAL_MAIN_GUILD.getRoleById(roleToGiveID);
+                Role roleToGive = InternalJDA.getJda().getRoleById(roleToGiveID);
                 if (roleToGive == null) continue;
                 new RoleQueueObject(member.getIdLong(), roleToGive.getIdLong(), Type.ADD_ROLE).add();
             }
@@ -51,16 +52,16 @@ public class MovementUtil {
             List<Long> RoleIDS = (ArrayList<Long>) object.get("extraRoles");
             RoleIDS.add(oldMainRoleID);
             for (long roleToGiveID : RoleIDS) {
-                Role roleToGive = GlobalConfig.GENERAL_MAIN_GUILD.getRoleById(roleToGiveID);
+                Role roleToGive = InternalJDA.getJda().getRoleById(roleToGiveID);
                 if (roleToGive == null) continue;
-                member.getGuild().removeRoleFromMember(member, roleToGive).queue();
+                new RoleQueueObject(member.getIdLong(), roleToGive.getIdLong(), Type.REMOVE_ROLE).add();
             }
         }
     }
 
     public static JSONObject getObject(Role role) {
         for (JSONObject object : Tracks) {
-            if (((long) object.get("mainRole")) == Long.valueOf(role.getId())) {
+            if (((long) object.get("mainRole")) == role.getIdLong()) {
                 return object;
             }
         }
@@ -70,7 +71,7 @@ public class MovementUtil {
     public static boolean isAlreadyStaff(Member member) {
         for (JSONObject object : Tracks) {
             long mainRoleID = (long) object.get("mainRole");
-            Role mainRole = GlobalConfig.GENERAL_MAIN_GUILD.getRoleById(mainRoleID);
+            Role mainRole = InternalJDA.getJda().getRoleById(mainRoleID);
             if (mainRole == null) continue;
             if (member.getRoles().contains(mainRole)) {
                 return true;
@@ -81,7 +82,7 @@ public class MovementUtil {
 
     public static boolean isHighestStaff(Member member) {
         long topRoleID = (long) Tracks.get(Tracks.size() - 1).get("mainRole");
-        Role topRole = GlobalConfig.GENERAL_MAIN_GUILD.getRoleById(topRoleID);
+        Role topRole = InternalJDA.getJda().getRoleById(topRoleID);
         if (topRole == null) return false;
         if (member.getRoles().contains(topRole)) {
             return true;
@@ -91,7 +92,7 @@ public class MovementUtil {
 
     public static boolean isLowestStaff(Member member) {
         long lowestRoleID = (long) Tracks.get(0).get("mainRole");
-        Role lowestRole = GlobalConfig.GENERAL_MAIN_GUILD.getRoleById(lowestRoleID);
+        Role lowestRole = InternalJDA.getJda().getRoleById(lowestRoleID);
         if (lowestRole == null) return false;
         if (member.getRoles().contains(lowestRole)) {
             return true;
@@ -104,7 +105,7 @@ public class MovementUtil {
 
         for (int i = 0; i < Tracks.size(); i++) {
             long mainRoleID = (long) Tracks.get(i).get("mainRole");
-            Role mainRole = GlobalConfig.GENERAL_MAIN_GUILD.getRoleById(mainRoleID);
+            Role mainRole = InternalJDA.getJda().getRoleById(mainRoleID);
             if (mainRole == null) continue;
 
             if (mainRole == role) {
@@ -117,7 +118,7 @@ public class MovementUtil {
 
                 long nextTrackID = (long) Tracks.get(i + 1).get("mainRole");
 
-                Role nextRole = GlobalConfig.GENERAL_MAIN_GUILD.getRoleById(nextTrackID);
+                Role nextRole = InternalJDA.getJda().getRoleById(nextTrackID);
                 if (nextRole == null) continue;
 
                 return nextRole;
@@ -130,7 +131,7 @@ public class MovementUtil {
 
         for (int i = 0; i < Tracks.size(); i++) {
             long mainRoleID = (long) Tracks.get(i).get("mainRole");
-            Role mainRole = GlobalConfig.GENERAL_MAIN_GUILD.getRoleById(mainRoleID);
+            Role mainRole = InternalJDA.getJda().getRoleById(mainRoleID);
             if (mainRole == null) continue;
 
             if (mainRole == role) {
@@ -143,7 +144,7 @@ public class MovementUtil {
 
                 long nextTrackID = (long) Tracks.get(i - 1).get("mainRole");
 
-                Role nextRole = GlobalConfig.GENERAL_MAIN_GUILD.getRoleById(nextTrackID);
+                Role nextRole = InternalJDA.getJda().getRoleById(nextTrackID);
                 if (nextRole == null) continue;
 
                 return nextRole;
@@ -155,7 +156,7 @@ public class MovementUtil {
     public static JSONObject getNextRoleObject(Role role) {
         for (int i = 0; i < Tracks.size(); i++) {
             long mainRoleID = (long) Tracks.get(i).get("mainRole");
-            Role mainRole = GlobalConfig.GENERAL_MAIN_GUILD.getRoleById(mainRoleID);
+            Role mainRole = InternalJDA.getJda().getRoleById(mainRoleID);
             if (mainRole == null) continue;
             if (mainRole == role) {
                 try {
@@ -165,7 +166,7 @@ public class MovementUtil {
                 }
                 long nextTrackID = (long) Tracks.get(i + 1).get("mainRole");
 
-                Role nextRole = GlobalConfig.GENERAL_MAIN_GUILD.getRoleById(nextTrackID);
+                Role nextRole = InternalJDA.getJda().getRoleById(nextTrackID);
                 if (nextRole == null) continue;
                 return getObject(nextRole);
             }
@@ -176,7 +177,7 @@ public class MovementUtil {
     public static JSONObject getPreviousRoleObject(Role role) {
         for (int i = 0; i < Tracks.size(); i++) {
             long mainRoleID = (long) Tracks.get(i).get("mainRole");
-            Role mainRole = GlobalConfig.GENERAL_MAIN_GUILD.getRoleById(mainRoleID);
+            Role mainRole = InternalJDA.getJda().getRoleById(mainRoleID);
             if (mainRole == null) continue;
             if (mainRole == role) {
                 try {
@@ -186,7 +187,7 @@ public class MovementUtil {
                 }
                 long nextTrackID = (long) Tracks.get(i - 1).get("mainRole");
 
-                Role nextRole = GlobalConfig.GENERAL_MAIN_GUILD.getRoleById(nextTrackID);
+                Role nextRole = InternalJDA.getJda().getRoleById(nextTrackID);
                 if (nextRole == null) continue;
                 return getObject(nextRole);
             }

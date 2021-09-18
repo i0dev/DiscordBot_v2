@@ -6,7 +6,6 @@ import com.i0dev.object.discordLinking.DPlayer;
 import com.i0dev.object.discordLinking.DPlayerEngine;
 import com.i0dev.object.objects.LogObject;
 import com.i0dev.utility.Configuration;
-import com.i0dev.utility.GlobalConfig;
 import com.i0dev.utility.util.FormatUtil;
 import lombok.Getter;
 import net.dv8tion.jda.api.entities.Message;
@@ -76,7 +75,7 @@ public class EventHandler extends ListenerAdapter {
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
         if (e.getAuthor().isBot()) return;
-        if (!e.getGuild().equals(GlobalConfig.GENERAL_MAIN_GUILD)) return;
+        if (!FormatUtil.isValidGuild(e.getGuild())) return;
         double pointsToGive = messageCharacterModifier * e.getMessage().getContentRaw().length();
         for (Message.Attachment attachment : e.getMessage().getAttachments()) {
             if (attachment.isImage()) {
@@ -92,7 +91,7 @@ public class EventHandler extends ListenerAdapter {
     @Override
     public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent e) {
         if (e.getUser().isBot()) return;
-        if (!e.getGuild().equals(GlobalConfig.GENERAL_MAIN_GUILD)) return;
+        if (!FormatUtil.isValidGuild(e.getGuild())) return;
         DPlayer dpLayer = DPlayerEngine.getObject(e.getUser().getIdLong());
         dpLayer.setPoints(dpLayer.getPoints() + reaction);
     }
@@ -103,21 +102,21 @@ public class EventHandler extends ListenerAdapter {
     @Override
     public void onGuildVoiceJoin(GuildVoiceJoinEvent e) {
         if (e.getEntity().getUser().isBot()) return;
-        if (!e.getGuild().equals(GlobalConfig.GENERAL_MAIN_GUILD)) return;
+        if (!FormatUtil.isValidGuild(e.getGuild())) return;
         voiceChannelCache.put(e.getEntity().getUser(), System.currentTimeMillis());
     }
 
     @Override
     public void onGuildVoiceMove(GuildVoiceMoveEvent e) {
         if (e.getEntity().getUser().isBot()) return;
-        if (!e.getGuild().equals(GlobalConfig.GENERAL_MAIN_GUILD)) return;
+        if (!FormatUtil.isValidGuild(e.getGuild())) return;
         voiceChannelCache.put(e.getEntity().getUser(), System.currentTimeMillis());
     }
 
     @Override
     public void onGuildVoiceLeave(GuildVoiceLeaveEvent e) {
         if (e.getEntity().getUser().isBot()) return;
-        if (!e.getGuild().equals(GlobalConfig.GENERAL_MAIN_GUILD)) return;
+        if (!FormatUtil.isValidGuild(e.getGuild())) return;
         voiceChannelCache.remove(e.getEntity().getUser());
     }
 }

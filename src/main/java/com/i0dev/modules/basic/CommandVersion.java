@@ -3,6 +3,7 @@ package com.i0dev.modules.basic;
 import com.i0dev.utility.EmbedFactory;
 import com.i0dev.utility.GlobalConfig;
 import com.i0dev.utility.Placeholders;
+import com.i0dev.utility.util.FormatUtil;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -11,7 +12,7 @@ public class CommandVersion extends ListenerAdapter {
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
         if (e.getAuthor().isBot()) return;
-        if (!e.getGuild().equals(GlobalConfig.GENERAL_MAIN_GUILD)) return;
+        if (!FormatUtil.isValidGuild(e.getGuild())) return;
         String[] message = e.getMessage().getContentRaw().split(" ");
         if (message.length == 1) {
             if (e.getMessage().getMentionedUsers().size() > 0 && e.getMessage().getMentionedUsers().get(0).equals(e.getGuild().getJDA().getSelfUser())) {

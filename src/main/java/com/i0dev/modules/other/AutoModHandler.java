@@ -1,6 +1,7 @@
 package com.i0dev.modules.other;
 
 import com.i0dev.utility.*;
+import com.i0dev.utility.util.FormatUtil;
 import com.i0dev.utility.util.MessageUtil;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -22,7 +23,7 @@ public class AutoModHandler extends ListenerAdapter {
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
         if (e.getAuthor().isBot()) return;
-        if (!e.getGuild().equals(GlobalConfig.GENERAL_MAIN_GUILD)) return;
+        if (!FormatUtil.isValidGuild(e.getGuild())) return;
         if (!EVENT_ENABLED) return;
         if (channelWhitelistEnabled) {
             if (!MessageAliases.isChannelInList(e.getChannel(), automodChannels)) return;

@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class  Punishment {
+public class Punishment {
 
     String type;
     String punishedUUID;
@@ -51,6 +51,4 @@ public class  Punishment {
     public void addToCache() {
 
     }
-
-
 }

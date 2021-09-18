@@ -16,9 +16,17 @@ public class RoleQueueObject {
         this.type = type;
     }
 
-    public void add() {
+    public RoleQueueObject add() {
         Engine.getRoleQueueList().add(this);
+        return this;
     }
 
-
+    @Override
+    public String toString() {
+        return "RoleQueueObject{" +
+                "userID=" + userID +
+                ", roleID=" + roleID +
+                ", type=" + type +
+                '}';
+    }
 }

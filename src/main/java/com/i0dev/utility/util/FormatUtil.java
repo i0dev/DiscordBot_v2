@@ -2,11 +2,11 @@ package com.i0dev.utility.util;
 
 import com.i0dev.object.discordLinking.DPlayer;
 import com.i0dev.utility.Configuration;
+import com.i0dev.utility.GlobalConfig;
+import com.i0dev.utility.InternalJDA;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.entities.Role;
-import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.entities.*;
 import org.apache.commons.lang.RandomStringUtils;
 
 import java.awt.*;
@@ -25,6 +25,20 @@ public class FormatUtil {
         return a.substring(0, 1).toUpperCase() + a.substring(1).toLowerCase();
 
     }
+
+    public static boolean isValidGuild(Guild guild) {
+        return GlobalConfig.GUILDS.stream().anyMatch(guild1 -> guild1.getId().equals(guild.getId()));
+    }
+
+    public static boolean hasRoleAlready(long roleID, long userID) {
+        Role role = InternalJDA.getJda().getRoleById(roleID);
+        if (role == null) return true;
+        Guild guild = role.getGuild();
+        Member member = guild.getMemberById(userID);
+        if (member == null) return true;
+        return member.getRoles().contains(role);
+    }
+
 
     public static String formatNumber(int num) {
         String Formatted = "Extra, Beyond set formatting";

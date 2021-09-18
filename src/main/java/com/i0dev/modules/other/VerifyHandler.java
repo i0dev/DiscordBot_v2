@@ -5,6 +5,7 @@ import com.i0dev.object.discordLinking.DPlayerEngine;
 import com.i0dev.utility.Configuration;
 import com.i0dev.utility.GlobalConfig;
 import com.i0dev.utility.Placeholders;
+import com.i0dev.utility.util.FormatUtil;
 import com.i0dev.utility.util.PermissionUtil;
 import com.i0dev.utility.util.RoleUtil;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -32,7 +33,7 @@ public class VerifyHandler extends ListenerAdapter {
         if (!e.getButton().getId().equalsIgnoreCase("BUTTON_VERIFY_PANEL")) return;
         if (e.getUser().isBot()) return;
         if (!EVENT_ENABLED) return;
-        if (!e.getGuild().equals(GlobalConfig.GENERAL_MAIN_GUILD)) return;
+        if (!FormatUtil.isValidGuild(e.getGuild())) return;
         if (!PermissionUtil.get().hasPermission(REQUIRE_PERMISSIONS, REQUIRE_LITE_PERMISSIONS, e.getGuild(), e.getUser()))
             return;
         DPlayer dPlayer = DPlayerEngine.getObject(e.getUser().getIdLong());
@@ -46,7 +47,11 @@ public class VerifyHandler extends ListenerAdapter {
                 .setColor(Color.decode(GlobalConfig.EMBED_COLOR_HEX_CODE))
                 .setDescription(Placeholders.convert(MESSAGE_DM_DESCRIPTION, e.getUser()))
                 .setTimestamp(ZonedDateTime.now());
-        e.getUser().openPrivateChannel().complete().sendMessage(EmbedPM.build()).complete();
+        try {
+            e.getUser().openPrivateChannel().complete().sendMessage(EmbedPM.build()).complete();
+        } catch (Exception ignored) {
+
+        }
         e.deferEdit().queue();
     }
 }

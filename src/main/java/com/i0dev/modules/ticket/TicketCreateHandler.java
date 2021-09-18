@@ -8,6 +8,7 @@ import com.i0dev.object.objects.LogObject;
 import com.i0dev.object.objects.Ticket;
 import com.i0dev.utility.Configuration;
 import com.i0dev.utility.GlobalConfig;
+import com.i0dev.utility.InternalJDA;
 import com.i0dev.utility.Placeholders;
 import com.i0dev.utility.util.EmojiUtil;
 import com.i0dev.utility.util.FormatUtil;
@@ -74,7 +75,7 @@ public class TicketCreateHandler extends ListenerAdapter {
         if (e.getUser().isBot()) return;
         if (!EVENT_ENABLED) return;
         if (e.getChannel().getIdLong() != (TICKET_CREATE_CHANNEL_ID)) return;
-        if (!e.getGuild().equals(GlobalConfig.GENERAL_MAIN_GUILD)) return;
+        if (!FormatUtil.isValidGuild(e.getGuild())) return;
         if (DPlayerEngine.getObject(e.getUser().getIdLong()).isBlacklisted()) return;
         if (!PermissionUtil.get().hasPermission(REQUIRE_PERMISSIONS, REQUIRE_LITE_PERMISSIONS, e.getGuild(), e.getUser()))
             return;
@@ -96,7 +97,7 @@ public class TicketCreateHandler extends ListenerAdapter {
             String ChannelName = object.get("ChannelName").toString();
             long categoryID = object.containsKey("CategoryID") ? ((long) object.get("CategoryID")) : TICKET_CREATE_CATEGORY_ID;
 
-            Category NewTicketCreatedCategory = e.getGuild().getCategoryById(categoryID);
+            Category NewTicketCreatedCategory =  InternalJDA.getJda().getCategoryById(categoryID);
             TextChannel NewTicketCreated;
             if (NewTicketCreatedCategory != null) {
                 NewTicketCreated = NewTicketCreatedCategory.createTextChannel(ChannelName.replace("{ticketNumber}", CurrentTicketNumber + "")).complete();

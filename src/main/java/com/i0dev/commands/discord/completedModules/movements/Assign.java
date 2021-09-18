@@ -49,7 +49,7 @@ public class Assign {
         Member MentionedMember = e.getGuild().getMember(MentionedUser);
         JSONObject assignRoleObject = MovementUtil.getObject(MentionedRole);
 
-        MovementUtil.giveNewRoles(MentionedMember, Long.valueOf(MentionedRole.getId()));
+        MovementUtil.giveNewRoles(MentionedMember, MentionedRole.getIdLong());
         TempNicknameUtil.modifyNickname(MentionedUser, MovementManager.NICKNAME_FORMAT.replace("{userName}", MentionedUser.getName()).replace("{displayName}", assignRoleObject.get("displayName").toString()));
 
         String desc = MESSAGE_CONTENT

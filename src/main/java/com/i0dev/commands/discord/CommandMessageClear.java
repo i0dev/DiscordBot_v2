@@ -2,6 +2,7 @@ package com.i0dev.commands.discord;
 
 import com.i0dev.object.discordLinking.DPlayerEngine;
 import com.i0dev.utility.*;
+import com.i0dev.utility.util.FormatUtil;
 import com.i0dev.utility.util.MessageUtil;
 import com.i0dev.utility.util.PermissionUtil;
 import net.dv8tion.jda.api.entities.Message;
@@ -26,7 +27,7 @@ public class CommandMessageClear extends ListenerAdapter {
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
         if (e.getAuthor().isBot()) return;
-        if (!e.getGuild().equals(GlobalConfig.GENERAL_MAIN_GUILD)) return;
+        if (!FormatUtil.isValidGuild(e.getGuild())) return;
 
         if (MessageAliases.isMessageACommand(e.getMessage(), COMMAND_ALIASES)) {
             if (DPlayerEngine.getObject(e.getAuthor().getIdLong()).isBlacklisted()) return;

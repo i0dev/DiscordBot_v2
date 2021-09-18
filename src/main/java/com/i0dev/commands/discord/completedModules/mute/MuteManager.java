@@ -2,6 +2,7 @@ package com.i0dev.commands.discord.completedModules.mute;
 
 import com.i0dev.utility.Configuration;
 import com.i0dev.utility.GlobalConfig;
+import com.i0dev.utility.InternalJDA;
 import com.i0dev.utility.util.MessageUtil;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -10,7 +11,7 @@ public class MuteManager {
 
     public static final String MESSAGE_ROLE_NOT_FOUND = Configuration.getString("modules.mute.message.roleNotFound");
 
-    public static final Role ROLE_MUTED_ROLE = GlobalConfig.GENERAL_MAIN_GUILD.getRoleById(Configuration.getLong("roles.mutedRoleID"));
+    public static final Role ROLE_MUTED_ROLE =  InternalJDA.getJda().getRoleById(Configuration.getLong("roles.mutedRoleID"));
 
     public static String usage() {
         StringBuilder builder = new StringBuilder();
